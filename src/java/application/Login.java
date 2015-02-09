@@ -39,6 +39,24 @@ public class Login {
         return result.length != 0;
     }
     
+    public String getUsername(HttpServletRequest request) {
+        String firstName[];
+        DatabaseClass database = new DatabaseClass();
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        
+        username = request.getParameter( "username" );
+        password = request.getParameter( "password" );
+        
+        firstName = database.SelectRow( "SELECT first_name FROM users WHERE user_id = '" + username + "';" );
+        return firstName[1];
+    }
+    
+    public String getUsername2() {
+        
+        return null;
+    }
+    
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
                form += "<label for=\"username\">UCC ID:</label>\n";
