@@ -5,7 +5,6 @@ package application;
  */
 
 public class AddMeeting {
-    private int eventId;
     private String startTime;
     private String endTime;
     private String startDate;
@@ -14,14 +13,6 @@ public class AddMeeting {
     private int moduleCode;
     private int location;
     private int description;
-    
-    public int getEventId( ) {
-        return eventId;
-    } 
-    
-    public void setEventId( int eventId ) {
-        this.eventId = eventId;
-    }
     
     public String getStartTime( ) {
         return startTime;
@@ -85,5 +76,29 @@ public class AddMeeting {
     
     public void setDescription( int description ) {
         this.description = description;
+    }
+    
+    public String addMeetingForm( ) {
+        String form = "<form name=\"add_mmeting\" action=\"add_meeting.jsp\" method=\"POST\">";
+               form += "<label for=\"startTime\">Start Time:</label>";
+               form += "<input type=\"text\" name=\"startTime\" value=" + startTime + " placeholder=\"01:00:00\"/>";
+               form += "<label for=\"endTime\">End Time:</label>";
+               form += "<input type=\"text\" name=\"endTime\" value=" + endTime + " placeholder=\"02:00:00\"/>";
+               form += "<label for=\"startDate\">Start Date:</label>"; 
+               form += "<input type=\"text\" name=\"startDate\" value=" + startDate + " placeholder=\"2015/01/01\"/>";
+               form += "<label for=\"endDate\">End Date:</label>";
+               form += "<input type=\"text\" name=\"endDate\" value=" + endDate + " placeholder=\"2015/01/31\"/>";
+               form += "<label for=\"reoccurance\">Reoccurance:</label>";
+               form += "<input type=\"text\" name=\"reoccurance\" value=" + reoccurance + " placeholder=\"12:00:00\"/>";
+               form += "<label for=\"moduleCode\">Module Code:</label>";
+               form += "<input type=\"text\" name=\"moduleCode\" value=" + moduleCode + " placeholder=\"CS3505\"/>";
+               form += "<label for=\"location\">Location:</label>";
+               form += "<input type=\"text\" name=\"location\" value=" + location + " placeholder=\"WGB 1.01\"/>";
+               form += "<textarea name=\"decription\" row=\"20\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea>";
+               
+               form += "<input type='submit' value='Submit' name='submit' /><br />\n";
+               form += "</form>";
+               
+        return form;
     }
 }
