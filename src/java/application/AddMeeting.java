@@ -39,5 +39,7 @@ public class AddMeeting {
         this.startDate = startDate;
     }
             
-    
+    public void setEndDate( String endDate ) {
+        this.endDate = endDate;
+    } 
 }
