@@ -24,7 +24,7 @@
             }
             else{
                 if( login.loginUser( request )) {
-                    response.sendRedirect( "login_success.jsp" );
+                    response.sendRedirect( "timetable.jsp" );
                 }
                 out.print( login.loginForm( ) );
                 out.print( "Username or Password incorrect, try again!" );

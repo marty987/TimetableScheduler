@@ -25,7 +25,7 @@
             }
             else {
                 if( register.validateRegForm( ) ) {
-                    response.sendRedirect( "reg_success.jsp" );  
+                    response.sendRedirect( "timetable.jsp" );  
                 }
                 out.print( register.registrationForm( ) );
                 out.print( register.errors( ) );
