@@ -23,6 +23,14 @@ public class AddMeeting {
         this.startTime = startTime;
     }
     
+    public String getEndTime( ) {
+        return startTime;
+    } 
+    
+    public void setEndTime( String startTime ) {
+        this.startTime = startTime;
+    }
+    
     public String getStartDate( ) {
         return startDate;
     } 
