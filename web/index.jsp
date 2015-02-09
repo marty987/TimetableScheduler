@@ -5,7 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="application.Login;" %>
+<%@ page import="application.Login;"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -17,13 +17,14 @@
     <body>
         <h1>Welcome, Please Login</h1>
         <%
-            Login login = new Login( );
+            Login login = new Login();
             
             if( request.getParameter( "submit" ) == null ){
                 out.print( login.loginForm(  ) );
             }
             else{
                 if( login.loginUser( request )) {
+                    session.setAttribute("username", login.getUsername());
                     response.sendRedirect( "timetable.jsp" );
                 }
                 out.print( login.loginForm( ) );

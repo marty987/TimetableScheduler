@@ -25,6 +25,7 @@
             }
             else {
                 if( register.validateRegForm( ) ) {
+                    session.setAttribute("username", register.getUserId());
                     response.sendRedirect( "timetable.jsp" );  
                 }
                 out.print( register.registrationForm( ) );
