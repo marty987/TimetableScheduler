@@ -86,4 +86,12 @@ public class AddMeeting {
     public void setDescription( int description ) {
         this.description = description;
     }
+    
+     public int getDescription( ) {
+        return description;
+    } 
+    
+    public void setDescription( int description ) {
+        this.description = description;
+    }
 }
