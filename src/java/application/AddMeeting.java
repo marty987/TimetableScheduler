@@ -15,7 +15,7 @@ public class AddMeeting {
     private String moduleCode;
     private String location;
     private String description;
-    private final ArrayList<String> errors;
+    private final ArrayList<String> errors = new ArrayList<>();
     
 //    public AddMeeting( ){
 //        this
