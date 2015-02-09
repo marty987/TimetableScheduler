@@ -35,7 +35,7 @@ public class AddMeeting {
         return endTime;
     } 
     
-    public void setEndTime( String startTime ) {
+    public void setEndTime( String endTime ) {
         this.endTime = endTime;
     }
     
@@ -80,14 +80,6 @@ public class AddMeeting {
     }
     
     public int getDescription( ) {
-        return description;
-    } 
-    
-    public void setDescription( int description ) {
-        this.description = description;
-    }
-    
-     public int getDescription( ) {
         return description;
     } 
     
