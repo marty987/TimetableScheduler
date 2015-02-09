@@ -1,13 +1,9 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package application;
-
 /**
- *
- * @author mjb2
+ * @author Martin Bullman 112735341
+ * @since Feb 8, 2015, 12:56:25 PM
  */
+
 public class AddMeeting {
     private int eventId;
     private String startTime;

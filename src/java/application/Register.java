@@ -1,6 +1,7 @@
 package application;
 /**
- * @author Marty2
+ * @author Martin Bullman 112735341
+ * @since Feb 7, 2015, 12:56:25 PM
  */
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;

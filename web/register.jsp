@@ -1,11 +1,11 @@
 <%-- 
-    Document   : register
+    Document   : register.jsp
     Created on : Feb 6, 2015, 11:07:11 PM
-    Author     : Marty2
+    Author     : Martin Bullman
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="application.*;" %>
+<%@ page import="application.Register;" %>
 
 <!DOCTYPE html>
 <html lang="en">
