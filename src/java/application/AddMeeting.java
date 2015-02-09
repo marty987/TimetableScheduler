@@ -3,6 +3,8 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 8, 2015, 12:56:25 PM
  */
+import dbpackage.DatabaseClass;
+import java.util.ArrayList;
 
 public class AddMeeting {
     private String startTime;
@@ -10,15 +12,20 @@ public class AddMeeting {
     private String startDate;
     private String endDate;
     private String reoccurance;
-    private int moduleCode;
-    private int location;
-    private int description;
+    private String moduleCode;
+    private String location;
+    private String description;
+    private final ArrayList<String> errors;
+    
+    public AddMeeting( ){
+        this
+    }
     
     public String getStartTime( ) {
         return startTime;
     } 
     
-    public void setStartTime( String startTime ) {
+    public void setStartTime( final String startTime ) {
         this.startTime = startTime;
     }
     
@@ -26,7 +33,7 @@ public class AddMeeting {
         return endTime;
     } 
     
-    public void setEndTime( String endTime ) {
+    public void setEndTime( final String endTime ) {
         this.endTime = endTime;
     }
     
@@ -34,7 +41,7 @@ public class AddMeeting {
         return startDate;
     } 
     
-    public void setStartDate( String startDate ) {
+    public void setStartDate( final String startDate ) {
         this.startDate = startDate;
     }
             
@@ -42,7 +49,7 @@ public class AddMeeting {
         return endDate;
     } 
     
-    public void setEndDate( String endDate ) {
+    public void setEndDate( final String endDate ) {
         this.endDate = endDate;
     }
     
@@ -50,54 +57,135 @@ public class AddMeeting {
         return reoccurance;
     } 
     
-    public void setReoccurance( String reoccurance ) {
+    public void setReoccurance( final String reoccurance ) {
         this.reoccurance = reoccurance;
     }
     
-    public int getModuleCode( ) {
+    public String getModuleCode( ) {
         return moduleCode;
     } 
     
-    public void setModuleCode( int moduleCode ) {
+    public void setModuleCode( final String moduleCode ) {
         this.moduleCode = moduleCode;
     }
     
-    public int getLocation( ) {
+    public String getLocation( ) {
         return location;
     } 
     
-    public void setLocation( int location ) {
+    public void setLocation( final String location ) {
         this.location = location;
     }
     
-    public int getDescription( ) {
+    public String getDescription( ) {
         return description;
     } 
     
-    public void setDescription( int description ) {
+    public void setDescription( final String description ) {
         this.description = description;
     }
     
+    
+    public boolean validateRegForm( ) {
+        boolean isValid = true;
+        
+        if( startTime.equals( "" ) ) {
+            errors.add( "Start time required. Must be in yyyy/mm/dd format." );
+            isValid = false;
+            userId = "";
+        }
+        
+        if( firstName.equals( "" )  ) {
+            errors.add( "First Name required." );
+            isValid = false;
+            firstName = "";
+        }
+      
+        if( lastName.equals( "" )  ) {
+            errors.add( "Last Name required." );
+            isValid = false;
+            lastName = "";
+        }
+        
+        if( email.equals( "" ) || ! email.contains( "@" ) || ! email.contains( "." ) ) {
+            errors.add( "Email required. Must be valid email address" );
+            isValid = false;
+            email = "";
+        }
+        
+        if( password1.equals( "" ) ) {
+            errors.add( "Password required. Min length is 6 characters" );
+            isValid = false;
+        }
+        
+        if( password2.equals( "" ) ) {
+            errors.add( "Confirm Password required." );
+            isValid = false;
+        }
+        
+        if( ! password1.equals( password2 ) ){
+            errors.add( "Passwords do not match. Must be identical" );
+            isValid = false;
+        }
+        
+        if( phoneNo.equals( "" ) || phoneNo.length( ) < 6 ) {
+            errors.add( "Phone Number required. Must be valid phone number" );
+            isValid = false;
+            phoneNo = "";
+        }
+        
+        if( isValid ) {
+            insertNewUser( );
+        }
+        
+        return isValid;
+    }
+    
+    public String errors( ) {
+        String errorList;
+        
+        errorList = "<ul>";
+            for( String error: errors ) {
+                errorList += "<li>" + error + "</li>";
+            }
+        errorList += "</ul>";
+        
+        return errorList;
+    }
+    
+    public void insertNewUser(  ) {
+        database = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        
+        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
+                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
+                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
+                            + "', '" + getCurrentDate( ) + "' );" );
+    }
+    
+    
+    
     public String addMeetingForm( ) {
-        String form = "<form name=\"add_mmeting\" action=\"add_meeting.jsp\" method=\"POST\">";
-               form += "<label for=\"startTime\">Start Time:</label>";
-               form += "<input type=\"text\" name=\"startTime\" value=" + startTime + " placeholder=\"01:00:00\"/>";
-               form += "<label for=\"endTime\">End Time:</label>";
-               form += "<input type=\"text\" name=\"endTime\" value=" + endTime + " placeholder=\"02:00:00\"/>";
-               form += "<label for=\"startDate\">Start Date:</label>"; 
-               form += "<input type=\"text\" name=\"startDate\" value=" + startDate + " placeholder=\"2015/01/01\"/>";
-               form += "<label for=\"endDate\">End Date:</label>";
-               form += "<input type=\"text\" name=\"endDate\" value=" + endDate + " placeholder=\"2015/01/31\"/>";
-               form += "<label for=\"reoccurance\">Reoccurance:</label>";
-               form += "<input type=\"text\" name=\"reoccurance\" value=" + reoccurance + " placeholder=\"12:00:00\"/>";
-               form += "<label for=\"moduleCode\">Module Code:</label>";
-               form += "<input type=\"text\" name=\"moduleCode\" value=" + moduleCode + " placeholder=\"CS3505\"/>";
-               form += "<label for=\"location\">Location:</label>";
-               form += "<input type=\"text\" name=\"location\" value=" + location + " placeholder=\"WGB 1.01\"/>";
-               form += "<textarea name=\"decription\" row=\"20\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea>";
-               
+        String form = "<form name=\"add_mmeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
+               form += "<label for=\"startTime\">Start Time:</label>\n";
+               form += "<input type=\"text\" name=\"startTime\" value=" + startTime + " placeholder=\"01:00:00\"/><br />\n";
+               form += "<label for=\"endTime\">End Time:</label>\n";
+               form += "<input type=\"text\" name=\"endTime\" value=" + endTime + " placeholder=\"02:00:00\"/><br />\n";
+               form += "<label for=\"startDate\">Start Date:</label>\n"; 
+               form += "<input type=\"text\" name=\"startDate\" value=" + startDate + " placeholder=\"2015/01/01\"/><br />\n";
+               form += "<label for=\"endDate\">End Date:</label>\n";
+               form += "<input type=\"text\" name=\"endDate\" value=" + endDate + " placeholder=\"2015/01/31\"/><br />\n";
+               form += "<label for=\"reoccurance\">Reoccurance:</label>\n";
+               form += "<input type=\"text\" name=\"reoccurance\" value=" + reoccurance + " placeholder=\"12:00:00\"/><br />\n";
+               form += "<label for=\"moduleCode\">Module Code:</label>\n";
+               form += "<input type=\"text\" name=\"moduleCode\" value=" + moduleCode + " placeholder=\"CS3505\"/><br />\n";
+               form += "<label for=\"location\">Location:</label>\n";
+               form += "<input type=\"text\" name=\"location\" value=" + location + " placeholder=\"WGB 1.01\"/><br />\n";
+               form += "<textarea name=\"decription\" row=\"20\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
+        
                form += "<input type='submit' value='Submit' name='submit' /><br />\n";
-               form += "</form>";
+               form += "</form>\n";
                
         return form;
     }
