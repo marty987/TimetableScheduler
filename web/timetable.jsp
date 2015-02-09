@@ -5,6 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page import="application.Timetable;" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -12,6 +13,10 @@
         <title>UCC Timetable</title>
     </head>
     <body>
-        
+        <h1>Welcome</h1>
+        <%
+            Timetable timetable = new Timetable();
+            out.print(timetable.printedTimetable());
+        %>
     </body>
 </html>

@@ -9,7 +9,7 @@ public class GUI {
     
     public String loginForm(  ) {
         form = "<form name='login_form' action='loginform' method='POST'>\n";
-        form += "<label for='username'>Id Number:</label>\n";
+        form += "<label for='username'>UCC ID:</label>\n";
         form += "<input type='text' name='username' value='Id Number' />\n"; 
         form += "<label for='password'>Password:</label>\n";
         form += "<input type='password' name='password' value='Password' />/n"; 
