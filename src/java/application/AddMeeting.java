@@ -15,6 +15,14 @@ public class AddMeeting {
     private int location;
     private int description;
     
+    public int getEventId( ) {
+        return eventId;
+    } 
+    
+    public void setEventId( int eventId ) {
+        this.eventId = eventId;
+    }
+    
     public String getStartTime( ) {
         return startTime;
     } 
@@ -24,11 +32,11 @@ public class AddMeeting {
     }
     
     public String getEndTime( ) {
-        return startTime;
+        return endTime;
     } 
     
     public void setEndTime( String startTime ) {
-        this.startTime = startTime;
+        this.endTime = endTime;
     }
     
     public String getStartDate( ) {
@@ -39,7 +47,43 @@ public class AddMeeting {
         this.startDate = startDate;
     }
             
+    public String getEndDate( ) {
+        return endDate;
+    } 
+    
     public void setEndDate( String endDate ) {
         this.endDate = endDate;
+    }
+    
+    public String getReoccurance( ) {
+        return reoccurance;
     } 
+    
+    public void setReoccurance( String reoccurance ) {
+        this.reoccurance = reoccurance;
+    }
+    
+    public int getModuleCode( ) {
+        return moduleCode;
+    } 
+    
+    public void setModuleCode( int moduleCode ) {
+        this.moduleCode = moduleCode;
+    }
+    
+    public int getLocation( ) {
+        return location;
+    } 
+    
+    public void setLocation( int location ) {
+        this.location = location;
+    }
+    
+    public int getDescription( ) {
+        return description;
+    } 
+    
+    public void setDescription( int description ) {
+        this.description = description;
+    }
 }
