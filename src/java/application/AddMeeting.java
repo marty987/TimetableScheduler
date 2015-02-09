@@ -17,9 +17,9 @@ public class AddMeeting {
     private String description;
     private final ArrayList<String> errors;
     
-    public AddMeeting( ){
-        this
-    }
+//    public AddMeeting( ){
+//        this
+//    }
     
     public String getStartTime( ) {
         return startTime;
@@ -86,60 +86,60 @@ public class AddMeeting {
     }
     
     
-    public boolean validateRegForm( ) {
-        boolean isValid = true;
-        
-        if( startTime.equals( "" ) ) {
-            errors.add( "Start time required. Must be in yyyy/mm/dd format." );
-            isValid = false;
-            userId = "";
-        }
-        
-        if( firstName.equals( "" )  ) {
-            errors.add( "First Name required." );
-            isValid = false;
-            firstName = "";
-        }
-      
-        if( lastName.equals( "" )  ) {
-            errors.add( "Last Name required." );
-            isValid = false;
-            lastName = "";
-        }
-        
-        if( email.equals( "" ) || ! email.contains( "@" ) || ! email.contains( "." ) ) {
-            errors.add( "Email required. Must be valid email address" );
-            isValid = false;
-            email = "";
-        }
-        
-        if( password1.equals( "" ) ) {
-            errors.add( "Password required. Min length is 6 characters" );
-            isValid = false;
-        }
-        
-        if( password2.equals( "" ) ) {
-            errors.add( "Confirm Password required." );
-            isValid = false;
-        }
-        
-        if( ! password1.equals( password2 ) ){
-            errors.add( "Passwords do not match. Must be identical" );
-            isValid = false;
-        }
-        
-        if( phoneNo.equals( "" ) || phoneNo.length( ) < 6 ) {
-            errors.add( "Phone Number required. Must be valid phone number" );
-            isValid = false;
-            phoneNo = "";
-        }
-        
-        if( isValid ) {
-            insertNewUser( );
-        }
-        
-        return isValid;
-    }
+//    public boolean validateRegForm( ) {
+//        boolean isValid = true;
+//        
+//        if( startTime.equals( "" ) ) {
+//            errors.add( "Start time required. Must be in yyyy/mm/dd format." );
+//            isValid = false;
+//            userId = "";
+//        }
+//        
+//        if( firstName.equals( "" )  ) {
+//            errors.add( "First Name required." );
+//            isValid = false;
+//            firstName = "";
+//        }
+//      
+//        if( lastName.equals( "" )  ) {
+//            errors.add( "Last Name required." );
+//            isValid = false;
+//            lastName = "";
+//        }
+//        
+//        if( email.equals( "" ) || ! email.contains( "@" ) || ! email.contains( "." ) ) {
+//            errors.add( "Email required. Must be valid email address" );
+//            isValid = false;
+//            email = "";
+//        }
+//        
+//        if( password1.equals( "" ) ) {
+//            errors.add( "Password required. Min length is 6 characters" );
+//            isValid = false;
+//        }
+//        
+//        if( password2.equals( "" ) ) {
+//            errors.add( "Confirm Password required." );
+//            isValid = false;
+//        }
+//        
+//        if( ! password1.equals( password2 ) ){
+//            errors.add( "Passwords do not match. Must be identical" );
+//            isValid = false;
+//        }
+//        
+//        if( phoneNo.equals( "" ) || phoneNo.length( ) < 6 ) {
+//            errors.add( "Phone Number required. Must be valid phone number" );
+//            isValid = false;
+//            phoneNo = "";
+//        }
+//        
+//        if( isValid ) {
+//            insertNewUser( );
+//        }
+//        
+//        return isValid;
+//    }
     
     public String errors( ) {
         String errorList;
@@ -153,16 +153,16 @@ public class AddMeeting {
         return errorList;
     }
     
-    public void insertNewUser(  ) {
-        database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
-        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
-                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
-                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
-                            + "', '" + getCurrentDate( ) + "' );" );
-    }
+//    public void insertNewUser(  ) {
+//        database = new DatabaseClass( );
+//        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+//        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+//        
+//        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
+//                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
+//                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
+//                            + "', '" + getCurrentDate( ) + "' );" );
+//    }
     
     
     
