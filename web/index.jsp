@@ -32,5 +32,7 @@
             }
         %>
         <a href="register.jsp">Register Here!</a>
+        
+        <a href="register.jsp">Register Here!</a>
     </body>
 </html>
