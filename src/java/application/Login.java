@@ -17,6 +17,14 @@ public class Login {
         this.result = new String[10];
     }
     
+    public String getUsername() {
+        return username;
+    }
+    
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    
     public boolean loginUser( HttpServletRequest request ) {
         DatabaseClass database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );

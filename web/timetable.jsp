@@ -13,7 +13,8 @@
         <title>UCC Timetable</title>
     </head>
     <body>
-        <h1>Welcome</h1>
+        <jsp:useBean id="register" class="application.Register" scope="request" />
+        <h1>Welcome <%= session.getAttribute("username") %></h1>
         <%
             Timetable timetable = new Timetable();
             out.print(timetable.printedTimetable());
