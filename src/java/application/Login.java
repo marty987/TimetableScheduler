@@ -33,7 +33,7 @@ public class Login {
     
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
-               form += "<label for=\"username\">Username:</label>\n";
+               form += "<label for=\"username\">UCC ID:</label>\n";
                form += "<input type=\"text\" name=\"username\" value=\"" + username + "\"placeholder=\"Enter Username\" /><br/>\n";
                form += "<label for=\"Password\">Password:</label>\n";
                form += "<input type=\"password\" name=\"password\" placeholder=\"Enter Password\"/><br />\n";
