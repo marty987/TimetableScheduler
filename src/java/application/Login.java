@@ -52,11 +52,6 @@ public class Login {
         return firstName[1];
     }
     
-    public String getUsername2() {
-        
-        return null;
-    }
-    
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
                form += "<label for=\"username\">UCC ID:</label>\n";

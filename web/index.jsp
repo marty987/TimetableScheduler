@@ -20,14 +20,14 @@
             Login login = new Login();
             
             if( request.getParameter( "submit" ) == null ){
-                out.print( login.loginForm(  ) );
+                out.print( login.loginForm() );
             }
             else{
                 if( login.loginUser( request )) {
                     session.setAttribute("username", login.getUsername());
                     response.sendRedirect( "timetable.jsp" );
                 }
-                out.print( login.loginForm( ) );
+                out.print( login.loginForm() );
                 out.print( "Username or Password incorrect, try again!" );
             }
         %>
