@@ -157,15 +157,15 @@ public class AddMeeting {
         return errorList;
     }
     
-    public void insertNewUser(  ) {
-        database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
-        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
-                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
-                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
-                            + "', '" + getCurrentDate( ) + "' );" );
+    public void insertNewMeeting(  ) {
+//        database = new DatabaseClass( );
+//        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+//        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+//        
+//        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
+//                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
+//                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
+//                            + "', '" + getCurrentDate( ) + "' );" );
     }
     
     
