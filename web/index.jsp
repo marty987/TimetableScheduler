@@ -1,5 +1,5 @@
 <%-- 
-    Document   : index
+    Document   : index.jsp
     Created on : Feb 8, 2015, 12:56:25 PM
     Author     : Martin Bullman 112735341
 --%>

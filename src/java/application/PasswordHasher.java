@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 public class PasswordHasher {
     
     public static String sha256Hash(String input) { 
-        String sha256Hash = null; 
+        String sha256Hash = ""; 
         
         try {
             //Create MessageDigest object for MD5

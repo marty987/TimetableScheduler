@@ -19,7 +19,8 @@ public class Login {
     
     public boolean loginUser( HttpServletRequest request ) {
         DatabaseClass database = new DatabaseClass( );
-        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         username = request.getParameter( "username" );
         password = request.getParameter( "password" );

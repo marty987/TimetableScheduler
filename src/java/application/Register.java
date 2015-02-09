@@ -107,18 +107,6 @@ public class Register {
         this.phoneNo = phoneNo;
     }
     
-    public String errors( ) {
-        String errorList;
-        
-        errorList = "<ul>";
-            for( String error: errors ) {
-                errorList += "<li>" + error + "</li>";
-            }
-        errorList += "</ul>";
-        
-        return errorList;
-    }
-    
     public boolean validateRegForm( ) {
         boolean isValid = true;
         
@@ -174,9 +162,22 @@ public class Register {
         return isValid;
     }
     
+    public String errors( ) {
+        String errorList;
+        
+        errorList = "<ul>";
+            for( String error: errors ) {
+                errorList += "<li>" + error + "</li>";
+            }
+        errorList += "</ul>";
+        
+        return errorList;
+    }
+    
     public void insertNewUser(  ) {
         database = new DatabaseClass( );
-        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 

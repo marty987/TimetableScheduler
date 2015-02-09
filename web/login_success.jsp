@@ -1,5 +1,5 @@
-<%-- 
-    Document   : login_success
+ <%-- 
+    Document   : login_success.jsp
     Created on : Feb 8, 2015, 10:36:02 PM
     Author     : Martin Bullman 112735341
 --%>
@@ -11,7 +11,8 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>JSP Page</title>
     </head>
+    
     <body>
-        <h1>Success login yea!</h1>
+        <h1>Success login!</h1>
     </body>
 </html>
