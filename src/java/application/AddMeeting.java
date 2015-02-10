@@ -23,6 +23,7 @@ public class AddMeeting {
         this.startDate = "";
         this.endDate = "";
         this.recurrence = "";
+        this.moduleCode = "";
         this.location = "";
         this.description = "";
         this.errors = new ArrayList<>();
@@ -60,11 +61,11 @@ public class AddMeeting {
         this.endDate = endDate;
     }
     
-    public String getReoccurance( ) {
+    public String getRecurrence( ) {
         return recurrence;
     } 
     
-    public void setReoccurance( final String recurrence ) {
+    public void setRecurrence( final String recurrence ) {
         this.recurrence= recurrence;
     }
     
@@ -167,15 +168,15 @@ public class AddMeeting {
     }
     
     public String addMeetingForm( ) {
-        String form = "<form name=\"add_mmeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
+        String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                form += "<label for=\"startTime\">Start Time:</label>\n";
-               form += "<input type=\"text\" name=\"startTime\" value=" + startTime + " placeholder=\"01:00:00\"/><br />\n";
+               form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
                form += "<label for=\"endTime\">End Time:</label>\n";
-               form += "<input type=\"text\" name=\"endTime\" value=" + endTime + " placeholder=\"02:00:00\"/><br />\n";
+               form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
                form += "<label for=\"startDate\">Start Date:</label>\n"; 
-               form += "<input type=\"text\" name=\"startDate\" value=" + startDate + " placeholder=\"2015/01/01\"/><br />\n";
+               form += "<input type=\"text\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
                form += "<label for=\"endDate\">End Date:</label>\n";
-               form += "<input type=\"text\" name=\"endDate\" value=" + endDate + " placeholder=\"2015/01/31\"/><br />\n";
+               form += "<input type=\"text\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
                
                form += "<label for=\"recurrence\">Recurrence:</label>\n";
                form += "<select name=\"recurrence\">" +
@@ -183,14 +184,13 @@ public class AddMeeting {
                        "    <option value=\"weekly\">Weekly</option>" +
                        "    <option value=\"montly\">Monthly</option>" +
                        "    <option value=\"semester\">Semester</option>" +
-                       "</select";
+                       "</select><br />";
                
                form += "<label for=\"moduleCode\">Module Code:</label>\n";
-               form += "<input type=\"text\" name=\"moduleCode\" value=" + moduleCode + " placeholder=\"CS3505\"/><br />\n";
+               form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
                form += "<label for=\"location\">Location:</label>\n";
-               form += "<input type=\"text\" name=\"location\" value=" + location + " placeholder=\"WGB 1.01\"/><br />\n";
-               form += "<textarea name=\"decription\" row=\"20\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
-               
+               form += "<input type=\"text\" name=\"location\" value=\"" + location + "\" placeholder=\"WGB 1.01\"/><br />\n";
+               form += "<textarea name=\"decription\" rows=\"10\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
         
                form += "<input type='submit' value='Submit' name='submit' /><br />\n";
                form += "</form>\n";

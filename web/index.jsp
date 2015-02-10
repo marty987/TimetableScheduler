@@ -31,6 +31,7 @@
                 out.print( "Username or Password incorrect, try again!" );
             }
         %>
-        <a href="register.jsp">Register Here!</a>
+        <p><a href="register.jsp">Register Here!</a></p>
+        <p><a href="add_meeting.jsp">Add Event Here!</a></p>
     </body>
 </html>
