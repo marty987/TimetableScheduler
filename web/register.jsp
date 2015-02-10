@@ -22,6 +22,7 @@
         <jsp:setProperty name="register" property="*" />
         
         <%
+            
             if( request.getParameter( "submit" ) == null ) {
                 out.print( register.registrationForm( ) );
             }
