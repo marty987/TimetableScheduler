@@ -43,5 +43,10 @@
             }
         %>
       </div>
+
+        <%
+          GUI footer = new GUI();  
+          out.print( footer.footer() );
+        %>       
     </body>
 </html>
