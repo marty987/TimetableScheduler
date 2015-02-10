@@ -39,7 +39,7 @@ public class GUI {
         return form;
     }
     
-        public String header( ) {
+        public String loginHeader( ) {
         form = "<header>\n";
         form += "<nav>\n";
         form += "<ul>\n";
@@ -55,10 +55,11 @@ public class GUI {
         return form;
     }
         
-    public String footer( ) {
+        public String header( ) {
         form = "<header>\n";
-        form += "<nav>\n";
+        form += "<nav>\n";      
         form += "<ul>\n";
+        form += "<li><a href=\"logout.jsp\" id='logout'>(Logout)</a></li>\n";        
         form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
         form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
         form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
@@ -67,6 +68,20 @@ public class GUI {
         form += "</ul>\n";
         form += "</nav>\n";
         form += "</header>\n";       
+
+        return form;
+    }        
+        
+    public String footer( ) {
+        form = "<footer>\n";
+        form += "<small>\n";
+        form += "<ul class = footerLinks>\n";
+        form += "<li id='sitemap'><a>Sitemap</a></li>\n"; 
+        form += "<li><a>Legal</a></li>\n";
+        form += "<li><a>Acceptable Use Policy</a></li>\n";
+        form += "<li><a>Webmaster</a></li>\n";
+        form += "</ul>\n";
+        form += "</footer>\n";    
 
         return form;
     }    

@@ -21,8 +21,8 @@
     <body>
         
         <%
-          GUI header = new GUI();  
-          out.print( header.header() );
+          GUI loginHeader = new GUI();  
+          out.print( loginHeader.loginHeader() );
         %>
             
         <%--
@@ -65,5 +65,10 @@
          <p><a href="add_meeting.jsp">Add Event Here!</a></p>
         </div>
       </div>
+        
+        <%
+          GUI footer = new GUI();  
+          out.print( footer.footer() );
+        %>        
     </body>
 </html>
