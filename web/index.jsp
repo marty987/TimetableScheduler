@@ -25,34 +25,17 @@
           out.print( loginHeader.loginHeader() );
         %>
             
-        <%--
-        boolean viewPermission = true;
-  
-        if(viewPermission )
-        session.setAttribute( "VIEW", Boolean.TRUE );
-        else
-        session.setAttribute( "VIEW", Boolean.FALSE );
-        --%>
-        
       <div class="login-card">
         <h1>Welcome, Please Login</h1>
         <%
             Login login = new Login();
             
-            //boolean permission = false;
-            
             if( request.getParameter( "submit" ) == null ){
                 out.print( login.loginForm() );
             }
             else{
-                if( login.validateLogin( ) ) {
-                    login.loginUser( request );
-                    
-                    //permission = true;
-                    session.setAttribute("firstName", login.getFirstName());
-                    session.setAttribute("lastName", login.getLastName());
-                    
-                    //session.setAttribute("permission", permission);
+                if( login.loginUser( request )) {
+                    session.setAttribute("username", login.getFirstName());
                     response.sendRedirect( "timetable.jsp" );
                 }
                 out.print( login.loginForm() );
