@@ -66,7 +66,7 @@ public class AddMeeting {
     } 
     
     public void setRecurrence( final String recurrence ) {
-        this.recurrence= recurrence;
+        this.recurrence = recurrence;
     }
     
     public String getModuleCode( ) {
@@ -138,9 +138,9 @@ public class AddMeeting {
             description = "";
         }
         
-//        if( isValid ) {
-//            insertNewMeeting( );
-//        }
+        if( isValid ) {
+            insertNewMeeting( );
+        }
         
         return isValid;
     }
@@ -159,13 +159,20 @@ public class AddMeeting {
     
     public void insertNewMeeting(  ) {
         DatabaseClass database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        //database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         database.Insert( "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" 
-                                     + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
+                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" +
+                                       recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
+    
+//    public String query(){
+//        String query = "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
+//                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );";
+//    
+//    return query;
+//    }
     
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
@@ -190,7 +197,7 @@ public class AddMeeting {
                form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
                form += "<label for=\"location\">Location:</label>\n";
                form += "<input type=\"text\" name=\"location\" value=\"" + location + "\" placeholder=\"WGB 1.01\"/><br />\n";
-               form += "<textarea name=\"decription\" rows=\"10\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
+               form += "<textarea name=\"description\" rows=\"10\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
         
                form += "<input type='submit' value='Submit' name='submit' /><br />\n";
                form += "</form>\n";
