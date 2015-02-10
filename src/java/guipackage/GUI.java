@@ -88,5 +88,14 @@ public class GUI {
 
         return form;
     }    
+    
+    public String sessionErrorMessage() {
+        form = "<p>\n";
+        form += "Please <a href=\"index.jsp\">";
+        form += "login</a>";
+        form += " to view the timetable.</p>";
+        
+        return form;
+    }
 }
 
