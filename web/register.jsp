@@ -19,8 +19,8 @@
     <body>
       
         <%
-          GUI header = new GUI();  
-          out.print( header.header(false, "", "") );
+          GUI loginHeader = new GUI();  
+          out.print( loginHeader.loginHeader() );
         %>  
         
       <div class="login-card">       
