@@ -175,7 +175,6 @@ nav ul li a{
  
 header{
     background-color: #F7F7F7;
-    padding: 10px;
     margin-bottom: 2%;
     margin-top: -1%;
     margin-left: -1%;
@@ -193,6 +192,11 @@ nav ul li{
     font-size: 1em;
     padding-top: 30px;
     padding-bottom:5px;
+}
+
+#logout{
+    text-decoration: none;
+    color: #797A7A;
 }
 
 nav ul li a{
