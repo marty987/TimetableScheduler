@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="application.Register;" %>
+<%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,12 @@
         <title>Add Event</title>
     </head>
     <body>
+        
+        <%
+          GUI header = new GUI();  
+          out.print( header.header() );
+        %> 
+        
       <div class="login-card">
         <h1>Add A New Event!</h1>
         

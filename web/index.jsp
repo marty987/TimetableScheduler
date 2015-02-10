@@ -21,8 +21,8 @@
     <body>
         
         <%
-          GUI navigation = new GUI();  
-          out.print( navigation.navigation() );
+          GUI header = new GUI();  
+          out.print( header.header() );
         %>
             
       <div class="login-card">

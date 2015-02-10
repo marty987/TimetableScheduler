@@ -39,18 +39,36 @@ public class GUI {
         return form;
     }
     
-        public String navigation( ) {
-        form = "<nav>\n";
+        public String header( ) {
+        form = "<header>\n";
+        form += "<nav>\n";
         form += "<ul>\n";
-        form += "<li class = 'home'><a href='index.php'>Home</a></li>\n"; 
-        form += "<li class = 'timetable'><a href='timetable.php'>Timetable</a></li>\n";
-        form += "<li class = 'staff'><a href='staff.php'>Staff</a></li>\n";
-        form += "<li class = 'students'><a href='students.php'>Students</a></li>\n";
-        form += "<li class = 'help'><a href='help.php'>Help</a></li>\n";
+        form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
+        form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
+        form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
+        form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
+        form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
         form += "</ul>\n";
         form += "</nav>\n";
+        form += "</header>\n";       
 
         return form;
     }
+        
+    public String footer( ) {
+        form = "<header>\n";
+        form += "<nav>\n";
+        form += "<ul>\n";
+        form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
+        form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
+        form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
+        form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
+        form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
+        form += "</ul>\n";
+        form += "</nav>\n";
+        form += "</header>\n";       
+
+        return form;
+    }    
 }
 

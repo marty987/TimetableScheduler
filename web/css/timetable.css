@@ -12,11 +12,9 @@
 table {
     border-collapse: collapse;
     width: 100%;
-	font: 62.5%/1.3 normal Helvetica, sans-serif;
+    font: 62.5%/1.3 normal Helvetica, sans-serif;
 }
-  p, h1 {
-    margin: 2em 0; 
-  }
+
 td, th { 
 	
    text-align: center; 
@@ -28,7 +26,7 @@ td, th {
   th { 
     background-image: url(../images/red.png);
     font-weight: normal;
-	color: white;
+    color: white;
   } 
 caption {
     margin: 0; 
@@ -41,7 +39,7 @@ caption {
  
 td section:nth-child( 1 ){
     padding: 3px;
-	font-size: .6em;
+    font-size: .6em;
     background-image: url(../images/blue.png) 
 }
 

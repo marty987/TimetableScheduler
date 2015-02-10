@@ -6,6 +6,7 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ page import="application.Register;" %>
+<%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -16,6 +17,12 @@
     </head>
     
     <body>
+      
+        <%
+          GUI header = new GUI();  
+          out.print( header.header() );
+        %>  
+        
       <div class="login-card">       
         <h1>Registration!</h1>        
         <jsp:useBean id="register" class="application.Register" scope="request" />
