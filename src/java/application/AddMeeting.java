@@ -138,9 +138,9 @@ public class AddMeeting {
             description = "";
         }
         
-        if( isValid ) {
-            insertNewMeeting( );
-        }
+//        if( isValid ) {
+//            insertNewMeeting( );
+//        }
         
         return isValid;
     }

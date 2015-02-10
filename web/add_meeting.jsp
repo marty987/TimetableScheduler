@@ -17,7 +17,7 @@
         <h1>Add A New Event!</h1>
         
         <jsp:useBean id="meeting" class="application.AddMeeting" scope="request" />
-        <jsp:setProperty name="register" property="*" />
+        <jsp:setProperty name="meeting" property="*" />
         
         <%
             if( request.getParameter( "submit" ) == null ) {
