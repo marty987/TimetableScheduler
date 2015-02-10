@@ -20,18 +20,14 @@
     <body>
        
         <%
-          GUI header = new GUI();
-          String fname = (String) session.getAttribute("firstName");
-          String lname = (String) session.getAttribute("lastName");
-          out.print( header.header(fname, lname) );
-
+            GUI header = new GUI();
+            String fname = (String) session.getAttribute("firstName");
+            String lname = (String) session.getAttribute("lastName");
+            out.print( header.header(true, fname, lname) );
             Timetable timetable = new Timetable();
             out.print(timetable.printedTimetable());
-        %>
-    
-        <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+            GUI footer = new GUI();  
+            out.print( footer.footer() );
         %>  
     </body>
 </html>
