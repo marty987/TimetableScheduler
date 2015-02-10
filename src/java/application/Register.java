@@ -209,7 +209,7 @@ public class Register {
         form += "<input type='text' name='userId' value='" + userId + "' placeholder='123456789' /><br />\n";
         
         form += "<label for='stream'>Stream:</label>\n";
-        form += "<select name=\"stream\">\n" +
+        form += "<select name=\"stream\"id='dropdown' >\n" +
                     "  <option value=\"Comp Science 1\" selected>Computer Sci Year 1</option>\n" +
                     "  <option value=\"Core 2\">Core Year 2</option>\n" +
                     "  <option value=\"Core 3\">Core Year 3</option>\n" +

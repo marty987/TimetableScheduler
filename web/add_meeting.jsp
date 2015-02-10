@@ -11,9 +11,11 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <title>Add Event</title>
     </head>
     <body>
+      <div class="login-card">
         <h1>Add A New Event!</h1>
         
         <jsp:useBean id="meeting" class="application.AddMeeting" scope="request" />
@@ -33,5 +35,6 @@
                // out.print( meeting.query( ) );
             }
         %>
+      </div>
     </body>
 </html>

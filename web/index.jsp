@@ -6,6 +6,7 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="application.Login;"%>
+<%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +16,15 @@
         <title>Timetable Scheduler</title>
     </head>
     
+
+    
     <body>
+        
+        <%
+          GUI navigation = new GUI();  
+          out.print( navigation.navigation() );
+        %>
+            
       <div class="login-card">
         <h1>Welcome, Please Login</h1>
         <%
