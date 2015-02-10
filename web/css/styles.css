@@ -124,6 +124,15 @@ body {
 }
 
 
+nav ul li a{
+    color: white;
+    text-decoration: none;
+}
+
+
+
+@media screen and (min-width: 768px)
+{
 
 /* Navigation */
 
@@ -165,18 +174,10 @@ nav ul li{
 }
 
 nav ul li a{
-    color: white;
+
     border-radius: 20px;
-    text-decoration: none;
-}
-
-@media screen and (min-width: 768px)
-{
-
-body{
-
-}
-    
+}    
+ 
 footer{
     clear: both;
     margin-top: 40px;
@@ -246,11 +247,26 @@ nav ul li a:hover{
    font-size:1em;
  }
  
+ header{
+     background-color: #4d90fe; 
+ }
+ 
  nav ul li{
+     background-color: #fff;
      display: block;
      margin-left: auto;
      margin-right: auto;
- }
+     text-align:left;
+     margin-left:-10px;
+     padding-left:10px;
+     border-bottom: #69b3e7 1px solid;
+}
+
+nav ul li a{
+    color: #69b3e7;
+}
+
+
     
    
 }

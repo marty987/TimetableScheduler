@@ -57,7 +57,7 @@ public class GUI {
         
         public String header(boolean printName, String fName, String lName) {
         form = "<header>\n";
-        form += "<nav>\n";      
+        form += "<nav >\n";      
         form += "<ul>\n";
         form += "<li><a href=\"logout.jsp\" id='logout'>(Logout)</a></li>\n";        
         form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
