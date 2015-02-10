@@ -11,10 +11,12 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <title>Timetable Scheduler</title>
     </head>
     
     <body>
+      <div class="login-card">       
         <h1>Registration!</h1>        
         <jsp:useBean id="register" class="application.Register" scope="request" />
         <jsp:setProperty name="register" property="*" />
@@ -32,5 +34,6 @@
                 out.print( register.errors( ) );
             }
         %>
+      </div>
     </body>
 </html>
