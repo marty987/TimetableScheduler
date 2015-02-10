@@ -42,10 +42,22 @@ public class Login {
         return result.length != 0;
     }
     
-    public String getFirstName() {
+    public String getFirstName( ) {
         return firstName;
     }
     
+    public boolean validateLogin( ){
+        boolean isValid = true;
+        
+        if( username.equals( "" ) ) {
+            isValid = false;
+        }
+        if( password.equals( "" ) ) {
+            isValid = false;
+        }
+        
+        return isValid;
+    }    
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
                form += "<label for=\"username\">UCC ID:</label>\n";
