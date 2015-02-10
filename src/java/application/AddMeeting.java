@@ -159,20 +159,14 @@ public class AddMeeting {
     
     public void insertNewMeeting(  ) {
         DatabaseClass database = new DatabaseClass( );
-        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        //database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         database.Insert( "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" +
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
-    
-    public String query(){
-        String query = "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );";
-    
-    return query;
-    }
+
     
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";

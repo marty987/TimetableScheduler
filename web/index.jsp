@@ -35,7 +35,7 @@
             }
             else{
                 if( login.loginUser( request )) {
-                    session.setAttribute("username", login.getUsername());
+                    session.setAttribute("username", login.getFirstName());
                     response.sendRedirect( "timetable.jsp" );
                 }
                 out.print( login.loginForm() );

@@ -31,8 +31,6 @@
                 }
                 out.print( meeting.addMeetingForm( ) );
                 out.print( meeting.errors( ) );
-                
-               // out.print( meeting.query( ) );
             }
         %>
       </div>
