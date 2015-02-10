@@ -20,7 +20,7 @@
       
         <%
           GUI header = new GUI();  
-          out.print( header.header(false, "blank", "blank") );
+          out.print( header.header(false, "", "") );
         %>  
         
       <div class="login-card">       
@@ -29,12 +29,15 @@
         <jsp:setProperty name="register" property="*" />
         
         <%
+            boolean hasPermission = false;
             
             if( request.getParameter( "submit" ) == null ) {
                 out.print( register.registrationForm( ) );
             }
             else {
                 if( register.validateRegForm( ) ) {
+                    hasPermission = true;
+                    session.setAttribute("hasPermission", hasPermission);
                     session.setAttribute("firstName", register.getFirstName());
                     session.setAttribute("lastName", register.getLastName());
                     response.sendRedirect( "timetable.jsp" );  

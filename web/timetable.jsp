@@ -20,14 +20,21 @@
     <body>
        
         <%
-            GUI header = new GUI();
-            String fname = (String) session.getAttribute("firstName");
-            String lname = (String) session.getAttribute("lastName");
-            out.print( header.header(true, fname, lname) );
-            Timetable timetable = new Timetable();
-            out.print(timetable.printedTimetable());
-            GUI footer = new GUI();  
-            out.print( footer.footer() );
+            boolean hasPermission = (Boolean) session.getAttribute("hasPermission");
+            GUI gui = new GUI();
+            
+            if(hasPermission) {
+                String fname = (String) session.getAttribute("firstName");
+                String lname = (String) session.getAttribute("lastName");
+                out.print(gui.header(true, fname, lname));
+                Timetable timetable = new Timetable();
+                out.print(timetable.printedTimetable());
+            } else {
+                out.print(gui.header(false, "", ""));
+                out.print(gui.sessionErrorMessage());
+            }
+            
+            out.print( gui.footer() );
         %>  
     </body>
 </html>

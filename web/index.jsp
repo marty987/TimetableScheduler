@@ -29,12 +29,15 @@
         <h1>Welcome, Please Login</h1>
         <%
             Login login = new Login();
+            boolean hasPermission = false;
             
             if( request.getParameter( "submit" ) == null ){
                 out.print( login.loginForm() );
             }
             else{
                 if( login.loginUser( request )) {
+                    hasPermission = true;
+                    session.setAttribute("hasPermission", hasPermission);
                     session.setAttribute("firstName", login.getFirstName());
                     session.setAttribute("lastName", login.getLastName());
                     response.sendRedirect( "timetable.jsp" );
@@ -42,6 +45,7 @@
                 out.print( login.loginForm() );
                 out.print( "Username or Password incorrect, try again!" );
             }
+            session.setAttribute("hasPermission", hasPermission);
         %>
          <div class="login-help">
 
