@@ -111,7 +111,7 @@ body {
 }
 
 #dropdown{
-    width:77.5%;
+    width:100%;
     padding: 6px;
     font-size: 1em;
     margin-bottom: 3%;
@@ -172,21 +172,28 @@ nav ul li a{
 
 @media screen and (min-width: 768px)
 {
+
+body{
+
+}
     
 footer{
     clear: both;
     margin-top: 40px;
-    margin-right: 125px;
-    margin-left: 125px;
+    margin-left:10%;
+    width: 77%; 
     color: black;
     font-size: 15px;
     padding: 10px;
     text-align: center;
     border-top: 1px solid grey;
     position: relative;
+    background-color:white;
 }
 
 footer li{
+    margin-left:auto;
+
     display: inline;
     padding: 5px;
     border-right:#797A7A 1px solid;
@@ -230,4 +237,20 @@ nav ul li a:hover{
     color: #797A7A;
     text-shadow: 1px;
 }
+}
+
+
+@media screen and (max-width: 768px)
+{
+ nav{
+   font-size:1em;
+ }
+ 
+ nav ul li{
+     display: block;
+     margin-left: auto;
+     margin-right: auto;
+ }
+    
+   
 }
