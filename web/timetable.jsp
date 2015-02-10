@@ -20,12 +20,11 @@
     <body>
        
         <%
-          GUI header = new GUI();  
-          out.print( header.header() );
-        %>  
-        
-        <h1 id="welcomeH">Welcome <%= session.getAttribute("username") %></h1>
-        <%
+          GUI header = new GUI();
+          String fname = (String) session.getAttribute("firstName");
+          String lname = (String) session.getAttribute("lastName");
+          out.print( header.header(fname, lname) );
+
             Timetable timetable = new Timetable();
             out.print(timetable.printedTimetable());
         %>

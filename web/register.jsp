@@ -35,7 +35,8 @@
             }
             else {
                 if( register.validateRegForm( ) ) {
-                    session.setAttribute("username", register.getFirstName());
+                    session.setAttribute("firstName", register.getFirstName());
+                    session.setAttribute("lastName", register.getLastName());
                     response.sendRedirect( "timetable.jsp" );  
                 }
                 out.print( register.registrationForm( ) );
