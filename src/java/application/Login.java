@@ -57,7 +57,8 @@ public class Login {
         }
         
         return isValid;
-    }    
+    }  
+    
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
                form += "<label for=\"username\">UCC ID:</label>\n";
