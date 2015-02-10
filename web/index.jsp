@@ -11,10 +11,12 @@
 <html lang="en">
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <title>Timetable Scheduler</title>
     </head>
     
     <body>
+      <div class="login-card">
         <h1>Welcome, Please Login</h1>
         <%
             Login login = new Login();
@@ -31,7 +33,11 @@
                 out.print( "Username or Password incorrect, try again!" );
             }
         %>
-        <p><a href="register.jsp">Register Here!</a></p>
-        <p><a href="add_meeting.jsp">Add Event Here!</a></p>
+         <div class="login-help">
+
+         <p><a href="register.jsp">Register Here!</a></p>
+         <p><a href="add_meeting.jsp">Add Event Here!</a></p>
+        </div>
+      </div>
     </body>
 </html>
