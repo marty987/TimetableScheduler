@@ -13,9 +13,6 @@ public class Timetable {
     
     public String printedTimetable() {
         String timetable = "<div id=\'wrapper\'>"
-                +"<section>"
-                +"<a href=\"search_availability.php\">Search for available time period</a>"
-                +"</section>"
                 +"<table class=\"emp-sales\">"
                 +"<caption>Schedule Your Timetable</caption>"
                 +"<thead>"
