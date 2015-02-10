@@ -76,7 +76,7 @@ public class GUI {
         form = "<footer>\n";
         form += "<small>\n";
         form += "<ul class = footerLinks>\n";
-        form += "<li><a>Sitemap</a></li>\n"; 
+        form += "<li id='sitemap'><a>Sitemap</a></li>\n"; 
         form += "<li><a>Legal</a></li>\n";
         form += "<li><a>Acceptable Use Policy</a></li>\n";
         form += "<li><a>Webmaster</a></li>\n";

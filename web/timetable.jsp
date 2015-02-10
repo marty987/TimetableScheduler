@@ -29,7 +29,6 @@
             Timetable timetable = new Timetable();
             out.print(timetable.printedTimetable());
         %>
-        <p><a href="logout.jsp">Logout</a></p>
     
         <%
           GUI footer = new GUI();  

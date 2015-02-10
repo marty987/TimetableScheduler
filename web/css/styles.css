@@ -172,6 +172,29 @@ nav ul li a{
 
 @media screen and (min-width: 768px)
 {
+    
+footer{
+    clear: both;
+    margin-top: 40px;
+    margin-right: 125px;
+    margin-left: 125px;
+    color: black;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid grey;
+    position: relative;
+}
+
+footer li{
+    display: inline;
+    padding: 5px;
+    border-right:#797A7A 1px solid;
+}
+
+#sitemap{
+    border-left:#797A7A 1px solid;
+}
  
 header{
     background-color: #F7F7F7;
