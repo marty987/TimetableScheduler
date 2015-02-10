@@ -166,13 +166,7 @@ public class AddMeeting {
                          "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" +
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
-    
-    public String query(){
-        String query = "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );";
-    
-    return query;
-    }
+
     
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
