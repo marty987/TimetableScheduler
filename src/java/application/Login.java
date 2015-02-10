@@ -10,6 +10,7 @@ public class Login {
     private String username; 
     private String password;
     private String firstName;
+    private String lastName;
     private String[] result;
     
     public Login(){
@@ -39,11 +40,16 @@ public class Login {
                                      "' AND password = '" + PasswordHasher.sha256Hash( password ) + "';" );
         
         firstName = result[2];
+        lastName = result[4];
         return result.length != 0;
     }
     
     public String getFirstName( ) {
         return firstName;
+    }
+    
+    public String getLastName( ) {
+        return lastName;
     }
     
     public boolean validateLogin( ){

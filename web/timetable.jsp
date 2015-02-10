@@ -23,9 +23,9 @@
           GUI header = new GUI();  
           out.print( header.header() );
         %>  
-        
-        <h1 id="welcomeH">Welcome <%= session.getAttribute("username") %></h1>
+        <h1 id="welcomeH">Welcome <%= session.getAttribute("firstName") %> <%= session.getAttribute("lastName") %></h1>
         <%
+            String fname = (String) session.getAttribute("firstName");
             Timetable timetable = new Timetable();
             out.print(timetable.printedTimetable());
         %>
