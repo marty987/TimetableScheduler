@@ -15,6 +15,7 @@ public class Login {
     public Login(){
         this.username = "";
         this.password = "";
+        this.firstName = "";
         this.result = new String[10];
     }
     
