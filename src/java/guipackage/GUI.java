@@ -55,7 +55,7 @@ public class GUI {
         return form;
     }
         
-        public String header( ) {
+        public String header(String fName, String lName) {
         form = "<header>\n";
         form += "<nav>\n";      
         form += "<ul>\n";
@@ -67,6 +67,7 @@ public class GUI {
         form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
         form += "</ul>\n";
         form += "</nav>\n";
+        form += "<h1 id=\"welcomeH\">Welcome "+fName+" "+lName+"</h1>";
         form += "</header>\n";       
 
         return form;
