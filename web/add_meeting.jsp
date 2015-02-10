@@ -19,7 +19,7 @@
         
         <%
           GUI header = new GUI();  
-          out.print( header.header() );
+          out.print( header.header(false, "blank", "blank") );
         %> 
         
       <div class="login-card">
