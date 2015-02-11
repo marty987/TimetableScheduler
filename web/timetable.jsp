@@ -14,6 +14,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <link rel="stylesheet" href="css/timetable.css" media="screen" type="text/css" />
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
         <script type="text/javascript" src="js/table.js"></script>
         <title>UCC Timetable</title>
     </head>
