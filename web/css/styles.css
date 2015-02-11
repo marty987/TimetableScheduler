@@ -7,12 +7,12 @@
 */
 
 body {
-  background-image: url(../images/blue.png); 
+  background-image: url(../images/blur.jpg); 
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
-  font-family: 'Roboto', sans-serif;
+  font-family: Source Sans Pro;
 }
 
 .login-card {
@@ -21,14 +21,16 @@ body {
   background-color: #F7F7F7;
   margin: 0 auto 10px;
   border-radius: 2px;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+  -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
   overflow: hidden;
 }
 
 .login-card h1 {
   font-weight: 100;
   text-align: center;
-  font-size: 2.3em;
+  font-size: 2em;
 }
 
 .login-card input[type=submit] {
@@ -93,11 +95,12 @@ body {
 .login-card a {
   text-decoration: none;
   color: #666;
-  font-weight: 400;
+  font-weight: 500;
   text-align: center;
   display: inline-block;
   opacity: 0.6;
   transition: opacity ease 0.5s;
+  font-size: 1.4em;
 }
 
 .login-card a:hover {
@@ -129,6 +132,9 @@ nav ul li a{
     text-decoration: none;
 }
 
+footer{
+    font-family: Source Sans Pro;
+}
 
 
 @media screen and (min-width: 768px)
@@ -181,7 +187,7 @@ nav ul li a{
 footer{
     clear: both;
     margin-top: 40px;
-    margin-left:10%;
+    margin-left:9%;
     width: 77%; 
     color: black;
     font-size: 15px;
@@ -189,7 +195,10 @@ footer{
     text-align: center;
     border-top: 1px solid grey;
     position: relative;
-    background-color:white;
+    background-image: url(../images/white.png);
+    -webkit-box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
 }
 
 footer li{
@@ -205,7 +214,7 @@ footer li{
 }
  
 header{
-    background-color: #F7F7F7;
+    
     margin-bottom: 2%;
     margin-top: -1%;
     margin-left: -1%;
@@ -223,6 +232,9 @@ nav ul li{
     font-size: 1em;
     padding-top: 30px;
     padding-bottom:5px;
+    -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
+    -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
+    box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
 }
 
 #logout{
@@ -248,25 +260,41 @@ nav ul li a:hover{
  }
  
  header{
-     background-color: #4d90fe; 
+     background-image: url(../images/blur.png);
  }
- 
- nav ul li{
-     background-color: #fff;
+
+ nav ul li{ 
      display: block;
-     margin-left: auto;
-     margin-right: auto;
-     text-align:left;
-     margin-left:-10px;
+     margin-right: 25px;
+     text-align:center;
+     margin-left:-15px;
+     padding-bottom:2px;
+     padding-top:2px;
      padding-left:10px;
-     border-bottom: #69b3e7 1px solid;
+     border-bottom: #fff 1px solid;
+     font-family: Source Sans Pro;
+}
+
+nav ul li:hover{
+    background-image: url(../images/white.png);
+}
+
+ nav ul li a:hover{
+    color:#003c69;
 }
 
 nav ul li a{
-    color: #69b3e7;
+    color:#fff;
 }
 
-
-    
-   
+footer li{
+    display: inline;
+    text-decoration: none;
+    text-align: center;
+    padding-left: 5px;
+    padding-right: 5px;
+    color: white;
+    border-right: black 1px solid;
+    font-size: 1em;
+}
 }
