@@ -36,6 +36,10 @@ public class Login {
         username = request.getParameter( "username" );
         password = request.getParameter( "password" );
         
+        if( ! validateLogin( ) ){
+            return false;
+        }
+        
         result = database.SelectRow( "SELECT * FROM users WHERE user_id = '" + username + 
                                      "' AND password = '" + PasswordHasher.sha256Hash( password ) + "';" );
         
