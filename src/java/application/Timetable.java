@@ -6,201 +6,42 @@ package application;
 import dbpackage.DatabaseClass;
 
 public class Timetable {
+    private String[][] timetableValues;
     
     public Timetable() {
-        
+        this.timetableValues = new String[][]{
+            {null, "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
+            {"<th scope=\"row\">8AM - 9AM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">9AM - 10AM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">10AM - 11AM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">11AM - 12AM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">12AM - 1PM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">1PM - 2PM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">2PM - 3PM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">3PM - 4PM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">4PM - 5PM</th>", null, null, null, null, null, null, null},
+            {"<th scope=\"row\">5PM - 6PM</th>", null, null, null, null, null, null, null}
+        };
     }
     
-    public String printedTimetable() {
-        String timetable = "<div id=\'wrapper\'>"
-                +"<table class=\"emp-sales\">"
-                +"<caption>Schedule Your Timetable</caption>"
-                +"<thead>"
-                /*
-                 * DAYS
-                 */
-                +"<tr>"
-                +"<td></td>"
-                +"<th scope=\"col\">Mon</th>"
-                +"<th scope=\"col\">Tue</th>"
-                +"<th scope=\"col\">Wed</th>"
-                +"<th scope=\"col\">Thu</th>"
-                +"<th scope=\"col\">Fri</th>"
-                +"<th scope=\"col\">Sat</th>"
-                +"<th scope=\"col\">Sun</th>"
-                +"</tr>"
-                +"</thead>"
-                +"<tbody>"
-                /*
-                 * 8AM - 9AM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">8AM - 9AM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td>"
-                +"<section>"
-                +"<span>CS3301</span><br />"
-                +"<span>WGB G01</span>"
-                +"</section>"
-                +"<section>"
-                +"<span id = 'secondSpan'>-</span><br />"
-                +"</section></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 9AM - 10AM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">9AM - 10AM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 10AM - 11AM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">10AM - 11AM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 11AM - 12AM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">11AM - 12AM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"  
-                /*
-                 * 12AM - 1PM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">12AM - 1PM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td>"	    
-                +"<section>"
-                +"<span>CS3508</span><br />"
-                +"<span>WGB G02</span>"
-                +"</section>"					
-		+"<section>"
-		+"<span id = 'secondSpan'>-</span><br />"
-		+"</section></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 1PM - 2PM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">1PM - 2PM</th>"
-                +"<td></td>"
-                +"<td>"
-		+"<section>"
-                +"<span>CS3509</span><br />"
-		+"<span>WGB G02</span>"
-		+"</section>"					
-		+"<section>"
-		+"<span id = 'secondSpan'>-</span><br />"
-		+"</section>"	
-		+"</td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 2PM - 3PM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">2PM - 3PM</th>"
-                +"<td>"
-		+"<section>"
-		+"<span>CS3500</span><br />"
-		+"<span>WGB G01</span>"
-		+"</section>"					
-		+"<section>"
-		+"<span id = 'secondSpan'>-</span><br />"
-		+"</section>"	
-		+"</td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 3PM - 4PM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">3PM - 4PM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 4PM - 5PM
-                 */
-                +"<tr>"
-                +"<th scope=\"row\">4PM - 5PM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td>"		    
-		+"<section>"
-		+"<span>CS3500</span><br />"
-		+"<span>WGB G01</span>"
-		+"</section>"						
-		+"<section>"
-		+"<span id = 'secondSpan'>-</span><br />"
-		+"</section></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                /*
-                 * 5PM - 6PM
-                 */
-                +"</tr>"
-                +"<th scope=\"row\">5PM - 6PM</th>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"<td></td>"
-                +"</tr>"
-                +"</tbody>"
-                +"</table>";
+    public void printedTimetable( ) {
+        System.out.println("<div id=\'wrapper\'>"
+                + "<table class=\"emp-sales\">"
+                + "<captionSchedule Your Timetable</catption>"
+                + "<thread>"
+        );
         
-        return timetable;
+        //iterate through columns
+        for (int i = 0; i < 11; i++ ){
+            System.out.println("<tr>");
+            //iterate through rows
+            for (int j = 0; j < 8; j++ ) {
+                System.out.println (timetableValues[i][j]);
+            }
+            System.out.println("</tr>");
+        }
+        
+        System.out.println("</tbody>"
+                +"</table>");
     }
 }

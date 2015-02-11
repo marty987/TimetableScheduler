@@ -40,6 +40,7 @@ public class Register {
     }
     
     public void setUserId( final String userId ) {
+        System.out.println("test test");
         this.userId = userId;
     }
     
