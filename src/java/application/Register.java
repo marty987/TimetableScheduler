@@ -3,12 +3,13 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
-import emailsender.Email;
-import dbpackage.DatabaseClass;
-import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+import emailsender.Email;
 import java.util.Calendar;
+import java.util.ArrayList;
+import dbpackage.DatabaseClass;
+import miscellaneous.PasswordHasher;
+import java.text.SimpleDateFormat;
 
 public class Register {
     private String userId;
@@ -157,7 +158,6 @@ public class Register {
             phoneNo = "";
         }
         
-        // Save users data into database, also send email to confirm registration.
         if( isValid ) {
             insertNewUser( );
             
@@ -166,10 +166,21 @@ public class Register {
             // send an email to new registered users.
             
             //Email email = new Email( );
-            //email.sendEmailToNewRegUser( userId, firstName, userId );
+            //email.sendEmailToNewRegUser( userId, firstName, getEmail( ) );
         }
         
         return isValid;
+    }
+    
+    public void insertNewUser(  ) {
+        database = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        
+        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
+                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
+                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
+                            + "', '" + getCurrentDate( ) + "' );" );
     }
     
     public String printErrors( ) {
@@ -184,19 +195,6 @@ public class Register {
         return errorList;
     }
     
-    public void insertNewUser(  ) {
-        database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
-        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
-                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
-                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
-                            + "', '" + getCurrentDate( ) + "' );" );
-        
-        
-    }
-    
     public boolean isInteger( String value ) {
         try { 
             Integer.parseInt( value ); 
@@ -209,8 +207,8 @@ public class Register {
     
     public String getCurrentDate( ) {
         Date today = Calendar.getInstance( ).getTime( );
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String folderName = formatter.format(today);
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+        String folderName = formatter.format( today );
 
         return folderName;
     }

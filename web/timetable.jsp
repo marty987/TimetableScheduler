@@ -29,7 +29,10 @@
                 String lname = (String) session.getAttribute("lastName");
                 out.print(gui.header(true, fname, lname));
                 Timetable timetable = new Timetable();
-                out.print(timetable.printedTimetable());
+                //out.print(timetable.printedTimetable());
+        %>       
+                <a href="add_meeting.jsp">Add Meeting</a>
+        <%    
             } else {
                 out.print(gui.header(false, "", ""));
                 out.print(gui.sessionErrorMessage());
