@@ -1,7 +1,7 @@
 package application;
 
 /**
- * @author Jack Desmond, James Delaney
+ * @author Jack Desmond, James Delaney, Caroline Corcoran
  */
 import dbpackage.DatabaseClass;
 
