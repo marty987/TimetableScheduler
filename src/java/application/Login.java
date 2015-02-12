@@ -28,6 +28,14 @@ public class Login {
         this.username = username;
     }
     
+    public String getFirstName( ) {
+        return firstName;
+    }
+    
+    public String getLastName( ) {
+        return lastName;
+    }
+    
     public boolean loginUser( HttpServletRequest request ) {
         DatabaseClass database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -36,24 +44,19 @@ public class Login {
         username = request.getParameter( "username" );
         password = request.getParameter( "password" );
         
-        if( ! validateLogin( ) ){
-            return false;
-        }
-        
         result = database.SelectRow( "SELECT * FROM users WHERE user_id = '" + username + 
                                      "' AND password = '" + PasswordHasher.sha256Hash( password ) + "';" );
         
-        firstName = result[2];
-        lastName = result[4];
+        if( result.length != 0 ) {
+            firstName = result[2];
+            lastName = result[4];
+        }
+        
+        if( ! validateLogin( ) ){
+            return false;
+        }
+  
         return result.length != 0;
-    }
-    
-    public String getFirstName( ) {
-        return firstName;
-    }
-    
-    public String getLastName( ) {
-        return lastName;
     }
     
     public boolean validateLogin( ){

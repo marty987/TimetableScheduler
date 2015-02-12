@@ -167,7 +167,6 @@ public class AddMeeting {
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
 
-    
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                form += "<label for=\"startTime\">Start Time:</label>\n";
