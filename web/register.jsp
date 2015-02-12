@@ -38,13 +38,13 @@
             else {
                 if( register.validateRegForm( ) ) {
                     hasPermission = true;
-                    session.setAttribute("hasPermission", hasPermission);
-                    session.setAttribute("firstName", register.getFirstName());
-                    session.setAttribute("lastName", register.getLastName());
+                    session.setAttribute( "hasPermission", hasPermission );
+                    session.setAttribute( "firstName", register.getFirstName( ) );
+                    session.setAttribute( "lastName", register.getLastName( ) );
                     response.sendRedirect( "timetable.jsp" );  
                 }
                 out.print( register.registrationForm( ) );
-                out.print( register.errors( ) );
+                out.print( register.printErrors( ) );
             }
         %>
       </div>

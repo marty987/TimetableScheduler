@@ -3,6 +3,7 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
+import emailsender.Email;
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 import java.util.Date;
@@ -156,14 +157,22 @@ public class Register {
             phoneNo = "";
         }
         
+        // Save users data into database, also send email to confirm registration.
         if( isValid ) {
             insertNewUser( );
+            
+            // This will not work in the labs, as UCC blocks the smpt port
+            // If you are running at home uncomment the two lines below and it will 
+            // send an email to new registered users.
+            
+            //Email email = new Email( );
+            //email.sendEmailToNewRegUser( userId, firstName, userId );
         }
         
         return isValid;
     }
     
-    public String errors( ) {
+    public String printErrors( ) {
         String errorList;
         
         errorList = "<ul>";
@@ -184,6 +193,8 @@ public class Register {
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
                             + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
                             + "', '" + getCurrentDate( ) + "' );" );
+        
+        
     }
     
     public boolean isInteger( String value ) {
