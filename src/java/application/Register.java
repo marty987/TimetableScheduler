@@ -3,6 +3,7 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
+import emailsender.Email;
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 import java.util.Date;
@@ -157,12 +158,14 @@ public class Register {
         
         if( isValid ) {
             insertNewUser( );
+            //Email email = new Email( );
+            //email.sendEmailToNewRegUser( userId, firstName, userId );
         }
         
         return isValid;
     }
     
-    public String errors( ) {
+    public String printErrors( ) {
         String errorList;
         
         errorList = "<ul>";
