@@ -25,9 +25,9 @@
             GUI gui = new GUI();
             
             if(hasPermission) {
-                String fname = (String) session.getAttribute("firstName");
-                String lname = (String) session.getAttribute("lastName");
-                out.print(gui.header(true, fname, lname));
+                String fName = (String) session.getAttribute("firstName");
+                String lName = (String) session.getAttribute("lastName");
+                out.print(gui.header(true, fName, lName));
                 Timetable timetable = new Timetable();
                 out.print(timetable.printedTimetable());
             } else {

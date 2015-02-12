@@ -46,6 +46,7 @@
                 session.setAttribute("hasPermission", hasPermission);
             %>
             <div class="login-help">
+                <p><a href="password_reset.jsp">Reset Password</a></p>
                 <p><a href="register.jsp">Register Here!</a></p>
                 <p><a href="add_meeting.jsp">Add Event Here!</a></p>
             </div>
