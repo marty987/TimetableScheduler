@@ -1,7 +1,7 @@
 <%-- 
-    Document   : logout
+    Document   : logout.jsp
     Created on : 10-Feb-2015, 14:44:03
-    Author     : jd7
+    Author     : Jack Desmond
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -14,6 +14,7 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
         <title>Logout</title>
     </head>
+    
     <body>
         <%
           GUI loginHeader = new GUI();  
@@ -21,13 +22,12 @@
         %>       
         
         <div class="login-card">
-        
-        <h1>Logout successful</h1>
-        <%
-            session.invalidate();
-        %>
-        <p><a href="index.jsp">Log back in</a></p> 
-      </div>
+            <h1>Logout successful</h1>
+            <%
+                session.invalidate();
+            %>
+            <p><a href="index.jsp">Log back in</a></p> 
+        </div>
         
         <%
           GUI footer = new GUI();  

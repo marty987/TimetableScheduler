@@ -190,7 +190,7 @@ public class AddMeeting {
                form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
                form += "<label for=\"location\">Location:</label>\n";
                form += "<input type=\"text\" name=\"location\" value=\"" + location + "\" placeholder=\"WGB 1.01\"/><br />\n";
-               form += "<textarea name=\"description\" rows=\"10\" cols=\"40\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
+               form += "<textarea name=\"description\" rows=\"10\" cols=\"30\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
         
                form += "<input type='submit' value='Submit' name='submit' /><br />\n";
                form += "</form>\n";
