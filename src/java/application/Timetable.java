@@ -7,6 +7,8 @@ import dbpackage.DatabaseClass;
 
 public class Timetable {
     private String[][] timetableValues;
+    private DatabaseClass database;
+    private String[] dbResult;
     
     public Timetable() {
         this.timetableValues = new String[][]{
@@ -22,6 +24,18 @@ public class Timetable {
             {"<th scope=\"row\">4PM - 5PM</th>", null, null, null, null, null, null, null},
             {"<th scope=\"row\">5PM - 6PM</th>", null, null, null, null, null, null, null}
         };
+    }
+    
+    private void addEventsToTimetable( ) {
+        database = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        
+        dbResult = database.SelectRow( "SELECT * "
+                + "FROM events JOIN has_events JOIN calendars JOIN has_calendar"
+                + "ON events.event_id = has_events.event_id "
+                + "AND calendars.calendar_id = has_events.calendar_id = has_calendar.calendar_id"
+                + "WHERE users.user_id = \"" + User.getUserId() + "\";");
     }
     
     public void printedTimetable( ) {
