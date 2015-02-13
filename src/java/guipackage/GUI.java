@@ -1,9 +1,8 @@
 package guipackage;
 /**
- *
- * @author mjb2
+ * @author James Delany 
+ * @since Feb 8, 2015, 12:56:25 PM
  */
-
 public class GUI {
     private String form;
     

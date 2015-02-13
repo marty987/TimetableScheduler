@@ -32,6 +32,7 @@
                 out.print(gui.header(true, fname, lname));
                 
                 Timetable timetable = new Timetable();
+                
                 //out.print(timetable.printedTimetable());
                 
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
