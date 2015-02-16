@@ -66,5 +66,15 @@ public class GUI {
         
         return form;
     }
+    
+    public String forgotPassForm( ) {
+        String passForm = "<form name=\"forgot_pass_form\" action=\"forgot_password.jsp\" method=\"POST\">\n";
+               passForm += "<label for=\"email\">Email Address:</label>\n";
+               passForm += "<input type=\"text\" name=\"email\" placeholder=\"Enter Email Here\" />\n";
+               
+               passForm += "<input type=\"submit\" value=\"Submit!\" name=\"submit\" />\n";
+               
+        return passForm;
+    }
 }
 

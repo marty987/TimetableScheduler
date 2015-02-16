@@ -18,16 +18,16 @@
     
     <body>
        <%
-          GUI loginHeader = new GUI();  
-          out.print( loginHeader.loginHeader() );
+          GUI gui = new GUI();  
+          out.print( gui.loginHeader() );
         %>  
         
         <h1>You forgot your password again!</h1>
         <h2>What a douche!!!</h2>
         
         <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+          out.print( gui.forgotPassForm() );
+          out.print( gui.footer( ) );
         %>    
     </body>
 </html>
