@@ -181,6 +181,8 @@ public class User {
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
                             + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
                             + "', '" + getCurrentDate( ) + "' );" );
+        
+        database.Close();
     }
     
     public String printErrors( ) {
@@ -220,19 +222,19 @@ public class User {
         
         form += "<label for='stream'>Stream:</label>\n";
         form += "<select name=\"stream\"id='dropdown' >\n" +
-                    "  <option value=\"Comp Science 1\" selected>Computer Sci Year 1</option>\n" +
-                    "  <option value=\"Core 2\">Core Year 2</option>\n" +
-                    "  <option value=\"Core 3\">Core Year 3</option>\n" +
-                    "  <option value=\"Core 4\">Core Year 4</option>\n" +
-                    "  <option value=\"Web 2\">Web Year 2</option>\n" +
-                    "  <option value=\"Web 3\">Web Year 3</option>\n" +
-                    "  <option value=\"Web 4\">Web Year 4</option>\n" +
-                    "  <option value=\"Soft Entrep 2\">Soft Entrep Year 2</option>\n" +
-                    "  <option value=\"Soft Entrep 3\">Soft Entrep Year 3</option>\n" +
-                    "  <option value=\"Soft Entrep 4\">Soft Entrep Year 4</option>\n" +
-                    "  <option value=\"Chinese 2\">Chinese Year 2</option>\n" +
-                    "  <option value=\"Chinese 3\">Chinese Year 3</option>\n" +
-                    "  <option value=\"Chinese 4\">Chinese Year 4</option>\n" +
+                    "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
+                    "  <option value=\"2\">Core Year 2</option>\n" +
+                    "  <option value=\"3\">Core Year 3</option>\n" +
+                    "  <option value=\"4\">Core Year 4</option>\n" +
+                    "  <option value=\"5\">Web Year 2</option>\n" +
+                    "  <option value=\"6\">Web Year 3</option>\n" +
+                    "  <option value=\"7\">Web Year 4</option>\n" +
+                    "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
+                    "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
+                    "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
+                    "  <option value=\"11\">Chinese Year 2</option>\n" +
+                    "  <option value=\"12\">Chinese Year 3</option>\n" +
+                    "  <option value=\"13\">Chinese Year 4</option>\n" +
                 "</select><br />"; 
         
         form += "<label for='firstName'>First Name::</label>\n";
@@ -255,6 +257,11 @@ public class User {
         
         return form;
     }
+    
+     public void resetPassword( final String password1, final String password2 ) {
+         database.Insert( "UPDATE users" );
+     }
+     
      
     //    private void changePassword( String userInputCurrentPassword, String newPassword ) {
 //        DatabaseClass database = new DatabaseClass( );

@@ -11,9 +11,9 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
-        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>        
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css' />        
         <title>Forgot Password!</title>
     </head>
     
@@ -27,17 +27,14 @@
         <h2>What a douche!!!</h2>
         
         <%
-            if( session.getAttribute( "Authenticated" ) == null ) {
-                response.sendRedirect( "index.jsp" );
+            if( request.getParameter( "submit" ) == null ) {
+                    out.print( gui.forgotPassForm( ) );
             }
             else {
-                if( request.getParameter( "submit" ) == null ) {
-                    out.print( gui.forgotPassForm( ) );
-                }
                 Email email = new Email( );
-                email.sendPasswordToUser( (String) request.getAttribute( "email" ) );
+                email.sendPasswordToUser( (String) request.getAttribute( "id_number" ) );
             }
-          
+            
             out.print( gui.footer( ) );
         %>    
     </body>
