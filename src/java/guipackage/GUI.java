@@ -15,6 +15,7 @@ public class GUI {
         form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
         form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
         form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
+        form += "<li class = 'timetable'><a href='contact.jsp'>Contact</a></li>\n";        
         form += "</ul>\n";
         form += "</nav>\n";
         form += "</header>\n";       
@@ -32,6 +33,7 @@ public class GUI {
         form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
         form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
         form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
+        form += "<li class = 'timetable'><a href='contact.jsp'>Contact</a></li>\n";          
         form += "</ul>\n";
         form += "</nav>\n";
         if(printName) {
