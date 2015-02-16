@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="guipackage.GUI;"%>
+<%@ page import="emailsender.Email;"%>
 
 <!DOCTYPE html>
 <html>
@@ -17,17 +18,27 @@
     </head>
     
     <body>
-       <%
-          GUI gui = new GUI();  
-          out.print( gui.loginHeader() );
+        <%
+            GUI gui = new GUI();  
+            out.print( gui.loginHeader() );
         %>  
         
         <h1>You forgot your password again!</h1>
         <h2>What a douche!!!</h2>
         
         <%
-          out.print( gui.forgotPassForm() );
-          out.print( gui.footer( ) );
+            if( session.getAttribute( "Authenticated" ) == null ) {
+                response.sendRedirect( "index.jsp" );
+            }
+            else {
+                if( request.getParameter( "submit" ) == null ) {
+                    out.print( gui.forgotPassForm( ) );
+                }
+                Email email = new Email( );
+                email.sendPasswordToUser( (String) request.getAttribute( "email" ) );
+            }
+          
+            out.print( gui.footer( ) );
         %>    
     </body>
 </html>
