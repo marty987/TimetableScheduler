@@ -26,17 +26,17 @@ public class Timetable {
         };
     }
     
-    private void addEventsToTimetable( ) {
-        database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
-        dbResult = database.SelectRow( "SELECT * "
-                + "FROM events JOIN has_events JOIN calendars JOIN has_calendar"
-                + "ON events.event_id = has_events.event_id "
-                + "AND calendars.calendar_id = has_events.calendar_id = has_calendar.calendar_id"
-                + "WHERE users.user_id = \"" + User.getUserId() + "\";");
-    }
+//    private void addEventsToTimetable( ) {
+//        database = new DatabaseClass( );
+//        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+//        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+//        
+//        dbResult = database.SelectRow( "SELECT * "
+//                + "FROM events JOIN has_events JOIN calendars JOIN has_calendar"
+//                + "ON events.event_id = has_events.event_id "
+//                + "AND calendars.calendar_id = has_events.calendar_id = has_calendar.calendar_id"
+//                + "WHERE users.user_id = \"" + User.getUserId() + "\";");
+//    }
     
     public void printedTimetable( ) {
         System.out.println("<div id=\'wrapper\'>"
