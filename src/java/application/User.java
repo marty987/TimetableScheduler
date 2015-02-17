@@ -278,14 +278,7 @@ public class User {
         return form;
     }
      
-     
-     
-     
-     
-
-     
-     
-    //    private void changePassword( String userInputCurrentPassword, String newPassword ) {
+//    private void changePassword( String userInputCurrentPassword, String newPassword ) {
 //        DatabaseClass database = new DatabaseClass( );
 //        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
 //        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );

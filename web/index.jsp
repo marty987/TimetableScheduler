@@ -19,8 +19,8 @@
    
     <body>
         <%
-          GUI loginHeader = new GUI();  
-          out.print( loginHeader.loginHeader() );
+          GUI loginHeader = new GUI( );  
+          out.print( loginHeader.loginHeader( ) );
         %>
             
         <div class="login-card">
@@ -35,8 +35,8 @@
                 else{
                     if( login.loginUser( request )) {
                         session.setAttribute( "Authenticated", login.getUsername( ) );
-                        session.setAttribute("firstName", login.getFirstName());
-                        session.setAttribute("lastName", login.getLastName());
+                        session.setAttribute("firstName", login.getFirstName( ) );
+                        session.setAttribute("lastName", login.getLastName( ) );
                         response.sendRedirect( "timetable.jsp" );
                     }
                     out.print( login.loginForm() );
@@ -50,8 +50,8 @@
         </div>
         
         <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+          GUI footer = new GUI( );  
+          out.print( footer.footer( ) );
         %>        
     </body>
 </html>
