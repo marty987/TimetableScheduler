@@ -5,7 +5,7 @@
 --%>
 
 <%@ page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ page import="application.Register;" %>
+<%@ page import="application.User;" %>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
@@ -18,40 +18,38 @@
     </head>
     
     <body>
-      
         <%
-          GUI loginHeader = new GUI();  
-          out.print( loginHeader.loginHeader() );
+          GUI gui = new GUI();  
+          out.print( gui.loginHeader( ) );
         %>  
         
-      <div class="login-card">       
-        <h1>Registration!</h1>        
-        <jsp:useBean id="register" class="application.Register" scope="request" />
-        <jsp:setProperty name="register" property="*" />
+        <div class="login-card">       
+            <h1>Registration!</h1>        
+            <jsp:useBean id="register" class="application.User" scope="request" />
+            <jsp:setProperty name="register" property="*" />
         
-        <%
-            boolean hasPermission = false;
-            
-            if( request.getParameter( "submit" ) == null ) {
-                out.print( register.registrationForm( ) );
-            }
-            else {
-                if( register.validateRegForm( ) ) {
-                    hasPermission = true;
-                    session.setAttribute( "hasPermission", hasPermission );
-                    session.setAttribute( "firstName", register.getFirstName( ) );
-                    session.setAttribute( "lastName", register.getLastName( ) );
-                    response.sendRedirect( "timetable.jsp" );  
+            <%
+                boolean hasPermission = false;
+
+                if( request.getParameter( "submit" ) == null ) {
+                    out.print( register.registrationForm( ) );
                 }
-                out.print( register.registrationForm( ) );
-                out.print( register.printErrors( ) );
-            }
-        %>
-      </div>
+                else {
+                    if( register.validateRegForm( ) ) {
+                        hasPermission = true;
+                        session.setAttribute( "hasPermission", hasPermission );
+                        session.setAttribute( "firstName", register.getFirstName( ) );
+                        session.setAttribute( "lastName", register.getLastName( ) );
+                        response.sendRedirect( "timetable.jsp" );  
+                    }
+                    out.print( register.registrationForm( ) );
+                    out.print( register.printErrors( ) );
+                }
+            %>
+        </div>
 
         <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+          out.print( gui.footer( ) );
         %>       
     </body>
 </html>

@@ -1,7 +1,7 @@
 package miscellaneous;
 /**
- *
- * @author Marty2
+ * @author Martin Bullman 112735341
+ * @since Feb 10, 2015, 12:56:25 PM
  */
 import java.math.BigInteger;
 import java.security.MessageDigest;

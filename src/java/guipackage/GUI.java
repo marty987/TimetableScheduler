@@ -3,8 +3,20 @@ package guipackage;
  * @author James Delany 
  * @since Feb 8, 2015, 12:56:25 PM
  */
+import java.math.BigInteger;
+import java.security.SecureRandom;
+
 public class GUI {
     private String form;
+    private final SecureRandom random;
+
+    public GUI( ) {
+        this.random = new SecureRandom( );
+    }
+
+    public String nextSessionId( ) {
+        return new BigInteger( 130, random ).toString( 32 );
+    }
     
     public String loginHeader( ) {
         form = "<header>\n";
@@ -70,8 +82,10 @@ public class GUI {
     public String forgotPassForm( ) {
         String passForm = "<form name=\"forgot_pass_form\" action=\"forgot_password.jsp\" method=\"POST\">\n";
                passForm += "<label for=\"id_number\">ID Number:</label>\n";
-               passForm += "<input type=\"text\" name=\"id_number\" placeholder=\"Enter ID Number\" />\n";
+               passForm += "<input type=\"text\" name=\"id_number\" placeholder=\"Enter User ID Here!\" />\n";
              
+               passForm += "<input type=\"hidden\" name=\"token\" value=\"" + nextSessionId( ) + "\" /><br />\n";
+               
                passForm += "<input type=\"submit\" value=\"Submit!\" name=\"submit\" />\n";
                
         return passForm;
@@ -79,10 +93,12 @@ public class GUI {
     
     public String resetPassForm( ) {
         String resetPassForm = "<form name=\"reset_pass_form\" action=\"reset_password.jsp\" method=\"POST\">\n";
+               resetPassForm += "<label for=\"user_id\">User ID:</label>\n";
+               resetPassForm += "<input type=\"text\" name=\"user_id\" placeholder=\"Enter user ID\" /><br />\n";
                resetPassForm += "<label for=\"password1\">New Password:</label>\n";
-               resetPassForm += "<input type=\"text\" name=\"password1\" placeholder=\"Enter new password\" /><br />\n";
+               resetPassForm += "<input type=\"password\" name=\"password1\" placeholder=\"Enter new password\" /><br />\n";
                resetPassForm += "<label for=\"password2\">Confirm New Password:</label>\n";
-               resetPassForm += "<input type=\"text\" name=\"password2\" placeholder=\"Confirm new password\" /><br />\n";
+               resetPassForm += "<input type=\"password\" name=\"password2\" placeholder=\"Confirm new password\" /><br />\n";
                
                resetPassForm += "<input type=\"submit\" value=\"Submit!\" name=\"submit\" />\n";
                

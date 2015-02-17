@@ -21,7 +21,7 @@ public class User {
     private String password1;
     private String password2;
     private String phoneNo;
-    private DatabaseClass database;
+    private final DatabaseClass database;
     private final ArrayList<String> errors;
     
     public User( ) {
@@ -215,6 +215,26 @@ public class User {
         return folderName;
     }
     
+     public boolean resetPassword( final String password1, final String password2, final String userId ) {
+         String[] user = getUser( userId );
+         
+         if( userId.equals( "" ) || user.length == 0 || ! password1.equals( password2 ) ) {
+             return false;
+         }
+         
+         database.Insert( "UPDATE users SET password = '" + PasswordHasher.sha256Hash( password2 ) 
+                        + "' Where user_id = '" + userId + "'; ");
+         
+         return true;
+     }
+     
+    public String[] getUser( String userId ) {
+        String[] dbResult = database.SelectRow( "SELECT * FROM users WHERE user_id = '" + userId + "';" );
+        
+        database.Close();
+        return dbResult;
+    }
+     
      public String registrationForm( ) {
         String form = "<form name='registration_form' action='register.jsp' method='POST'>\n";
         form += "<label for='userId'>Id Number:</label>\n";
@@ -257,10 +277,12 @@ public class User {
         
         return form;
     }
-    
-     public void resetPassword( final String password1, final String password2 ) {
-         database.Insert( "UPDATE users" );
-     }
+     
+     
+     
+     
+     
+
      
      
     //    private void changePassword( String userInputCurrentPassword, String newPassword ) {
