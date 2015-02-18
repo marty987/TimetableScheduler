@@ -30,6 +30,7 @@ public class Timetable {
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        GregorianCalendar calendar = new GregorianCalendar.getInstance();
         
         this.timetableValues = new String[][]{
             {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
@@ -59,7 +60,7 @@ public class Timetable {
         eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM events JOIN has_events "
                 + "ON events.event_id = has_events.user_id"
-                + "WHERE has_events.user_id = " + User.userId + ";");
+                + "WHERE has_events.user_id = " + user.userId + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
