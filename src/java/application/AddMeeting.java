@@ -7,19 +7,22 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class AddMeeting {
-    private String startTime;
-    private String endTime;
+   // private String startTime;
+   // private String endTime;
     private String startDate;
     private String endDate;
     private String recurrence;
     private String moduleCode;
     private String location;
     private String description;
+    private String period;
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
-        this.startTime = "";
-        this.endTime = "";
+        
+        this.period = "";
+//        this.startTime = "";
+//        this.endTime = "";
         this.startDate = "";
         this.endDate = "";
         this.recurrence = "";
@@ -29,6 +32,8 @@ public class AddMeeting {
         this.errors = new ArrayList<>();
     }
     
+   /*
+    No longer needed because using period instead
     public String getStartTime( ) {
         return startTime;
     } 
@@ -44,7 +49,13 @@ public class AddMeeting {
     public void setEndTime( final String endTime ) {
         this.endTime = endTime;
     }
-    
+    */
+    public String getPeriod(){
+        return period;
+    }
+    public String setPeriod(final String period){
+        this.period = period;
+    }
     public String getStartDate( ) {
         return startDate;
     } 
@@ -96,7 +107,7 @@ public class AddMeeting {
     public boolean validateMeetingForm( ) {
         boolean isValid = true;
         
-        if( startTime.equals( "" ) ) {
+    /*    if( startTime.equals( "" ) ) {
             errors.add( "Start time required. Must be in 12:00:00 format." );
             isValid = false;
             startTime = "";
@@ -105,9 +116,14 @@ public class AddMeeting {
         if( endTime.equals( "" )  ) {
             errors.add( "End time required. Must be in 12:00:00 format." );
             isValid = false;
-            endTime = "";
+            endTime = ""; 
         }
-      
+      */
+        if( period.equals ("") ){
+            errors.add( "Timeslot required. Please pick from dropdown menu.");
+            isValid = false;
+            period = "";
+        }
         if( startDate.equals( "" )  ) {
             errors.add( "Start date required. Must be in yyyy/mm/dd format." );
             isValid = false;
@@ -162,18 +178,34 @@ public class AddMeeting {
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
-        database.Insert( "INSERT INTO add_meeting( start_time, end_time, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" +
+        database.Insert( "INSERT INTO add_meeting( period, start_date, end_date, recurrence, module_code, location, description )" +
+                         "VALUES( '" + period + "', '" + startDate + "', '" + endDate + "', '" +
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
 
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                form += "<label for=\"startTime\">Start Time:</label>\n";
-               form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
-               form += "<label for=\"endTime\">End Time:</label>\n";
-               form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
-               form += "<label for=\"startDate\">Start Date:</label>\n"; 
+               //Need a dropdown menu put here
+//               form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
+//               form += "<label for=\"endTime\">End Time:</label>\n";
+//               form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
+//               form += "<label for=\"startDate\">Start Date:</label>\n"; 
+//               
+               form += "<label for=\"period\">Period:</label>\n";
+               form += "<select name=\"period\" id='dropdown'>" +
+                       "    <option value=\"1\" selected>8:00 - 9:00</option>" +
+                       "    <option value=\"2\">9:00 - 10:00</option>" +
+                       "    <option value=\"3\">10:00 - 11:00</option>" +
+                       "    <option value=\"4\">11:00 - 12:00</option>" +
+                       "    <option value=\"5\">12:00 - 13:00</option>" +
+                       "    <option value=\"6\">13:00 - 14:00</option>" +
+                       "    <option value=\"7\">14:00 - 15:00</option>" +
+                       "    <option value=\"8\">15:00 - 16:00</option>" +
+                       "    <option value=\"9\">16:00 - 17:00</option>" +
+                       "    <option value=\"10\">17:00 - 18:00</option>" +
+                       "</select><br />";
+               
                form += "<input type=\"text\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
                form += "<label for=\"endDate\">End Date:</label>\n";
                form += "<input type=\"text\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
