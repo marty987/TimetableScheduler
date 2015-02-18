@@ -39,10 +39,11 @@
                         session.setAttribute("lastName", login.getLastName( ) );
                         response.sendRedirect( "timetable.jsp" );
                     }
-                    out.print( login.loginForm() );
+                    out.print( login.loginForm( ) );
                     out.print( "Username or Password incorrect, try again!" );
                 }
             %>
+            
             <div class="login-help">
                 <p><a href="register.jsp">Register Here!</a></p>
                 <p><a href="forgot_password.jsp">Forgot Password!</a></p>

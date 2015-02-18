@@ -7,8 +7,6 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class AddMeeting {
-   // private String startTime;
-   // private String endTime;
     private String startDate;
     private String endDate;
     private String recurrence;
@@ -195,6 +193,7 @@ public class AddMeeting {
                        "    <option value=\"10\">17:00 - 18:00</option>" +
                        "</select><br />";
                
+               form += "<label for=\"startDate\">Start Date:</label>\n";
                form += "<input type=\"text\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
                form += "<label for=\"endDate\">End Date:</label>\n";
                form += "<input type=\"text\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
