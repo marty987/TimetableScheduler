@@ -19,22 +19,21 @@
         <title>UCC Timetable</title>
     </head>
     <body>
-       
+        <h1>Timetable</h1>
         <%
-            GUI gui = new GUI();
+            GUI gui = new GUI( );
             
             if( session.getAttribute( "Authenticated" ) == null ) {
                 response.sendRedirect( "index.jsp" );
             }
             else {
-                String fname = (String) session.getAttribute("firstName");
-                String lname = (String) session.getAttribute("lastName");
+                String fname = (String) session.getAttribute( "firstName" );
+                String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
-                Timetable timetable = new Timetable();
-                
-                //out.print(timetable.printedTimetable());
-                
+                Timetable timetable = new Timetable( );
+    
+                out.print( timetable.printTimetable( ) );            
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
             

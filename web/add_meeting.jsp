@@ -5,7 +5,7 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="application.Register;" %>
+<%@ page import="application.User;" %>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
