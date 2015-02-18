@@ -44,7 +44,6 @@
                 }
             %>
             <div class="login-help">
-                <p><a href="password_reset.jsp">Reset Password</a></p>
                 <p><a href="register.jsp">Register Here!</a></p>
                 <p><a href="forgot_password.jsp">Forgot Password!</a></p>
             </div>

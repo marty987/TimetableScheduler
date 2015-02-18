@@ -17,13 +17,12 @@ public class AddMeeting {
     private String description;
     private String period;
     private String stream;
+    private final DatabaseClass database;
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
         
         this.period = "";
-//        this.startTime = "";
-//        this.endTime = "";
         this.startDate = "";
         this.endDate = "";
         this.recurrence = "";
@@ -32,26 +31,11 @@ public class AddMeeting {
         this.description = "";
         this.stream = "";
         this.errors = new ArrayList<>();
+        this.database = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
-   /*
-    No longer needed because using period instead
-    public String getStartTime( ) {
-        return startTime;
-    } 
-    
-    public void setStartTime( final String startTime ) {
-        this.startTime = startTime;
-    }
-    
-    public String getEndTime( ) {
-        return endTime;
-    } 
-    
-    public void setEndTime( final String endTime ) {
-        this.endTime = endTime;
-    }
-    */
     public String getPeriod(){
         return period;
     }
@@ -116,19 +100,7 @@ public class AddMeeting {
     
     public boolean validateMeetingForm( ) {
         boolean isValid = true;
-        
-    /*    if( startTime.equals( "" ) ) {
-            errors.add( "Start time required. Must be in 12:00:00 format." );
-            isValid = false;
-            startTime = "";
-        }
-        
-        if( endTime.equals( "" )  ) {
-            errors.add( "End time required. Must be in 12:00:00 format." );
-            isValid = false;
-            endTime = ""; 
-        }
-      */
+
         if( period.equals ("") ){
             errors.add( "Timeslot required. Please pick from dropdown menu.");
             isValid = false;
@@ -184,22 +156,15 @@ public class AddMeeting {
     }
     
     public void insertNewMeeting(  ) {
-        DatabaseClass database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
         database.Insert( "INSERT INTO add_meeting( period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + period + "', '" + startDate + "', '" + endDate + "', '" +
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
+        database.Close( );
     }
     
-    public boolean isLecturer(String userId) {
-        DatabaseClass database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
+    public boolean isLecturer( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
-        database.Close();
+        database.Close( );
         
         if(dbResult[0].equals("0")) {
             return false;
@@ -207,15 +172,15 @@ public class AddMeeting {
         return true;
     }
 
-    public String addMeetingForm(String userId ) {
+    public String addMeetingForm( String userId ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                form += "<label for=\"startTime\">Start Time:</label>\n";
                //Need a dropdown menu put here
-//               form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
-//               form += "<label for=\"endTime\">End Time:</label>\n";
-//               form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
-//               form += "<label for=\"startDate\">Start Date:</label>\n"; 
-//               
+               //form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
+               //form += "<label for=\"endTime\">End Time:</label>\n";
+               //form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
+               //form += "<label for=\"startDate\">Start Date:</label>\n"; 
+             
                form += "<label for=\"period\">Period:</label>\n";
                form += "<select name=\"period\" id='dropdown'>" +
                        "    <option value=\"1\" selected>8:00 - 9:00</option>" +
@@ -242,7 +207,7 @@ public class AddMeeting {
                        "    <option value=\"semester\">Semester</option>" +
                        "</select><br />";
                
-               if(isLecturer(userId)) {
+               if( isLecturer( userId ) ) {
                    form += "<label for='stream'>Stream:</label>\n";
                    form += "<select name=\"stream\"id='dropdown' >\n" +
                         "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +

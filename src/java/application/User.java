@@ -178,9 +178,7 @@ public class User {
     
     public void registerNewUser(  ) {
         database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, is_admin, date_joined )" +
-                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
-                            + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
-                            + "', '" + false + "', '" + getCurrentDate( ) + "' );" );
+                         "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo + "', '" + "0" + "', '" + getCurrentDate( ) + "' );" );
         
         database.Close();
     }
@@ -257,11 +255,11 @@ public class User {
                     "  <option value=\"13\">Chinese Year 4</option>\n" +
                 "</select><br />"; 
         
-        form += "<label for='firstName'>First Name::</label>\n";
+        form += "<label for='firstName'>First Name:</label>\n";
         form += "<input type='text' name='firstName' value='" + firstName +  "' placeholder='John' /><br />\n";
-        form += "<label for='middleName'>Middle Name::</label>\n";
+        form += "<label for='middleName'>Middle Name:</label>\n";
         form += "<input type='text' name='middleName' value='" + middleName +  "' placeholder='Swan' /><br />\n";
-        form += "<label for='lastName'>Last Name::</label>\n";
+        form += "<label for='lastName'>Last Name:</label>\n";
         form += "<input type='text' name='lastName' value='" + lastName +  "' placeholder='Smith' /><br />\n";
         form += "<label for='email'>Email:</label>\n";
         form += "<input type='text' name='email' value='" + email +  "' placeholder='martin@live.ie' /><br />\n";
