@@ -16,6 +16,7 @@ public class AddMeeting {
     private String location;
     private String description;
     private String period;
+    private String stream;
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
@@ -29,6 +30,7 @@ public class AddMeeting {
         this.moduleCode = "";
         this.location = "";
         this.description = "";
+        this.stream = "";
         this.errors = new ArrayList<>();
     }
     
@@ -103,6 +105,14 @@ public class AddMeeting {
     public void setDescription( final String description ) {
         this.description = description;
     }   
+    
+    public String getStream() {
+        return stream;
+    }
+    
+    public void setStream(String stream) {
+        this.stream = stream;
+    }
     
     public boolean validateMeetingForm( ) {
         boolean isValid = true;
