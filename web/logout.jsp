@@ -17,8 +17,8 @@
     
     <body>
         <%
-          GUI loginHeader = new GUI();  
-          out.print( loginHeader.loginHeader() );
+          GUI gui = new GUI();  
+          out.print( gui.loginHeader( ) );
         %>       
         
         <div class="login-card">
@@ -30,8 +30,7 @@
         </div>
         
         <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+          out.print( gui.footer( ) );
         %>        
     </body>
 </html>
