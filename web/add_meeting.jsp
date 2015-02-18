@@ -35,13 +35,13 @@
             }
             else {
                 if( request.getParameter( "submit" ) == null ) {
-                    out.print( meeting.addMeetingForm( ) );
+                    out.print( meeting.addMeetingForm((String)session.getAttribute( "Authenticated" )) );
                 }
                 else {
                     if( meeting.validateMeetingForm( ) ) {
                         response.sendRedirect( "timetable.jsp" );  
                     }
-                    out.print( meeting.addMeetingForm( ) );
+                    out.print( meeting.addMeetingForm((String)session.getAttribute( "Authenticated" )) );
                     out.print( meeting.errors( ) );
                 }
             }

@@ -53,7 +53,7 @@ public class AddMeeting {
     public String getPeriod(){
         return period;
     }
-    public String setPeriod(final String period){
+    public void setPeriod(final String period){
         this.period = period;
     }
     public String getStartDate( ) {
@@ -197,7 +197,7 @@ public class AddMeeting {
         return true;
     }
 
-    public String addMeetingForm( ) {
+    public String addMeetingForm(String userId ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                form += "<label for=\"startTime\">Start Time:</label>\n";
                //Need a dropdown menu put here
@@ -231,6 +231,25 @@ public class AddMeeting {
                        "    <option value=\"montly\">Monthly</option>" +
                        "    <option value=\"semester\">Semester</option>" +
                        "</select><br />";
+               
+               if(isLecturer(userId)) {
+                   form += "<label for='stream'>Stream:</label>\n";
+                   form += "<select name=\"stream\"id='dropdown' >\n" +
+                        "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
+                        "  <option value=\"2\">Core Year 2</option>\n" +
+                        "  <option value=\"3\">Core Year 3</option>\n" +
+                        "  <option value=\"4\">Core Year 4</option>\n" +
+                        "  <option value=\"5\">Web Year 2</option>\n" +
+                        "  <option value=\"6\">Web Year 3</option>\n" +
+                        "  <option value=\"7\">Web Year 4</option>\n" +
+                        "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
+                        "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
+                        "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
+                        "  <option value=\"11\">Chinese Year 2</option>\n" +
+                        "  <option value=\"12\">Chinese Year 3</option>\n" +
+                        "  <option value=\"13\">Chinese Year 4</option>\n" +
+                        "</select><br />"; 
+               }
                
                form += "<label for=\"moduleCode\">Module Code:</label>\n";
                form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
