@@ -166,6 +166,20 @@ public class AddMeeting {
                          "VALUES( '" + startTime + "', '" + endTime + "', '" + startDate + "', '" + endDate + "', '" +
                                        recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
     }
+    
+    public boolean isLecturer(String userId) {
+        DatabaseClass database = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        
+        String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
+        database.Close();
+        
+        if(dbResult[0].equals("0")) {
+            return false;
+        } 
+        return true;
+    }
 
     public String addMeetingForm( ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
