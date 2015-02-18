@@ -30,7 +30,7 @@ public class Timetable {
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        GregorianCalendar calendar = new GregorianCalendar.getInstance();
+        GregorianCalendar calendar = new GregorianCalendar.getInstance( );
         
         this.timetableValues = new String[][]{
             {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
@@ -144,4 +144,6 @@ public class Timetable {
                
         return table;
     }
+    
+    
 }

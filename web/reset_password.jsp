@@ -32,7 +32,7 @@
                         out.print( gui.resetPassForm( ) );
                 }
                 else {
-                    User user = new User(  );
+                   User user = new User(  );
                     
                    boolean passwordsMatch = user.resetPassword( request.getParameter( "password1" ), 
                            request.getParameter( "password2" ), request.getParameter( "user_id" ) );
