@@ -1,4 +1,4 @@
-package application;
+package miscellaneous;
 /**
  *
  * @author Marty2

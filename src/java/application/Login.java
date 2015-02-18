@@ -3,6 +3,7 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
+import miscellaneous.PasswordHasher;
 import dbpackage.DatabaseClass;
 import javax.servlet.http.HttpServletRequest;
 

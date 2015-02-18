@@ -3,11 +3,13 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
-import dbpackage.DatabaseClass;
-import java.util.ArrayList;
 import java.util.Date;
-import java.text.SimpleDateFormat;
+import emailsender.Email;
 import java.util.Calendar;
+import java.util.ArrayList;
+import dbpackage.DatabaseClass;
+import miscellaneous.PasswordHasher;
+import java.text.SimpleDateFormat;
 
 public class Register {
     private String userId;
@@ -40,6 +42,7 @@ public class Register {
     }
     
     public void setUserId( final String userId ) {
+        System.out.println("test test");
         this.userId = userId;
     }
     
@@ -157,21 +160,16 @@ public class Register {
         
         if( isValid ) {
             insertNewUser( );
+            
+            // This will not work in the labs, as UCC blocks the smpt port
+            // If you are running at home uncomment the two lines below and it will 
+            // send an email to new registered users.
+            
+            //Email email = new Email( );
+            //email.sendEmailToNewRegUser( userId, firstName, getEmail( ) );
         }
         
         return isValid;
-    }
-    
-    public String errors( ) {
-        String errorList;
-        
-        errorList = "<ul>";
-            for( String error: errors ) {
-                errorList += "<li>" + error + "</li>";
-            }
-        errorList += "</ul>";
-        
-        return errorList;
     }
     
     public void insertNewUser(  ) {
@@ -183,6 +181,18 @@ public class Register {
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
                             + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
                             + "', '" + getCurrentDate( ) + "' );" );
+    }
+    
+    public String printErrors( ) {
+        String errorList;
+        
+        errorList = "<ul>";
+            for( String error: errors ) {
+                errorList += "<li>" + error + "</li>";
+            }
+        errorList += "</ul>";
+        
+        return errorList;
     }
     
     public boolean isInteger( String value ) {
@@ -197,8 +207,8 @@ public class Register {
     
     public String getCurrentDate( ) {
         Date today = Calendar.getInstance( ).getTime( );
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-        String folderName = formatter.format(today);
+        SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
+        String folderName = formatter.format( today );
 
         return folderName;
     }

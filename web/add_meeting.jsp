@@ -28,17 +28,22 @@
         
         <jsp:useBean id="meeting" class="application.AddMeeting" scope="request" />
         <jsp:setProperty name="meeting" property="*" />
-        
+   
         <%
-            if( request.getParameter( "submit" ) == null ) {
-                out.print( meeting.addMeetingForm( ) );
+            if( session.getAttribute( "Authenticated" ) == null ) {
+                response.sendRedirect( "index.jsp" );
             }
             else {
-                if( meeting.validateMeetingForm( ) ) {
-                    response.sendRedirect( "timetable.jsp" );  
+                if( request.getParameter( "submit" ) == null ) {
+                    out.print( meeting.addMeetingForm( ) );
                 }
-                out.print( meeting.addMeetingForm( ) );
-                out.print( meeting.errors( ) );
+                else {
+                    if( meeting.validateMeetingForm( ) ) {
+                        response.sendRedirect( "timetable.jsp" );  
+                    }
+                    out.print( meeting.addMeetingForm( ) );
+                    out.print( meeting.errors( ) );
+                }
             }
         %>
       </div>

@@ -7,7 +7,10 @@
 */
 
 body {
-  background-image: url(../images/blur.jpg); 
+  background-image: url(../images/blur.jpg);  
+  background-size: 100%;
+  background-repeat:no-repeat;
+
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
@@ -123,7 +126,7 @@ body {
 
 #welcomeH
 {
-    font-size: 1em;
+    color:white;
 }
 
 
@@ -139,6 +142,14 @@ footer{
 
 @media screen and (min-width: 768px)
 {
+ 
+ #welcomeH
+{
+    font-size: 0.9em;
+    float:right;
+    margin-right: 1%;
+    margin-bottom:2%;
+}   
 
 /* Navigation */
 
@@ -296,5 +307,17 @@ footer li{
     color: white;
     border-right: black 1px solid;
     font-size: 1em;
+}
+
+body{
+   -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+#welcomeH
+{
+float:right;
 }
 }

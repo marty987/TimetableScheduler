@@ -21,18 +21,21 @@
     <body>
        
         <%
-            boolean hasPermission = (Boolean) session.getAttribute("hasPermission");
             GUI gui = new GUI();
             
-            if(hasPermission) {
-                String fName = (String) session.getAttribute("firstName");
-                String lName = (String) session.getAttribute("lastName");
-                out.print(gui.header(true, fName, lName));
+            if( session.getAttribute( "Authenticated" ) == null ) {
+                response.sendRedirect( "index.jsp" );
+            }
+            else {
+                String fname = (String) session.getAttribute("firstName");
+                String lname = (String) session.getAttribute("lastName");
+                out.print(gui.header(true, fname, lname));
+                
                 Timetable timetable = new Timetable();
-                out.print(timetable.printedTimetable());
-            } else {
-                out.print(gui.header(false, "", ""));
-                out.print(gui.sessionErrorMessage());
+                
+                //out.print(timetable.printedTimetable());
+                
+                out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
             
             out.print( gui.footer() );
