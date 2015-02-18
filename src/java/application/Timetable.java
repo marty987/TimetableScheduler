@@ -5,17 +5,19 @@ package application;
  */
 import dbpackage.DatabaseClass;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
-import java.text.SimpleDateFormat;
-import java.text.ParsePosition;
+import java.util.*;
+import java.text.*;
 
 public class Timetable {
     private Event[] myEvents;
     SimpleDateFormat formatter = 
             new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
+    private Calendar calendar = Calendar.getInstance();
+    private int mondayOfWeek = calendar.getFirstDayOfWeek();
     
-    private String[][] timetableValues;
     private DatabaseClass database;
+    private String[][] timetableValues;
+    
     private String eventName;
     private String eventType;
     private int period;
@@ -30,7 +32,6 @@ public class Timetable {
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        GregorianCalendar calendar = new GregorianCalendar.getInstance( );
         
         this.timetableValues = new String[][]{
             {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
@@ -47,7 +48,11 @@ public class Timetable {
         };
     }
     
-    private void fetchEventsFromDB( ) {
+    public int daysBetween(Date d1, Date d2){
+             return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+    
+    private void fetchEventsFromDB( String userId ) {
         String eventIDs[];
         String currentEvent[];
         ParsePosition startDatePos = new ParsePosition(0);
@@ -60,7 +65,7 @@ public class Timetable {
         eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM events JOIN has_events "
                 + "ON events.event_id = has_events.user_id"
-                + "WHERE has_events.user_id = " + user.userId + ";");
+                + "WHERE has_events.user_id = " + userId + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
@@ -72,7 +77,7 @@ public class Timetable {
             eventName = currentEvent[1];
             eventType = currentEvent[2];
             period = Integer.parseInt(currentEvent[3]);
-            startDate = formatter.parse( currentEvent[4], startDatePos );
+            startDate = formatter.parse( currentEvent[4], startDatePos ); 
             endDate = formatter.parse( currentEvent[4], endDatePos );
             recurrence = currentEvent[6];
             moduleCode = currentEvent[7];
@@ -93,25 +98,26 @@ public class Timetable {
             if ( myEvents[i].getStartDate().equals(myEvents[i].getEndDate()) )
                 //non-recurring events
             {
-                if ( myEvents[i].getStartDate().after(/*8AM MONDAY*/) && myEvents[i].getStartDate().before(/*6PM SUNDAY*/) ) 
+                //if ( myEvents[i].getStartDate().compareTo(mondayOfWeek) && myEvents[i].getStartDate() <= mondayOfWeek ) 
                     //if this event occurs this week
-                {
+               // {
                     
-                }
+                //}
             } 
             else if (myEvents[i].getRecurrence().equals("daily")) 
                 //daily recurring events
             {
-                timetableValues[myEvents[i].getPeriod()][1] = myEvents[i].getEventName(); //Monday
-                timetableValues[myEvents[i].getPeriod()][2] = myEvents[i].getEventName(); //Tuesday
-                timetableValues[myEvents[i].getPeriod()][3] = myEvents[i].getEventName(); //Wednesday                   
-                timetableValues[myEvents[i].getPeriod()][4] = myEvents[i].getEventName(); //Thursday
-                timetableValues[myEvents[i].getPeriod()][5] = myEvents[i].getEventName(); //Friday
-                timetableValues[myEvents[i].getPeriod()][6] = myEvents[i].getEventName(); //Saturday
-                timetableValues[myEvents[i].getPeriod()][7] = myEvents[i].getEventName(); //Sunday
+                for ( int j = 1; j <= daysBetween(startDate, endDate); j++ ){
+                    timetableValues[myEvents[i].getPeriod()][j] = myEvents[i].getEventName(); 
+                }
             }
             else if (myEvents[i].getRecurrence().equals("monthly"))
                 //monthly recurring events
+            {
+                
+            }   
+            else if (myEvents[i].getRecurrence().equals("semesterly"))
+                //semesterly recurring events
             {
                 
             }   
