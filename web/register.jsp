@@ -38,7 +38,8 @@
                         session.setAttribute( "Authenticated", register.getUserId( ) );
                         session.setAttribute( "firstName", register.getFirstName( ) );
                         session.setAttribute( "lastName", register.getLastName( ) );
-                        response.sendRedirect( "timetable.jsp" );  
+                        out.print( "<p>You have successfully registered to Timetable Scheduler</p>!" );
+                        out.print( "<p><a href='timetable.jsp'>Go to your Timetable!</a></p>" );
                     }
                     out.print( register.registrationForm( ) );
                     out.print( register.printErrors( ) );
