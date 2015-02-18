@@ -177,10 +177,10 @@ public class User {
     }
     
     public void registerNewUser(  ) {
-        database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, date_joined )" +
+        database.Insert( "INSERT INTO Users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, is_admin, date_joined )" +
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName 
                             + "', '" + lastName + "', '" + email + "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo 
-                            + "', '" + getCurrentDate( ) + "' );" );
+                            + "', '" + false + "', '" + getCurrentDate( ) + "' );" );
         
         database.Close();
     }

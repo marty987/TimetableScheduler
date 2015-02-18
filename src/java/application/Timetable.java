@@ -144,6 +144,4 @@ public class Timetable {
                
         return table;
     }
-    
-    
 }
