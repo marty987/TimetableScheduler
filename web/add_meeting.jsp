@@ -39,10 +39,13 @@
                     }
                     else {
                         if( meeting.validateMeetingForm( ) ) {
-                            response.sendRedirect( "timetable.jsp" );  
+                            out.print( "Your event has be saved successfully!" );
+                            out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
                         }
-                        out.print( meeting.addMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
-                        out.print( meeting.errors( ) );
+                        else {
+                            out.print( meeting.addMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+                            out.print( meeting.errors( ) );
+                        }
                     }
                 }
             %>

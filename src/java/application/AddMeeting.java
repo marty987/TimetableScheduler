@@ -7,19 +7,23 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class AddMeeting {
+    private String eventName;
+    private String eventType;
+    private String stream;
+    private String period;
     private String startDate;
     private String endDate;
     private String recurrence;
     private String moduleCode;
     private String location;
     private String description;
-    private String period;
-    private String stream;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
-        
+        this.eventName = "";
+        this.eventType = "";
+        this.stream = "";
         this.period = "";
         this.startDate = "";
         this.endDate = "";
@@ -27,19 +31,36 @@ public class AddMeeting {
         this.moduleCode = "";
         this.location = "";
         this.description = "";
-        this.stream = "";
-        this.errors = new ArrayList<>();
+        this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
-    public String getPeriod(){
+    public String getEventName( ){
+        return eventName;
+    }
+    
+    public void setEventName( final String eventName ){
+        this.eventName = eventName;
+    }
+    
+    public String getEventType( ){
+        return eventType;
+    }
+    
+    public void setEventType( final String eventType ){
+        this.eventType = eventType;
+    }
+    
+    public String getPeriod( ){
         return period;
     }
-    public void setPeriod(final String period){
+    
+    public void setPeriod( final String period ){
         this.period = period;
     }
+    
     public String getStartDate( ) {
         return startDate;
     } 
@@ -99,31 +120,38 @@ public class AddMeeting {
     public boolean validateMeetingForm( ) {
         boolean isValid = true;
 
-        if( period.equals ("") ){
-            errors.add( "Timeslot required. Please pick from dropdown menu.");
+        if( eventName.equals ("") ){
+            errors.add( "Event Name required");
             isValid = false;
-            period = "";
+            eventName = "";
         }
-        if( startDate.equals( "" )  ) {
+        
+        if( eventType.equals ("") ){
+            errors.add( "Event Type required");
+            isValid = false;
+            eventType = "";
+        }
+        
+        if( startDate.equals( "" ) || startDate.length() != 10 ) {
             errors.add( "Start date required. Must be in yyyy/mm/dd format." );
             isValid = false;
             startDate = "";
         }
         
-        if( endDate.equals( "" ) ) {
+        if( endDate.equals( "" ) || endDate.length( ) != 10 ) {
             errors.add( "End date required. Must be in yyyy/mm/dd format." );
             isValid = false;
             endDate = "";
         }
         
-        if( moduleCode.equals( "" ) ) {
-            errors.add( "Module Code required." );
+        if( moduleCode.equals( "" ) || moduleCode.length( ) > 6 ) {
+            errors.add( "Module Code required. Must be six characters in length" );
             isValid = false;
             moduleCode = "";
         }
         
-        if( location.equals( "" ) ) {
-            errors.add( "Location required." );
+        if( location.equals( "" ) || location.length( ) > 100 ) {
+            errors.add( "Location required. No greater that one hundred characters" );
             isValid = false;
             location = "";
         }
@@ -154,17 +182,17 @@ public class AddMeeting {
     }
     
     public void insertNewMeeting(  ) {
-        database.Insert( "INSERT INTO add_meeting( period, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + period + "', '" + startDate + "', '" + endDate + "', '" +
-                                       recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
-        database.Close( );
+        database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
+                         "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
+                          endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
+        //database.Close( );
     }
     
     public boolean isLecturer( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
         database.Close( );
         
-        if(dbResult[0].equals("0")) {
+        if( dbResult.length == 0 || dbResult[0].equals("0")) {
             return false;
         } 
         return true;
@@ -172,8 +200,33 @@ public class AddMeeting {
 
     public String addMeetingForm( String userId ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
-               form += "<label for=\"startTime\">Start Time:</label>\n";
+               
+               form += "<label for=\"eventName\">Event Name:</label>\n";
+               form += "<input type=\"text\" name=\"eventName\" value=\"" + eventName + "\" placeholder=\"Team Meeting\"/><br />\n";
+               form += "<label for=\"eventType\">Event Type:</label>\n";
+               form += "<input type=\"text\" name=\"eventType\" value=\"" + eventType + "\" placeholder=\"Meeting\"/><br />\n";
+               
+               if( isLecturer( userId ) ) {
+                   form += "<label for='stream'>Stream:</label>\n";
+                   form += "<select name=\"stream\"id='dropdown' >\n" +
+                        "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
+                        "  <option value=\"2\">Core Year 2</option>\n" +
+                        "  <option value=\"3\">Core Year 3</option>\n" +
+                        "  <option value=\"4\">Core Year 4</option>\n" +
+                        "  <option value=\"5\">Web Year 2</option>\n" +
+                        "  <option value=\"6\">Web Year 3</option>\n" +
+                        "  <option value=\"7\">Web Year 4</option>\n" +
+                        "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
+                        "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
+                        "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
+                        "  <option value=\"11\">Chinese Year 2</option>\n" +
+                        "  <option value=\"12\">Chinese Year 3</option>\n" +
+                        "  <option value=\"13\">Chinese Year 4</option>\n" +
+                        "</select><br />"; 
+               }
+                  
                //Need a dropdown menu put here
+               //form += "<label for=\"startTime\">Start Time:</label>\n";
                //form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
                //form += "<label for=\"endTime\">End Time:</label>\n";
                //form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
@@ -205,26 +258,7 @@ public class AddMeeting {
                        "    <option value=\"montly\">Monthly</option>" +
                        "    <option value=\"semester\">Semester</option>" +
                        "</select><br />";
-               
-               if( isLecturer( userId ) ) {
-                   form += "<label for='stream'>Stream:</label>\n";
-                   form += "<select name=\"stream\"id='dropdown' >\n" +
-                        "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
-                        "  <option value=\"2\">Core Year 2</option>\n" +
-                        "  <option value=\"3\">Core Year 3</option>\n" +
-                        "  <option value=\"4\">Core Year 4</option>\n" +
-                        "  <option value=\"5\">Web Year 2</option>\n" +
-                        "  <option value=\"6\">Web Year 3</option>\n" +
-                        "  <option value=\"7\">Web Year 4</option>\n" +
-                        "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
-                        "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
-                        "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
-                        "  <option value=\"11\">Chinese Year 2</option>\n" +
-                        "  <option value=\"12\">Chinese Year 3</option>\n" +
-                        "  <option value=\"13\">Chinese Year 4</option>\n" +
-                        "</select><br />"; 
-               }
-               
+                          
                form += "<label for=\"moduleCode\">Module Code:</label>\n";
                form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
                form += "<label for=\"location\">Location:</label>\n";

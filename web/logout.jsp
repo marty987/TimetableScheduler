@@ -17,7 +17,7 @@
     
     <body>
         <%
-          GUI gui = new GUI();  
+          GUI gui = new GUI( );  
           out.print( gui.loginHeader( ) );
         %>       
         
