@@ -39,8 +39,8 @@ public class Login {
     
     public boolean loginUser( HttpServletRequest request ) {
         DatabaseClass database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        //database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         username = request.getParameter( "username" );
         password = request.getParameter( "password" );
@@ -56,6 +56,8 @@ public class Login {
         if( ! validateLogin( ) ){
             return false;
         }
+        
+        database.Close();
   
         return result.length != 0;
     }
