@@ -13,10 +13,11 @@ public class Timetable {
     SimpleDateFormat formatter = 
             new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
     private Calendar calendar = Calendar.getInstance();
-    private int mondayOfWeek = calendar.getFirstDayOfWeek();
+    private Date startOfWeek = getMondayOfWeek();
+    private Date endOfWeek = getSundayOfWeek();
     
     private DatabaseClass database;
-    private String[][] timetableValues;
+    private final String[][] timetableValues;
     
     private String eventName;
     private String eventType;
@@ -46,10 +47,6 @@ public class Timetable {
             {"<th scope=\"row\">4PM - 5PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">5PM - 6PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"}
         };
-    }
-    
-    public int daysBetween(Date d1, Date d2){
-             return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
     
     private void fetchEventsFromDB( String userId ) {
@@ -95,36 +92,45 @@ public class Timetable {
     private void addEventsToTimetable( ) {
         //iterate through the user's events
         for ( int i = 0; i < myEvents.length; i++ ) {
-            if ( myEvents[i].getStartDate().equals(myEvents[i].getEndDate()) )
+            Date startDateOfEvent = myEvents[i].getStartDate();
+            Date endDateOfEvent = myEvents[i].getEndDate();
+            calendar.setTime(myEvents[i].getStartDate());
+            
+            if ( startDateOfEvent.equals(myEvents[i].getEndDate()) )
                 //non-recurring events
             {
-                //if ( myEvents[i].getStartDate().compareTo(mondayOfWeek) && myEvents[i].getStartDate() <= mondayOfWeek ) 
+                if ( startDateOfEvent.compareTo(startOfWeek) >= 0 && endDateOfEvent.compareTo(endOfWeek) <= 0)
                     //if this event occurs this week
-               // {
-                    
-                //}
+                {
+                    timetableValues[myEvents[i].getPeriod()][calendar.DAY_OF_WEEK] 
+                            = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
+                }
             } 
             else if (myEvents[i].getRecurrence().equals("daily")) 
                 //daily recurring events
             {
                 for ( int j = 1; j <= daysBetween(startDate, endDate); j++ ){
-                    timetableValues[myEvents[i].getPeriod()][j] = myEvents[i].getEventName(); 
+                    timetableValues[myEvents[i].getPeriod()][j] 
+                            = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
                 }
             }
             else if (myEvents[i].getRecurrence().equals("monthly"))
                 //monthly recurring events
             {
-                
+                //get the date associated with startDate
+                //check if startDate is after first day of week and endDate before last day of week
             }   
             else if (myEvents[i].getRecurrence().equals("semesterly"))
                 //semesterly recurring events
             {
-                
+                //?????
             }   
             else 
                 //annually recurring events
             {
-                
+                //get date associated with start date
+                //get month associated with start date
+                //check if startDate is after first day of week and endDate before last day of week 
             }    
         }
         
@@ -149,5 +155,34 @@ public class Timetable {
                      +"</table>";
                
         return table;
+    }
+    
+    private int daysBetween(Date d1, Date d2){
+             return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
+    }
+    
+    private Date getTodaysDate( ){
+        Calendar temp = Calendar.getInstance();
+        temp.set(Calendar.HOUR_OF_DAY, 0);
+        temp.set(Calendar.MINUTE, 0);
+        temp.set(Calendar.SECOND, 0);
+        
+        return temp.getTime();
+    }
+    
+    private Date getMondayOfWeek( ){
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.DAY_OF_WEEK;
+        temp.add(Calendar.DATE, 0 - currentDayOfWeek);
+        
+        return temp.getTime();
+    }
+    
+    private Date getSundayOfWeek( ){
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.DAY_OF_WEEK;
+        temp.add(Calendar.DATE, 6 - currentDayOfWeek);
+        
+        return temp.getTime();
     }
 }
