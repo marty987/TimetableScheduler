@@ -30,6 +30,7 @@ public class Timetable {
     private String description;
     
     public Timetable() {
+        calendar = getTodaysDate( );
         startOfWeek.setTime(getMondayOfWeek());
         endOfWeek.setTime(getSundayOfWeek());
         
@@ -95,14 +96,14 @@ public class Timetable {
     private void addEventsToTimetable( ) {
         //iterate through the user's events
         for ( int i = 0; i < myEvents.length; i++ ) {
-            Calendar startDateOfEvent = myEvents[i].getStartDate();
-            Calendar endDateOfEvent = myEvents[i].getEndDate();
+            Calendar startOfEvent = myEvents[i].getStartDate();
+            Calendar endOfEvent = myEvents[i].getEndDate();
             
-            if(startDateOfEvent.compareTo(startOfWeek) >= 0 
-                    && endDateOfEvent.compareTo(endOfWeek) <= 0 ){
+            if(startOfEvent.compareTo(startOfWeek) >= 0 
+                    && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
                 
-                if ( startDateOfEvent.equals(endDateOfEvent) )
+                if ( startOfEvent.equals(endOfEvent) )
                     //non-recurring events
                 {
                         timetableValues[myEvents[i].getPeriod()][calendar.DAY_OF_WEEK] 
@@ -123,7 +124,7 @@ public class Timetable {
                     //monthly recurring events
                 {
                     for( int j = 1; i <= 7; i++ ){
-                        if ( j == startDate.DAY_OF_MONTH ){
+                        if ( j == startOfEvent.DAY_OF_MONTH ){
                             timetableValues[myEvents[i].getPeriod()][j] 
                                 = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
                         }
@@ -137,9 +138,11 @@ public class Timetable {
                 else 
                     //annually recurring events
                 {
-                    //get date associated with start date
-                    //get month associated with start date
-                    //check if startDate is after first day of week and endDate before last day of week 
+                    if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
+                            && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
+                         timetableValues[myEvents[i].getPeriod()][] 
+                                = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>";
+                    }
                 }   
             }
         }
@@ -180,19 +183,21 @@ public class Timetable {
         return temp;
     }
     
-    private Calendar getMondayOfWeek( ){
+    private Date getMondayOfWeek( ){
         Calendar temp = Calendar.getInstance();
+        temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
         temp.add(Calendar.DATE, 0 - currentDayOfWeek);
         
-        return temp;
+        return temp.getTime();
     }
     
-    private Calendar getSundayOfWeek( ){
+    private Date getSundayOfWeek( ){
         Calendar temp = Calendar.getInstance();
+        temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
         temp.add(Calendar.DATE, 6 - currentDayOfWeek);
         
-        return temp;
+        return temp.getTime();
     }
 }
