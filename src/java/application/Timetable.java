@@ -139,7 +139,7 @@ public class Timetable {
                 {
                     if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
                             && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents[i].getPeriod()][] 
+                        timetableValues[myEvents[i].getPeriod()][startOfEvent.DAY_OF_WEEK] 
                                 = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>";
                     }
                 }   
