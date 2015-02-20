@@ -9,6 +9,7 @@ import java.text.*;
 
 public class Timetable {
     private Event[] myEvents;
+    private final String[][] timetableValues;
     SimpleDateFormat formatter = 
             new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
     private Calendar calendar = Calendar.getInstance();
@@ -16,7 +17,6 @@ public class Timetable {
     private final Calendar endOfWeek = Calendar.getInstance();
     
     private DatabaseClass database;
-    private final String[][] timetableValues;
     
     private String eventName;
     private String eventType;
