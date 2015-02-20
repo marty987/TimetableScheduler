@@ -4,7 +4,6 @@ package application;
  * @since Feb 13, 2015, 12:56:25 PM
  */
 import dbpackage.DatabaseClass;
-import javax.servlet.http.HttpServletRequest;
 import java.util.*;
 import java.text.*;
 
@@ -13,8 +12,8 @@ public class Timetable {
     SimpleDateFormat formatter = 
             new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
     private Calendar calendar = Calendar.getInstance();
-    private Calendar startOfWeek = Calendar.getInstance();
-    private Calendar endOfWeek = Calendar.getInstance();
+    private final Calendar startOfWeek = Calendar.getInstance();
+    private final Calendar endOfWeek = Calendar.getInstance();
     
     private DatabaseClass database;
     private final String[][] timetableValues;
@@ -22,8 +21,8 @@ public class Timetable {
     private String eventName;
     private String eventType;
     private int period;
-    private Calendar startDate = Calendar.getInstance();
-    private Calendar endDate = Calendar.getInstance();
+    private final Calendar startDate = Calendar.getInstance();
+    private final Calendar endDate = Calendar.getInstance();
     private String recurrence;
     private String moduleCode;
     private String location;
@@ -140,7 +139,7 @@ public class Timetable {
                 {
                     if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
                             && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                         timetableValues[myEvents[i].getPeriod()][] 
+                        timetableValues[myEvents[i].getPeriod()][] 
                                 = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>";
                     }
                 }   
@@ -184,7 +183,7 @@ public class Timetable {
     }
     
     private Date getMondayOfWeek( ){
-        Calendar temp = Calendar.getInstance();
+        Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
         temp.add(Calendar.DATE, 0 - currentDayOfWeek);
@@ -193,7 +192,7 @@ public class Timetable {
     }
     
     private Date getSundayOfWeek( ){
-        Calendar temp = Calendar.getInstance();
+        Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
         temp.add(Calendar.DATE, 6 - currentDayOfWeek);
