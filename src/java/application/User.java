@@ -181,6 +181,8 @@ public class User {
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + email +
                          "', '" + PasswordHasher.sha256Hash( password2 ) + "', '" + phoneNo + "', '" + "0" + "', '" + getCurrentDate( ) + "' );" );
         
+        database.Insert( "INSERT INTO is_member_of VALUES( '" + userId + "', '" + stream + "' );" );
+        
         database.Close();
     }
     

@@ -7,7 +7,6 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class AddMeeting {
-    private String creatorID;
     private String eventName;
     private String eventType;
     private String stream;
@@ -22,7 +21,6 @@ public class AddMeeting {
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
-        this.creatorID = "";
         this.eventName = "";
         this.eventType = "";
         this.stream = "";
@@ -188,8 +186,12 @@ public class AddMeeting {
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
                           endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
         
+        String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
+        
+        System.out.println( last[0].toString( ) );
+        
         database.Insert( "INSERT INTO has_events( user_id, event_id )" + 
-                         "VALUES( '" + userId+ "', '10' );");
+                         "VALUES( '" + userId+ "', '" + last[0].toString( ) + "' );");
         //database.Close( );
     }
     
