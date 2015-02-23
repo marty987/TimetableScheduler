@@ -7,6 +7,7 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class AddMeeting {
+    private String creatorID;
     private String eventName;
     private String eventType;
     private String stream;
@@ -21,6 +22,7 @@ public class AddMeeting {
     private final ArrayList<String> errors;
     
     public AddMeeting( ){
+        this.creatorID = "";
         this.eventName = "";
         this.eventType = "";
         this.stream = "";
@@ -185,6 +187,9 @@ public class AddMeeting {
         database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
                           endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
+        
+        database.Insert( "INSERT INTO has_events( user_id, event_id )" + 
+                         "VALUES( '" + creatorID + "', '10' );");
         //database.Close( );
     }
     
@@ -199,6 +204,10 @@ public class AddMeeting {
     }
 
     public String addMeetingForm( String userId ) {
+        creatorID = userId;
+        
+        System.out.println( creatorID );
+        
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                
                form += "<label for=\"eventName\">Event Name:</label>\n";
