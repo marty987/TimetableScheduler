@@ -11,7 +11,7 @@ public class Timetable {
     private Event[] myEvents;
     private final String[][] timetableValues;
     SimpleDateFormat formatter = 
-            new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
+    new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
     private Calendar calendar = Calendar.getInstance();
     private final Calendar startOfWeek = Calendar.getInstance();
     private final Calendar endOfWeek = Calendar.getInstance();

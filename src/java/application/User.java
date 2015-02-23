@@ -263,7 +263,7 @@ public class User {
         form += "<label for='lastName'>Last Name:</label>\n";
         form += "<input type='text' name='lastName' value='" + lastName +  "' placeholder='Smith' /><br />\n";
         form += "<label for='email'>Email:</label>\n";
-        form += "<input type='email' name='email' value='" + email +  "' placeholder='martin@live.ie' /><br />\n";
+        form += "<input type='email' id='email' name='email' value='" + email +  "' placeholder='martin@live.ie' /><br />\n";
         form += "<label for='password1'>Password:</label>\n";
         form += "<input type='password' name='password1' /><br />\n";
         form += "<label for='password2'>Confirm Password:</label>\n";

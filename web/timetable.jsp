@@ -19,7 +19,6 @@
         <title>UCC Timetable</title>
     </head>
     <body>
-        <h1>Timetable</h1>
         <%
             GUI gui = new GUI( );
             

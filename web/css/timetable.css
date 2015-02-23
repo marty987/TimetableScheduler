@@ -6,9 +6,6 @@
         Purpose of the stylesheet follows.
 */
 
-
-  
-
 table {
     border-collapse: collapse;
     width: 100%;
@@ -23,7 +20,7 @@ td, th {
    font-size: 1.2em;
    background-color:white;
 }
-  th { 
+th { 
     background-image: url(../images/red.png);
     font-weight: normal;
     color: white;
