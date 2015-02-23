@@ -119,7 +119,7 @@ public class AddMeeting {
         this.stream = stream;
     }
     
-    public boolean validateMeetingForm( ) {
+    public boolean validateMeetingForm( String userId ) {
         boolean isValid = true;
 
         if( eventName.equals ("") ){
@@ -165,7 +165,7 @@ public class AddMeeting {
         }
         
         if( isValid ) {
-            insertNewMeeting( );
+            insertNewMeeting( userId );
         }
         
         return isValid;
@@ -183,13 +183,13 @@ public class AddMeeting {
         return errorList;
     }
     
-    public void insertNewMeeting(  ) {
+    public void insertNewMeeting( String userId ) {
         database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
                           endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
         
         database.Insert( "INSERT INTO has_events( user_id, event_id )" + 
-                         "VALUES( '" + creatorID + "', '10' );");
+                         "VALUES( '" + userId+ "', '10' );");
         //database.Close( );
     }
     
@@ -204,10 +204,6 @@ public class AddMeeting {
     }
 
     public String addMeetingForm( String userId ) {
-        creatorID = userId;
-        
-        System.out.println( creatorID );
-        
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                
                form += "<label for=\"eventName\">Event Name:</label>\n";
