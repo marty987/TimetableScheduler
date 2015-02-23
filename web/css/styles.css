@@ -286,6 +286,27 @@ nav ul li a:hover{
 
 @media screen and (max-width: 768px)
 {
+    
+#welcomeH{
+    text-align: center;
+    font-size:0.9em;
+    font-weight:lighter;
+    padding: 5px;
+    padding-top: 10px;
+    outline: none;
+    border-color: #9ecaed;
+    box-shadow: 0 0 6px black;
+    background-image: url(../images/blue.png);
+
+}
+
+#welcomeH:Hover{
+    color: midnightblue;
+    background-image: url(../images/white.png);
+}
+
+
+
  nav{
    font-size:1em;
  }
@@ -336,8 +357,4 @@ body{
   background-size: cover;
 }
 
-#welcomeH
-{
-float:right;
-}
 }
