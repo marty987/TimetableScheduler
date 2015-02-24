@@ -263,7 +263,6 @@ public class AddMeeting {
                        "    <option value=\"day\" selected>Single Meeting</option>" +
                        "    <option value=\"weekly\">Weekly</option>" +
                        "    <option value=\"montly\">Monthly</option>" +
-                       "    <option value=\"semester\">Semester</option>" +
                        "</select><br />";
                           
                form += "<label for=\"moduleCode\">Module Code:</label>\n";
