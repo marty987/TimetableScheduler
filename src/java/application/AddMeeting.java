@@ -113,11 +113,11 @@ public class AddMeeting {
         return stream;
     }
     
-    public void setStream(String stream) {
+    public void setStream( final String stream) {
         this.stream = stream;
     }
     
-    public boolean validateMeetingForm( String userId ) {
+    public boolean validateMeetingForm( final String userId ) {
         boolean isValid = true;
 
         if( eventName.equals ("") ){
