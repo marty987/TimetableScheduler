@@ -35,7 +35,7 @@
                 
                 Timetable timetable = new Timetable( );
     
-                out.print( timetable.printTimetable( ) );            
+                //out.print( timetable.printTimetable( ) );            
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
         %>  
@@ -47,7 +47,10 @@
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
-                notify.hasSeen( request );
+                if( request.getParameter( "seen_events" ) != null ){
+                    
+                    notify.hasSeen( request );
+                }
                 
                 out.print( gui.footer() );
             %>
