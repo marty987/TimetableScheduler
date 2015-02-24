@@ -146,7 +146,7 @@ public class Timetable {
     public String printTimetable( ) {
         
         fetchEventsFromDB( "999999999" );
-        addEventsToTimetable( );
+        //addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"

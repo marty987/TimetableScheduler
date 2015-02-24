@@ -29,9 +29,13 @@ public class UsersNotifications {
             notifications += "<tr><th>Event Name</th><th>Event Type</th><th>Period</th><th>Recurrence</th><th>Module Code</th><th>Location</th><th>Description</th></tr>\n";
            
             while( statementResult.next( ) ){
-                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
-                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
-                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
+                notifications += "<tr>\n" +
+                                     "<td>" + statementResult.getString( 2 ) + "</td>\n" +
+                                     "<td>" + statementResult.getString( 5 ) + "</td>\n" +
+                                     "<td>" + statementResult.getString( 10 ) + "</td>\n" +
+                                     "<td>" + statementResult.getString( 11 ) + "</td>\n" +
+                                 "</tr>\n";
+
             }
             
            return notifications += "</table>";
