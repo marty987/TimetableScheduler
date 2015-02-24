@@ -108,7 +108,7 @@ public class Timetable {
                         timetableValues[myEvents[i].getPeriod()][calendar.DAY_OF_WEEK] 
                                 = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
                 } 
-                else if (myEvents[i].getRecurrence().equals("daily")) 
+                else if (myEvents[i].getRecurrence().equals("day")) 
                     //daily recurring events
                 {
                     Date start = startDate.getTime();
@@ -144,6 +144,10 @@ public class Timetable {
     }
     
     public String printTimetable( ) {
+        
+        fetchEventsFromDB( "999999999" );
+        addEventsToTimetable( );
+        
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
                      + "<tbody>\n";
