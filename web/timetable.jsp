@@ -39,8 +39,6 @@
                 out.print( timetable.printTimetable( ) );            
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
-            
-            out.print( gui.footer() );
         %>  
         
         <section>
@@ -48,7 +46,10 @@
             
             <%
                 UsersNotifications notify = new UsersNotifications( );
-                notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) );
+                out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
+                
+                
+                out.print( gui.footer() );
             %>
         </section>
     </body>

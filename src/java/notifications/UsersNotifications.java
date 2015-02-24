@@ -15,28 +15,31 @@ public class UsersNotifications {
     private Statement statementObject;
     private Connection connectionObject;
     
-    public void getUsersNotifications( String userId ) throws SQLException {
-        String notifications;
+    public String getUsersNotifications( String userId ) throws SQLException {
+        String notifications = "";
         
         // Establish connection to database
         connectionObject = DriverManager.getConnection( "jdbc:mysql://" + "cs1.ucc.ie" + "/" + "2016_mjb2", "mjb2", "diechoro" );
         
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
         try{
             statementObject = connectionObject.createStatement( );
-            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN " ); //Should connection be left open?
+            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users" +
+                                                                      "ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id" +
+                                                                      "WHERE users.user_id = '" + userId + "';"); 
     
             notifications = "<table>";
-            notifications = "<th>Event Name</th><th></th>";
-            
+            notifications += "<th>Event Name</th><th>Event Type</th><th>Period</th><th>Recurrence</th><th>Module Code</th><th>Location</th><th>Description</th>";
+           
             while( statementResult.next( ) ){
-                notifications += "<tr>" ;
+                notifications += "<td>" + statementResult.getString(2) + "</td>";
             }
+            
+            notifications += "</table>";
         }
         catch( SQLException exceptionObject ){
            
         }
+        
+        return notifications;
     }
 }
