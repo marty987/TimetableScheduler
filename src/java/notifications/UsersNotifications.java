@@ -26,7 +26,7 @@ public class UsersNotifications {
             ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id WHERE users.user_id = '" + userId + "';"); 
     
             notifications += "<table>\n";
-            notifications += "<tr><th>Event Name</th><th>Event Type</th><th>Period</th><th>Recurrence</th><th>Module Code</th><th>Location</th><th>Description</th></tr>\n";
+            notifications += "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th></tr>\n";
            
             while( statementResult.next( ) ){
                 notifications += "<tr>\n" +
@@ -35,7 +35,6 @@ public class UsersNotifications {
                                      "<td>" + statementResult.getString( 10 ) + "</td>\n" +
                                      "<td>" + statementResult.getString( 11 ) + "</td>\n" +
                                  "</tr>\n";
-
             }
             
            return notifications += "</table>";
