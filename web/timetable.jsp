@@ -6,7 +6,9 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="application.Timetable;" %>
+<%@ page import="notifications.UsersNotifications;" %>
 <%@ page import="guipackage.GUI;"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -19,6 +21,8 @@
         <title>UCC Timetable</title>
     </head>
     <body>
+        
+        
         <%
             GUI gui = new GUI( );
             
@@ -38,5 +42,14 @@
             
             out.print( gui.footer() );
         %>  
+        
+        <section>
+            <h1>Notifications</h1>
+            
+            <%
+                UsersNotifications notify = new UsersNotifications( );
+                notify.getUsersNotifications( );
+            %>
+        </section>
     </body>
 </html>
