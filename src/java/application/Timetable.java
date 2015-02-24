@@ -129,11 +129,6 @@ public class Timetable {
                         }
                     }
                 }   
-                else if (myEvents[i].getRecurrence().equals("semesterly"))
-                    //semesterly recurring events
-                {
-                    //?????
-                }   
                 else 
                     //annually recurring events
                 {
