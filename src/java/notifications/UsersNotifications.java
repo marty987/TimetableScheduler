@@ -23,23 +23,22 @@ public class UsersNotifications {
         
         try{
             statementObject = connectionObject.createStatement( );
-            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users" +
-                                                                      "ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id" +
-                                                                      "WHERE users.user_id = '" + userId + "';"); 
+            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id WHERE users.user_id = '" + userId + "';"); 
     
-            notifications = "<table>";
-            notifications += "<th>Event Name</th><th>Event Type</th><th>Period</th><th>Recurrence</th><th>Module Code</th><th>Location</th><th>Description</th>";
+            notifications += "<table>\n";
+            notifications += "<tr><th>Event Name</th><th>Event Type</th><th>Period</th><th>Recurrence</th><th>Module Code</th><th>Location</th><th>Description</th></tr>\n";
            
             while( statementResult.next( ) ){
-                notifications += "<td>" + statementResult.getString(2) + "</td>";
+                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
             }
             
-            notifications += "</table>";
+           return notifications += "</table>";
         }
         catch( SQLException exceptionObject ){
            
         }
-        
-        return notifications;
+        finally{
+            return notifications;
+        }
     }
 }

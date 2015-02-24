@@ -20,9 +20,8 @@
         <script type="text/javascript" src="js/table.js"></script>
         <title>UCC Timetable</title>
     </head>
+    
     <body>
-        
-        
         <%
             GUI gui = new GUI( );
             
@@ -47,7 +46,6 @@
             <%
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
-                
                 
                 out.print( gui.footer() );
             %>
