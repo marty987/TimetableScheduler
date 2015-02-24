@@ -48,7 +48,7 @@
             
             <%
                 UsersNotifications notify = new UsersNotifications( );
-                notify.getUsersNotifications( );
+                notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) );
             %>
         </section>
     </body>
