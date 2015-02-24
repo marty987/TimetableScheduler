@@ -145,7 +145,7 @@ public class Timetable {
     
     public String printTimetable( ) {
         
-        fetchEventsFromDB( "999999999" );
+        fetchEventsFromDB( "111111111" );
         addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
