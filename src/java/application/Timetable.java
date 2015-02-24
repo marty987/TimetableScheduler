@@ -154,8 +154,7 @@ public class Timetable {
             table += "<tr>";
             //iterate through rows
             for (int j = 0; j < 8; j++ ) {
-                //table += timetableValues[i][j];
-                table += myEvents[0].getEventName();
+                table += timetableValues[i][j];
             }
             table += "</tr>\n";
         }
