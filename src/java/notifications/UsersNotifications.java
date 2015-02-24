@@ -9,8 +9,10 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.servlet.http.HttpServletRequest;
 
 public class UsersNotifications {
+    private int count = 0;
     private DatabaseClass database;
     private Statement statementObject;
     private Connection connectionObject;
@@ -23,27 +25,45 @@ public class UsersNotifications {
         
         try{
             statementObject = connectionObject.createStatement( );
-            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id WHERE users.user_id = '" + userId + "';"); 
+            ResultSet statementResult = statementObject.executeQuery( "SELECT * FROM events JOIN has_events JOIN users "
+                                                                    + "ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id"
+                                                                    + " WHERE users.user_id = '" + userId + "';"); 
     
-            notifications += "<table>\n";
-            notifications += "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th></tr>\n";
+            
+            notifications += "<form action='timetable.jsp' method='POST'>"
+                           + "<table>\n";
+            notifications += "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th><th>Accept event</th></tr>\n";
            
             while( statementResult.next( ) ){
+                
+                
                 notifications += "<tr>\n" +
                                      "<td>" + statementResult.getString( 2 ) + "</td>\n" +
                                      "<td>" + statementResult.getString( 5 ) + "</td>\n" +
                                      "<td>" + statementResult.getString( 10 ) + "</td>\n" +
                                      "<td>" + statementResult.getString( 11 ) + "</td>\n" +
+                                     "<td><input type='submit' value='Accept' name='" + count++ + "'/></td>\n" +
                                  "</tr>\n";
             }
             
-           return notifications += "</table>";
+           return notifications += "</table>"
+                                 + "</form>";
         }
         catch( SQLException exceptionObject ){
            
         }
         finally{
             return notifications;
+        }
+    }
+    
+    public void hasSeen( HttpServletRequest request ) {
+        DatabaseClass db = new DatabaseClass( );
+        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
+        db.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+    
+        if( request.getAttribute(  ) ) {
+        
         }
     }
 }

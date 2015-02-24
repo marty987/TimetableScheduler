@@ -47,6 +47,8 @@
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
+                notify.hasSeen( request );
+                
                 out.print( gui.footer() );
             %>
         </section>
