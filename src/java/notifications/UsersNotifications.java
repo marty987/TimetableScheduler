@@ -30,6 +30,8 @@ public class UsersNotifications {
            
             while( statementResult.next( ) ){
                 notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
+                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
+                notifications += "<tr><td>" + statementResult.getString(2) + "</td></tr>\n";
             }
             
            return notifications += "</table>";
