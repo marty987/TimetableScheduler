@@ -63,33 +63,37 @@ public class Timetable {
         
         //get IDs of all events associated with this user
         eventIDs = database.SelectColumn( "SELECT event_id "
-                + "FROM events JOIN has_events "
-                + "ON events.event_id = has_events.user_id"
-                + "WHERE has_events.user_id = " + userId + ";");
+                + "FROM has_events "
+                + "WHERE user_id = \"" + userId + "\";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
-        for( int i = 0; i < eventIDs.length; i++ ) {
-            currentEvent = database.SelectRow( "SELECT *"
-                    + "FROM events"
-                    + "WHERE event_id = " + eventIDs[i] + ";");
-            
-            eventName = currentEvent[1];
-            eventType = currentEvent[2];
-            period = Integer.parseInt(currentEvent[3]);
-            startDate.setTime(formatter.parse( currentEvent[4], startDatePos )); 
-            endDate.setTime(formatter.parse( currentEvent[4], endDatePos ));
-            recurrence = currentEvent[6];
-            moduleCode = currentEvent[7];
-            location = currentEvent[8];
-            description = currentEvent[9];
-            
-            //create an Event instance from this row and add it to the myEvents[]
-            //array
-            myEvents[i] = new Event( Integer.parseInt(eventIDs[i]), eventName,
-                    eventType, period, startDate, endDate, recurrence, 
-                    moduleCode, location, description );
-        }   
+        if(eventIDs.length != 0){
+            for( int i = 0;
+                i < eventIDs.length; i++ ) {
+                currentEvent = database.SelectRow( "SELECT *"
+                        + "FROM events"
+                        + "WHERE event_id = \"" + eventIDs[i] + "\";");
+
+                eventName = currentEvent[1];
+                eventType = currentEvent[2];
+                period = Integer.parseInt(currentEvent[3]);
+                startDate.setTime(formatter.parse( currentEvent[4], startDatePos )); 
+                endDate.setTime(formatter.parse( currentEvent[4], endDatePos ));
+                recurrence = currentEvent[6];
+                moduleCode = currentEvent[7];
+                location = currentEvent[8];
+                description = currentEvent[9];
+
+                //create an Event instance from this row and add it to the myEvents[]
+                //array
+                myEvents[i] = new Event( Integer.parseInt(eventIDs[i]), eventName,
+                        eventType, period, startDate, endDate, recurrence, 
+                        moduleCode, location, description );
+            }   
+        }
+    
+        database.Close();
     }
     
     private void addEventsToTimetable( ) {
@@ -144,6 +148,8 @@ public class Timetable {
     }
     
     public String printTimetable( ) {
+        
+        fetchEventsFromDB( "999999999" );
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
