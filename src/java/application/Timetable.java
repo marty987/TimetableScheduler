@@ -146,7 +146,6 @@ public class Timetable {
     public String printTimetable( ) {
         
         fetchEventsFromDB( "111111111" );
-        addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
@@ -157,7 +156,8 @@ public class Timetable {
             table += "<tr>";
             //iterate through rows
             for (int j = 0; j < 8; j++ ) {
-                table += timetableValues[i][j];
+                //table += timetableValues[i][j];
+                table += myEvents[0].getEventName();
             }
             table += "</tr>\n";
         }
