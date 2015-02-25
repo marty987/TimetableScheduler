@@ -40,7 +40,7 @@ public class GUI {
         form += "<nav >\n";      
         form += "<ul>\n";
         form += "<li><a href=\"logout.jsp\" id='logout'>(Logout)</a></li>\n";        
-        form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
+        form += "<li class = 'home'><a href='logout.jsp'>(Logout)</a></li>\n"; 
         form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
         form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
         form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
