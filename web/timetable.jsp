@@ -54,6 +54,11 @@
                 
                 out.print( gui.footer() );
             %>
+        </section
+        
+        <section>
+            <h1>Chat Room</h1>
+            
         </section>
     </body>
 </html>

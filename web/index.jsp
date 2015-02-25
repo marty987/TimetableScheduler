@@ -28,7 +28,7 @@
             
             <%
                 Login login = new Login();
-
+                
                 if( request.getParameter( "submit" ) == null ){
                     out.print( login.loginForm() );
                 }

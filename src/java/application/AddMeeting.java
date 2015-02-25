@@ -231,13 +231,6 @@ public class AddMeeting {
                         "  <option value=\"13\">Chinese Year 4</option>\n" +
                         "</select><br />"; 
                }
-                  
-               //Need a dropdown menu put here
-               //form += "<label for=\"startTime\">Start Time:</label>\n";
-               //form += "<input type=\"text\" name=\"startTime\" value=\"" + startTime + "\" placeholder=\"01:00:00\" /><br />\n";
-               //form += "<label for=\"endTime\">End Time:</label>\n";
-               //form += "<input type=\"text\" name=\"endTime\" value=\"" + endTime + "\" placeholder=\"02:00:00\"/><br />\n";
-               //form += "<label for=\"startDate\">Start Date:</label>\n"; 
              
                form += "<label for=\"period\">Period:</label>\n";
                form += "<select name=\"period\" id='dropdown'>" +
