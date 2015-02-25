@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="application.Timetable;" %>
+<%@ page import="notifications.UsersNotifications;" %>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
@@ -18,8 +19,8 @@
         <script type="text/javascript" src="js/table.js"></script>
         <title>UCC Timetable</title>
     </head>
+    
     <body>
-        <h1>Timetable</h1>
         <%
             GUI gui = new GUI( );
             
@@ -33,11 +34,26 @@
                 
                 Timetable timetable = new Timetable( );
     
-                out.print( timetable.printTimetable( ) );            
+                //out.print( timetable.printTimetable( ) );            
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
-            
-            out.print( gui.footer() );
         %>  
+        
+        <section>
+            <h1>Notifications</h1>
+            
+            <%
+                UsersNotifications notify = new UsersNotifications( );
+                out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
+                
+                if( request.getParameter( "seen_events" ) != null ){
+                    
+                    notify.hasSeen( request );
+                    response.sendRedirect( "timetable.jsp" );
+                }
+                
+                out.print( gui.footer() );
+            %>
+        </section>
     </body>
 </html>

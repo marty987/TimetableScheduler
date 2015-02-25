@@ -5,7 +5,7 @@
  */
 package application;
 
-import java.util.Date;
+import java.util.*;
 
 /**
  *
@@ -16,15 +16,15 @@ public class Event {
     private String eventName;
     private String eventType;
     private int period;
-    private Date startDate;
-    private Date endDate;
+    private Calendar startDate;
+    private Calendar endDate;
     private String recurrence;
     private String moduleCode;
     private String location;
     private String description;
     
     public Event( int eventID, String eventName, String eventType, int period, 
-            Date startDate, Date endDate, String recurrence, String moduleCode,
+            Calendar startDate, Calendar endDate, String recurrence, String moduleCode,
             String location, String description) {
         this.eventID = eventID;
         this.eventName = eventName;
@@ -62,7 +62,7 @@ public class Event {
         this.eventType = eventType;
     }
     
-    public Date getStartDate(){
+    public Calendar getStartDate(){
         return this.startDate;
     }
     
@@ -70,7 +70,7 @@ public class Event {
         this.startDate = startDate;
     }
     
-    public Date getEndDate(){
+    public Calendar getEndDate(){
         return this.endDate;
     }
     

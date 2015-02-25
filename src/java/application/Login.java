@@ -56,6 +56,8 @@ public class Login {
         if( ! validateLogin( ) ){
             return false;
         }
+        
+        //database.Close();
   
         return result.length != 0;
     }

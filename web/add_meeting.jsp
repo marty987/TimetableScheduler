@@ -16,41 +16,45 @@
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
         <title>Add Event</title>
     </head>
+    
     <body>
-        
         <%
-          GUI header = new GUI();  
-          out.print( header.header(false, "blank", "blank") );
+          GUI gui = new GUI( );  
+          out.print( gui.header( false, "blank", "blank" ) );
         %> 
         
-      <div class="login-card">
-        <h1>Add A New Event!</h1>
+        <div class="login-card">
+            <h1>Add A New Event!</h1>
         
-        <jsp:useBean id="meeting" class="application.AddMeeting" scope="request" />
-        <jsp:setProperty name="meeting" property="*" />
+            <jsp:useBean id="meeting" class="application.AddMeeting" scope="request" />
+            <jsp:setProperty name="meeting" property="*" />
    
-        <%
-            if( session.getAttribute( "Authenticated" ) == null ) {
-                response.sendRedirect( "index.jsp" );
-            }
-            else {
-                if( request.getParameter( "submit" ) == null ) {
-                    out.print( meeting.addMeetingForm((String)session.getAttribute( "Authenticated" )) );
+            <%
+                if( session.getAttribute( "Authenticated" ) == null ) {
+                    response.sendRedirect( "index.jsp" );
                 }
                 else {
-                    if( meeting.validateMeetingForm( ) ) {
-                        response.sendRedirect( "timetable.jsp" );  
+                    String userId = (String) session.getAttribute( "Authenticated" );
+                    
+                    if( request.getParameter( "submit" ) == null ) {
+                        out.print( meeting.addMeetingForm( userId ) );
                     }
-                    out.print( meeting.addMeetingForm((String)session.getAttribute( "Authenticated" )) );
-                    out.print( meeting.errors( ) );
+                    else {
+                        if( meeting.validateMeetingForm( userId ) ) {
+                            out.print( "Your event has be saved successfully!" );
+                            out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
+                        }
+                        else {
+                            out.print( meeting.addMeetingForm( userId ) );
+                            out.print( meeting.errors( ) );
+                        }
+                    }
                 }
-            }
-        %>
-      </div>
+            %>
+        </div>
       
         <%
-          GUI footer = new GUI();  
-          out.print( footer.footer() );
+          out.print( gui.footer( ) );
         %>  
     </body>
 </html>
