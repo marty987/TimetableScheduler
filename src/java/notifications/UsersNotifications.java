@@ -40,7 +40,7 @@ public class UsersNotifications {
                                                                     + "WHERE users.user_id = '" + userId + "';"); 
     
             notifications = "<form action='timetable.jsp'>" + 
-                               "<table>\n" +
+                               "<table class=\"emp-sales2\">\n" +
                                  "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th><th>Accept event</th></tr>\n";
            
             while( statementResult.next( ) ){
