@@ -150,7 +150,8 @@ public class Timetable {
     public String printTimetable( ) {
         
         fetchEventsFromDB( "999999999" );
-        timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
+        
+        //timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
