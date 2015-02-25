@@ -112,8 +112,8 @@ public class Timetable {
                                 += "compare start date " + startOfEvent.compareTo(startOfWeek)
                     + "compare end date " + endOfEvent.compareTo(endOfWeek);
             
-            if(startOfEvent.compareTo(startOfWeek) >= 0 
-                    || endOfEvent.compareTo(endOfWeek) <= 0 ){
+            if(startOfEvent.compareTo(endOfWeek) <= 0 
+                    && endOfEvent.compareTo(startOfWeek) >= 0 ){
                 //occurs this week
                 if ( myEvents.get(i).getRecurrence().equals("once") || myEvents.get(i).getRecurrence().equals("weekly"))
                     //non-recurring events
