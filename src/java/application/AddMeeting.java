@@ -253,7 +253,7 @@ public class AddMeeting {
                
                form += "<label for=\"recurrence\">Recurrence:</label>\n";
                form += "<select name=\"recurrence\" id='dropdown'>" +
-                       "    <option value=\"day\" selected>Single Meeting</option>" +
+                       "    <option value=\"once\" selected>Single Meeting</option>" +
                        "    <option value=\"weekly\">Weekly</option>" +
                        "    <option value=\"montly\">Monthly</option>" +
                        "</select><br />";
