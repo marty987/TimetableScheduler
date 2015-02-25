@@ -108,19 +108,19 @@ public class Timetable {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
+            timetableValues[0][0]                          
+                                += "compare start date " + startOfEvent.compareTo(startOfWeek)
+                    + "compare end date " + endOfEvent.compareTo(endOfWeek);
+            
             if(startOfEvent.compareTo(startOfWeek) >= 0 
-                    && endOfEvent.compareTo(endOfWeek) <= 0 ){
+                    || endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
-                if ( myEvents.get(i).getRecurrence().equals("once") )
+                if ( myEvents.get(i).getRecurrence().equals("once") || myEvents.get(i).getRecurrence().equals("weekly"))
                     //non-recurring events
                 {
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
+                     timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                 } 
-                else if ( myEvents.get(i).getRecurrence().equals("weekly") )
-                {
-                    
-                }
                 else
                     //monthly recurring events
                 {
