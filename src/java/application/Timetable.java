@@ -12,7 +12,7 @@ public class Timetable {
     private final String[][] timetableValues;
     SimpleDateFormat sdf = 
     new SimpleDateFormat("yyyy-MM-dd");
-    private Calendar calendar = Calendar.getInstance();
+    private Calendar today = Calendar.getInstance();
     private final Calendar startOfWeek = Calendar.getInstance();
     private final Calendar endOfWeek = Calendar.getInstance();
     
@@ -30,7 +30,6 @@ public class Timetable {
     private String description;
     
     public Timetable() {
-        calendar = getTodaysDate( );
         startOfWeek.setTime(getMondayOfWeek());
         endOfWeek.setTime(getSundayOfWeek());
         
@@ -107,17 +106,17 @@ public class Timetable {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
-            timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
-                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
             if(startOfEvent.compareTo(startOfWeek) >= 0 
                     && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
-                
+
                 if ( startOfEvent.equals(endOfEvent) )
                     //non-recurring events
                 {
-                        timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
+                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
+                        
+                        timetableValues[0][0] = "<th>" + today.get(Calendar.DAY_OF_WEEK) + "</th>";
                 } 
                 else if (myEvents.get(i).getRecurrence().equals("day")) 
                     //daily recurring events
@@ -145,10 +144,10 @@ public class Timetable {
                 {
                     if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
                             && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.DAY_OF_WEEK] 
+                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)] 
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>";
                     }
-                }   
+                }
             }
         }
         
@@ -183,28 +182,17 @@ public class Timetable {
              return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
     
-    private Calendar getTodaysDate( ){
-        Calendar temp = Calendar.getInstance();
-        temp.set(Calendar.HOUR_OF_DAY, 0);
-        temp.set(Calendar.MINUTE, 0);
-        temp.set(Calendar.SECOND, 0);
-        
-        return temp;
-    }
-    
     private Date getMondayOfWeek( ){
-        Calendar temp;
-        temp = getTodaysDate();
-        int currentDayOfWeek = temp.DAY_OF_WEEK;
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
         temp.add(Calendar.DATE, 1 - currentDayOfWeek);
         
         return temp.getTime();
     }
     
     private Date getSundayOfWeek( ){
-        Calendar temp;
-        temp = getTodaysDate();
-        int currentDayOfWeek = temp.DAY_OF_WEEK;
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
         temp.add(Calendar.DATE, 7 - currentDayOfWeek);
         
         return temp.getTime();
