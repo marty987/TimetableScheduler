@@ -79,4 +79,24 @@ public class UsersNotifications {
                 db.Insert( "UPDATE has_events SET has_seen = '1' WHERE user_id = '" + userId + "' AND event_id = '" + event + "';" );
         }
     }
+    
+    public String getFriendRequests( String userId ) throws SQLException {
+        String friendRequests = "";
+        this.userId = userId;
+        
+        // Establish connection to database
+        connectionObject = DriverManager.getConnection( "jdbc:mysql://" + "cs1.ucc.ie" + "/" + "2016_mjb2", "mjb2", "diechoro" );
+        
+        try{
+            statementObject = connectionObject.createStatement( );
+            
+            
+        }
+        catch( SQLException exceptionObject ){
+           friendRequests = "There has been an error retreiveing your friend requests, Please try again!";
+        }
+        finally{
+            return friendRequests;
+        }
+    }
 }

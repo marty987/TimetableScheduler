@@ -4,7 +4,6 @@
     Author     : Martin Bullman 112735341
 --%>
 
-<%@ page import="application.Chat;"%>
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="application.Login;"%>
 <%@ page import="guipackage.GUI;"%>
@@ -29,9 +28,6 @@
             
             <%
                 Login login = new Login();
-
-                Chat chat = new Chat();
-                chat.infoBox("test", "chat");
                 
                 if( request.getParameter( "submit" ) == null ){
                     out.print( login.loginForm() );
