@@ -8,16 +8,17 @@ import java.util.*;
 import java.text.*;
 
 public class Timetable {
-    private Event[] myEvents;
+    ArrayList<Event> myEvents = new ArrayList<Event>();
     private final String[][] timetableValues;
-    SimpleDateFormat formatter = 
-    new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
+    SimpleDateFormat sdf = 
+    new SimpleDateFormat("yyyy-MM-dd");
     private Calendar calendar = Calendar.getInstance();
     private final Calendar startOfWeek = Calendar.getInstance();
     private final Calendar endOfWeek = Calendar.getInstance();
     
     private DatabaseClass database;
     
+    private int eventId;
     private String eventName;
     private String eventType;
     private int period;
@@ -53,8 +54,7 @@ public class Timetable {
     }
     
     private void fetchEventsFromDB( String userId ) {
-        String eventIDs[];
-        String currentEvent[];
+        String[] currentEvent = new String[10];
         ParsePosition startDatePos = new ParsePosition(0);
         ParsePosition endDatePos = new ParsePosition(0);
         database = new DatabaseClass( );
@@ -62,42 +62,53 @@ public class Timetable {
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         //get IDs of all events associated with this user
-        eventIDs = database.SelectColumn( "SELECT event_id "
-                + "FROM events JOIN has_events "
-                + "ON events.event_id = has_events.user_id"
-                + "WHERE has_events.user_id = " + userId + ";");
+        String[] eventIDs = database.SelectColumn( "SELECT event_id "
+                + "FROM has_events "
+                + "WHERE user_id = " + "112735341" + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
-        for( int i = 0; i < eventIDs.length; i++ ) {
-            currentEvent = database.SelectRow( "SELECT *"
-                    + "FROM events"
-                    + "WHERE event_id = " + eventIDs[i] + ";");
-            
-            eventName = currentEvent[1];
-            eventType = currentEvent[2];
-            period = Integer.parseInt(currentEvent[3]);
-            startDate.setTime(formatter.parse( currentEvent[4], startDatePos )); 
-            endDate.setTime(formatter.parse( currentEvent[4], endDatePos ));
-            recurrence = currentEvent[6];
-            moduleCode = currentEvent[7];
-            location = currentEvent[8];
-            description = currentEvent[9];
-            
-            //create an Event instance from this row and add it to the myEvents[]
-            //array
-            myEvents[i] = new Event( Integer.parseInt(eventIDs[i]), eventName,
-                    eventType, period, startDate, endDate, recurrence, 
-                    moduleCode, location, description );
-        }   
+        if(eventIDs.length > 0){
+            for( int i = 0;
+                i < eventIDs.length; i++ ) {
+                //THIS IS WHERE PROBLEM IS!!
+                currentEvent = database.SelectRow( "SELECT * "
+                        + "FROM events "
+                        + "WHERE event_id = 3;");
+
+                eventId = Integer.parseInt(currentEvent[0]);
+                eventName = currentEvent[1];
+                eventType = currentEvent[2];
+                period = Integer.parseInt(currentEvent[3]);
+                try{
+                    startDate.setTime(sdf.parse( currentEvent[4], startDatePos )); 
+                    endDate.setTime(sdf.parse( currentEvent[5], startDatePos ));
+                } catch (Exception e) {
+                    //parse exception
+                }
+                recurrence = currentEvent[6];
+                moduleCode = currentEvent[7];
+                location = currentEvent[8];
+                description = currentEvent[9];
+
+                //create an Event instance from this row and add it to the myEvents[]
+                //array
+                Event event = new Event(eventId, eventName, eventType, period, startDate, endDate, recurrence, moduleCode, location, description);
+                myEvents.add(event);
+            }   
+        }
+    
+        database.Close();
     }
     
     private void addEventsToTimetable( ) {
-        //iterate through the user's events
-        for ( int i = 0; i < myEvents.length; i++ ) {
-            Calendar startOfEvent = myEvents[i].getStartDate();
-            Calendar endOfEvent = myEvents[i].getEndDate();
+        //iterate through the user's events 
+        for ( int i = 0; i < myEvents.size(); i++ ) {
+            Calendar startOfEvent = myEvents.get(i).getStartDate();
+            Calendar endOfEvent = myEvents.get(i).getEndDate();
             
+            timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
             if(startOfEvent.compareTo(startOfWeek) >= 0 
                     && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
@@ -105,42 +116,37 @@ public class Timetable {
                 if ( startOfEvent.equals(endOfEvent) )
                     //non-recurring events
                 {
-                        timetableValues[myEvents[i].getPeriod()][calendar.DAY_OF_WEEK] 
-                                = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
+                        timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                 } 
-                else if (myEvents[i].getRecurrence().equals("daily")) 
+                else if (myEvents.get(i).getRecurrence().equals("day")) 
                     //daily recurring events
                 {
                     Date start = startDate.getTime();
                     Date end = endDate.getTime();
                     
                     for ( int j = 1; j <= daysBetween(start, end); j++ ){
-                        timetableValues[myEvents[i].getPeriod()][j] 
-                                = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
+                        timetableValues[myEvents.get(i).getPeriod()][j] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                     }
                 }
-                else if (myEvents[i].getRecurrence().equals("monthly"))
+                else if (myEvents.get(i).getRecurrence().equals("monthly"))
                     //monthly recurring events
                 {
                     for( int j = 1; i <= 7; i++ ){
                         if ( j == startOfEvent.DAY_OF_MONTH ){
-                            timetableValues[myEvents[i].getPeriod()][j] 
-                                = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>"; 
+                            timetableValues[myEvents.get(i).getPeriod()][j] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         }
                     }
-                }   
-                else if (myEvents[i].getRecurrence().equals("semesterly"))
-                    //semesterly recurring events
-                {
-                    //?????
                 }   
                 else 
                     //annually recurring events
                 {
                     if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
                             && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents[i].getPeriod()][startOfEvent.DAY_OF_WEEK] 
-                                = "<td>" + myEvents[i].getEventName()+ " in " + myEvents[i].getLocation() + "</td>";
+                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.DAY_OF_WEEK] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>";
                     }
                 }   
             }
@@ -149,6 +155,10 @@ public class Timetable {
     }
     
     public String printTimetable( ) {
+        
+        fetchEventsFromDB( "112735341" );
+        addEventsToTimetable( );
+        
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
                      + "<tbody>\n";
@@ -186,7 +196,7 @@ public class Timetable {
         Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 0 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 1 - currentDayOfWeek);
         
         return temp.getTime();
     }
@@ -195,7 +205,7 @@ public class Timetable {
         Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 6 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 7 - currentDayOfWeek);
         
         return temp.getTime();
     }

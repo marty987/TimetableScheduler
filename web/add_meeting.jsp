@@ -15,6 +15,16 @@
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
         <title>Add Event</title>
+        
+        <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        
+        <script>
+            $( function( ) {
+              $( ".datepicker" ).datepicker( { dateFormat: "yy/mm/dd" } );
+            });
+        </script>
     </head>
     
     <body>

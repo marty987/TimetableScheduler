@@ -9,7 +9,6 @@
 <%@ page import="notifications.UsersNotifications;" %>
 <%@ page import="guipackage.GUI;"%>
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -46,6 +45,12 @@
             <%
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
+                
+                if( request.getParameter( "seen_events" ) != null ){
+                    
+                    notify.hasSeen( request );
+                    response.sendRedirect( "timetable.jsp" );
+                }
                 
                 out.print( gui.footer() );
             %>

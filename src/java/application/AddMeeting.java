@@ -113,11 +113,11 @@ public class AddMeeting {
         return stream;
     }
     
-    public void setStream(String stream) {
+    public void setStream( final String stream) {
         this.stream = stream;
     }
     
-    public boolean validateMeetingForm( String userId ) {
+    public boolean validateMeetingForm( final String userId ) {
         boolean isValid = true;
 
         if( eventName.equals ("") ){
@@ -254,16 +254,15 @@ public class AddMeeting {
                        "</select><br />";
                
                form += "<label for=\"startDate\">Start Date:</label>\n";
-               form += "<input type=\"text\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
+               form += "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
                form += "<label for=\"endDate\">End Date:</label>\n";
-               form += "<input type=\"text\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
+               form += "<input type=\"text\" class=\"datepicker\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
                
                form += "<label for=\"recurrence\">Recurrence:</label>\n";
                form += "<select name=\"recurrence\" id='dropdown'>" +
                        "    <option value=\"day\" selected>Single Meeting</option>" +
                        "    <option value=\"weekly\">Weekly</option>" +
                        "    <option value=\"montly\">Monthly</option>" +
-                       "    <option value=\"semester\">Semester</option>" +
                        "</select><br />";
                           
                form += "<label for=\"moduleCode\">Module Code:</label>\n";
