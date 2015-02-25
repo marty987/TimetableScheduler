@@ -111,33 +111,17 @@ public class Timetable {
             if(startOfEvent.compareTo(startOfWeek) >= 0 
                     && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
-
-                if ( startOfEvent.equals(endOfEvent) )
+                if ( myEvents.get(i).getRecurrence().equals("once") )
                     //non-recurring events
                 {
                         timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
-                        
-                        timetableValues[0][0] = "<ul><li>period = " +myEvents.get(i).getPeriod()+ "</li>"
-                                + "<li>eventID = " + myEvents.get(i).getEventID() + "</li>"
-                                + "<li>location = " + myEvents.get(i).getLocation() + "</li>"
-                                + "<li>eventName = " + myEvents.get(i).getEventName() + "</li>"
-                                + "<li>eventType = " + myEvents.get(i).getEventType() + "</li>"
-                                + "<li>moduleCode = " + myEvents.get(i).getModuleCode() + "</li>"
-                                + "</ul>";
                 } 
-                else if (myEvents.get(i).getRecurrence().equals("day")) 
-                    //daily recurring events
+                else if ( myEvents.get(i).getRecurrence().equals("weekly") )
                 {
-                    Date start = startDate.getTime();
-                    Date end = endDate.getTime();
                     
-                    for ( int j = 1; j <= daysBetween(start, end); j++ ){
-                        timetableValues[myEvents.get(i).getPeriod()][j] 
-                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
-                    }
                 }
-                else if (myEvents.get(i).getRecurrence().equals("monthly"))
+                else
                     //monthly recurring events
                 {
                     for( int j = 1; i <= 7; i++ ){
@@ -146,16 +130,7 @@ public class Timetable {
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         }
                     }
-                }   
-                else 
-                    //annually recurring events
-                {
-                    if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
-                            && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)] 
-                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>";
-                    }
-                }
+                } 
             }
         }
         
