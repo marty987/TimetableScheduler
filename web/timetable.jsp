@@ -44,7 +44,7 @@
             
             <%
                 out.print( "<div class='divid2'>" );
-                out.print( "<h1>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
+                out.print( "<h1 class='notifications'>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
