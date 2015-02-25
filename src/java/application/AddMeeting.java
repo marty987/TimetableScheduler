@@ -247,9 +247,9 @@ public class AddMeeting {
                        "</select><br />";
                
                form += "<label for=\"startDate\">Start Date:</label>\n";
-               form += "<input type=\"text\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
+               form += "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
                form += "<label for=\"endDate\">End Date:</label>\n";
-               form += "<input type=\"text\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
+               form += "<input type=\"text\" class=\"datepicker\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
                
                form += "<label for=\"recurrence\">Recurrence:</label>\n";
                form += "<select name=\"recurrence\" id='dropdown'>" +

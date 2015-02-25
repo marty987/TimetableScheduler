@@ -10,9 +10,9 @@ import java.text.*;
 public class Timetable {
     ArrayList<Event> myEvents = new ArrayList<Event>();
     private final String[][] timetableValues;
-    SimpleDateFormat formatter = 
-    new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
-    private Calendar calendar = Calendar.getInstance();
+    SimpleDateFormat sdf = 
+    new SimpleDateFormat("yyyy-MM-dd");
+    private Calendar today = Calendar.getInstance();
     private final Calendar startOfWeek = Calendar.getInstance();
     private final Calendar endOfWeek = Calendar.getInstance();
     
@@ -21,6 +21,7 @@ public class Timetable {
     private int eventId;
     private String eventName;
     private String eventType;
+    private int stream;
     private int period;
     private final Calendar startDate = Calendar.getInstance();
     private final Calendar endDate = Calendar.getInstance();
@@ -30,7 +31,6 @@ public class Timetable {
     private String description;
     
     public Timetable() {
-        calendar = getTodaysDate( );
         startOfWeek.setTime(getMondayOfWeek());
         endOfWeek.setTime(getSundayOfWeek());
         
@@ -54,7 +54,7 @@ public class Timetable {
     }
     
     private void fetchEventsFromDB( String userId ) {
-        String[] currentEvent = new String[10];
+        String[] currentEvent = new String[11];
         ParsePosition startDatePos = new ParsePosition(0);
         ParsePosition endDatePos = new ParsePosition(0);
         database = new DatabaseClass( );
@@ -64,32 +64,38 @@ public class Timetable {
         //get IDs of all events associated with this user
         String[] eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM has_events "
-                + "WHERE user_id = " + userId + ";");
+                + "WHERE user_id = " + "112735341" + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
-        if(eventIDs.length != 0){
+        if(eventIDs.length > 0){
             for( int i = 0;
                 i < eventIDs.length; i++ ) {
                 //THIS IS WHERE PROBLEM IS!!
                 currentEvent = database.SelectRow( "SELECT * "
                         + "FROM events "
-                        + "WHERE event_id = 40;");
+                        + "WHERE event_id = 3;");
 
                 eventId = Integer.parseInt(currentEvent[0]);
                 eventName = currentEvent[1];
                 eventType = currentEvent[2];
-                period = Integer.parseInt(currentEvent[3]);
-                startDate.setTime(formatter.parse( currentEvent[4], startDatePos )); 
-                endDate.setTime(formatter.parse( currentEvent[4], endDatePos ));
-                recurrence = currentEvent[6];
-                moduleCode = currentEvent[7];
-                location = currentEvent[8];
-                description = currentEvent[9];
+                stream = Integer.parseInt(currentEvent[3]);
+                period = Integer.parseInt(currentEvent[4]);
+                try{
+                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
+                    endDate.setTime(sdf.parse( currentEvent[6], startDatePos ));
+                } catch (Exception e) {
+                    //parse exception
+                }
+                recurrence = currentEvent[7];
+                moduleCode = currentEvent[8];
+                location = currentEvent[9];
+                description = currentEvent[10];
 
                 //create an Event instance from this row and add it to the myEvents[]
                 //array
-                Event event = new Event(eventId, eventName, eventType, period, startDate, endDate, recurrence, moduleCode, location, description);
+                Event event = new Event(eventId, eventName, eventType, stream, period, startDate, endDate, recurrence, moduleCode, location, description);
+                myEvents.add(event);
             }   
         }
     
@@ -97,7 +103,7 @@ public class Timetable {
     }
     
     private void addEventsToTimetable( ) {
-        //iterate through the user's events
+        //iterate through the user's events 
         for ( int i = 0; i < myEvents.size(); i++ ) {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
@@ -105,12 +111,20 @@ public class Timetable {
             if(startOfEvent.compareTo(startOfWeek) >= 0 
                     && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
-                
+
                 if ( startOfEvent.equals(endOfEvent) )
                     //non-recurring events
                 {
-                        timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
+                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
+                        
+                        timetableValues[0][0] = "<ul><li>period = " +myEvents.get(i).getPeriod()+ "</li>"
+                                + "<li>eventID = " + myEvents.get(i).getEventID() + "</li>"
+                                + "<li>location = " + myEvents.get(i).getLocation() + "</li>"
+                                + "<li>eventName = " + myEvents.get(i).getEventName() + "</li>"
+                                + "<li>eventType = " + myEvents.get(i).getEventType() + "</li>"
+                                + "<li>moduleCode = " + myEvents.get(i).getModuleCode() + "</li>"
+                                + "</ul>";
                 } 
                 else if (myEvents.get(i).getRecurrence().equals("day")) 
                     //daily recurring events
@@ -138,10 +152,10 @@ public class Timetable {
                 {
                     if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
                             && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.DAY_OF_WEEK] 
+                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)] 
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>";
                     }
-                }   
+                }
             }
         }
         
@@ -149,9 +163,8 @@ public class Timetable {
     
     public String printTimetable( ) {
         
-        fetchEventsFromDB( "999999999" );
-        
-        //timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
+        fetchEventsFromDB( "112735341" );
+        addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
@@ -177,29 +190,18 @@ public class Timetable {
              return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
     }
     
-    private Calendar getTodaysDate( ){
-        Calendar temp = Calendar.getInstance();
-        temp.set(Calendar.HOUR_OF_DAY, 0);
-        temp.set(Calendar.MINUTE, 0);
-        temp.set(Calendar.SECOND, 0);
-        
-        return temp;
-    }
-    
     private Date getMondayOfWeek( ){
-        Calendar temp;
-        temp = getTodaysDate();
-        int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 0 - currentDayOfWeek);
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
+        temp.add(Calendar.DATE, 1 - currentDayOfWeek);
         
         return temp.getTime();
     }
     
     private Date getSundayOfWeek( ){
-        Calendar temp;
-        temp = getTodaysDate();
-        int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 6 - currentDayOfWeek);
+        Calendar temp = Calendar.getInstance();
+        int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
+        temp.add(Calendar.DATE, 7 - currentDayOfWeek);
         
         return temp.getTime();
     }
