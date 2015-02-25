@@ -60,7 +60,7 @@ public class UsersNotifications {
             }
            
             notifications +=    "<tr><td colspan='4'><b>THESE ARE YOUR UNSEEN NOTIFICATIONS!</b></td>"
-                          + "<td><input type='submit' value='Submit!' id='checker' /></td></tr>\n" 
+                          + "<td><input type='submit' value='Clear!' /></td></tr>\n" 
                           +   "</table>\n"
                           + "</form>\n";
         }
