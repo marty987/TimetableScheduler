@@ -21,6 +21,7 @@ public class Timetable {
     private int eventId;
     private String eventName;
     private String eventType;
+    private int stream;
     private int period;
     private final Calendar startDate = Calendar.getInstance();
     private final Calendar endDate = Calendar.getInstance();
@@ -53,7 +54,7 @@ public class Timetable {
     }
     
     private void fetchEventsFromDB( String userId ) {
-        String[] currentEvent = new String[10];
+        String[] currentEvent = new String[11];
         ParsePosition startDatePos = new ParsePosition(0);
         ParsePosition endDatePos = new ParsePosition(0);
         database = new DatabaseClass( );
@@ -78,21 +79,22 @@ public class Timetable {
                 eventId = Integer.parseInt(currentEvent[0]);
                 eventName = currentEvent[1];
                 eventType = currentEvent[2];
-                period = Integer.parseInt(currentEvent[3]);
+                stream = Integer.parseInt(currentEvent[3]);
+                period = Integer.parseInt(currentEvent[4]);
                 try{
-                    startDate.setTime(sdf.parse( currentEvent[4], startDatePos )); 
-                    endDate.setTime(sdf.parse( currentEvent[5], startDatePos ));
+                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
+                    endDate.setTime(sdf.parse( currentEvent[6], startDatePos ));
                 } catch (Exception e) {
                     //parse exception
                 }
-                recurrence = currentEvent[6];
-                moduleCode = currentEvent[7];
-                location = currentEvent[8];
-                description = currentEvent[9];
+                recurrence = currentEvent[7];
+                moduleCode = currentEvent[8];
+                location = currentEvent[9];
+                description = currentEvent[10];
 
                 //create an Event instance from this row and add it to the myEvents[]
                 //array
-                Event event = new Event(eventId, eventName, eventType, period, startDate, endDate, recurrence, moduleCode, location, description);
+                Event event = new Event(eventId, eventName, eventType, stream, period, startDate, endDate, recurrence, moduleCode, location, description);
                 myEvents.add(event);
             }   
         }
@@ -116,7 +118,13 @@ public class Timetable {
                         timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         
-                        timetableValues[0][0] = "<th>" + today.get(Calendar.DAY_OF_WEEK) + "</th>";
+                        timetableValues[0][0] = "<ul><li>period = " +myEvents.get(i).getPeriod()+ "</li>"
+                                + "<li>eventID = " + myEvents.get(i).getEventID() + "</li>"
+                                + "<li>location = " + myEvents.get(i).getLocation() + "</li>"
+                                + "<li>eventName = " + myEvents.get(i).getEventName() + "</li>"
+                                + "<li>eventType = " + myEvents.get(i).getEventType() + "</li>"
+                                + "<li>moduleCode = " + myEvents.get(i).getModuleCode() + "</li>"
+                                + "</ul>";
                 } 
                 else if (myEvents.get(i).getRecurrence().equals("day")) 
                     //daily recurring events
