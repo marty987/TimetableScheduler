@@ -81,7 +81,7 @@ public class Timetable {
                 eventType = currentEvent[2];
                 period = Integer.parseInt(currentEvent[3]);
                 try{
-                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
+                    startDate.setTime(sdf.parse( currentEvent[4], startDatePos )); 
                     endDate.setTime(sdf.parse( currentEvent[5], startDatePos ));
                 } catch (Exception e) {
                     //parse exception
@@ -102,11 +102,13 @@ public class Timetable {
     }
     
     private void addEventsToTimetable( ) {
-        //iterate through the user's events
+        //iterate through the user's events 
         for ( int i = 0; i < myEvents.size(); i++ ) {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
+            timetableValues[myEvents.get(i).getPeriod()][calendar.DAY_OF_WEEK] 
+                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
             if(startOfEvent.compareTo(startOfWeek) >= 0 
                     && endOfEvent.compareTo(endOfWeek) <= 0 ){
                 //occurs this week
@@ -155,8 +157,7 @@ public class Timetable {
     public String printTimetable( ) {
         
         fetchEventsFromDB( "112735341" );
-        
-        timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
+        addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
@@ -195,7 +196,7 @@ public class Timetable {
         Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 0 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 1 - currentDayOfWeek);
         
         return temp.getTime();
     }
@@ -204,7 +205,7 @@ public class Timetable {
         Calendar temp;
         temp = getTodaysDate();
         int currentDayOfWeek = temp.DAY_OF_WEEK;
-        temp.add(Calendar.DATE, 6 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 7 - currentDayOfWeek);
         
         return temp.getTime();
     }
