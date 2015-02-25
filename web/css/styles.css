@@ -180,19 +180,15 @@ footer{
 .timetable{
 	background-color:#ffb500;
 }
-.staff{
+.help{
 	background-color:#003c69;
 	color:#fff;
 }
-.students{
+.contact{
 	background-color:#69b3e7;
-	color:#fff;
+	color: deepskyblue;
 }
 
-.help{
-	background-color:#1D3063;
-	color:#fff;
-}
 
 nav{
     text-align: center;

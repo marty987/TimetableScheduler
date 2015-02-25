@@ -33,16 +33,18 @@
                 out.print(gui.header(true, fname, lname));
                 
                 Timetable timetable = new Timetable( );
-    
-                out.print( timetable.printTimetable( ) );            
-                out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
+                out.print( "<div class='divid'>" );
+                out.print( timetable.printTimetable( ) );      
+                out.print( "</div>" );
             }
         %>  
         
         <section>
-            <h1>Notifications</h1>
+            
             
             <%
+                out.print( "<div class='divid2'>" );
+                out.print( "<h1>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
@@ -51,7 +53,7 @@
                     notify.hasSeen( request );
                     response.sendRedirect( "timetable.jsp" );
                 }
-                
+                out.print( "</div>" );
                 out.print( gui.footer() );
             %>
         </section
