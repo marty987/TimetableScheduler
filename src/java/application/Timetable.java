@@ -10,8 +10,8 @@ import java.text.*;
 public class Timetable {
     ArrayList<Event> myEvents = new ArrayList<Event>();
     private final String[][] timetableValues;
-    SimpleDateFormat formatter = 
-    new SimpleDateFormat("EEEE, MMM dd, yyyy HH:mm:ss a");
+    SimpleDateFormat sdf = 
+    new SimpleDateFormat("yyyy-MM-dd");
     private Calendar calendar = Calendar.getInstance();
     private final Calendar startOfWeek = Calendar.getInstance();
     private final Calendar endOfWeek = Calendar.getInstance();
@@ -64,24 +64,28 @@ public class Timetable {
         //get IDs of all events associated with this user
         String[] eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM has_events "
-                + "WHERE user_id = " + userId + ";");
+                + "WHERE user_id = " + "112735341" + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
-        if(eventIDs.length != 0){
+        if(eventIDs.length > 0){
             for( int i = 0;
                 i < eventIDs.length; i++ ) {
                 //THIS IS WHERE PROBLEM IS!!
                 currentEvent = database.SelectRow( "SELECT * "
                         + "FROM events "
-                        + "WHERE event_id = 40;");
+                        + "WHERE event_id = 3;");
 
                 eventId = Integer.parseInt(currentEvent[0]);
                 eventName = currentEvent[1];
                 eventType = currentEvent[2];
                 period = Integer.parseInt(currentEvent[3]);
-                startDate.setTime(formatter.parse( currentEvent[4], startDatePos )); 
-                endDate.setTime(formatter.parse( currentEvent[4], endDatePos ));
+                try{
+                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
+                    endDate.setTime(sdf.parse( currentEvent[5], startDatePos ));
+                } catch (Exception e) {
+                    //parse exception
+                }
                 recurrence = currentEvent[6];
                 moduleCode = currentEvent[7];
                 location = currentEvent[8];
@@ -90,6 +94,7 @@ public class Timetable {
                 //create an Event instance from this row and add it to the myEvents[]
                 //array
                 Event event = new Event(eventId, eventName, eventType, period, startDate, endDate, recurrence, moduleCode, location, description);
+                myEvents.add(event);
             }   
         }
     
@@ -149,9 +154,9 @@ public class Timetable {
     
     public String printTimetable( ) {
         
-        fetchEventsFromDB( "999999999" );
+        fetchEventsFromDB( "112735341" );
         
-        //timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
+        timetableValues[2][2] = "<td>" + myEvents.get(0).getEventName() + "</td>";
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
