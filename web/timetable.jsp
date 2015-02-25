@@ -34,7 +34,7 @@
                 
                 Timetable timetable = new Timetable( );
     
-                //out.print( timetable.printTimetable( ) );            
+                out.print( timetable.printTimetable( ) );            
                 out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
             }
         %>  
