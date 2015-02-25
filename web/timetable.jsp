@@ -9,7 +9,6 @@
 <%@ page import="notifications.UsersNotifications;" %>
 <%@ page import="guipackage.GUI;"%>
 
-
 <!DOCTYPE html>
 <html>
     <head>
@@ -50,6 +49,7 @@
                 if( request.getParameter( "seen_events" ) != null ){
                     
                     notify.hasSeen( request );
+                    response.sendRedirect( "timetable.jsp" );
                 }
                 
                 out.print( gui.footer() );
