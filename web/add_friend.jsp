@@ -25,7 +25,7 @@
         <div class="login-card">
             <jsp:useBean id="friend" class="application.AddFriend" scope="request" />
             <jsp:setProperty name="friend" property="*" />
-            <h1>Add a friend to chat too!</h1>
+            <h1>Add a friend to chat with!</h1>
             <%
               if( session.getAttribute( "Authenticated" ) == null ) {
                   response.sendRedirect( "index.jsp" );
@@ -35,7 +35,13 @@
                   if( request.getParameter( "submit" ) == null ) {
                       out.print( friend.addFriendForm( userId ) );
                   } else {
-                      
+                      if( friend.validateAddingFriendForm( userId ) ) {
+                          out.print( "Friend added successfully!" );
+                          out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
+                      } else {
+                          out.print( friend.addFriendForm( userId ) );
+                          out.print( friend.errors( ) );
+                      }
                   }
               }
             %>
