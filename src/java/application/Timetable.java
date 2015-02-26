@@ -55,8 +55,7 @@ public class Timetable {
     
     private void fetchEventsFromDB( String userId ) {
         String[] currentEvent = new String[11];
-        ParsePosition startDatePos = new ParsePosition(0);
-        ParsePosition endDatePos = new ParsePosition(0);
+        ParsePosition pos = new ParsePosition(0);
         database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
@@ -82,11 +81,10 @@ public class Timetable {
                 stream = Integer.parseInt(currentEvent[3]);
                 period = Integer.parseInt(currentEvent[4]);
                 try{
-                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
-                    endDate.setTime(sdf.parse( currentEvent[6], startDatePos ));
-                } catch (Exception e) {
-                    //parse exception
+                    startDate.setTime(sdf.parse( currentEvent[5])); 
+                    endDate.setTime(sdf.parse( currentEvent[6]));
                 }
+                catch (ParseException e){}
                 recurrence = currentEvent[7];
                 moduleCode = currentEvent[8];
                 location = currentEvent[9];
