@@ -18,13 +18,15 @@
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <link rel="stylesheet" href="css/timetable.css" media="screen" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
-        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
-        <script type="text/javascript" src="js/table.js"></script>
         <title>UCC Timetable</title>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/table.js"></script>
         
-    </head>
+
     
     <body>
+        <div class="time">
         <%
             GUI gui = new GUI( );
             
@@ -42,6 +44,7 @@
                 out.print( "</div>" );
             }
         %>  
+        </div>
         
         <section>
             
