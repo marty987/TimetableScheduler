@@ -6,9 +6,7 @@
         Purpose of the stylesheet follows.
 */
 
-body{
-    background-image: url(../images/test.jpg);
-}
+
 
 table {
     border-collapse: collapse;
@@ -43,8 +41,11 @@ td, th {
    }
    
    td:hover{
-       color:blue;
-       background-image: url(../images/blue.png);
+       color:black;
+      
+    background: #888888;
+    background: -webkit-gradient(linear, left top, left bottom, from(#888888 ), to(#909090 ));
+    background: -moz-linear-gradient(top,  #888888 ,  #909090 );  
    }
   
 caption {
@@ -82,11 +83,18 @@ tr td section span{
     background-image:url(../images/white5.png);
     padding:20px;
     margin-bottom: 1%;
+
+        border-left:#484848 1px solid;
+    border-left:#bbbbbb 1px solid;
+
 }
 
 .divid2{
     background-image:url(../images/white5.png);
-    
+  
+    border-left:#484848 1px solid;
+    border-left:#bbbbbb 1px solid;
+
     padding:20px;
 }
 

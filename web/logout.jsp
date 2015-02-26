@@ -29,7 +29,7 @@
                 session.invalidate();
             %>
             
-            <p><a href="index.jsp">Log back in</a></p> 
+            <p id="logback" ><a href="index.jsp">Please Log back in to continue</a></p> 
             
             <%
                 Login login = new Login();
