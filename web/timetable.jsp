@@ -65,7 +65,13 @@
         <section>
             <%
                 FindMeeting meeting = new FindMeeting( );
-                out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+                
+                if( request.getParameter( "find_meet" ) == null ){
+                    out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+                }
+                else{
+                    out.print( meeting.getFreeSlot( request.getParameter( "startDate" ), request.getParameter( "stream" ) ) );
+                 }
             %>
         </section>
         

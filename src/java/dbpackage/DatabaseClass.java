@@ -117,6 +117,8 @@ public class DatabaseClass {
         return Result;
     } // End SelectRow
     
+    
+   
     public String[] SelectColumn( String SQLquery )
     {
         String Result[];
@@ -156,6 +158,45 @@ public class DatabaseClass {
         return Result;
     } // End Select
  
+    public int[] SelectIntColumn( String SQLquery )
+    {
+        int Result[];
+        // Send an SQL query to a database and return the *single column* result in an array of strings
+        try // Make connection to database
+        {
+            statementObject = connectionObject.createStatement( ); //Should connection be left open?
+            ResultSet statementResult = statementObject.executeQuery( SQLquery );
+ 
+            // Start solution from http://www.coderanch.com/t/303346/JDBC/java/find-number-rows-resultset
+            int rowcount = 0;
+            if( statementResult.last( ) ) 
+            {
+                rowcount = statementResult.getRow( );
+                statementResult.beforeFirst( ); // not rs.first() because the rs.next() below will move on, missing the first element
+            }
+            // End solution from http://www.coderanch.com/t/303346/JDBC/java/find-number-rows-resultset
+            Result = new int[rowcount];
+             
+            int currentCounter = 0;
+            while( statementResult.next( ) ) // While there are rows to process
+            {
+                // Get the first cell in the current row
+                Result[currentCounter] = statementResult.getInt( 1 );
+                currentCounter++;
+            }
+            // Close the link to the database when finished
+        } 
+        catch( Exception e ) 
+        {
+            System.err.println( "Select problems with SQL " + SQLquery );
+            System.err.println( "Select problem is " + e.getMessage( ) );
+            Result = new int[0]; //Need to setup result array to avoid initialisation error
+            writeLogSQL( SQLquery + " caused error " + e.getMessage( ) );
+        }
+        writeLogSQL( SQLquery + "worked " );
+        return Result;
+    } // End Select
+    
     public void writeLogSQL(String message) 
     {
         PrintStream output;
