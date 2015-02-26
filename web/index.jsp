@@ -24,6 +24,7 @@
         %>
             
         <div class="login-card">
+            <img src="images/uccLogo.jpg" alt="UCC logo">
             <h1>Welcome, Please Login</h1>
             
             <%
