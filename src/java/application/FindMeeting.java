@@ -8,6 +8,7 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 public class FindMeeting {
+    
     private String stream = "";
     private String student = "";
      private final ArrayList<String> errors;
