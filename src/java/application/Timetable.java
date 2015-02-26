@@ -109,8 +109,7 @@ public class Timetable {
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
             timetableValues[0][0]                          
-                                += "compare start date " + startOfEvent.compareTo(startOfWeek)
-                    + "compare end date " + endOfEvent.compareTo(endOfWeek);
+                                += "<th></th>";
             
             if(startOfEvent.compareTo(endOfWeek) <= 0 
                     && endOfEvent.compareTo(startOfWeek) >= 0 ){
