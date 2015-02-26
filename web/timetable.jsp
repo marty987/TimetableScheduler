@@ -5,8 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="application.Timetable;" %>
 <%@ page import="notifications.UsersNotifications;" %>
+<%@ page import="algorithm.FindMeeting;" %>
+<%@ page import="application.Timetable;" %>
+<%@ page import="guipackage.GUI;"%>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
@@ -56,13 +58,24 @@
                     response.sendRedirect( "timetable.jsp" );
                 }
                 out.print( "</div>" );
-                out.print( gui.footer() );
             %>
-        </section
+        </section>
+        
+        <section>
+            <%
+                FindMeeting meeting = new FindMeeting( );
+                out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+            %>
+        </section>
+        
         
         <section>
             <h1>Chat Room</h1>
             
         </section>
+        
+        <%
+             out.print( gui.footer() );
+        %>
     </body>
 </html>
