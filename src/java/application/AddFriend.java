@@ -7,20 +7,21 @@ package application;
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 /**
- *
  * @author jd7
  */
 public class AddFriend {
 //    private String addingID;
-    private String yourUserID;
+//    private String yourUserID;
     private String friendUserID;
+    private boolean isValid;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
     
     public AddFriend() {
 //        this.addingID = "";
-        this.yourUserID = "";
+//        this.yourUserID = "";
         this.friendUserID = "";
+        this.isValid = true;
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -34,14 +35,14 @@ public class AddFriend {
 //    public void setAddingID(String addingID) {
 //        this.addingID = addingID;
 //    }
-    
-    public String getYourUserID() {
-        return yourUserID;
-    }
-    
-    public void setYourUserID(String yourUserID) {
-        this.yourUserID = yourUserID;
-    }
+//    
+//    public String getYourUserID() {
+//        return yourUserID;
+//    }
+//    
+//    public void setYourUserID(String yourUserID) {
+//        this.yourUserID = yourUserID;
+//    }
     
     public String getFriendUserID() {
         return friendUserID;
@@ -51,19 +52,33 @@ public class AddFriend {
         this.friendUserID = friendUserID;
     }
     
+    public boolean getIsValid() {
+        return isValid;
+    }
+    
+    public void setIsValid(boolean isValid) {
+        this.isValid = isValid;
+    }
+    
     public boolean validateAddingFriendForm( final String userId ) {
-        boolean isValid = true;
 
-        if( friendUserID.equals ("") ){
-            errors.add( "Event Name required");
-            isValid = false;
+        if(friendUserID.equals("") || !doesFriendExist(friendUserID)) {
+            
+            if(friendUserID.equals("")) {
+                errors.add("User ID required");
+            }
+            setIsValid(false);
             friendUserID = "";
+        }
+        
+        if(isValid) {
+            addFriend(userId);
         }
         
         return isValid;
     }
     
-    public String errors( ) {
+    public String errors() {
         String errorList;
         
         errorList = "<ul>";
@@ -75,8 +90,25 @@ public class AddFriend {
         return errorList;
     }
     
-    public String addFriendForm( String userId ) {
-        setYourUserID(userId);
+    public boolean doesFriendExist(String friendUserID) {
+        String[] dbResult = database.SelectRow( "SELECT user_id FROM users WHERE user_id = '" + friendUserID + "';" );
+        
+        if(dbResult.length == 0) {
+            errors.add("User does not exist");
+            return false;
+        }
+        return true;
+    }
+    
+    public void addFriend (String userId) {
+        
+        if(doesFriendExist(friendUserID)) {
+            database.Insert("INSERT INTO friends_list (user_id, friend_id, accepted)" +
+                    "VALUES( '" + userId + "', '" + friendUserID + "', '0' );");
+        }
+    }
+    
+    public String addFriendForm() {
         
         String form = "<form name=\"add_friend\" action=\"add_friend.jsp\" method=\"POST\">\n";
                form += "<label for=\"friendUserID\">Your friends UCC ID:</label>\n";

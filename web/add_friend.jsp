@@ -33,13 +33,13 @@
                   String userId = (String) session.getAttribute( "Authenticated" );
                   
                   if( request.getParameter( "submit" ) == null ) {
-                      out.print( friend.addFriendForm( userId ) );
+                      out.print( friend.addFriendForm() );
                   } else {
                       if( friend.validateAddingFriendForm( userId ) ) {
                           out.print( "Friend added successfully!" );
                           out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
                       } else {
-                          out.print( friend.addFriendForm( userId ) );
+                          out.print( friend.addFriendForm() );
                           out.print( friend.errors( ) );
                       }
                   }

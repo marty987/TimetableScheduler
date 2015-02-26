@@ -54,9 +54,7 @@
         %>  
         </div>
         
-        <section>
-            
-            
+        <section>     
             <%
                 out.print( "<div class='divid2'>" );
                 out.print( "<h1 class='notifications'>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
@@ -88,8 +86,13 @@
         
         
         <section>
-            <h1>Chat Room</h1>
-            
+            <%
+                out.print( "<div class='divid3'>" );
+                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
+                
+                
+                out.print( "</div>" );
+            %>   
         </section>
         
         <%

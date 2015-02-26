@@ -74,7 +74,7 @@ tr td section span{
 	font-size: 1.3em;
 }
 
-.add_meeting{
+.add_meeting, .add_friend {
     font-weight:lighter;
 
     color:black;
@@ -90,7 +90,7 @@ tr td section span{
 
 }
 
-.divid2{
+.divid2, .divid3 {
     background-image:url(../images/white5.png);
   
     border-left:#484848 1px solid;
@@ -158,5 +158,3 @@ tr td section span{
   }
  
  }
-
-

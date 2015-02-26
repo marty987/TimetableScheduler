@@ -55,8 +55,7 @@ public class Timetable {
     
     private void fetchEventsFromDB( String userId ) {
         String[] currentEvent = new String[11];
-        ParsePosition startDatePos = new ParsePosition(0);
-        ParsePosition endDatePos = new ParsePosition(0);
+        ParsePosition pos = new ParsePosition(0);
         database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
@@ -82,11 +81,10 @@ public class Timetable {
                 stream = Integer.parseInt(currentEvent[3]);
                 period = Integer.parseInt(currentEvent[4]);
                 try{
-                    startDate.setTime(sdf.parse( currentEvent[5], startDatePos )); 
-                    endDate.setTime(sdf.parse( currentEvent[6], startDatePos ));
-                } catch (Exception e) {
-                    //parse exception
+                    startDate.setTime(sdf.parse( currentEvent[5])); 
+                    endDate.setTime(sdf.parse( currentEvent[6]));
                 }
+                catch (ParseException e){}
                 recurrence = currentEvent[7];
                 moduleCode = currentEvent[8];
                 location = currentEvent[9];
@@ -103,36 +101,34 @@ public class Timetable {
     }
     
     private void addEventsToTimetable( ) {
+
         //iterate through the user's events 
-        for ( int i = 0; i <= myEvents.size(); i++ ) {
-            Calendar startOfEvent = myEvents.get(i).getStartDate();
-            Calendar endOfEvent = myEvents.get(i).getEndDate();
+        for ( int i = 0; i < myEvents.size(); i++ ) {
             
-            timetableValues[0][0]                          
-                                = "<th>" + startOfWeek.getTime() + "</th>";
-            
-            if(startOfEvent.compareTo(endOfWeek) <= 0 
-                    && endOfEvent.compareTo(startOfWeek) >= 0 ){
+            timetableValues[0][0] += "" + myEvents.get(i).getEventName() + " ";
+                    
+            if(myEvents.get(i).getStartDate().compareTo(endOfWeek) <= 0 
+                    && myEvents.get(i).getEndDate().compareTo(startOfWeek) >= 0 ){
                 //occurs this week
                 if ( myEvents.get(i).getRecurrence().equals("once") || myEvents.get(i).getRecurrence().equals("weekly"))
                     //non-recurring events
                 {
-                     timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
+                     timetableValues[myEvents.get(i).getPeriod()][myEvents.get(i).getStartDate().get(Calendar.DAY_OF_WEEK) - 1]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                 } 
                 else
                     //monthly recurring events
                 {
-                    for( int j = 1; i <= 7; i++ ){
-                        if ( j == startOfEvent.DAY_OF_MONTH ){
-                            timetableValues[myEvents.get(i).getPeriod()][j] 
+                    for( Calendar j = startOfWeek; j.compareTo(endOfWeek) > 0 ; j.add(Calendar.DATE, 1)){
+                        if ( j.DAY_OF_MONTH == myEvents.get(i).getStartDate().DAY_OF_MONTH){
+
+                            timetableValues[myEvents.get(i).getPeriod()][j.DAY_OF_WEEK -1] 
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         }
                     }
                 } 
             }
         }
-        
     }
     
     public String printTimetable( ) {

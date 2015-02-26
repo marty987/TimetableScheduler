@@ -80,7 +80,7 @@ public class UsersNotifications {
         }
     }
     
-    public String getFriendRequests( String userId ) throws SQLException {
+    public String getFriendsAndRequests( String userId ) throws SQLException {
         String friendRequests = "";
         this.userId = userId;
         
@@ -91,11 +91,9 @@ public class UsersNotifications {
             statementObject = connectionObject.createStatement( );
             
             
-        }
-        catch( SQLException exceptionObject ){
-           friendRequests = "There has been an error retreiveing your friend requests, Please try again!";
-        }
-        finally{
+        } catch( SQLException exceptionObject ){
+           friendRequests = "There has been an error retreiveing your friend list and friends requests, Please try again!";
+        } finally{
             return friendRequests;
         }
     }
