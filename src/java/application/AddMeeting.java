@@ -190,8 +190,8 @@ public class AddMeeting {
         
         System.out.println( last[0].toString( ) );
         
-        database.Insert( "INSERT INTO has_events( user_id, event_id )" + 
-                         "VALUES( '" + userId+ "', '" + last[0].toString( ) + "' );");
+        database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )" + 
+                         "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
         //database.Close( );
     }
     

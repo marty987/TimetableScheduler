@@ -11,7 +11,7 @@ public class FindMeeting {
     
     private String stream = "";
     private String student = "";
-     private final ArrayList<String> errors;
+    private final ArrayList<String> errors;
     private final DatabaseClass database;
     
     public FindMeeting(){
