@@ -63,7 +63,7 @@ public class Timetable {
         //get IDs of all events associated with this user
         String[] eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM has_events "
-                + "WHERE user_id = " + "112445898" + ";");
+                + "WHERE user_id = " + userId + ";");
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
