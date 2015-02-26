@@ -14,8 +14,8 @@ public class FindMeeting {
     private final ArrayList<String> errors;
     private final DatabaseClass database;
     
-    public FindMeeting(){
-     this.errors = new ArrayList<>( );
+    public FindMeeting( ) {
+        this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
@@ -34,6 +34,7 @@ public class FindMeeting {
         } 
         return true;
     }
+  
 /**
  * Form used to get the information of the type of meeting to be set and the preferred day to meet.
  * If the form user is a lecturer, they can make a meeting with a full class. However, if they are 
