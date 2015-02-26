@@ -7,12 +7,11 @@ package application;
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 /**
- *
  * @author jd7
  */
 public class AddFriend {
 //    private String addingID;
-    private String yourUserID;
+//    private String yourUserID;
     private String friendUserID;
     private boolean isValid;
     private final DatabaseClass database;
@@ -20,7 +19,7 @@ public class AddFriend {
     
     public AddFriend() {
 //        this.addingID = "";
-        this.yourUserID = "";
+//        this.yourUserID = "";
         this.friendUserID = "";
         this.isValid = true;
         this.errors = new ArrayList<>( );
@@ -36,14 +35,14 @@ public class AddFriend {
 //    public void setAddingID(String addingID) {
 //        this.addingID = addingID;
 //    }
-    
-    public String getYourUserID() {
-        return yourUserID;
-    }
-    
-    public void setYourUserID(String yourUserID) {
-        this.yourUserID = yourUserID;
-    }
+//    
+//    public String getYourUserID() {
+//        return yourUserID;
+//    }
+//    
+//    public void setYourUserID(String yourUserID) {
+//        this.yourUserID = yourUserID;
+//    }
     
     public String getFriendUserID() {
         return friendUserID;
@@ -71,6 +70,11 @@ public class AddFriend {
             setIsValid(false);
             friendUserID = "";
         }
+        
+        if(isValid) {
+            addFriend(userId);
+        }
+        
         return isValid;
     }
     
@@ -98,13 +102,13 @@ public class AddFriend {
     
     public void addFriend (String userId) {
         
-//        if(doesFriendExist(friendUserID)) {
-//            database.insert("INSERT INTO
-//        }
+        if(doesFriendExist(friendUserID)) {
+            database.Insert("INSERT INTO friends_list (user_id, friend_id, accepted)" +
+                    "VALUES( '" + userId + "', '" + friendUserID + "', '0' );");
+        }
     }
     
-    public String addFriendForm(String userId) {
-        setYourUserID(userId);
+    public String addFriendForm() {
         
         String form = "<form name=\"add_friend\" action=\"add_friend.jsp\" method=\"POST\">\n";
                form += "<label for=\"friendUserID\">Your friends UCC ID:</label>\n";
