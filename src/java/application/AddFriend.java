@@ -63,6 +63,18 @@ public class AddFriend {
         return isValid;
     }
     
+    public String errors( ) {
+        String errorList;
+        
+        errorList = "<ul>";
+            for( String error: errors ) {
+                errorList += "<li>" + error + "</li>";
+            }
+        errorList += "</ul>";
+        
+        return errorList;
+    }
+    
     public String addFriendForm( String userId ) {
         setYourUserID(userId);
         
