@@ -6,7 +6,7 @@
 
 <%@ page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="guipackage.GUI;"%>
-
+<%@ page import="application.Contact;"%>
 <!DOCTYPE html>
 <html lang="en">
     <head>
@@ -22,8 +22,24 @@
           out.print( loginHeader.loginHeader() );
         %>
             
+            <jsp:useBean id="message" class="application.Contact" scope="request" />
+            <jsp:setProperty name="message" property="*" />
         <div class="login-card">
             <h1>Contact Us</h1>
+            <%
+
+                if( request.getParameter( "submit" ) == null ) {
+                    out.print( message.addContactForm(  ) );
+                }
+                else {
+                    if( message.validateContactForm( ) ) {
+                        out.print( "<p>You have successfully sent your message, we shall be in contact shortly.</p>!" );
+                        out.print( "<p><a href='index.jsp'>Go to your Timetable!</a></p>" );
+                    }
+                    out.print( message.addContactForm( ) );
+                    out.print( message.printErrors( ) );
+                }
+            %>
         </div>
         
         <%
