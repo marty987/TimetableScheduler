@@ -117,6 +117,12 @@ public class User {
     public boolean validateRegForm( ) {
         boolean isValid = true;
         
+        if(doesUserExist(userId)) {
+            errors.add( "User already exists" );
+            isValid = false;
+            userId = "";
+        }
+        
         if( userId.equals( "" ) || userId.length( ) != 9 || ! isInteger( userId )) {
             errors.add( "User ID required. Must be valid ID and 9 digits in length" );
             isValid = false;
@@ -176,6 +182,15 @@ public class User {
         return isValid;
     }
     
+    public boolean doesUserExist(String userID) {
+        String[] dbResult = database.SelectRow( "SELECT user_id FROM users WHERE user_id = '" + userID + "';" );
+        
+        if(dbResult.length != 0) {
+            return true;
+        }
+        return false;
+    }
+    
     public void registerNewUser(  ) {
         database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, is_admin, date_joined )" +
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + email +
@@ -216,18 +231,18 @@ public class User {
         return folderName;
     }
     
-     public boolean resetPassword( final String password1, final String password2, final String userId ) {
-         String[] user = getUser( userId );
+    public boolean resetPassword( final String password1, final String password2, final String userId ) {
+        String[] user = getUser( userId );
          
-         if( userId.equals( "" ) || user.length == 0 || ! password1.equals( password2 ) ) {
-             return false;
-         }
+        if( userId.equals( "" ) || user.length == 0 || ! password1.equals( password2 ) ) {
+            return false;
+        }
          
-         database.Insert( "UPDATE users SET password = '" + PasswordHasher.sha256Hash( password2 ) 
-                        + "' Where user_id = '" + userId + "'; ");
+        database.Insert( "UPDATE users SET password = '" + PasswordHasher.sha256Hash( password2 ) 
+                       + "' Where user_id = '" + userId + "'; ");
          
-         return true;
-     }
+        return true;
+    } 
      
     public String[] getUser( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT * FROM users WHERE user_id = '" + userId + "';" );
