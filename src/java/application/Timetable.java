@@ -40,7 +40,7 @@ public class Timetable {
         
         this.timetableValues = new String[][]{
             {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
-            {"<th scope=\"row\">8AM - 9AM</th>", "<td>hello</td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
+            {"<th scope=\"row\">8AM - 9AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">9AM - 10AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">10AM - 11AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">11AM - 12AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
@@ -74,7 +74,7 @@ public class Timetable {
                 //THIS IS WHERE PROBLEM IS!!
                 currentEvent = database.SelectRow( "SELECT * "
                         + "FROM events "
-                        + "WHERE event_id = 3;");
+                        + "WHERE event_id = " + eventIDs[i] + ";");
 
                 eventId = Integer.parseInt(currentEvent[0]);
                 eventName = currentEvent[1];
@@ -104,12 +104,12 @@ public class Timetable {
     
     private void addEventsToTimetable( ) {
         //iterate through the user's events 
-        for ( int i = 0; i < myEvents.size(); i++ ) {
+        for ( int i = 0; i <= myEvents.size(); i++ ) {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
             timetableValues[0][0]                          
-                                += "<th></th>";
+                                = "<th>" + startOfWeek.getTime() + "</th>";
             
             if(startOfEvent.compareTo(endOfWeek) <= 0 
                     && endOfEvent.compareTo(startOfWeek) >= 0 ){
@@ -146,7 +146,7 @@ public class Timetable {
         
         //iterate through columns
         for (int i = 0; i < 11; i++ ) {
-            table += "<tr>";
+            table += "<tr>\n";
             //iterate through rows
             for (int j = 0; j < 8; j++ ) {
                 table += timetableValues[i][j];
@@ -160,14 +160,10 @@ public class Timetable {
         return table;
     }
     
-    private int daysBetween(Date d1, Date d2){
-             return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-    }
-    
     private Date getMondayOfWeek( ){
         Calendar temp = Calendar.getInstance();
         int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
-        temp.add(Calendar.DATE, 1 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 2 - currentDayOfWeek);
         
         return temp.getTime();
     }
@@ -175,7 +171,7 @@ public class Timetable {
     private Date getSundayOfWeek( ){
         Calendar temp = Calendar.getInstance();
         int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
-        temp.add(Calendar.DATE, 7 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 8 - currentDayOfWeek);
         
         return temp.getTime();
     }
