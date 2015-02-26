@@ -11,10 +11,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import javax.servlet.http.HttpServletRequest;
 
 public class FindMeeting {
     private String stream;
-    private String student;
+    private String date; 
+    
+
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
@@ -22,10 +25,17 @@ public class FindMeeting {
     private Statement statementObject;
     
     public FindMeeting( ) {
+        this.date = "";
+        this.stream = "";
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+    }
+    
+    public void setup( HttpServletRequest request ){
+        stream = request.getParameter( "stream" );
+        date = request.getParameter( "date" );
     }
     
     /**
@@ -43,40 +53,17 @@ public class FindMeeting {
            return true;
      }
 
-     public String[] getGroupMembers(String stream) {
-         String[] userIds;
-         userIds = database.SelectRow("SELECT user_id FROM users WHERE stream = '"+ stream +"'");
+     public String[] getGroupMembers( ) {
+         String[] userIds = database.SelectRow("SELECT user_id FROM users WHERE stream = '" + stream +"'");
          return userIds;
      }
-//     public String[] getGroupMembers() throws SQLException {
-//         String[] users = {""};
-//        // Establish connection to database
-//        connectionObject = DriverManager.getConnection( "jdbc:mysql://" + "cs1.ucc.ie" + "/" + "2016_mjb2", "mjb2", "diechoro" );
-//        
-//        try{
-//            statementObject = connectionObject.createStatement( );
-//            ResultSet statementResult = statementObject.executeQuery( "Select user_id FROM users;" );
-//            while( statementResult.next( ) ){
-//                  String group = statementResult.getString( 1 );         
-//            }
-//        }
-//        catch( SQLException exceptionObject ){
-//           
-//        }
-//        finally{
-//               return users;
-//        }
-//         
-//         
-//    
-//         return groupMembers;
-//     }
      
-     public int[] getLectureTimes(String startDate){
+     public int[] getLectureTimes( ){
+         String[] members = getGroupMembers(  );
          String member = groupMembers[0];
          
          int[] lectureTimes = database.SelectIntColumn("SELECT period FROM events JOIN has_events JOIN users ON events.event_id = has_events.event_id "
-                 + "AND users.user_id = has_events.user_id WHERE events.start_date = '" + startDate + "' AND users.user_id = '" + member + "' AND events.event_type = "
+                 + "AND users.user_id = has_events.user_id WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type = "
                  + "'Lecture'"); 
           
         
@@ -94,11 +81,11 @@ public class FindMeeting {
          return otherEvents;
      }
   
-     public int getFreeSlot(String start_date, String stream){
-         String[] groupMembers = getGroupMembers(stream);
+     public int getFreeSlot(  ){
+         String[] groupMembers = getGroupMembers(  );
          int memberNumber = 0;
-         int[] lectureTimes = getLectureTimes(start_date);
-         int[] eventTimes = getMembersEvents(start_date, memberNumber);
+         int[] lectureTimes = getLectureTimes(  );
+         int[] eventTimes = getMembersEvents( date, memberNumber );
          int currentFreeTime = -1;
          
          while( memberNumber < groupMembers.length ){
@@ -173,10 +160,10 @@ public class FindMeeting {
 
          }
 
-        form += "<label for=\"startDate\">Preferred Day:</label>\n"
-              + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"\" placeholder=\"2015/01/01\"/><br />\n"
+        form += "<label for=\"date\">Preferred Day:</label>\n"
+              + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
               + "<label for=\"recurrence\">Recurrence:</label>\n"
-              + "<select name=\"recurrence\" id='dropdown'>" 
+              + "<select name=\"recurrence\">" 
               + "  <option value=\"once\" selected>Single Meeting</option>" 
               + "  <option value=\"weekly\">Weekly</option>" 
               + "  <option value=\"montly\">Monthly</option>" 
