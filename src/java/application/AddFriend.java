@@ -22,7 +22,7 @@ public class AddFriend {
 //        this.addingID = "";
         this.yourUserID = "";
         this.friendUserID = "";
-        this.isValid = false;
+        this.isValid = true;
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -63,12 +63,11 @@ public class AddFriend {
     
     public boolean validateAddingFriendForm( final String userId ) {
 
-        if(errors.size() == 0) {
-            setIsValid(true);
-        }
-        
-        if( friendUserID.equals ("") ){
-            errors.add( "User ID required");
+        if(friendUserID.equals("") || !doesFriendExist(friendUserID)) {
+            
+            if(friendUserID.equals("")) {
+                errors.add("User ID required");
+            }
             setIsValid(false);
             friendUserID = "";
         }
@@ -99,9 +98,9 @@ public class AddFriend {
     
     public void addFriend (String userId) {
         
-        if(doesFriendExist(friendUserID)) {
-            
-        }
+//        if(doesFriendExist(friendUserID)) {
+//            database.insert("INSERT INTO
+//        }
     }
     
     public String addFriendForm(String userId) {
