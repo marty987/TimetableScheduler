@@ -5,8 +5,10 @@
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
-<%@ page import="application.Timetable;" %>
 <%@ page import="notifications.UsersNotifications;" %>
+<%@ page import="algorithm.FindMeeting;" %>
+<%@ page import="application.Timetable;" %>
+<%@ page import="guipackage.GUI;"%>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
@@ -16,11 +18,15 @@
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
         <link rel="stylesheet" href="css/timetable.css" media="screen" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
-        <script type="text/javascript" src="js/table.js"></script>
         <title>UCC Timetable</title>
-    </head>
+        <script src="//code.jquery.com/jquery-1.10.2.js"></script>
+        <script src="//code.jquery.com/ui/1.11.3/jquery-ui.js"></script>
+        <script type="text/javascript" src="js/table.js"></script>
+        
+
     
     <body>
+        <div class="time">
         <%
             GUI gui = new GUI( );
             
@@ -33,16 +39,19 @@
                 out.print(gui.header(true, fname, lname));
                 
                 Timetable timetable = new Timetable( );
-    
-                out.print( timetable.printTimetable( ) );            
-                out.print( "<a href='add_meeting.jsp'>Add Meeting</a>" );
+                out.print( "<div class='divid'>" );
+                out.print( timetable.printTimetable( ) );      
+                out.print( "</div>" );
             }
         %>  
+        </div>
         
         <section>
-            <h1>Notifications</h1>
+            
             
             <%
+                out.print( "<div class='divid2'>" );
+                out.print( "<h1 class='notifications'>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
@@ -51,14 +60,25 @@
                     notify.hasSeen( request );
                     response.sendRedirect( "timetable.jsp" );
                 }
-                
-                out.print( gui.footer() );
+                out.print( "</div>" );
             %>
-        </section
+        </section>
+        
+        <section>
+            <%
+                FindMeeting meeting = new FindMeeting( );
+                out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+            %>
+        </section>
+        
         
         <section>
             <h1>Chat Room</h1>
             
         </section>
+        
+        <%
+             out.print( gui.footer() );
+        %>
     </body>
 </html>

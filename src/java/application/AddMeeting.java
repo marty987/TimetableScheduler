@@ -190,8 +190,8 @@ public class AddMeeting {
         
         System.out.println( last[0].toString( ) );
         
-        database.Insert( "INSERT INTO has_events( user_id, event_id )" + 
-                         "VALUES( '" + userId+ "', '" + last[0].toString( ) + "' );");
+        database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )" + 
+                         "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
         //database.Close( );
     }
     
@@ -253,7 +253,7 @@ public class AddMeeting {
                
                form += "<label for=\"recurrence\">Recurrence:</label>\n";
                form += "<select name=\"recurrence\" id='dropdown'>" +
-                       "    <option value=\"day\" selected>Single Meeting</option>" +
+                       "    <option value=\"once\" selected>Single Meeting</option>" +
                        "    <option value=\"weekly\">Weekly</option>" +
                        "    <option value=\"montly\">Monthly</option>" +
                        "</select><br />";

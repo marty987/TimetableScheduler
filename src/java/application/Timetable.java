@@ -74,7 +74,7 @@ public class Timetable {
                 //THIS IS WHERE PROBLEM IS!!
                 currentEvent = database.SelectRow( "SELECT * "
                         + "FROM events "
-                        + "WHERE event_id = 3;");
+                        + "WHERE event_id = " + eventIDs[i] + ";");
 
                 eventId = Integer.parseInt(currentEvent[0]);
                 eventName = currentEvent[1];
@@ -104,40 +104,23 @@ public class Timetable {
     
     private void addEventsToTimetable( ) {
         //iterate through the user's events 
-        for ( int i = 0; i < myEvents.size(); i++ ) {
+        for ( int i = 0; i <= myEvents.size(); i++ ) {
             Calendar startOfEvent = myEvents.get(i).getStartDate();
             Calendar endOfEvent = myEvents.get(i).getEndDate();
             
-            if(startOfEvent.compareTo(startOfWeek) >= 0 
-                    && endOfEvent.compareTo(endOfWeek) <= 0 ){
+            timetableValues[0][0]                          
+                                = "<th>" + startOfWeek.getTime() + "</th>";
+            
+            if(startOfEvent.compareTo(endOfWeek) <= 0 
+                    && endOfEvent.compareTo(startOfWeek) >= 0 ){
                 //occurs this week
-
-                if ( startOfEvent.equals(endOfEvent) )
+                if ( myEvents.get(i).getRecurrence().equals("once") || myEvents.get(i).getRecurrence().equals("weekly"))
                     //non-recurring events
                 {
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
+                     timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
-                        
-                        timetableValues[0][0] = "<ul><li>period = " +myEvents.get(i).getPeriod()+ "</li>"
-                                + "<li>eventID = " + myEvents.get(i).getEventID() + "</li>"
-                                + "<li>location = " + myEvents.get(i).getLocation() + "</li>"
-                                + "<li>eventName = " + myEvents.get(i).getEventName() + "</li>"
-                                + "<li>eventType = " + myEvents.get(i).getEventType() + "</li>"
-                                + "<li>moduleCode = " + myEvents.get(i).getModuleCode() + "</li>"
-                                + "</ul>";
                 } 
-                else if (myEvents.get(i).getRecurrence().equals("day")) 
-                    //daily recurring events
-                {
-                    Date start = startDate.getTime();
-                    Date end = endDate.getTime();
-                    
-                    for ( int j = 1; j <= daysBetween(start, end); j++ ){
-                        timetableValues[myEvents.get(i).getPeriod()][j] 
-                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
-                    }
-                }
-                else if (myEvents.get(i).getRecurrence().equals("monthly"))
+                else
                     //monthly recurring events
                 {
                     for( int j = 1; i <= 7; i++ ){
@@ -146,16 +129,7 @@ public class Timetable {
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         }
                     }
-                }   
-                else 
-                    //annually recurring events
-                {
-                    if(startOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR >= 0 
-                            && endOfWeek.DAY_OF_YEAR - startOfEvent.DAY_OF_YEAR <= 0){ //RETHINK - WON'T WORK AT TRANSITION OF YEAR
-                        timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)] 
-                                = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>";
-                    }
-                }
+                } 
             }
         }
         
@@ -172,7 +146,7 @@ public class Timetable {
         
         //iterate through columns
         for (int i = 0; i < 11; i++ ) {
-            table += "<tr>";
+            table += "<tr>\n";
             //iterate through rows
             for (int j = 0; j < 8; j++ ) {
                 table += timetableValues[i][j];
@@ -186,14 +160,10 @@ public class Timetable {
         return table;
     }
     
-    private int daysBetween(Date d1, Date d2){
-             return (int)( (d2.getTime() - d1.getTime()) / (1000 * 60 * 60 * 24));
-    }
-    
     private Date getMondayOfWeek( ){
         Calendar temp = Calendar.getInstance();
         int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
-        temp.add(Calendar.DATE, 1 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 2 - currentDayOfWeek);
         
         return temp.getTime();
     }
@@ -201,7 +171,7 @@ public class Timetable {
     private Date getSundayOfWeek( ){
         Calendar temp = Calendar.getInstance();
         int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
-        temp.add(Calendar.DATE, 7 - currentDayOfWeek);
+        temp.add(Calendar.DATE, 8 - currentDayOfWeek);
         
         return temp.getTime();
     }

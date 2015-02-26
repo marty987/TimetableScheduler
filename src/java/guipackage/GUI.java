@@ -24,10 +24,8 @@ public class GUI {
         form += "<ul>\n";
         form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
         form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
-        form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
-        form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
         form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
-        form += "<li class = 'timetable'><a href='contact.jsp'>Contact</a></li>\n";        
+        form += "<li class = 'contact'><a href='contact.jsp'>Contact</a></li>\n";        
         form += "</ul>\n";
         form += "</nav>\n";
         form += "</header>\n";       
@@ -38,14 +36,11 @@ public class GUI {
     public String header(boolean printName, String fName, String lName) {
         form = "<header>\n";
         form += "<nav >\n";      
-        form += "<ul>\n";
-        form += "<li><a href=\"logout.jsp\" id='logout'>(Logout)</a></li>\n";        
-        form += "<li class = 'home'><a href='index.jsp'>Home</a></li>\n"; 
+        form += "<ul>\n";       
+        form += "<li class = 'home'><a href='logout.jsp'>(Logout)</a></li>\n"; 
         form += "<li class = 'timetable'><a href='timetable.jsp'>Timetable</a></li>\n";
-        form += "<li class = 'staff'><a href='staff.jsp'>Staff</a></li>\n";
-        form += "<li class = 'students'><a href='students.jsp'>Students</a></li>\n";
         form += "<li class = 'help'><a href='help.jsp'>Help</a></li>\n";
-        form += "<li class = 'timetable'><a href='contact.jsp'>Contact</a></li>\n";          
+        form += "<li class = 'contact'><a href='contact.jsp'>Contact</a></li>\n";          
         form += "</ul>\n";
         form += "</nav>\n";
         if(printName) {

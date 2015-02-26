@@ -18,6 +18,7 @@ body {
   font-family: Source Sans Pro;
 }
 
+
 .login-card {
   padding: 40px;
   width: 274px;
@@ -147,9 +148,14 @@ footer{
     font-family: Source Sans Pro;
 }
 
+footer li:hover{
+    color: #666;
+}
+    
 
 @media screen and (min-width: 768px)
 {
+
  
  #welcomeH
 {
@@ -180,19 +186,15 @@ footer{
 .timetable{
 	background-color:#ffb500;
 }
-.staff{
+.help{
 	background-color:#003c69;
 	color:#fff;
 }
-.students{
+.contact{
 	background-color:#69b3e7;
-	color:#fff;
+	color: deepskyblue;
 }
 
-.help{
-	background-color:#1D3063;
-	color:#fff;
-}
 
 nav{
     text-align: center;
@@ -265,6 +267,7 @@ nav ul li{
     -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
     -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
     box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.52);
+    text-shadow: 6px 6px 7px rgba(150, 150, 150, 1);
 }
 
 #logout{
@@ -285,6 +288,8 @@ nav ul li a:hover{
 
 @media screen and (max-width: 768px)
 {
+
+
     
 #welcomeH{
     text-align: center;

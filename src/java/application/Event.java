@@ -15,6 +15,7 @@ public class Event {
     private int eventID;
     private String eventName;
     private String eventType;
+    private int stream;
     private int period;
     private Calendar startDate;
     private Calendar endDate;
@@ -23,12 +24,13 @@ public class Event {
     private String location;
     private String description;
     
-    public Event( int eventID, String eventName, String eventType, int period, 
+    public Event( int eventID, String eventName, String eventType, int stream, int period, 
             Calendar startDate, Calendar endDate, String recurrence, String moduleCode,
             String location, String description) {
         this.eventID = eventID;
         this.eventName = eventName;
         this.eventType = eventType;
+        this.stream = stream;
         this.period = period;
         this.startDate = startDate;
         this.endDate = endDate;
