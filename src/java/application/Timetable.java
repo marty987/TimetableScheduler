@@ -103,36 +103,34 @@ public class Timetable {
     }
     
     private void addEventsToTimetable( ) {
+
         //iterate through the user's events 
-        for ( int i = 0; i <= myEvents.size(); i++ ) {
-            Calendar startOfEvent = myEvents.get(i).getStartDate();
-            Calendar endOfEvent = myEvents.get(i).getEndDate();
+        for ( int i = 0; i < myEvents.size(); i++ ) {
             
-            timetableValues[0][0]                          
-                                = "<th>" + startOfWeek.getTime() + "</th>";
-            
-            if(startOfEvent.compareTo(endOfWeek) <= 0 
-                    && endOfEvent.compareTo(startOfWeek) >= 0 ){
+            timetableValues[0][0] += "" + myEvents.get(i).getEventName() + " ";
+                    
+            if(myEvents.get(i).getStartDate().compareTo(endOfWeek) <= 0 
+                    && myEvents.get(i).getEndDate().compareTo(startOfWeek) >= 0 ){
                 //occurs this week
                 if ( myEvents.get(i).getRecurrence().equals("once") || myEvents.get(i).getRecurrence().equals("weekly"))
                     //non-recurring events
                 {
-                     timetableValues[myEvents.get(i).getPeriod()][startOfEvent.get(Calendar.DAY_OF_WEEK)]                          
+                     timetableValues[myEvents.get(i).getPeriod()][myEvents.get(i).getStartDate().get(Calendar.DAY_OF_WEEK) - 1]                          
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                 } 
                 else
                     //monthly recurring events
                 {
-                    for( int j = 1; i <= 7; i++ ){
-                        if ( j == startOfEvent.DAY_OF_MONTH ){
-                            timetableValues[myEvents.get(i).getPeriod()][j] 
+                    for( Calendar j = startOfWeek; j.compareTo(endOfWeek) > 0 ; j.add(Calendar.DATE, 1)){
+                        if ( j.DAY_OF_MONTH == myEvents.get(i).getStartDate().DAY_OF_MONTH){
+
+                            timetableValues[myEvents.get(i).getPeriod()][j.DAY_OF_WEEK -1] 
                                 = "<td>" + myEvents.get(i).getEventName()+ " in " + myEvents.get(i).getLocation() + "</td>"; 
                         }
                     }
                 } 
             }
         }
-        
     }
     
     public String printTimetable( ) {
