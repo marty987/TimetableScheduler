@@ -94,7 +94,7 @@ public class FindMeeting {
       * @return an array of period slots that correspond to times of events that the member has
       * on the given day. (Integers)
       */
-     public int[] getMembersEvents(String startDate, int memberNumber){
+     public int[] getMembersEvents( int memberNumber ){
          String member = groupMembers[memberNumber];
          
          int[] otherEvents = database.SelectIntColumn( "SELECT period "
@@ -112,36 +112,44 @@ public class FindMeeting {
       * represented by an integer.
       */
      public int getFreeSlot(  ){
-         groupMembers = getGroupMembers(  );
+         groupMembers = getGroupMembers();
          int memberNumber = 0;
          int[] lectureTimes = getLectureTimes(  );
          int[] eventTimes = getMembersEvents( memberNumber );
          int currentFreeTime = -1;
-         
+         int period = 1;
          while( memberNumber < groupMembers.length ){
-             for(int period = 1; period < 11 ; period++){
+             outer_loop:
+             while(period < lectureTimes.length ){                 
                  for( int i = 0; i < lectureTimes.length; i++){
-                     if(period == lectureTimes[i]){
+                     if(Arrays.asList(lectureTimes).contains(period))
+                     {
                          memberNumber = 0;
+                         System.out.println(period + " " + i);
+                         period++;
                          break;
                      }
-                     else{
+                     else
+                     {
                             for( int j = 0; j < eventTimes.length; j++){
-                                if(period != eventTimes[j]){
-                                    if( memberNumber == groupMembers.length - 1){
+                                if(!Arrays.asList(eventTimes).contains(period)){
+                                    if( memberNumber == groupMembers.length - 1)
+                                    {
                                            currentFreeTime = period;
                                            return currentFreeTime;
-                                    }else{
+                                    }
+                                    else
+                                    {
                                            memberNumber++;
+                                           period++;
+                                           break outer_loop;
                                     }                                    
-                                    break;
                                 }
                             }
-                        }
-                     break;  
-                  }
-               break;                
+                     }
+                 }
              }
+             
          }
          return currentFreeTime;
          
@@ -153,7 +161,7 @@ public class FindMeeting {
      * @return form
      */
     public String findMeetingForm( String userId ) {
-        String form = "<form name=\"find_meeting\" id = 'dropdown' action=\"timetable.jsp\" method=\"POST\">\n" 
+        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
                         + "<label for=\"eventType\">Event Type:</label>\n"
                         + "<select name =\"eventType\" >\n +"
                             + "<option value=\"1\" selected>Lecture</option>\n" 
@@ -163,7 +171,7 @@ public class FindMeeting {
                         + "</select><br />";
 
               if( isLecturer( userId ) ) {
-                  form += "<label id = 'dropdown' for='stream'>Stream:</label>\n"
+                  form += "<label for='stream'>Stream:</label>\n"
                         + "<select name=\"stream\" >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
                         + "  <option value=\"2\">Core Year 2</option>\n" 
@@ -186,7 +194,7 @@ public class FindMeeting {
                   //this.stream = database.
               }
 
-                  form += "<label id = 'dropdown' for=\"date\">Preferred Day:</label>\n"
+                  form += "<label for=\"date\">Preferred Day:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
                         + "<label for=\"recurrence\">Recurrence:</label>\n"
                         + "<select name=\"recurrence\">\n" 
