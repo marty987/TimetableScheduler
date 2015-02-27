@@ -125,11 +125,9 @@ public class Timetable {
             startDateAsCal.setTime(myEvent.getStartDate());
             endDateAsCal.setTime(myEvent.getEndDate());
             dayOfEvent = startDateAsCal.get(Calendar.DAY_OF_WEEK);
-            
             if((startDateAsCal.compareTo(sundayDateAsCal) <= 0 && (endDateAsCal.compareTo(mondayDateAsCal) >= 0)))
             { //occurs this week
-                
-                timetableValues[0][0] += "" + i + "; ";
+              
                 //to force days of the week correspond to our timetable layout
                 if (dayOfEvent == 1){
                     dayOfEvent = 7;
@@ -161,9 +159,9 @@ public class Timetable {
      * Function to print the timetable.
      * @return the variable table (string)
      */
-    public String printTimetable( ) {
+    public String printTimetable( String userId ) {
         
-        fetchEventsFromDB( "112735341" );
+        fetchEventsFromDB( userId );
         addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"

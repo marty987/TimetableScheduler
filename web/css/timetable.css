@@ -10,7 +10,6 @@
 
 table {
     border-collapse: collapse;
-    width: 100%;
     font: 62.5%/1.3 normal Helvetica, sans-serif;
     width:85%;
     float:right;
@@ -92,12 +91,19 @@ tr td section span{
 }
 
 .divid2, .divid3 {
-    background-image:url(../images/white5.png);
+
   
     border-left:#484848 1px solid;
     border-left:#bbbbbb 1px solid;
-
+    width: 96.3%;
     padding:20px;
+    
+  background-color: #F7F7F7;
+  border-radius: 2px;
+  -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  overflow: hidden;
 }
 
 .notifications{

@@ -42,6 +42,7 @@
                 response.sendRedirect( "index.jsp" );
             }
             else {
+                String username = (String) session.getAttribute( "Authenticated" );
                 String fname = (String) session.getAttribute( "firstName" );
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
@@ -56,6 +57,8 @@
                     meeting.setup( request );
                     out.print( meeting.getFreeSlot( ) );
                  }
+                
+                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
                 out.print( "</div>");
                 
                 out.print( "<div class='card'>" );   
@@ -63,7 +66,7 @@
                 Timetable timetable = new Timetable( );
                 out.print( "</div>" );
               
-                out.print( timetable.printTimetable( ) ); 
+                out.print( timetable.printTimetable( username ) ); 
                 out.print( "</div>" );
             }
         %>  
@@ -85,18 +88,7 @@
             %>
         </section>
         
-
-        
-        
-        <section>
-            <%
-                out.print( "<div class='divid3'>" );
-                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
-                
-                
-                out.print( "</div>" );
-            %>   
-        </section>
+ 
         
         <%
              out.print( gui.footer() );
