@@ -8,8 +8,6 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 
-public class Contact {
-
 /**
  * This class allows you to add a personal message to the database for another user within the system.
  **/
@@ -17,17 +15,17 @@ public class Contact {
     private String email;
     private String subject;
     private String message;
-    private final DatabaseClass database;
-    private final ArrayList<String> errors;
+    private DatabaseClass database;
+    private ArrayList<String> errors;
     /**
      * Constructor for the AddMessage class
      */
-    public contact( ){
-        this.email = "";
-        this.subject = "";
-        this.message = "";
-        this.errors = new ArrayList<>( );
-        this.database = new DatabaseClass( );
+    public Contact( ){
+        email = "";
+        subject = "";
+        message = "";
+        errors = new ArrayList<>( );
+        database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
@@ -79,7 +77,7 @@ public class Contact {
      * @param userId Your own user ID.
      * @return true if form is filled out correctly and false if otherwise.
      */
-    public boolean validateContactForm( final String userId ) {
+    public boolean validateContactForm(  ) {
         boolean isValid = true;
 
         if( email.equals( "" ) || ! email.contains( "@" ) || ! email.contains( "." ) ) {
@@ -118,17 +116,17 @@ public class Contact {
      * Function to insert the message entered in the form to the database.
      * @param userId the user's ID (string)
      */
-    public void insertNewMessage( String userId ) {
+    public void insertNewMessage( String email, String subject, String message  ) {
         database.Insert( "INSERT INTO contact( email, subject, message )" +
                          "VALUES( '" + email + "', '" + subject + "', '" + message + "'  );" );
-        database.Close( );
+        //database.Close( );
     }
     /**
      * Function to create the form to send a message.
      * @param userId (string)
      * @return the form (string)
      */
-    public String contactForm( String userId ) {
+    public String contactForm(  ) {
         String form = "<form name=\"contact\" action=\"contact.jsp\" method=\"POST\">\n";
                
                form += "<label for='email'>Email:</label>\n";
@@ -145,4 +143,4 @@ public class Contact {
         return form;
     }
   }
-}  
+  

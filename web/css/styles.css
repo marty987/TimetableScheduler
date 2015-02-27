@@ -19,7 +19,9 @@ body {
 }
 
 
-.login-card {
+
+
+.login-card{
   padding: 40px;
   width: 274px;
   background-color: #F7F7F7;
@@ -31,20 +33,39 @@ body {
   overflow: hidden;
 }
 
-.login-card h1 {
+.card{
+  width: 94%;
+  margin-left:1%;
+  background-color: #F7F7F7;
+  border-radius: 2px;
+  -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  overflow: hidden;
+}
+
+.login-card h1{
   font-weight: 100;
   text-align: center;
   font-size: 2em;
 }
 
-.login-card input[type=submit] {
+.login-card input[type=submit]{
   width: 100%;
   display: block;
   margin-bottom: 10px;
   position: relative;
 }
 
-.login-card input[type=text], input[type=password] {
+.card input[type=submit]{
+  width: 15%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+
+.login-card input[type=text], input[type=password]{
   height: 44px;
   font-size: 16px;
   width: 100%;
@@ -59,7 +80,22 @@ body {
   -moz-box-sizing: border-box;
 }
 
-.login-card input[type=text]:hover, input[type=password]:hover {
+.card input[type=text]{
+  height: 44px;
+  font-size: 16px;
+  width: 60%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.login-card input[type=text]:hover, input[type=password]:hover, .add-meeting input[type=text]:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -78,6 +114,7 @@ body {
 /* -webkit-user-select: none;
   user-select: none; */
 }
+
 
 .login-submit {
   /* border: 1px solid #3079ed; */
@@ -156,6 +193,30 @@ footer li:hover{
 @media screen and (min-width: 768px)
 {
 
+#sidebar {
+    position: absolute;
+    top: 0;
+    margin-bottom: -5%;
+    bottom: 0;
+    left: 0;
+    width: 200px;
+    background:#797A7A;
+    padding-right: 20px;
+    background: #3f4c6b; /* Old browsers */
+    background: -moz-linear-gradient(top, #3f4c6b 0%, #3f4c6b 100%); /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3f4c6b), color-stop(100%,#3f4c6b)); /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(top, #3f4c6b 0%,#3f4c6b 100%); /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(top, #3f4c6b 0%,#3f4c6b 100%); /* Opera 11.10+ */
+    background: -ms-linear-gradient(top, #3f4c6b 0%,#3f4c6b 100%); /* IE10+ */
+    background: linear-gradient(to bottom, #3f4c6b 0%,#3f4c6b 100%); /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
+    
+}    
+    
+    
+.card{
+  padding: 30px;
+}    
  
  #welcomeH
 {
@@ -288,6 +349,10 @@ nav ul li a:hover{
 
 @media screen and (max-width: 768px)
 {
+
+.card{  
+   padding:10px;
+}
 
 
     

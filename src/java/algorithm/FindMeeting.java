@@ -23,6 +23,7 @@ public class FindMeeting {
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
+
     /**
      * Constructor for the class.
      */

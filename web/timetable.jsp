@@ -34,7 +34,7 @@
         
     
     <body>
-        <div class="time">
+
         <%
             GUI gui = new GUI( );
             
@@ -47,13 +47,29 @@
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
+                out.print( "<div id='sidebar'>" );
+                                FindMeeting meeting = new FindMeeting( );
+                
+                if( request.getParameter( "find_meet" ) == null ){
+                    out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+                }
+                else{
+                    meeting.setup( request );
+                    out.print( meeting.getFreeSlot( ) );
+                 }
+                
+                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
+                out.print( "</div>");
+                
+                out.print( "<div class='card'>" );   
+                out.print( "<div class='time'>" );
                 Timetable timetable = new Timetable( );
                 out.print( "<div class='divid'>" );
                 out.print( timetable.printTimetable( username ) );      
                 out.print( "</div>" );
             }
         %>  
-        </div>
+
         
         <section>     
             <%
@@ -71,30 +87,7 @@
             %>
         </section>
         
-        <section>
-            <%
-                FindMeeting meeting = new FindMeeting( );
-                
-                if( request.getParameter( "find_meet" ) == null ){
-                    out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
-                }
-                else{
-                    meeting.setup( request );
-                    out.print( meeting.getFreeSlot( ) );
-                 }
-            %>
-        </section>
-        
-        
-        <section>
-            <%
-                out.print( "<div class='divid3'>" );
-                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
-                
-                
-                out.print( "</div>" );
-            %>   
-        </section>
+ 
         
         <%
              out.print( gui.footer() );
