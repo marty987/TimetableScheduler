@@ -46,14 +46,8 @@
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
-                out.print( "<div class='card'>" );   
-                out.print( "<div class='time'>" );
-                Timetable timetable = new Timetable( );
-                out.print( "</div>" );
-              
-                out.print( timetable.printTimetable( ) );  
-                
-                FindMeeting meeting = new FindMeeting( );
+                out.print( "<div id='sidebar'>" );
+                                FindMeeting meeting = new FindMeeting( );
                 
                 if( request.getParameter( "find_meet" ) == null ){
                     out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
@@ -62,7 +56,14 @@
                     meeting.setup( request );
                     out.print( meeting.getFreeSlot( ) );
                  }
-     
+                out.print( "</div>");
+                
+                out.print( "<div class='card'>" );   
+                out.print( "<div class='time'>" );
+                Timetable timetable = new Timetable( );
+                out.print( "</div>" );
+              
+                out.print( timetable.printTimetable( ) ); 
                 out.print( "</div>" );
             }
         %>  

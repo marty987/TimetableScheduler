@@ -12,6 +12,8 @@ table {
     border-collapse: collapse;
     width: 100%;
     font: 62.5%/1.3 normal Helvetica, sans-serif;
+    width:85%;
+    float:right;
 }
 
 td, th { 

@@ -28,18 +28,18 @@
             <h1>Contact Us</h1>
             <%
                 
+                if( request.getParameter( "submit" ) == null ) {
                     out.print( contact.contactForm( ) );
-
-
+                    
+                }
+                else {
                     if( contact.validateContactForm( ) ) {
-
                         out.print( "<p>You message has been sent.</p>" );
                         out.print( "<p><a href='timetable.jsp'>Go to your Timetable!</a></p>" );
-                                            out.print( contact.contactForm( ) );
-                    out.print( contact.errors( ) );
                     }
-
-                
+                    out.print( contact.contactForm( ) );
+                    out.print( contact.errors( ) );
+                }
             %>
         </div>
         
