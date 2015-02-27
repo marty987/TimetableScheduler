@@ -17,8 +17,8 @@ public class Event {
     private String eventType;
     private int stream;
     private int period;
-    private Calendar startDate;
-    private Calendar endDate;
+    private Date startDate;
+    private Date endDate;
     private String recurrence;
     private String moduleCode;
     private String location;
@@ -38,7 +38,7 @@ public class Event {
      * @param description 
      */
     public Event( int eventID, String eventName, String eventType, int stream, int period, 
-            Calendar startDate, Calendar endDate, String recurrence, String moduleCode,
+            Date startDate, Date endDate, String recurrence, String moduleCode,
             String location, String description) {
         this.eventID = eventID;
         this.eventName = eventName;
@@ -98,7 +98,7 @@ public class Event {
      * Getter method for the start date of the event.
      * @return startDate (calender object)
      */
-    public Calendar getStartDate(){
+    public Date getStartDate(){
         return this.startDate;
     }
     /**
@@ -111,7 +111,7 @@ public class Event {
      * Getter method for the end date of the event
      * @return the variable endDate (calender object)
      */
-    public Calendar getEndDate(){
+    public Date getEndDate(){
         return this.endDate;
     }
     /**
