@@ -42,7 +42,7 @@
                 response.sendRedirect( "index.jsp" );
             }
             else {
-                String username = (String) session.getAttribute( "username" );
+                String username = (String) session.getAttribute( "Authenticated" );
                 String fname = (String) session.getAttribute( "firstName" );
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
