@@ -277,12 +277,21 @@ public class AddMeeting {
      */
     public boolean isLecturer( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
-        database.Close( );
+        //database.Close( );
         
         if( dbResult.length == 0 || dbResult[0].equals("0")) {
             return false;
         } 
         return true;
+    }
+    /**
+     * Function to get the user's (type student) stream.
+     * @param userId
+     * @return the variable stream (string)
+     */
+    public String getUserStream(String userId){
+        String[] userStream = database.SelectRow("SELECT stream FROM users WHERE user_id ='"+ userId +"';");
+        return userStream[0];
     }
     /**
      * Form used to add a meeting.
@@ -314,6 +323,10 @@ public class AddMeeting {
                         "  <option value=\"12\">Chinese Year 3</option>\n" +
                         "  <option value=\"13\">Chinese Year 4</option>\n" +
                         "</select><br />"; 
+               }
+               else{
+                   String userStream = getUserStream(userId);
+                   setStream(userStream);
                }
              
                form += "<label for=\"period\">Period:</label>\n";
