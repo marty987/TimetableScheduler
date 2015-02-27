@@ -45,7 +45,7 @@ public class DatabaseClass {
  
         return "";
     } // DatabaseConnectorNew constructor
- 
+   
     public boolean issetup( )
     {
         return setup;

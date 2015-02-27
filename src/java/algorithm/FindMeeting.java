@@ -1,35 +1,27 @@
-/*
-*@author Emily Horgan 112340841
-* 26/02/2015
-*/
 package algorithm;
+/**
+ * @author Emily Horgan 112340841 
+ * @since Feb 8, 2015, 12:56:25 PM
+ */
 
+import java.util.Arrays;
 import dbpackage.DatabaseClass;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 
 public class FindMeeting {
     private String stream;
     private String date; 
-    
-
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
-    private Connection connectionObject;
-    private Statement statementObject;
     
     public FindMeeting( ) {
         this.date = "";
         this.stream = "";
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
@@ -45,7 +37,6 @@ public class FindMeeting {
      */
      public boolean isLecturer( String userId ) {
            String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
-           database.Close( );
 
            if( dbResult.length == 0 || dbResult[0].equals( "0" )) {
                return false;
@@ -54,42 +45,45 @@ public class FindMeeting {
      }
 
      public String[] getGroupMembers( ) {
-         String[] userIds = database.SelectRow("SELECT user_id FROM users WHERE stream = '" + stream +"'");
-         return userIds;
+         groupMembers = database.SelectColumn( "SELECT user_id FROM users WHERE stream = '" + stream + "';" );
+         System.out.println( "Group Members: " + Arrays.toString( groupMembers ) );   
+         
+         return groupMembers;
      }
      
      public int[] getLectureTimes( ){
-         String[] members = getGroupMembers(  );
          String member = groupMembers[0];
          
-         int[] lectureTimes = database.SelectIntColumn("SELECT period FROM events JOIN has_events JOIN users ON events.event_id = has_events.event_id "
-                 + "AND users.user_id = has_events.user_id WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type = "
-                 + "'Lecture'"); 
-          
-        
+         int[] lectureTimes = database.SelectIntColumn( "SELECT period "
+                                                      + "FROM events JOIN has_events JOIN users "
+                                                      + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id "
+                                                      + "WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type = 'Lecture';" ); 
+         
+         System.out.println( "Lecture periods: " + Arrays.toString( lectureTimes ) );   
          return lectureTimes;
      }
      
-     public int[] getMembersEvents(String startDate, int memberNumber){
+     public int[] getMembersEvents( int memberNumber ){
          String member = groupMembers[memberNumber];
          
-         int[] otherEvents = database.SelectIntColumn("SELECT period FROM events JOIN has_events JOIN users ON events.event_id = has_events.event_id "
-                 + "AND users.user_id = has_events.user_id WHERE events.start_date = '" + startDate + "' AND users.user_id = '" + member + "' AND events.event_type != "
-                 + "'Lecture'"); 
-          
-        
+         int[] otherEvents = database.SelectIntColumn( "SELECT period "
+                                                     + "FROM events JOIN has_events JOIN users "
+                                                     + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id "
+                                                     + "WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type != 'Lecture';" ); 
+         
+         System.out.println( "Other periods: " + Arrays.toString( otherEvents ) );    
          return otherEvents;
      }
   
      public int getFreeSlot(  ){
-         String[] groupMembers = getGroupMembers(  );
+         groupMembers = getGroupMembers(  );
          int memberNumber = 0;
          int[] lectureTimes = getLectureTimes(  );
-         int[] eventTimes = getMembersEvents( date, memberNumber );
+         int[] eventTimes = getMembersEvents( memberNumber );
          int currentFreeTime = -1;
          
          while( memberNumber < groupMembers.length ){
-             for(int period = 0; period < 9 ; period++){
+             for(int period = 1; period < 11 ; period++){
                  for( int i = 0; i < lectureTimes.length; i++){
                      if(period == lectureTimes[i]){
                          memberNumber = 0;
@@ -123,55 +117,50 @@ public class FindMeeting {
      * @return form
      */
     public String findMeetingForm( String userId ) {
-        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n";
+        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
+                        + "<label for=\"eventType\">Event Type:</label>\n"
+                        + "<select name =\"eventType\" >\n +"
+                            + "<option value=\"1\" selected>Lecture</option>\n" 
+                            + "<option value=\"2\" selected>Meeting</option>\n" 
+                            + "<option value=\"3\" selected>Tutorial</option>\n" 
+                            + "<option value=\"4\" selected>Other</option>\n" 
+                        + "</select><br />";
 
-        form += "<label for=\"eventType\">Event Type:</label>\n"
-              + "<select name =\"eventType\" >\n +"
-                  + "<option value=\"1\" selected>Lecture</option>\n" 
-                  + "<option value=\"2\" selected>Meeting</option>\n" 
-                  + "<option value=\"3\" selected>Tutorial</option>\n" 
-                  + "<option value=\"4\" selected>Other</option>\n" 
-              + "</select><br />";
+              if( isLecturer( userId ) ) {
+                  form += "<label for='stream'>Stream:</label>\n"
+                        + "<select name=\"stream\" >\n" 
+                        + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
+                        + "  <option value=\"2\">Core Year 2</option>\n" 
+                        + "  <option value=\"3\">Core Year 3</option>\n" 
+                        + "  <option value=\"4\">Core Year 4</option>\n" 
+                        + "  <option value=\"5\">Web Year 2</option>\n" 
+                        + "  <option value=\"6\">Web Year 3</option>\n" 
+                        + "  <option value=\"7\">Web Year 4</option>\n" 
+                        + "  <option value=\"8\">Soft Entrep Year 2</option>\n" 
+                        + "  <option value=\"9\">Soft Entrep Year 3</option>\n" 
+                        + "  <option value=\"10\">Soft Entrep Year 4</option>\n" 
+                        + "  <option value=\"11\">Chinese Year 2</option>\n" 
+                        + "  <option value=\"12\">Chinese Year 3</option>\n" 
+                        + "  <option value=\"13\">Chinese Year 4</option>\n" 
+                        + "</select><br />"; 
+              }
+              else {
+                  //get the user id's of all of the students in the same stream as the student and
+                  //offer to set meeting with these students.
+                  //this.stream = database.
+              }
 
-         if( isLecturer( userId ) ) {
-             form += "<label for='stream'>Stream:</label>\n"
-                   + "<select name=\"stream\" >\n" 
-                   + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
-                   + "  <option value=\"2\">Core Year 2</option>\n" 
-                   + "  <option value=\"3\">Core Year 3</option>\n" 
-                   + "  <option value=\"4\">Core Year 4</option>\n" 
-                   + "  <option value=\"5\">Web Year 2</option>\n" 
-                   + "  <option value=\"6\">Web Year 3</option>\n" 
-                   + "  <option value=\"7\">Web Year 4</option>\n" 
-                   + "  <option value=\"8\">Soft Entrep Year 2</option>\n" 
-                   + "  <option value=\"9\">Soft Entrep Year 3</option>\n" 
-                   + "  <option value=\"10\">Soft Entrep Year 4</option>\n" 
-                   + "  <option value=\"11\">Chinese Year 2</option>\n" 
-                   + "  <option value=\"12\">Chinese Year 3</option>\n" 
-                   + "  <option value=\"13\">Chinese Year 4</option>\n" 
-                   + "</select><br />"; 
-         }
-         else {
-            //get the user id's of all of the students in the same stream as the student and
-            //offer to set meeting with these students.
-            //this.stream = database.
+                  form += "<label for=\"date\">Preferred Day:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
+                        + "<label for=\"recurrence\">Recurrence:</label>\n"
+                        + "<select name=\"recurrence\">\n" 
+                        + "  <option value=\"once\" selected>Single Meeting</option>" 
+                        + "  <option value=\"weekly\">Weekly</option>" 
+                        + "  <option value=\"montly\">Monthly</option>" 
+                        + "</select><br />"
 
-            
-
-         }
-
-        form += "<label for=\"date\">Preferred Day:</label>\n"
-              + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
-              + "<label for=\"recurrence\">Recurrence:</label>\n"
-              + "<select name=\"recurrence\">" 
-              + "  <option value=\"once\" selected>Single Meeting</option>" 
-              + "  <option value=\"weekly\">Weekly</option>" 
-              + "  <option value=\"montly\">Monthly</option>" 
-              + "</select><br />";
-
-
-        form += "<input type='submit' value='Search Availability' name='find_meet' /><br />\n";
-        form += "</form>\n";
+                        + "<input type='submit' value='Search Availability' name='find_meet' /><br />\n"
+                    + "</form>\n";
 
         return form;
     }
