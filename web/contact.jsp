@@ -22,23 +22,24 @@
           out.print( loginHeader.loginHeader() );
         %>
             
-            <jsp:useBean id="message" class="application.Contact" scope="request" />
-            <jsp:setProperty name="message" property="*" />
+            <jsp:useBean id="contact" class="application.Contact" scope="request" />
+            <jsp:setProperty name="contact" property="*" />
         <div class="login-card">
             <h1>Contact Us</h1>
             <%
+                
+                    out.print( contact.contactForm( ) );
 
-                if( request.getParameter( "submit" ) == null ) {
-                    out.print( message.addContactForm(  ) );
-                }
-                else {
-                    if( message.validateContactForm( ) ) {
-                        out.print( "<p>You have successfully sent your message, we shall be in contact shortly.</p>!" );
-                        out.print( "<p><a href='index.jsp'>Go to your Timetable!</a></p>" );
+
+                    if( contact.validateContactForm( ) ) {
+
+                        out.print( "<p>You message has been sent.</p>" );
+                        out.print( "<p><a href='timetable.jsp'>Go to your Timetable!</a></p>" );
+                                            out.print( contact.contactForm( ) );
+                    out.print( contact.errors( ) );
                     }
-                    out.print( message.addContactForm( ) );
-                    out.print( message.printErrors( ) );
-                }
+
+                
             %>
         </div>
         

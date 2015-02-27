@@ -13,7 +13,7 @@ public class Contact {
 /**
  * This class allows you to add a personal message to the database for another user within the system.
  **/
-public class AddMessage {
+public class Contact {
     private String email;
     private String subject;
     private String message;
@@ -22,7 +22,7 @@ public class AddMessage {
     /**
      * Constructor for the AddMessage class
      */
-    public AddMessage( ){
+    public contact( ){
         this.email = "";
         this.subject = "";
         this.message = "";
@@ -128,7 +128,7 @@ public class AddMessage {
      * @param userId (string)
      * @return the form (string)
      */
-    public String addContactForm( String userId ) {
+    public String contactForm( String userId ) {
         String form = "<form name=\"contact\" action=\"contact.jsp\" method=\"POST\">\n";
                
                form += "<label for='email'>Email:</label>\n";
