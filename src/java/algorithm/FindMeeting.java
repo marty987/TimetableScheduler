@@ -118,9 +118,14 @@ public class FindMeeting {
          int currentFreeTime = -1;
          int period = 1;
          while( memberNumber < groupMembers.length ){
+             System.out.println( "main loop" + memberNumber );
              outer_loop:
-             while(period < lectureTimes.length ){                 
+             while(period < lectureTimes.length ){   
+                 System.out.println( "period loop" + 1 );
+                 
                  for( int i = 0; i < lectureTimes.length; i++){
+                     System.out.println( "lecturetimes" + i );
+                     
                      if(Arrays.asList(lectureTimes).contains(period))
                      {
                          memberNumber = 0;
