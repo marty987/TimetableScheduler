@@ -1,3 +1,10 @@
+/*
+* Class that defines finding a free slot to make a meeting with using the timetables
+* of students registered in the system
+*@author Emily Horgan 112340841
+*@author Martin Bullman
+* 26/02/2015
+*/
 package algorithm;
 /**
  * @author Emily Horgan 112340841 
@@ -16,7 +23,11 @@ public class FindMeeting {
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
-    
+    private Connection connectionObject;
+    private Statement statementObject;
+    /**
+     * Constructor for the class.
+     */
     public FindMeeting( ) {
         this.date = "";
         this.stream = "";
@@ -25,6 +36,11 @@ public class FindMeeting {
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
+    /**
+     * Funtion to set up the servlet for Javascript. Allows the stream and date 
+     * to be taken from the form and used globally in the class
+     * @param request Form.
+     */
     public void setup( HttpServletRequest request ){
         stream = request.getParameter( "stream" );
         date = request.getParameter( "date" );
@@ -43,7 +59,11 @@ public class FindMeeting {
            } 
            return true;
      }
-
+     /**
+      * Function to get the group members of a certain stream. The stream is whatever 
+      * is chosen through the form which is taken as a global variable.
+      * @return An array of user id's of the students in the selected stream. (Strings)
+      */
      public String[] getGroupMembers( ) {
          groupMembers = database.SelectColumn( "SELECT user_id FROM users WHERE stream = '" + stream + "';" );
          System.out.println( "Group Members: " + Arrays.toString( groupMembers ) );   
@@ -51,6 +71,12 @@ public class FindMeeting {
          return groupMembers;
      }
      
+     /**
+      * Function to get the times of the lectures of a certain stream ie. the master timetable
+      * that is common to all students of the stream.
+      * @return array of the period slots which lectures occur in a given day. Day defined using the 
+      * global variable 'start_date' chosen through the form. (Integers)
+      */
      public int[] getLectureTimes( ){
          String member = groupMembers[0];
          
@@ -62,8 +88,14 @@ public class FindMeeting {
          System.out.println( "Lecture periods: " + Arrays.toString( lectureTimes ) );   
          return lectureTimes;
      }
-     
-     public int[] getMembersEvents( int memberNumber ){
+     /**
+      * Function used to get a particular member of the stream's extra events, disregarding lectures.
+      * @param startDate
+      * @param memberNumber - user id.
+      * @return an array of period slots that correspond to times of events that the member has
+      * on the given day. (Integers)
+      */
+     public int[] getMembersEvents(String startDate, int memberNumber){
          String member = groupMembers[memberNumber];
          
          int[] otherEvents = database.SelectIntColumn( "SELECT period "
@@ -74,7 +106,12 @@ public class FindMeeting {
          System.out.println( "Other periods: " + Arrays.toString( otherEvents ) );    
          return otherEvents;
      }
-  
+     /**
+      * Function designed to get a free slot that could be used for a meeting based on the timetables
+      * of the students in the stream picked by the user.
+      * @return period during the start_date day that is free for all members of the stream.
+      * represented by an integer.
+      */
      public int getFreeSlot(  ){
          groupMembers = getGroupMembers(  );
          int memberNumber = 0;

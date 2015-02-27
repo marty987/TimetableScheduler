@@ -1,5 +1,6 @@
 package application;
 /**
+ * Class designed to add a meeting to your own personal calender.
  * @author Martin Bullman 112735341
  * @since Feb 8, 2015, 12:56:25 PM
  */
@@ -19,7 +20,9 @@ public class AddMeeting {
     private String description;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
-    
+    /**
+     * Constructor for the class
+     */
     public AddMeeting( ){
         this.eventName = "";
         this.eventType = "";
@@ -36,87 +39,153 @@ public class AddMeeting {
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
-    
+    /**
+     * Getter method for the variable eventName ie. the name of the event (CS3500, Group Meeting)
+     * @return variable eventName (String)
+     */
     public String getEventName( ){
         return eventName;
     }
-    
+    /**
+     * Setter method for the variable eventName ie. the name of the event (CS3500, Group Meeting)
+     * @param eventName (String)
+     */
     public void setEventName( final String eventName ){
         this.eventName = eventName;
     }
-    
+    /**
+     * Getter method for the variable eventType ie the type of event being created (Meeting, lecture)
+     * @return variable eventType (String)
+     */
     public String getEventType( ){
         return eventType;
     }
-    
+    /**
+     * Setter method for the variable eventType ie the type of event being created (Meeting, lecture)
+     * @param eventType (String)
+     */
     public void setEventType( final String eventType ){
         this.eventType = eventType;
     }
-    
+    /**
+     * Getter method for the variable period ie the integer representation of a timeslot during a college
+     * day which you can schedule a meeting during.
+     * @return variable period (integer)
+     */
     public String getPeriod( ){
         return period;
     }
-    
+    /**
+     * Setter method for the variable period ie the integer representation of a timeslot during a college
+     * day which you can schedule a meeting during.
+     * @param period (integer)
+     */
     public void setPeriod( final String period ){
         this.period = period;
     }
-    
+    /**
+     * Getter method for the start date of the event.
+     * @return variable startDate (string)
+     */
     public String getStartDate( ) {
         return startDate;
     } 
-    
+    /**
+     * Setter method for the start date of the event.
+     * @param startDate (integer)
+     */
     public void setStartDate( final String startDate ) {
         this.startDate = startDate;
     }
-            
+    /**
+     * Getter method for the end date of the event.
+     * @return variable endDate (string)
+     */
     public String getEndDate( ) {
         return endDate;
     } 
-    
+    /**
+     * Setter method for the end date of the event
+     * @param endDate (string)
+     */
     public void setEndDate( final String endDate ) {
         this.endDate = endDate;
     }
-    
+    /**
+     * Getter method for the state of the event (once off or recurring)
+     * @return variable recurrence (String)
+     */
     public String getRecurrence( ) {
         return recurrence;
     } 
-    
+    /**
+     * Setter method for the state of the event (once off or recurring)
+     * @param recurrence (string)
+     */
     public void setRecurrence( final String recurrence ) {
         this.recurrence = recurrence;
     }
-    
+    /**
+     * Getter method for the module code of a module.
+     * @return variable moduleCode(string)
+     */
     public String getModuleCode( ) {
         return moduleCode;
     } 
-    
+    /**
+     * Setter method for the module code of a module.
+     * @param moduleCode (string)
+     */
     public void setModuleCode( final String moduleCode ) {
         this.moduleCode = moduleCode;
     }
-    
+    /**
+     * Getter method for the location of the event.
+     * @return variable location (string)
+     */
     public String getLocation( ) {
         return location;
     } 
-    
+    /**
+     * Setter method for the location of the event.
+     * @param location (string)
+     */
     public void setLocation( final String location ) {
         this.location = location;
     }
-    
+    /**
+     * Getter method for the description of the event.
+     * @return variable description (string)
+     */
     public String getDescription( ) {
         return description;
     } 
-    
+    /**
+     * Setter method for the description of the event.
+     * @param description (string)
+     */
     public void setDescription( final String description ) {
         this.description = description;
     }   
-    
+    /**
+     * Setter method for the stream that a student is enrolled in. (ie. Core stream, web stream)
+     * @return variable stream (string)
+     */
     public String getStream() {
         return stream;
     }
-    
+    /**
+     * Setter method for the stream that a student is enrolled in. (ie Core stream, web stream)
+     * @param stream (string)
+     */
     public void setStream( final String stream) {
         this.stream = stream;
     }
-    
+    /**
+     * Function to ensure that the user has filled out the form correctly when adding a meeting.
+     * @param userId Your student id.
+     * @return true if form is filled out correctly and false otherwise.
+     */
     public boolean validateMeetingForm( final String userId ) {
         boolean isValid = true;
 
@@ -168,7 +237,11 @@ public class AddMeeting {
         
         return isValid;
     }
-    
+     /**
+     * function to collect any error messages that are created throughout the creation and implementation
+     * of the addFriend class.
+     * @return a string of errors.
+     */
     public String errors( ) {
         String errorList;
         
@@ -180,7 +253,10 @@ public class AddMeeting {
         
         return errorList;
     }
-    
+    /**
+     * Function to insert a new meeting into the database and into a student's timetable.
+     * @param userId the student's user ID.
+     */
     public void insertNewMeeting( String userId ) {
         database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
@@ -194,7 +270,11 @@ public class AddMeeting {
                          "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
         //database.Close( );
     }
-    
+    /**
+     * Function to check is logged in user is a lecturer/administrative staff member or student.
+     * @param userId
+     * @return true if lecturer or administrative staff member and false if otherwise.
+     */
     public boolean isLecturer( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
         database.Close( );
@@ -204,7 +284,11 @@ public class AddMeeting {
         } 
         return true;
     }
-
+    /**
+     * Form used to add a meeting.
+     * @param userId
+     * @return form (string)
+     */
     public String addMeetingForm( String userId ) {
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                

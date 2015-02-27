@@ -1,5 +1,7 @@
 package application;
 /**
+ * This class defines a user within the scheduling system's constraints. Also defines
+ * functions to register the student with the system.
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
@@ -23,7 +25,9 @@ public class User {
     private String phoneNo;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
-    
+    /**
+     * constructor for the class
+     */
     public User( ) {
         userId = "";
         stream = "";
@@ -40,80 +44,141 @@ public class User {
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
-    
+    /**
+     * Getter method for the user's user id
+     * @return the variable userID (string)
+     */
     public String getUserId( ) {
         return userId;
     }
-    
+    /**
+     * Setter method for the user's user id
+     * @param userId (string)
+     */
     public void setUserId( final String userId ) {
         System.out.println("test test");
         this.userId = userId;
     }
-    
+    /**
+     * Getter method for the stream which the user is enrolled in. ie. Core stream, 
+     * Web stream, Year 1 Computer Science
+     * @return the variable stream (string)
+     */
     public String getStream( ) {
         return stream;
     }
-    
+     /**
+     * Setter method for the stream which the user is enrolled in. ie. Core stream, 
+     * Web stream, Year 1 Computer Science
+     * @param stream (string)
+     **/
     public void setStream( final String stream ) {
         this.stream = stream;
     }
-    
+    /**
+     * Getter method for the user's first name
+     * @return the variable firstName (string)
+     */
     public String getFirstName( ) {
         return firstName;
     }
-    
+    /**
+     * setter method for the user's first name
+     * @param firstName (string)
+     */
     public void setFirstName( final String firstName ) {
         this.firstName = firstName;
     }
-    
+    /**
+     * Getter method for the user's middle name
+     * @return the variable middleName (string)
+     */
     public String getMiddleName( ) {
         return middleName;
     }
-    
+    /**
+     * Setter method for the user's middle name
+     * @param middleName (string)
+     */
     public void setMiddleName( final String middleName ) {
         this.middleName = middleName;
     }
-    
+    /**
+     * Getter method for the user's last name
+     * @return the variable lastName (string)
+     */
     public String getLastName( ) {
         return lastName;
     }
-    
+    /**
+     * Setter method for the user's last name
+     * @param lastName (string)
+     **/
     public void setLastName( final String lastName ) {
         this.lastName = lastName;
     }
-    
+    /**
+     * Getter method for the user's email address
+     * @return the variable email (string)
+     */
     public String getEmail( ) {
         return email;
     }
-    
+    /**
+     * Setter method for the user's email address
+     * @param email (string)
+     */
     public void setEmail( final String email ) {
         this.email = email;
     }
-    
+    /**
+     * Getter method for the user's password1 (the original password.)
+     * @return the variable password1 (string)
+     */
     public String getPassword1( ) {
         return password1;
     }
-    
+    /**
+     * Setter method for the user's password1 (the original password)
+     * @param password1 (string)
+    */
     public void setPassword1( final String password1 ) {
         this.password1 = password1;
     }
-    
+    /**
+     * Getter method for the user's password2 (the password used to confirm the 
+     * user's password choice)
+     * @return the variable password2 (string)
+     */
     public String getPassword2( ) {
         return password2;
     }
-    
+    /**
+     * Setter method for the user's password2 (the password used to confirm the 
+     * user's password choice)
+     * @param password2 (string)
+     */
     public void setPassword2( final String password2 ) {
         this.password2 = password2;
     }
-
+    /**
+     * Getter method for the user's phone number.
+     * @return the variable phoneNo (string)
+     */
     public String getPhoneNo( ) {
         return phoneNo;
     }
-    
+    /**
+     * Setter method for the user's phone number.
+     * @param phoneNo (string)
+     */
     public void setPhoneNo( final String phoneNo ) {
         this.phoneNo = phoneNo;
     }
-    
+  /**
+     * Ensures the form is filled out correctly by the user.
+     * @return true if form is filled out correctly and false if otherwise.
+     */
     public boolean validateRegForm( ) {
         boolean isValid = true;
         
@@ -181,7 +246,11 @@ public class User {
         
         return isValid;
     }
-    
+    /**
+     * Function to see if the user attempting to register already exists in the database.
+     * @param userID
+     * @return true if the user does already exist in the database and false otherwise.
+     */
     public boolean doesUserExist(String userID) {
         String[] dbResult = database.SelectRow( "SELECT user_id FROM users WHERE user_id = '" + userID + "';" );
         
@@ -190,7 +259,9 @@ public class User {
         }
         return false;
     }
-    
+    /**
+     * Function to register the new user into the database.
+     */
     public void registerNewUser(  ) {
         database.Insert( "INSERT INTO users( user_id, stream, first_name, middle_name, last_name, email, password, phone_number, is_admin, date_joined )" +
                          "VALUES( '" + userId + "', '" + stream + "', '" + firstName + "', '" + middleName + "', '" + lastName + "', '" + email +
@@ -200,7 +271,11 @@ public class User {
         
         database.Close();
     }
-    
+    /**
+     * Function to print any error messages that may have been collected throughout the 
+     * registration process
+     * @return errorList (string)
+     */
     public String printErrors( ) {
         String errorList;
         
@@ -212,7 +287,11 @@ public class User {
         
         return errorList;
     }
-    
+    /**
+     * Function to check if a string can be parsed to an integer.
+     * @param value
+     * @return true if the string is a string representation of an integer and false if otherwise
+     */
     public boolean isInteger( String value ) {
         try { 
             Integer.parseInt( value ); 
@@ -222,7 +301,10 @@ public class User {
         }
         return true;
     }
-    
+    /**
+     * Function to get today's date.
+     * @return the variable folderName (string) 
+     */
     public String getCurrentDate( ) {
         Date today = Calendar.getInstance( ).getTime( );
         SimpleDateFormat formatter = new SimpleDateFormat( "yyyy-MM-dd" );
@@ -230,7 +312,13 @@ public class User {
 
         return folderName;
     }
-    
+    /**
+     * Function that allows the user to reset their password.
+     * @param password1
+     * @param password2
+     * @param userId
+     * @return true if the passwords are the same and thus, the password is reset. False if otherwise
+     */
     public boolean resetPassword( final String password1, final String password2, final String userId ) {
         String[] user = getUser( userId );
          
@@ -243,14 +331,21 @@ public class User {
          
         return true;
     } 
-     
+    /**
+     * Get the user's information from the database using their login ID.
+     * @param userId
+     * @return the array dbResult which contains the user's information
+     */
     public String[] getUser( String userId ) {
         String[] dbResult = database.SelectRow( "SELECT * FROM users WHERE user_id = '" + userId + "';" );
         
         database.Close();
         return dbResult;
     }
-     
+     /**
+      * Form used to register the user to the scheduling system.
+      * @return the variable form (string)
+      */
      public String registrationForm( ) {
         String form = "<form name='registration_form' action='register.jsp' method='POST'>\n";
         form += "<label for='userId'>Id Number:</label>\n";

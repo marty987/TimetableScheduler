@@ -1,5 +1,7 @@
 package application;
 /**
+ * This class defines how the timetable for the scheduling system can be displayed
+ * and implemented.
  * @author Jack Desmond, James Delaney, Caroline Corcoran
  * @since Feb 13, 2015, 12:56:25 PM
  */
@@ -29,7 +31,9 @@ public class Timetable {
     private String moduleCode;
     private String location;
     private String description;
-    
+    /**
+     * Constructor for the timetable class.
+     */
     public Timetable() {
         startOfWeek = getMondayOfWeek();
         endOfWeek = getSundayOfWeek();
@@ -52,7 +56,11 @@ public class Timetable {
             {"<th scope=\"row\">5PM - 6PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"}
         };
     }
-    
+    /**
+     * Function that contacts the database and gets the relevant events for the user that is 
+     * logged in.
+     * @param userId 
+     */
     private void fetchEventsFromDB( String userId ) {
         String[] currentEvent = new String[11];
         ParsePosition pos = new ParsePosition(0);
@@ -97,7 +105,9 @@ public class Timetable {
     
         database.Close();
     }
-    
+    /**
+     * Function to add events to the timetable.
+     */
     private void addEventsToTimetable( ) {
         Event myEvent;
         Calendar mondayDateAsCal = Calendar.getInstance();
@@ -147,7 +157,10 @@ public class Timetable {
             }
         }
     }
-    
+    /**
+     * Function to print the timetable.
+     * @return the variable table (string)
+     */
     public String printTimetable( ) {
         
         fetchEventsFromDB( "112735341" );
@@ -172,7 +185,10 @@ public class Timetable {
                
         return table;
     }
-    
+    /**
+     * Function to get the first day of the week (Monday) for display purposes.
+     * @return the variable date (Date instance)
+     */
     private Date getMondayOfWeek( ){
         Calendar temp = Calendar.getInstance();
         int currentDayOfWeek = temp.get(Calendar.DAY_OF_WEEK);
@@ -180,7 +196,10 @@ public class Timetable {
         
         return temp.getTime();
     }
-    
+    /**
+     * Function to get the last day of the week (Sunday) for display purposes.
+     * @return the variable date (Date instance)
+     */
     private Date getSundayOfWeek( ){
         Calendar tempCal = Calendar.getInstance();
         int currentDayOfWeek = tempCal.get(Calendar.DAY_OF_WEEK);
