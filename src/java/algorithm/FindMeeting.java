@@ -23,8 +23,6 @@ public class FindMeeting {
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
-    private Connection connectionObject;
-    private Statement statementObject;
     /**
      * Constructor for the class.
      */

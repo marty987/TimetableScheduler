@@ -161,9 +161,9 @@ public class Timetable {
      * Function to print the timetable.
      * @return the variable table (string)
      */
-    public String printTimetable( ) {
+    public String printTimetable( String userId ) {
         
-        fetchEventsFromDB( "112735341" );
+        fetchEventsFromDB( userId );
         addEventsToTimetable( );
         
         String table = "<table class=\"emp-sales\">\n"
