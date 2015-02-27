@@ -8,8 +8,6 @@ import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 
-public class Contact {
-
 /**
  * This class allows you to add a personal message to the database for another user within the system.
  **/
@@ -145,4 +143,4 @@ public class Contact {
         return form;
     }
   }
-}  
+  

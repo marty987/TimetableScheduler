@@ -19,7 +19,7 @@ body {
 }
 
 
-.login-card {
+.login-card{
   padding: 40px;
   width: 274px;
   background-color: #F7F7F7;
@@ -31,20 +31,39 @@ body {
   overflow: hidden;
 }
 
-.login-card h1 {
+.card{
+  width: 94%;
+  margin-left:1%;
+  background-color: #F7F7F7;
+  border-radius: 2px;
+  -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+  overflow: hidden;
+}
+
+.login-card h1{
   font-weight: 100;
   text-align: center;
   font-size: 2em;
 }
 
-.login-card input[type=submit] {
+.login-card input[type=submit]{
   width: 100%;
   display: block;
   margin-bottom: 10px;
   position: relative;
 }
 
-.login-card input[type=text], input[type=password] {
+.card input[type=submit]{
+  width: 15%;
+  display: block;
+  margin-bottom: 10px;
+  position: relative;
+}
+
+
+.login-card input[type=text], input[type=password]{
   height: 44px;
   font-size: 16px;
   width: 100%;
@@ -59,7 +78,22 @@ body {
   -moz-box-sizing: border-box;
 }
 
-.login-card input[type=text]:hover, input[type=password]:hover {
+.card input[type=text]{
+  height: 44px;
+  font-size: 16px;
+  width: 60%;
+  margin-bottom: 10px;
+  -webkit-appearance: none;
+  background: #fff;
+  border: 1px solid #d9d9d9;
+  border-top: 1px solid #c0c0c0;
+  /* border-radius: 2px; */
+  padding: 0 8px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+}
+
+.login-card input[type=text]:hover, input[type=password]:hover, .add-meeting input[type=text]:hover {
   border: 1px solid #b9b9b9;
   border-top: 1px solid #a0a0a0;
   -moz-box-shadow: inset 0 1px 2px rgba(0,0,0,0.1);
@@ -78,6 +112,7 @@ body {
 /* -webkit-user-select: none;
   user-select: none; */
 }
+
 
 .login-submit {
   /* border: 1px solid #3079ed; */
@@ -156,6 +191,9 @@ footer li:hover{
 @media screen and (min-width: 768px)
 {
 
+.card{
+  padding: 30px;
+}    
  
  #welcomeH
 {
@@ -289,6 +327,9 @@ nav ul li a:hover{
 @media screen and (max-width: 768px)
 {
 
+.card{  
+   padding:10px;
+}
 
     
 #welcomeH{

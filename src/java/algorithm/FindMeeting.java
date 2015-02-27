@@ -23,8 +23,7 @@ public class FindMeeting {
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
-    private Connection connectionObject;
-    private Statement statementObject;
+
     /**
      * Constructor for the class.
      */
@@ -154,7 +153,7 @@ public class FindMeeting {
      * @return form
      */
     public String findMeetingForm( String userId ) {
-        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
+        String form = "<form name=\"find_meeting\" id = 'dropdown' action=\"timetable.jsp\" method=\"POST\">\n" 
                         + "<label for=\"eventType\">Event Type:</label>\n"
                         + "<select name =\"eventType\" >\n +"
                             + "<option value=\"1\" selected>Lecture</option>\n" 
@@ -164,7 +163,7 @@ public class FindMeeting {
                         + "</select><br />";
 
               if( isLecturer( userId ) ) {
-                  form += "<label for='stream'>Stream:</label>\n"
+                  form += "<label id = 'dropdown' for='stream'>Stream:</label>\n"
                         + "<select name=\"stream\" >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
                         + "  <option value=\"2\">Core Year 2</option>\n" 
@@ -187,7 +186,7 @@ public class FindMeeting {
                   //this.stream = database.
               }
 
-                  form += "<label for=\"date\">Preferred Day:</label>\n"
+                  form += "<label id = 'dropdown' for=\"date\">Preferred Day:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
                         + "<label for=\"recurrence\">Recurrence:</label>\n"
                         + "<select name=\"recurrence\">\n" 
