@@ -94,10 +94,9 @@ public class FindMeeting {
       * on the given day. (Integers)
       */
      public int[] getMembersEvents( int memberNumber ){
-         String member = groupMembers[memberNumber];
+        String member = groupMembers[memberNumber];
          
-         int[] otherEvents = new int[10];
-         otherEvents = database.SelectIntColumn( "SELECT period "
+        int[] otherEvents = database.SelectIntColumn( "SELECT period "
                                                      + "FROM events JOIN has_events JOIN users "
                                                      + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id "
                                                      + "WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type != 'Lecture';" ); 
@@ -105,6 +104,29 @@ public class FindMeeting {
          System.out.println( "Other periods: " + Arrays.toString( otherEvents ) );    
          return otherEvents;
      }
+     
+     public boolean intIsInArray( int period, int[] array ){
+         for( int i = 0; i < array.length; i++  ){
+             if( period == array[i] ){
+                 return true;
+             }
+         }
+         
+         return false;
+     }
+     
+     public boolean hasUserThisFreePeriod( String member, int currentFreePeriod ) {
+         int[] freePeriod = database.SelectIntColumn( "SELECT events.period "
+                                                 + "FROM events JOIN has_events JOIN users "
+                                                 + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id " 
+                                                 + "WHERE users.user_id = '" + member + "' AND events.period = '" + currentFreePeriod + "';");
+         
+         if( freePeriod.length == 0 ){
+             return false;
+         }
+         return true;
+     }
+     
      /**
       * Function designed to get a free slot that could be used for a meeting based on the timetables
       * of the students in the stream picked by the user.
@@ -112,53 +134,58 @@ public class FindMeeting {
       * represented by an integer.
       */
      public int getFreeSlot(  ){
-         groupMembers = getGroupMembers();
          int memberNumber = 0;
+         int currentFreePeriod = 0;
+         boolean currentUserHasFreePeriod = true;
+         
+         groupMembers = getGroupMembers( );
          int[] lectureTimes = getLectureTimes(  );
-         int[] eventTimes = getMembersEvents( memberNumber );
-         int currentFreeTime = -1;
-         int period = 1;
+         int[] eventTimes = getMembersEvents( memberNumber );  
                   
-         while( memberNumber < groupMembers.length ){
-             System.out.println( "main loop " + memberNumber );
-             outer_loop:
-             while(period < 11 ){   
-                 System.out.println( "period loop " + period );
-                 
-                 for( int i = 0; i < lectureTimes.length; i++){
-                     System.out.println( "lecturetimes " + i );
-                     if(Arrays.asList(lectureTimes).contains(period))
-                     {
-                         memberNumber = 0;
-                         System.out.println(period + " " + i);
-                         period++;
-                         break;
-                     }
-                     else
-                     {
-                            for( int j = 0; j < eventTimes.length; j++){
-                                if(!Arrays.asList(eventTimes).contains(period)){
-                                    if( memberNumber == groupMembers.length - 1)
-                                    {
-                                           currentFreeTime = period;
-                                           return currentFreeTime;
-                                    }
-                                    else
-                                    {
-                                           memberNumber++;
-                                           period++;
-                                           break outer_loop;
-                                    }                                    
-                                }
-                            }
-                     }
-                 }
+         while( memberNumber < groupMembers.length ) {
+             System.out.println( "Member: " + memberNumber );
+            
+             if( memberNumber >= 1 && currentFreePeriod >= 1 )
+             {
+                 System.out.println( "checking next user also has this free period");
+                 currentUserHasFreePeriod = hasUserThisFreePeriod( groupMembers[memberNumber], currentFreePeriod );
              }
              
+             if( currentUserHasFreePeriod ) {
+                 for( int period = 1; period < 11; period++ ){   
+                     System.out.println( "period: " + period + " - is already taken: " + intIsInArray( period, lectureTimes ));
+
+                     if( intIsInArray( period, lectureTimes ) ) {
+                        //memberNumber = 0;
+                     }
+                     else {
+                        System.out.println( "Current member free period " + period );
+
+                        if( ! intIsInArray( period, eventTimes ) ) {
+                            if( memberNumber == groupMembers.length - 1 ) {
+                                System.out.println( "Found free period for Group: " + currentFreePeriod );
+                                return currentFreePeriod = period;
+                            }
+                            else {
+                                System.out.println( "Moving on to next group member");
+                                currentFreePeriod = period;
+                                memberNumber += 1 ;
+                                period = 11;    
+                            }                                    
+                        }
+
+                     }
+
+                 }
+             }
+             else{
+                 System.out.println("This member also has the same free time slot: " + memberNumber );
+                 memberNumber++;
+             }
          }
-         return currentFreeTime;
-         
+         return currentFreePeriod;
      }
+     
     /**
      * Form used to get the information of the type of meeting to be set and the preferred day to meet.
      * If the form user is a lecturer, they can make a meeting with a full class. However, if they are 
