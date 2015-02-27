@@ -42,13 +42,14 @@
                 response.sendRedirect( "index.jsp" );
             }
             else {
+                String username = (String) session.getAttribute( "username" );
                 String fname = (String) session.getAttribute( "firstName" );
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
                 Timetable timetable = new Timetable( );
                 out.print( "<div class='divid'>" );
-                out.print( timetable.printTimetable( ) );      
+                out.print( timetable.printTimetable( username ) );      
                 out.print( "</div>" );
             }
         %>  
