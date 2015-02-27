@@ -23,8 +23,6 @@ public class FindMeeting {
     private String[] groupMembers;
     private final ArrayList<String> errors;
     private final DatabaseClass database;
-    private Connection connectionObject;
-    private Statement statementObject;
     /**
      * Constructor for the class.
      */
@@ -95,7 +93,7 @@ public class FindMeeting {
       * @return an array of period slots that correspond to times of events that the member has
       * on the given day. (Integers)
       */
-     public int[] getMembersEvents(String startDate, int memberNumber){
+     public int[] getMembersEvents( int memberNumber ){
          String member = groupMembers[memberNumber];
          
          int[] otherEvents = database.SelectIntColumn( "SELECT period "
@@ -113,36 +111,44 @@ public class FindMeeting {
       * represented by an integer.
       */
      public int getFreeSlot(  ){
-         groupMembers = getGroupMembers(  );
+         groupMembers = getGroupMembers();
          int memberNumber = 0;
          int[] lectureTimes = getLectureTimes(  );
          int[] eventTimes = getMembersEvents( memberNumber );
          int currentFreeTime = -1;
-         
+         int period = 1;
          while( memberNumber < groupMembers.length ){
-             for(int period = 1; period < 11 ; period++){
+             outer_loop:
+             while(period < lectureTimes.length ){                 
                  for( int i = 0; i < lectureTimes.length; i++){
-                     if(period == lectureTimes[i]){
+                     if(Arrays.asList(lectureTimes).contains(period))
+                     {
                          memberNumber = 0;
+                         System.out.println(period + " " + i);
+                         period++;
                          break;
                      }
-                     else{
+                     else
+                     {
                             for( int j = 0; j < eventTimes.length; j++){
-                                if(period != eventTimes[j]){
-                                    if( memberNumber == groupMembers.length - 1){
+                                if(!Arrays.asList(eventTimes).contains(period)){
+                                    if( memberNumber == groupMembers.length - 1)
+                                    {
                                            currentFreeTime = period;
                                            return currentFreeTime;
-                                    }else{
+                                    }
+                                    else
+                                    {
                                            memberNumber++;
+                                           period++;
+                                           break outer_loop;
                                     }                                    
-                                    break;
                                 }
                             }
-                        }
-                     break;  
-                  }
-               break;                
+                     }
+                 }
              }
+             
          }
          return currentFreeTime;
          
