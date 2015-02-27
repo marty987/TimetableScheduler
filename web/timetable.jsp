@@ -64,9 +64,8 @@
                 out.print( "<div class='card'>" );   
                 out.print( "<div class='time'>" );
                 Timetable timetable = new Timetable( );
-                out.print( "</div>" );
-              
-                out.print( timetable.printTimetable( username ) ); 
+                out.print( "<div class='divid'>" );
+                out.print( timetable.printTimetable( username ) );      
                 out.print( "</div>" );
             }
         %>  
