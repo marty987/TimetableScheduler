@@ -96,7 +96,8 @@ public class FindMeeting {
      public int[] getMembersEvents( int memberNumber ){
          String member = groupMembers[memberNumber];
          
-         int[] otherEvents = database.SelectIntColumn( "SELECT period "
+         int[] otherEvents = new int[10];
+         otherEvents = database.SelectIntColumn( "SELECT period "
                                                      + "FROM events JOIN has_events JOIN users "
                                                      + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id "
                                                      + "WHERE events.start_date = '" + date + "' AND users.user_id = '" + member + "' AND events.event_type != 'Lecture';" ); 
@@ -117,16 +118,15 @@ public class FindMeeting {
          int[] eventTimes = getMembersEvents( memberNumber );
          int currentFreeTime = -1;
          int period = 1;
-         
+                  
          while( memberNumber < groupMembers.length ){
-             System.out.println( "main loop" + memberNumber );
+             System.out.println( "main loop " + memberNumber );
              outer_loop:
-             while(period < lectureTimes.length ){   
-                 System.out.println( "period loop" + period );
+             while(period < 11 ){   
+                 System.out.println( "period loop " + period );
                  
                  for( int i = 0; i < lectureTimes.length; i++){
-                     System.out.println( "lecturetimes" + i );
-                     
+                     System.out.println( "lecturetimes " + i );
                      if(Arrays.asList(lectureTimes).contains(period))
                      {
                          memberNumber = 0;
