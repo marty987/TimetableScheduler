@@ -9,6 +9,8 @@
 <%@ page import="algorithm.FindMeeting;" %>
 <%@ page import="application.Timetable;" %>
 <%@ page import="guipackage.GUI;"%>
+<%@ page import="java.util.ArrayList;"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -45,27 +47,31 @@
                 out.print(gui.header(true, fname, lname));
                 
                 out.print( "<div id='sidebar'>" );
-                   
-                
-                
+                 
                 FindMeeting meeting = new FindMeeting( );
                 
                 if( request.getParameter( "find_meeting" ) == null ){
+                    
                     out.print( meeting.findMeetingForm( ) );
                 }
                 else {
-                    meeting.processFormData( request );
-                    int freeMeetingPeriod = meeting.getFreeSlot( );
-                    
-                    if( freeMeetingPeriod == 0  ){
-                        out.print( "<p>No time available on this day, Please try another day!</p>" );
+                    if( meeting.processFormData( request ) ) {
+                        ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( );
+
+                        if( freeMeetingPeriods.isEmpty( ) ){
+                            out.print( "<p>No free time for group available on this day, Please try another day!</p>" );
+                        }
+                        else{
+                            out.print( freeMeetingPeriods );
+                            out.print( meeting.pickAvailablePeriodFrom( ) );
+                            //response.sendRedirect( "add_meeting.jsp" );
+                        }
                     }
-                    else{
-                        out.print( freeMeetingPeriod );
-                        
-                        //response.sendRedirect( "add_meeting.jsp" );
+                    else {
+                        out.print( meeting.findMeetingForm( ) );
+                        out.print( meeting.errors( ) );
                     }
-                 }
+                }
                 
                 out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
                 out.print( "</div>");

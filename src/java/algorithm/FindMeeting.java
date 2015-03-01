@@ -11,9 +11,13 @@ public class FindMeeting {
     private int period;
     private String date; 
     private String stream;
+    private String eventType;
+    private String recurrence;
     private String[] groupMembers;
-    private final ArrayList<String> errors;
     private final DatabaseClass database;
+    private final ArrayList<String> errors;
+    private ArrayList<Integer> currentFreePeriods;
+    private ArrayList<Integer> busyPeriods;
 
     /**
      * Constructor for the class.
@@ -22,33 +26,13 @@ public class FindMeeting {
         this.period = 0;
         this.date = "";
         this.stream = "";
+        this.eventType = "";
+        this.recurrence = "";
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
+        this.busyPeriods = new ArrayList<>( );
+        this.currentFreePeriods = new ArrayList<>( );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-    }
-    
-    /**
-     * Returns the stream in which the user is currently looking for a free time slot.
-     * @param
-     */
-    public String getStream( ) {
-        return stream;
-    }
-    
-    /**
-     * Returns the date in which the user is currently looking for a free time slot.
-     * @return The date user entered into the search free slot form 
-     */
-    public String getDate( ) {
-        return date;
-    }
-    
-    /**
-     * Returns the current free period after the search free slot algorithm has been run.
-     * @retutn The free period of the day the user specified.
-     */
-    public int getPeriod( ) {
-        return period;
     }
     
     /**
@@ -56,9 +40,37 @@ public class FindMeeting {
      * to be taken from the form and used globally in the class
      * @param request Form.
      */
-    public void processFormData( HttpServletRequest request ) {
+    public boolean processFormData( HttpServletRequest request ) {
+        boolean isValid = true;
+        
+        eventType = request.getParameter( "eventType" );
         stream = request.getParameter( "stream" );
         date = request.getParameter( "date" );
+        recurrence = request.getParameter( "recurrence" );
+        
+        if( date.equals( "" ) ) {
+            isValid = false;
+            errors.add( "Date is required!" );
+        }
+        
+        return isValid;
+    }
+    
+    /**
+     * function to collect any error messages that are created throughout the creation and implementation
+     * of the addFriend class.
+     * @return a string of errors.
+     */
+    public String errors( ) {
+        String errorList;
+        
+        errorList = "<ul>";
+            for( String error: errors ) {
+                errorList += "<li>" + error + "</li>";
+            }
+        errorList += "</ul>";
+        
+        return errorList;
     }
 
     /**
@@ -68,6 +80,10 @@ public class FindMeeting {
      */
     public String[] getGroupMembers( ) {
         groupMembers = database.SelectColumn( "SELECT user_id FROM users WHERE stream = '" + stream + "';" );
+        if( groupMembers.length == 0 ) {
+            groupMembers = new String[]{ "000000000" };
+        }  
+        
         System.out.println( "Group Members: " + Arrays.toString( groupMembers ) );   
          
         return groupMembers;
@@ -79,9 +95,9 @@ public class FindMeeting {
      * @return array of the period slots which lectures occur in a given day. Day defined using the 
      * global variable 'start_date' chosen through the form. (Integers)
      */
-    public int[] getLectureTimes( ){
+    public int[] getLectureTimes(  ){ 
         String member = groupMembers[0];
-         
+        
         int[] lectureTimes = database.SelectIntColumn( "SELECT period "
                                                      + "FROM events JOIN has_events JOIN users "
                                                      + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id "
@@ -119,23 +135,14 @@ public class FindMeeting {
     public boolean intIsInArray( int period, int[] array ) {
         for( int i = 0; i < array.length; i++ ) {
             if( period == array[i] ) {
+                if( ! busyPeriods.contains( period ) ) {
+                    busyPeriods.add( period );
+                }
                 return true;
             }
         }
          
         return false;
-    }
-     
-    public boolean hasUserThisFreePeriod( String member, int currentFreePeriod ) {
-        int[] freePeriod = database.SelectIntColumn( "SELECT events.period "
-                                                   + "FROM events JOIN has_events JOIN users "
-                                                   + "ON events.event_id = has_events.event_id AND users.user_id = has_events.user_id " 
-                                                   + "WHERE users.user_id = '" + member + "' AND events.period = '" + currentFreePeriod + "';" );
-         
-        if( freePeriod.length == 0 ){
-            return false;
-        }
-        return true;
     }
      
     /**
@@ -144,55 +151,61 @@ public class FindMeeting {
      * @return period during the start_date day that is free for all members of the stream.
      * represented by an integer.
      */
-    public int getFreeSlot(  ) {
-        int memberNumber = 0;
-        int currentFreePeriod = 0;
-        boolean currentUserHasFreePeriod = true;
-         
+    public ArrayList<Integer> getFreeSlot(  ) {
+        int currentMember = 0;
         groupMembers = getGroupMembers( );
-        int[] lectureTimes = getLectureTimes(  );
-        int[] eventTimes = getMembersEvents( memberNumber );  
                   
-        while( memberNumber < groupMembers.length ) {
-            System.out.println( "Member: " + memberNumber );
+        while( currentMember < groupMembers.length ) {
+            System.out.println( "Member: " + currentMember );
             
-            if( memberNumber >= 1 && currentFreePeriod >= 1 ) {
-                System.out.println( "checking next user also has this free period");
-                currentUserHasFreePeriod = hasUserThisFreePeriod( groupMembers[memberNumber], currentFreePeriod );
-            }
-             
-            if( currentUserHasFreePeriod ) {
-                for( int period = 1; period < 11; period++ ){   
-                    System.out.println( "period: " + period + " - is already taken: " + intIsInArray( period, lectureTimes ));
+            int[] lectureTimes = getLectureTimes(  );
+            int[] eventTimes = getMembersEvents( currentMember );  
+            
+            for( int period = 1; period < 11; period++ ) {   
+                System.out.println( "period: " + period + " - is already taken: " + intIsInArray( period, lectureTimes ));
 
-                    if( intIsInArray( period, lectureTimes ) ) {
-                       //memberNumber = 0;
-                    }
-                    else {
-                       System.out.println( "Current member free period " + period );
-
-                       if( ! intIsInArray( period, eventTimes ) ) {
-                           if( memberNumber == groupMembers.length - 1 ) {
-                               System.out.println( "Found free period for Group: " + currentFreePeriod );
-                               return currentFreePeriod = period;
-                           }
-                           else {
-                               System.out.println( "Moving on to next group member" );
-                               currentFreePeriod = period;
-                               memberNumber += 1 ;
-                               period = 11;    
-                           }                                    
-                       }
+                if( intIsInArray( period, lectureTimes ) ) {
+                    if( currentFreePeriods.contains( period ) ) {
+                        currentFreePeriods.remove( period );
                     }
                 }
+                else {
+                    System.out.println( "Free period " + period );
+                    
+                    if( ! intIsInArray( period, eventTimes ) ) {
+                        System.out.println( "added new free period: " + period );
+                        if( ! currentFreePeriods.contains( period ) && ! busyPeriods.contains( period ) ) {
+                            currentFreePeriods.add( period );
+                        }
+                    }
+                    else {
+                        System.out.println( "Period is already used: " );
+                    } 
+                }
             }
-            else {
-                System.out.println( "This member also has the same free time slot: " + memberNumber );
-                memberNumber++;
-            }
-        } 
-        System.out.println("We found free time period: " + currentFreePeriod );
-        return currentFreePeriod;
+            
+            System.out.println( "current free periods: " + currentFreePeriods );
+            System.out.println( "busy Periods: " + busyPeriods );
+            currentMember++;
+        }
+        return currentFreePeriods;
+    } 
+    
+    public String pickAvailablePeriodFrom( ) {
+        String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
+                    + "<h3>Free Periods</h2><br />";    
+        
+                for( int i = 1; i < 10; i++ ) {
+                    if( currentFreePeriods.contains( i ) ) {
+                        form += "<label for=\"free_periods\">Period " + currentFreePeriods.get( i ) + "</label>\n"
+                              + "<input type=\"radio\" name=\"free_periods\" value=\"" + currentFreePeriods.get( i )  + "\" /><br />";
+                    }
+                }
+                
+              form += "<input type=\"submit\" name=\"accept_slot\" value=\"Accept Slot!\" />\n"
+                    + "</form>";
+              
+        return form;
     }
      
    /**
@@ -206,9 +219,9 @@ public class FindMeeting {
                         + "<label for=\"eventType\">Event Type:</label>\n"
                         + "<select name=\"eventType\" >\n"
                             + "<option value=\"Lecture\" selected>Lecture</option>\n" 
-                            + "<option value=\"Meeting\" selected>Meeting</option>\n" 
-                            + "<option value=\"Tutorial\" selected>Tutorial</option>\n" 
-                            + "<option value=\"Group Meeting\" selected>Group Meeting</option>\n" 
+                            + "<option value=\"Meeting\">Meeting</option>\n" 
+                            + "<option value=\"Tutorial\">Tutorial</option>\n" 
+                            + "<option value=\"Group Meeting\">Group Meeting</option>\n" 
                         + "</select><br />"
 
                         + "<label for='stream'>Stream:</label>\n"
@@ -230,6 +243,7 @@ public class FindMeeting {
 
                         + "<label for=\"date\">Preferred Day:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
+                        
                         + "<label for=\"recurrence\">Recurrence:</label>\n"
                         + "<select name=\"recurrence\">\n" 
                         + "  <option value=\"once\" selected>Single Meeting</option>" 
