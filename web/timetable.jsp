@@ -1,14 +1,13 @@
 <%-- 
     Document   : timetable.jsp
     Created on : 09-Feb-2015, 16:44:55
-    Author     : Jack Desmond
+    Author     : Jack Desmond, Martin Bullman 112735341 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="notifications.UsersNotifications;" %>
 <%@ page import="algorithm.FindMeeting;" %>
 <%@ page import="application.Timetable;" %>
-<%@ page import="guipackage.GUI;"%>
 <%@ page import="guipackage.GUI;"%>
 
 <!DOCTYPE html>
@@ -31,8 +30,6 @@
         </script>
     </head>
         
-        
-    
     <body>
 
         <%
@@ -48,14 +45,26 @@
                 out.print(gui.header(true, fname, lname));
                 
                 out.print( "<div id='sidebar'>" );
-                                FindMeeting meeting = new FindMeeting( );
+                   
                 
-                if( request.getParameter( "find_meet" ) == null ){
-                    out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
+                
+                FindMeeting meeting = new FindMeeting( );
+                
+                if( request.getParameter( "find_meeting" ) == null ){
+                    out.print( meeting.findMeetingForm( ) );
                 }
-                else{
-                    meeting.setup( request );
-                    out.print( meeting.getFreeSlot( ) );
+                else {
+                    meeting.processFormData( request );
+                    int freeMeetingPeriod = meeting.getFreeSlot( );
+                    
+                    if( freeMeetingPeriod == 0  ){
+                        out.print( "<p>No time available on this day, Please try another day!</p>" );
+                    }
+                    else{
+                        out.print( freeMeetingPeriod );
+                        
+                        //response.sendRedirect( "add_meeting.jsp" );
+                    }
                  }
                 
                 out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
@@ -70,7 +79,6 @@
             }
         %>  
 
-        
         <section>     
             <%
                 out.print( "<div class='divid2'>" );
@@ -86,8 +94,6 @@
                 out.print( "</div>" );
             %>
         </section>
-        
- 
         
         <%
              out.print( gui.footer() );

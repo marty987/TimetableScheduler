@@ -237,7 +237,8 @@ public class AddMeeting {
         
         return isValid;
     }
-     /**
+    
+    /**
      * function to collect any error messages that are created throughout the creation and implementation
      * of the addFriend class.
      * @return a string of errors.
@@ -253,13 +254,14 @@ public class AddMeeting {
         
         return errorList;
     }
+    
     /**
      * Function to insert a new meeting into the database and into a student's timetable.
      * @param userId the student's user ID.
      */
     public void insertNewMeeting( String userId ) {
         database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
-                         "VALUES( '" + eventName + "', '" + eventType + "', '" + stream + "', '" + period + "', '" + startDate + "', '" +
+                         "VALUES( '" + eventName + "', '" + eventType + "', '" + ( stream.equals( "" ) ? getUserStream( userId ) : stream ) + "', '" + period + "', '" + startDate + "', '" +
                           endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
         
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
@@ -270,6 +272,7 @@ public class AddMeeting {
                          "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
         //database.Close( );
     }
+    
     /**
      * Function to check is logged in user is a lecturer/administrative staff member or student.
      * @param userId
@@ -284,85 +287,87 @@ public class AddMeeting {
         } 
         return true;
     }
+    
     /**
      * Function to get the user's (type student) stream.
      * @param userId
      * @return the variable stream (string)
      */
-    public String getUserStream(String userId){
+    public String getUserStream( String userId ){
         String[] userStream = database.SelectRow("SELECT stream FROM users WHERE user_id ='"+ userId +"';");
         return userStream[0];
     }
+    
     /**
      * Form used to add a meeting.
      * @param userId
      * @return form (string)
      */
     public String addMeetingForm( String userId ) {
-        String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
+        String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n"
+                        + "<label for=\"eventName\">Event Name:</label>\n"
+                        + "<input type=\"text\" name=\"eventName\" value=\"" + eventName + "\" placeholder=\"e.g. Team Meeting\"/><br />\n"
+
+                        + "<label for=\"eventType\">Event Type:</label>\n"
+                        + "<select name=\"eventType\" id=\"dropdown\">\n"
+                        + "  <option value\"Lecture\" selected>Lecture</option>\n"
+                        + "  <option value=\"Meeting\">Meeting</option>\n"
+                        + "  <option value=\"Tutorial\">Tutorial</option>\n"
+                        + "  <option value=\"Group Meeting\">Group Meeting</option>\n"
+                        + "</select>";
                
-               form += "<label for=\"eventName\">Event Name:</label>\n";
-               form += "<input type=\"text\" name=\"eventName\" value=\"" + eventName + "\" placeholder=\"Team Meeting\"/><br />\n";
-               form += "<label for=\"eventType\">Event Type:</label>\n";
-               form += "<input type=\"text\" name=\"eventType\" value=\"" + eventType + "\" placeholder=\"Meeting\"/><br />\n";
+        if( isLecturer( userId ) ) {
+               form +=    "<label for='stream'>Stream:</label>\n"
+                        + "<select name=\"stream\" id='dropdown' >\n" 
+                        + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
+                        + "  <option value=\"2\">Core Year 2</option>\n" 
+                        + "  <option value=\"3\">Core Year 3</option>\n" 
+                        + "  <option value=\"4\">Core Year 4</option>\n" 
+                        + "  <option value=\"5\">Web Year 2</option>\n" 
+                        + "  <option value=\"6\">Web Year 3</option>\n" 
+                        + "  <option value=\"7\">Web Year 4</option>\n" 
+                        + "  <option value=\"8\">Soft Entrep Year 2</option>\n" 
+                        + "  <option value=\"9\">Soft Entrep Year 3</option>\n" 
+                        + "  <option value=\"10\">Soft Entrep Year 4</option>\n" 
+                        + "  <option value=\"11\">Chinese Year 2</option>\n" 
+                        + "  <option value=\"12\">Chinese Year 3</option>\n" 
+                        + "  <option value=\"13\">Chinese Year 4</option>\n" 
+                        + "</select><br />"; 
+        }    
+               form +=    "<label for=\"period\">Period:</label>\n"
+                        + "<select name=\"period\" id='dropdown'>" 
+                        + "  <option value=\"1\" selected>8:00 - 9:00</option>" 
+                        + "  <option value=\"2\">9:00 - 10:00</option>" 
+                        + "  <option value=\"3\">10:00 - 11:00</option>" 
+                        + "  <option value=\"4\">11:00 - 12:00</option>"
+                        + "  <option value=\"5\">12:00 - 13:00</option>" 
+                        + "  <option value=\"6\">13:00 - 14:00</option>" 
+                        + "  <option value=\"7\">14:00 - 15:00</option>" 
+                        + "  <option value=\"8\">15:00 - 16:00</option>" 
+                        + "  <option value=\"9\">16:00 - 17:00</option>" 
+                        + "  <option value=\"10\">17:00 - 18:00</option>" 
+                        + "</select><br />"
                
-               if( isLecturer( userId ) ) {
-                   form += "<label for='stream'>Stream:</label>\n";
-                   form += "<select name=\"stream\"id='dropdown' >\n" +
-                        "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
-                        "  <option value=\"2\">Core Year 2</option>\n" +
-                        "  <option value=\"3\">Core Year 3</option>\n" +
-                        "  <option value=\"4\">Core Year 4</option>\n" +
-                        "  <option value=\"5\">Web Year 2</option>\n" +
-                        "  <option value=\"6\">Web Year 3</option>\n" +
-                        "  <option value=\"7\">Web Year 4</option>\n" +
-                        "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
-                        "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
-                        "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
-                        "  <option value=\"11\">Chinese Year 2</option>\n" +
-                        "  <option value=\"12\">Chinese Year 3</option>\n" +
-                        "  <option value=\"13\">Chinese Year 4</option>\n" +
-                        "</select><br />"; 
-               }
-               else{
-                   String userStream = getUserStream(userId);
-                   setStream(userStream);
-               }
-             
-               form += "<label for=\"period\">Period:</label>\n";
-               form += "<select name=\"period\" id='dropdown'>" +
-                       "    <option value=\"1\" selected>8:00 - 9:00</option>" +
-                       "    <option value=\"2\">9:00 - 10:00</option>" +
-                       "    <option value=\"3\">10:00 - 11:00</option>" +
-                       "    <option value=\"4\">11:00 - 12:00</option>" +
-                       "    <option value=\"5\">12:00 - 13:00</option>" +
-                       "    <option value=\"6\">13:00 - 14:00</option>" +
-                       "    <option value=\"7\">14:00 - 15:00</option>" +
-                       "    <option value=\"8\">15:00 - 16:00</option>" +
-                       "    <option value=\"9\">16:00 - 17:00</option>" +
-                       "    <option value=\"10\">17:00 - 18:00</option>" +
-                       "</select><br />";
+                        + "<label for=\"startDate\">Start Date:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n"
+                        + "<label for=\"endDate\">End Date:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n"
                
-               form += "<label for=\"startDate\">Start Date:</label>\n";
-               form += "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
-               form += "<label for=\"endDate\">End Date:</label>\n";
-               form += "<input type=\"text\" class=\"datepicker\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n";
-               
-               form += "<label for=\"recurrence\">Recurrence:</label>\n";
-               form += "<select name=\"recurrence\" id='dropdown'>" +
-                       "    <option value=\"once\" selected>Single Meeting</option>" +
-                       "    <option value=\"weekly\">Weekly</option>" +
-                       "    <option value=\"montly\">Monthly</option>" +
-                       "</select><br />";
+                        + "<label for=\"recurrence\">Recurrence:</label>\n"
+                        + "<select name=\"recurrence\" id='dropdown'>" 
+                        + "  <option value=\"once\" selected>Single Meeting</option>" 
+                        + "  <option value=\"weekly\">Weekly</option>" 
+                        + "  <option value=\"montly\">Monthly</option>" 
+                        + "</select><br />"
                           
-               form += "<label for=\"moduleCode\">Module Code:</label>\n";
-               form += "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n";
-               form += "<label for=\"location\">Location:</label>\n";
-               form += "<input type=\"text\" name=\"location\" value=\"" + location + "\" placeholder=\"WGB 1.01\"/><br />\n";
-               form += "<textarea name=\"description\" rows=\"10\" cols=\"30\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n";
+                        + "<label for=\"moduleCode\">Module Code:</label>\n"
+                        + "<input type=\"text\" name=\"moduleCode\" value=\"" + moduleCode + "\" placeholder=\"CS3505\"/><br />\n"
+                        + "<label for=\"location\">Location:</label>\n"
+                        + "<input type=\"text\" name=\"location\" value=\"" + location + "\" placeholder=\"WGB 1.01\"/><br />\n"
+                        + "<textarea name=\"description\" rows=\"10\" cols=\"30\" placeholder=\"Add description here!\">" + description + "</textarea><br />\n"
         
-               form += "<input type='submit' value='Submit' name='submit' /><br />\n";
-               form += "</form>\n";
+                        + "<input type='submit' value='Submit' name='submit' /><br />\n"
+                    + "</form>\n";
                
         return form;
     }
