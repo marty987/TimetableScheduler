@@ -89,7 +89,13 @@
             <%
                 out.print( "<div class='divid3'>" );
                 out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
+                out.print( notify.getFriendsAndRequests( (String) session.getAttribute( "Authenticated" ) ) );
                 
+                 if( request.getParameter( "seen_events" ) != null ){
+                    
+                    notify.hasSeen( request );
+                    response.sendRedirect( "timetable.jsp" );
+                }
                 
                 out.print( "</div>" );
             %>   

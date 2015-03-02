@@ -122,4 +122,12 @@ public class UsersNotifications {
             return friendRequests;
         }
     }
+    
+//    public void inviteAccepted( HttpServletRequest request ) {    
+//        String[] events = request.getParameterValues( "seen_events" );
+//        
+//        for( String event: events ){
+//                db.Insert( "UPDATE friends_list SET aceepted = '1' WHERE user_id = '" + userId + "' AND event_id = '" + event + "';" );
+//        }
+//    }
 }
