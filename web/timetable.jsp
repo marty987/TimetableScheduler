@@ -46,8 +46,11 @@
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
-                out.print( "<div id='sidebar'>" );
+                out.print( "<div id='sidebar'>" );               
+                
                 out.print( "<a class='add_meeting' href='add_meeting.jsp'><h1>Add meeting</h1></a>" );
+                
+                out.print( "<h4>Find an available time slot</h4>" );
                  
                 FindMeeting meeting = new FindMeeting( );
                 
