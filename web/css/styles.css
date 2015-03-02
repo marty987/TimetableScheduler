@@ -202,7 +202,9 @@ footer li:hover{
     left: 0;
     width: 200px;
     background:#797A7A;
-    padding-right: 200px;
+
+    
+    padding-right: 20px;
     background: #3f4c6b; /* Old browsers */
     background: -moz-linear-gradient(top, #3f4c6b 0%, #3f4c6b 100%); /* FF3.6+ */
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#3f4c6b), color-stop(100%,#3f4c6b)); /* Chrome,Safari4+ */
@@ -211,9 +213,40 @@ footer li:hover{
     background: -ms-linear-gradient(top, #3f4c6b 0%,#3f4c6b 100%); /* IE10+ */
     background: linear-gradient(to bottom, #3f4c6b 0%,#3f4c6b 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
-    
 }    
+
+#sidebar input[type=text]{
+    margin-left:2%;
+    width:92%;
+}
     
+#sidebar input[type=submit]{
+    margin-left:2%;
+}
+
+#sidebar #dropdown{
+    margin-left:2%;
+}
+
+#sidebar label{
+    margin-left:2%;
+    color:white;
+}
+
+#sidebar h1{
+    font-weight:lighter;
+    color:white;
+    margin-bottom: -2%;
+    margin-left:2%;
+}
+
+#sidebar a{
+    text-decoration:none;
+}
+
+#sidebar a :hover{
+    color:#b9b9b9;
+}
     
 .card{
   padding: 30px;
