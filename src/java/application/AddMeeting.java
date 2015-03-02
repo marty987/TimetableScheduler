@@ -306,7 +306,10 @@ public class AddMeeting {
      */
     public String addMeetingForm( String userId, HttpServletRequest request ) {
         String choosenPeriod = request.getParameter( "free_period" );
-        String choosenDate = request.getParameter( "" );
+        String choosenStream= request.getParameter( "pick_stream" );
+        String choosenDate = request.getParameter( "date" );
+        
+        System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + stream );
         
         if( choosenPeriod != null ) {
             System.out.println( "The free period was not set !!!!!!!!!!!!!!!!!!" );
@@ -342,6 +345,17 @@ public class AddMeeting {
                         + "  <option value=\"13\">Chinese Year 4</option>\n" 
                         + "</select><br />"; 
         }    
+        
+        if ( choosenPeriod != null ) {
+               form +=    "<label for=\"period\">Period:</label>\n"
+                        + "<select name=\"period\" id='dropdown' disabled>" 
+                        + "  <option value=\"1\" selected>8:00 - 9:00</option>"
+                        + "</select><br />"
+            
+                        + "<label for=\"startDate\">Start Date:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + choosenDate + "\" disabled/><br />\n";
+        }
+        else {
                form +=    "<label for=\"period\">Period:</label>\n"
                         + "<select name=\"period\" id='dropdown'>" 
                         + "  <option value=\"1\" selected>8:00 - 9:00</option>" 
@@ -357,10 +371,10 @@ public class AddMeeting {
                         + "</select><br />"
                
                         + "<label for=\"startDate\">Start Date:</label>\n"
-                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n"
-                        + "<label for=\"endDate\">End Date:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + startDate + "\" placeholder=\"2015/01/01\"/><br />\n";
+        }
+               form +=    "<label for=\"endDate\">End Date:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"endDate\" value=\"" + endDate + "\" placeholder=\"2015/01/31\"/><br />\n"
-               
                         + "<label for=\"recurrence\">Recurrence:</label>\n"
                         + "<select name=\"recurrence\" id='dropdown'>" 
                         + "  <option value=\"once\" selected>Single Meeting</option>" 

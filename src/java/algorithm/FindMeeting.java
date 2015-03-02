@@ -200,11 +200,13 @@ public class FindMeeting {
         return currentFreePeriods;
     } 
     
-    public String pickAvailablePeriodFrom( ) {
+    public String pickAvailablePeriodFrom( String stream, String date ) {
         getPeriodTimes( );
         
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                      + "<h3>Free Periods</h3>";    
+                      + "<h3>Free Periods</h3>"   
+                      + "<input type=\"hidden\" name=\"pick_stream\" value=\"" + stream + "\" />" 
+                      + "<input type=\"hidden\" name=\"date\" value=\"" + date + "\" />";  
      
         int counter = 0;
         for( int i = 0; i <= 9; i++ ) {
@@ -238,8 +240,8 @@ public class FindMeeting {
     public String findMeetingForm( ) {
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
 
-                        + "<label for='stream'>Stream:</label>\n"
-                        + "<select id='dropdown' name=\"stream\" >\n" 
+                        + "<label for='pick_stream'>Stream:</label>\n"
+                        + "<select id='dropdown' name=\"pick_stream\" >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
                         + "  <option value=\"2\">Core Year 2</option>\n" 
                         + "  <option value=\"3\">Core Year 3</option>\n" 

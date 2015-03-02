@@ -47,9 +47,7 @@
                 out.print(gui.header(true, fname, lname));
                 
                 out.print( "<div id='sidebar'>" );               
-                
                 out.print( "<a class='add_meeting' href='add_meeting.jsp'><h1>Add meeting</h1></a>" );
-                
                 out.print( "<h4>Find an available time slot</h4>" );
                  
                 FindMeeting meeting = new FindMeeting( );
@@ -67,7 +65,7 @@
                         }
                         else{
                             out.print( freeMeetingPeriods );
-                            out.print( meeting.pickAvailablePeriodFrom( ) );
+                            out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
                             //response.sendRedirect( "add_meeting.jsp" );
                         }
                     }
@@ -93,7 +91,6 @@
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
                 if( request.getParameter( "seen_events" ) != null ){
-                    
                     notify.hasSeen( request );
                     response.sendRedirect( "timetable.jsp" );
                 }
