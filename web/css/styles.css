@@ -56,7 +56,7 @@ body {
 }
 
 .card input[type=submit]{
-  width: 15%;
+  width: 100%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -215,6 +215,7 @@ footer li:hover{
     background: linear-gradient(to bottom, #3f4c6b 0%,#3f4c6b 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#3f4c6b', endColorstr='#3f4c6b',GradientType=0 ); /* IE6-9 */
     margin-top:-1.5%;
+    height:120%;
 }    
 
 #sidebar input[type=text]{
@@ -246,6 +247,7 @@ footer li:hover{
     margin-left:-1%;
     background: #003c69;
     padding-right:15px;
+    padding-top: 90px;
 }
 
 #sidebar a{
@@ -334,8 +336,8 @@ nav ul li a{
 footer{
     clear: both;
     margin-top: 40px;
-    margin-left:13%;
-    width: 77%; 
+    margin-left:15%;
+    width: 66%; 
     color: black;
     font-size: 15px;
     padding: 10px;
@@ -448,6 +450,11 @@ nav ul li a:hover{
     text-decoration: none;
 }
 
+#sidebar h4{
+    font-weight:lighter;
+    border-bottom: 1px solid black;
+}
+
 #sidebar a:hover{
     color: #666;
 }
@@ -456,6 +463,10 @@ nav ul li a:hover{
     width:96%;
 }
 
+#sidebar input[type=submit]{
+    
+    width:100%;
+}
     
 .card{  
    padding:10px;

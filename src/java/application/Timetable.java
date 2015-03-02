@@ -61,9 +61,7 @@ public class Timetable {
      * logged in.
      * @param userId 
      */
-    private void fetchEventsFromDB( String userId ) {
-        String[] currentEvent = new String[11];
-        ParsePosition pos = new ParsePosition(0);
+    private void fetchEventsFromDB( String userId ) {  
         database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
@@ -72,6 +70,7 @@ public class Timetable {
         String[] eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM has_events "
                 + "WHERE user_id = " + userId + ";");
+        String[] currentEvent = new String[eventIDs.length];
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
@@ -163,6 +162,8 @@ public class Timetable {
         
         fetchEventsFromDB( userId );
         addEventsToTimetable( );
+        
+        timetableValues [0][0] = "<th>" + myEvents.size() + "</th>";
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
