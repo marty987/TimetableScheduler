@@ -70,7 +70,7 @@ public class Timetable {
         String[] eventIDs = database.SelectColumn( "SELECT event_id "
                 + "FROM has_events "
                 + "WHERE user_id = " + userId + ";");
-        String[] currentEvent;
+        String[] currentEvent = new String[eventIDs.length];
         
         //iterate through eventIDs[] array and fetch data associated with each
         //eventsID
