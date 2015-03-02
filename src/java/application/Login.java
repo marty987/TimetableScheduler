@@ -1,5 +1,6 @@
 package application;
 /**
+ * This class allows a user to log into the system.
  * @author Martin Bullman 112735341
  * @since Feb 7, 2015, 12:56:25 PM
  */
@@ -13,30 +14,49 @@ public class Login {
     private String firstName;
     private String lastName;
     private String[] result;
-    
+    /**
+     * Constructor for the class
+     */
     public Login(){
         this.username = "";
         this.password = "";
         this.firstName = "";
         this.result = new String[10];
     }
-    
+    /**
+    * Getter method for the user's username.
+    * @return username (string)
+    **/
     public String getUsername() {
         return username;
     }
-    
+    /**
+     * Setter method for the user's username
+     * @param username (string)
+     */
     public void setUsername(String username) {
         this.username = username;
     }
-    
+    /**
+     * Getter method for the user's first name
+     * @return the variable firstName (string)
+     */
     public String getFirstName( ) {
         return firstName;
     }
-    
+    /**
+     * Getter method for the user's last name (surname)
+     * @return the variable lastName (string)
+     */
     public String getLastName( ) {
         return lastName;
     }
-    
+    /**
+     * Function used to log the user into the system, giving them access to view timetables,
+     * add events and use the system.
+     * @param request (HttpServletRequest)
+     * @return true if logged in and false if otherwise.
+     */
     public boolean loginUser( HttpServletRequest request ) {
         DatabaseClass database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -61,7 +81,11 @@ public class Login {
   
         return result.length != 0;
     }
-    
+    /**
+     * Function to validate if the user's log in credentials are correct. ie. they match
+     * the username and password stored in the database
+     * @return true if correct and false if otherwise.
+     */
     public boolean validateLogin( ){
         boolean isValid = true;
         
@@ -74,7 +98,10 @@ public class Login {
         
         return isValid;
     }  
-    
+    /**
+     * Form used by the user to log into the system
+     * @return form (string)
+     */
     public String loginForm( ) {
         String form = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n";
                form += "<label for=\"username\">UCC ID:</label>\n";

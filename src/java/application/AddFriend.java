@@ -7,7 +7,8 @@ package application;
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 /**
- * @author jd7
+ * Class to add a friend on the system to subsequentially chat with the user.
+ * @author Jack Desmond
  */
 public class AddFriend {
 //    private String addingID;
@@ -16,7 +17,9 @@ public class AddFriend {
     private boolean isValid;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
-    
+    /**
+     * Constructor for the class AddFriend
+     */
     public AddFriend() {
 //        this.addingID = "";
 //        this.yourUserID = "";
@@ -43,23 +46,39 @@ public class AddFriend {
 //    public void setYourUserID(String yourUserID) {
 //        this.yourUserID = yourUserID;
 //    }
-    
+    /**
+     * Getter method for the friend's student ID.
+     * @return variable friendUserID (String)
+     */
     public String getFriendUserID() {
         return friendUserID;
     }
-    
+    /**
+     * Setter method for the friend's user ID.
+     * @param friendUserID 
+     */
     public void setFriendUserID(String friendUserID) {
         this.friendUserID = friendUserID;
     }
-    
+    /**
+     * Getter method for the boolean value isValid
+     * @return isValid variable (boolean)
+     */
     public boolean getIsValid() {
         return isValid;
     }
-    
+    /**
+     * Setter method for the boolean variable isValid.
+     * @param isValid 
+     */
     public void setIsValid(boolean isValid) {
         this.isValid = isValid;
     }
-    
+    /**
+     * Ensures the form is filled out correctly by the user.
+     * @param userId Your own user ID.
+     * @return true if form is filled out correctly and false if otherwise.
+     */
     public boolean validateAddingFriendForm( final String userId ) {
 
         if(friendUserID.equals("") || !doesFriendExist(friendUserID)) {
@@ -77,7 +96,11 @@ public class AddFriend {
         
         return isValid;
     }
-    
+    /**
+     * function to collect any error messages that are created throughout the creation and implementation
+     * of the addFriend class.
+     * @return a string of errors.
+     */
     public String errors() {
         String errorList;
         
@@ -89,7 +112,11 @@ public class AddFriend {
         
         return errorList;
     }
-    
+    /**
+     * Function to check if the user ID of another member of the course is registered in the system.
+     * @param friendUserID
+     * @return true if it does exist and false otherwise.
+     */
     public boolean doesFriendExist(String friendUserID) {
         String[] dbResult = database.SelectRow( "SELECT user_id FROM users WHERE user_id = '" + friendUserID + "';" );
         
@@ -100,6 +127,10 @@ public class AddFriend {
         return true;
     }
     
+    /**
+     * Function to add a friend if friend's user ID is a valid ID on the system.
+     * @param userId Your own user ID.
+     */
     public void addFriend (String userId) {
         
         if(doesFriendExist(friendUserID)) {
@@ -107,7 +138,10 @@ public class AddFriend {
                     "VALUES( '" + userId + "', '" + friendUserID + "', '0' );");
         }
     }
-    
+    /**
+     * Form used to add a friend.
+     * @return form (String)
+     */
     public String addFriendForm() {
         
         String form = "<form name=\"add_friend\" action=\"add_friend.jsp\" method=\"POST\">\n";

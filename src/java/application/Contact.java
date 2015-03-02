@@ -1,59 +1,83 @@
 package application;
 
 /**
- *
+ * This class acts as a chat/messenger service between users of the systems. 
  * @author jd11
  */
 import dbpackage.DatabaseClass;
 import java.util.ArrayList;
 
 
+/**
+ * This class allows you to add a personal message to the database for another user within the system.
+ **/
 public class Contact {
-
-
-public class AddMessage {
     private String email;
     private String subject;
     private String message;
-    private final DatabaseClass database;
-    private final ArrayList<String> errors;
-    
-    public AddMessage( ){
-        this.email = "";
-        this.subject = "";
-        this.message = "";
-        this.errors = new ArrayList<>( );
-        this.database = new DatabaseClass( );
+    private DatabaseClass database;
+    private ArrayList<String> errors;
+    /**
+     * Constructor for the AddMessage class
+     */
+    public Contact( ){
+        email = "";
+        subject = "";
+        message = "";
+        errors = new ArrayList<>( );
+        database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
-    
+    /**
+     * Getter method for the email address of a user of the system.
+     * @return variable email (string)
+     */
     public String getEmail( ){
         return email;
     }
-    
+    /**
+     * Setter method for the email address of a user of the system. 
+     * @param email (string)
+     */
     public void setEmail( final String email ){
         this.email = email;
     }
-    
+    /**
+     * Getter method for the subject line of the message. 
+     * @return the variable 'subject' (string)
+     */
     public String getSubject( ){
         return subject;
     }
-    
+    /**
+     * Setter method for the subject line of the message.
+     * @param subject (string)
+     */
     public void setSubject( final String subject ){
         this.subject = subject;
     }
-    
+    /**
+     * Getter method for the body of the message to be sent.
+     * @return the variable 'message' (string)
+     */
     public String getMessage( ){
         return message;
     }
-    
+    /**
+     * Setter method for the body of the message to be sent. 
+     * @param message (string)
+     */
     public void setMessage( final String message ){
         this.message = message;
     }
     
- 
-    public boolean validateContactForm( final String userId ) {
+ /**
+     * Ensures the form is filled out correctly by the user.
+     * @param userId Your own user ID.
+     * @return true if form is filled out correctly and false if otherwise.
+     */
+    public boolean validateContactForm(  ) {
         boolean isValid = true;
 
         if( email.equals( "" ) || ! email.contains( "@" ) || ! email.contains( "." ) ) {
@@ -88,14 +112,21 @@ public class AddMessage {
         
         return errorList;
     }
-    
-    public void insertNewMessage( String userId ) {
+    /**
+     * Function to insert the message entered in the form to the database.
+     * @param userId the user's ID (string)
+     */
+    public void insertNewMessage( String email, String subject, String message  ) {
         database.Insert( "INSERT INTO contact( email, subject, message )" +
                          "VALUES( '" + email + "', '" + subject + "', '" + message + "'  );" );
-        database.Close( );
+        //database.Close( );
     }
-    
-    public String addContactForm( String userId ) {
+    /**
+     * Function to create the form to send a message.
+     * @param userId (string)
+     * @return the form (string)
+     */
+    public String contactForm(  ) {
         String form = "<form name=\"contact\" action=\"contact.jsp\" method=\"POST\">\n";
                
                form += "<label for='email'>Email:</label>\n";
@@ -112,4 +143,4 @@ public class AddMessage {
         return form;
     }
   }
-}  
+  

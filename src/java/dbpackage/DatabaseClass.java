@@ -8,12 +8,13 @@ import java.io.*;
 public class DatabaseClass {
     private Statement statementObject;
     private Connection connectionObject;
+   
     private String dbserver;
     private String DSN;
     private String username;
     private String password;
-    private boolean setup = false;
-     
+    private boolean setup=false;
+    
     public String setup( String dbserver, String DSN, String username, String password )
     {
         this.dbserver = dbserver;
@@ -21,7 +22,7 @@ public class DatabaseClass {
         this.username=username;
         this.password=password;
         String URL = "jdbc:mysql://" + dbserver + "/" + DSN;
-         
+        
         try // Initialiase drivers
         {
             Class.forName( "com.mysql.jdbc.Driver" );
@@ -31,7 +32,7 @@ public class DatabaseClass {
             writeLogSQL( URL + " caused error " + exceptionObject.getMessage( ) + " Error dbclass.setup.1. " );
             return( "Failed to load JDBC/ODBC driver. Error dbclass.setup.1 PLEASE report this error" );
         }
-        try
+        try 
         {
             // Establish connection to database
             connectionObject = DriverManager.getConnection( URL, username, password );
@@ -42,18 +43,18 @@ public class DatabaseClass {
             writeLogSQL( URL + " caused error " + exceptionObject.getMessage( ) + " Error dbclass.setup.2" );
             return( "Problem with setting up " + URL + " Error dbclass.setup.2 PLEASE report this error" );
         }
- 
+
         return "";
     } // DatabaseConnectorNew constructor
- 
+
     public boolean issetup( )
     {
         return setup;
     }
-     
+    
     public void Close( )
     {
-        try
+        try 
         {
             // Establish connection to database
             connectionObject.close( ); 
@@ -64,11 +65,11 @@ public class DatabaseClass {
             writeLogSQL( "closing caused error " + exceptionObject.getMessage( ) );
         }
     } //CloseDatabaseConnection
- 
+
     public void Insert(String SQLinsert)
     {
         // Setup database connection details
-        try
+        try 
         {
             // Setup statement object
             statementObject = connectionObject.createStatement();
@@ -82,7 +83,7 @@ public class DatabaseClass {
             writeLogSQL( SQLinsert + " caused error " + exceptionObject.getMessage( ) );
         }
     } // End Insert
- 
+
     public String[] SelectRow( String SQLquery )
     {
         String Result[];
@@ -95,7 +96,7 @@ public class DatabaseClass {
             int nrOfColumns = rsmd.getColumnCount( );
             Result = new String[nrOfColumns];
             statementResult.next( );
-             
+            
             int currentCounter = 0;
             while( currentCounter<nrOfColumns ) // While there are rows to process
             {
@@ -112,12 +113,10 @@ public class DatabaseClass {
             Result = new String[0]; //Need to setup result array to avoid initialisation error
             writeLogSQL( SQLquery + " caused error " + e.getMessage( ) );
         }
-         
+        
         writeLogSQL( SQLquery + "worked " );
         return Result;
     } // End SelectRow
-    
-    
    
     public String[] SelectColumn( String SQLquery )
     {
@@ -127,7 +126,7 @@ public class DatabaseClass {
         {
             statementObject = connectionObject.createStatement( ); //Should connection be left open?
             ResultSet statementResult = statementObject.executeQuery( SQLquery );
- 
+
             // Start solution from http://www.coderanch.com/t/303346/JDBC/java/find-number-rows-resultset
             int rowcount = 0;
             if( statementResult.last( ) ) 
@@ -137,7 +136,7 @@ public class DatabaseClass {
             }
             // End solution from http://www.coderanch.com/t/303346/JDBC/java/find-number-rows-resultset
             Result = new String[rowcount];
-             
+            
             int currentCounter = 0;
             while( statementResult.next( ) ) // While there are rows to process
             {
@@ -157,7 +156,7 @@ public class DatabaseClass {
         writeLogSQL( SQLquery + "worked " );
         return Result;
     } // End Select
- 
+
     public int[] SelectIntColumn( String SQLquery )
     {
         int Result[];
@@ -200,7 +199,7 @@ public class DatabaseClass {
     public void writeLogSQL(String message) 
     {
         PrintStream output;
-        try
+        try 
         {
             output = new PrintStream( new FileOutputStream( "sql-logfile.txt", true ) );
             output.println( new java.util.Date( ) + " " + message );
@@ -209,7 +208,7 @@ public class DatabaseClass {
         } 
         catch( IOException ieo ) 
         {
- 
+
         }
     } // End writeLog
 } //End dblib

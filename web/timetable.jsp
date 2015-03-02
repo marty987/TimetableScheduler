@@ -1,7 +1,7 @@
 <%-- 
     Document   : timetable.jsp
     Created on : 09-Feb-2015, 16:44:55
-    Author     : Jack Desmond
+    Author     : Jack Desmond, Martin Bullman 112735341 
 --%>
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -9,7 +9,8 @@
 <%@ page import="algorithm.FindMeeting;" %>
 <%@ page import="application.Timetable;" %>
 <%@ page import="guipackage.GUI;"%>
-<%@ page import="guipackage.GUI;"%>
+<%@ page import="java.util.ArrayList;"%>
+
 
 <!DOCTYPE html>
 <html>
@@ -31,10 +32,8 @@
         </script>
     </head>
         
-        
-    
     <body>
-        <div class="time">
+
         <%
             GUI gui = new GUI( );
             
@@ -42,22 +41,54 @@
                 response.sendRedirect( "index.jsp" );
             }
             else {
+                String username = (String) session.getAttribute( "Authenticated" );
                 String fname = (String) session.getAttribute( "firstName" );
                 String lname = (String) session.getAttribute( "lastName" );
                 out.print(gui.header(true, fname, lname));
                 
+                out.print( "<div id='sidebar'>" );               
+                
+                out.print( "<a class='add_meeting' href='add_meeting.jsp'><h1>Add meeting</h1></a>" );
+                
+                out.print( "<h4>Find an available time slot</h4>" );
+                 
+                FindMeeting meeting = new FindMeeting( );
+                
+                if( request.getParameter( "find_meeting" ) == null ){
+                    
+                    out.print( meeting.findMeetingForm( request ) );
+                }
+                else {
+                    if( meeting.processFormData( request ) ) {
+                        ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( );
+
+                        if( freeMeetingPeriods.isEmpty( ) ){
+                            out.print( "<p>No free time for group available on this day, Please try another day!</p>" );
+                        }
+                        else{
+                            out.print( freeMeetingPeriods );
+                            out.print( meeting.pickAvailablePeriodFrom( ) );
+                            //response.sendRedirect( "add_meeting.jsp" );
+                        }
+                    }
+                    else {
+                        out.print( meeting.findMeetingForm( request  ) );
+                        out.print( meeting.errors( ) );
+                    }
+                }
+                
+                out.print( "</div>");
+                
+                out.print( "<div class='card'>" );   
+                out.print( "<div class='time'>" );
                 Timetable timetable = new Timetable( );
-                out.print( "<div class='divid'>" );
-                out.print( timetable.printTimetable( ) );      
+                out.print( timetable.printTimetable( username ) );      
                 out.print( "</div>" );
             }
         %>  
-        </div>
-        
+
         <section>     
             <%
-                out.print( "<div class='divid2'>" );
-                out.print( "<h1 class='notifications'>Notifications</h1><a class='add_meeting' href='add_meeting.jsp'>Add Meeting</a>" );
                 UsersNotifications notify = new UsersNotifications( );
                 out.print( notify.getUsersNotifications( (String) session.getAttribute( "Authenticated" ) ) );
                 
@@ -68,37 +99,6 @@
                 }
                 out.print( "</div>" );
             %>
-        </section>
-        
-        <section>
-            <%
-                FindMeeting meeting = new FindMeeting( );
-                
-                if( request.getParameter( "find_meet" ) == null ){
-                    out.print( meeting.findMeetingForm( (String) session.getAttribute( "Authenticated" ) ) );
-                }
-                else{
-                    meeting.setup( request );
-                    out.print( meeting.getFreeSlot( ) );
-                 }
-            %>
-        </section>
-        
-        
-        <section>
-            <%
-                out.print( "<div class='divid3'>" );
-                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
-                out.print( notify.getFriendsAndRequests( (String) session.getAttribute( "Authenticated" ) ) );
-                
-                 if( request.getParameter( "seen_events" ) != null ){
-                    
-                    notify.hasSeen( request );
-                    response.sendRedirect( "timetable.jsp" );
-                }
-                
-                out.print( "</div>" );
-            %>   
         </section>
         
         <%
