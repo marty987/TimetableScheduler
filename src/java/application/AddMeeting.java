@@ -306,6 +306,7 @@ public class AddMeeting {
      */
     public String addMeetingForm( String userId, HttpServletRequest request ) {
         String choosenPeriod = request.getParameter( "free_period" );
+        String choosenDate = request.getParameter( "" );
         
         if( choosenPeriod != null ) {
             System.out.println( "The free period was not set !!!!!!!!!!!!!!!!!!" );

@@ -215,15 +215,15 @@ public class FindMeeting {
     * a student, they can only make meetings with other classmates.
     * @return form
     */
-    public String findMeetingForm(  ) {
+    public String findMeetingForm( HttpServletRequest request ) {
+        String choosenPeriod = request.getParameter( "free_period" );
+        
+        if( choosenPeriod == null ) {
+            System.out.println( "The choosen period was not set!!!!!!!!!!!!!!!!" );
+        }
+        
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
-                        + "<label for=\"eventType\">Event Type:</label>\n"
-                        + "<select name=\"eventType\" >\n"
-                            + "<option value=\"Lecture\" selected>Lecture</option>\n" 
-                            + "<option value=\"Meeting\">Meeting</option>\n" 
-                            + "<option value=\"Tutorial\">Tutorial</option>\n" 
-                            + "<option value=\"Group Meeting\">Group Meeting</option>\n" 
-                        + "</select><br />"
+
 
                         + "<label for='stream'>Stream:</label>\n"
                         + "<select name=\"stream\" >\n" 
@@ -244,13 +244,7 @@ public class FindMeeting {
 
                         + "<label for=\"date\">Preferred Day:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
-                        
-                        + "<label for=\"recurrence\">Recurrence:</label>\n"
-                        + "<select name=\"recurrence\">\n" 
-                        + "  <option value=\"once\" selected>Single Meeting</option>" 
-                        + "  <option value=\"weekly\">Weekly</option>" 
-                        + "  <option value=\"montly\">Monthly</option>" 
-                        + "</select><br />"
+                      
 
                         + "<input type='submit' value='Search Availability' name='find_meeting' /><br />\n"
                     + "</form>\n";
