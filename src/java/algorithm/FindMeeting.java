@@ -224,9 +224,8 @@ public class FindMeeting {
         
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
 
-
                         + "<label for='stream'>Stream:</label>\n"
-                        + "<select name=\"stream\" >\n" 
+                        + "<select id='dropdown' name=\"stream\" >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
                         + "  <option value=\"2\">Core Year 2</option>\n" 
                         + "  <option value=\"3\">Core Year 3</option>\n" 
@@ -243,8 +242,7 @@ public class FindMeeting {
                         + "</select><br />"
 
                         + "<label for=\"date\">Preferred Day:</label>\n"
-                        + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
-                      
+                        + "<input id='dropdown' type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
 
                         + "<input type='submit' value='Search Availability' name='find_meeting' /><br />\n"
                     + "</form>\n";

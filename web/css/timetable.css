@@ -5,8 +5,9 @@
     Description:
         Purpose of the stylesheet follows.
 */
+#dropdown{
 
-
+}
 
 table {
     border-collapse: collapse;
@@ -23,6 +24,8 @@ td, th {
    font-size: 1.2em;
    background-color:white;
 }
+
+
   th { 
     font-weight:inherit;
     padding: 5px 0;
