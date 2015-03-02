@@ -77,7 +77,6 @@
                     }
                 }
                 
-                out.print( "<h1 class='friends_list'>Friends List</h1><a class='add_friend' href='add_friend.jsp'>Add Friend</a>" );
                 out.print( "</div>");
                 
                 out.print( "<div class='card'>" );   

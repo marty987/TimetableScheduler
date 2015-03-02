@@ -52,7 +52,7 @@
                     else {
                         if( meeting.validateMeetingForm( userId ) ) {
                             out.print( "Your event has be saved successfully!" );
-                            out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
+                            out.print( "<a id='back' href='timetable.jsp'>Back to Timetable!</a>" );
                         }
                         else {
                             out.print( meeting.addMeetingForm( userId, request ) );

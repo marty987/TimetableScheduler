@@ -41,6 +41,7 @@ public class UsersNotifications {
     
             notifications = "<form action='timetable.jsp'>" + 
                                "<table class=\"emp-sales2\">\n" +
+                                 "<caption>Your notifications</catption>\n" +
                                  "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th><th>Accept event</th></tr>\n";
            
             while( statementResult.next( ) ){
@@ -59,8 +60,8 @@ public class UsersNotifications {
                 }
             }
            
-            notifications +=    "<tr><td colspan='4'><b>THESE ARE YOUR UNSEEN NOTIFICATIONS!</b></td>"
-                          + "<td><input type='submit' value='Clear!' /></td></tr>\n" 
+            notifications +=    "<tr><td colspan='4'><b></b></td>"
+                          + "<td><input id='sub' type='submit' value='Clear!' /></td></tr>\n" 
                           +   "</table>\n"
                           + "</form>\n";
         }
