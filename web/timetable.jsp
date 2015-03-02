@@ -56,7 +56,7 @@
                 
                 if( request.getParameter( "find_meeting" ) == null ){
                     
-                    out.print( meeting.findMeetingForm( request ) );
+                    out.print( meeting.findMeetingForm(  ) );
                 }
                 else {
                     if( meeting.processFormData( request ) ) {
@@ -72,7 +72,7 @@
                         }
                     }
                     else {
-                        out.print( meeting.findMeetingForm( request  ) );
+                        out.print( meeting.findMeetingForm( ) );
                         out.print( meeting.errors( ) );
                     }
                 }

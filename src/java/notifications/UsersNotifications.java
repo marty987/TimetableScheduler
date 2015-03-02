@@ -34,7 +34,7 @@ public class UsersNotifications {
         
         try{
             statementObject = connectionObject.createStatement( );
-            ResultSet statementResult = statementObject.executeQuery( "SELECT events.event_name, events.period, events.location, events.description, has_events.event_id, has_events.has_seen "
+            ResultSet statementResult = statementObject.executeQuery( "SELECT events.event_name, events.start_date, events.location, events.description, has_events.event_id, has_events.has_seen "
                                                                     + "FROM events JOIN has_events JOIN users "
                                                                     + "ON users.user_id = has_events.user_id AND events.event_id = has_events.event_id "
                                                                     + "WHERE users.user_id = '" + userId + "';"); 
@@ -42,7 +42,7 @@ public class UsersNotifications {
             notifications = "<form action='timetable.jsp'>" + 
                                "<table class=\"emp-sales2\">\n" +
                                  "<caption>Your notifications</catption>\n" +
-                                 "<tr><th>Event Name</th><th>Period</th><th>Location</th><th>Description</th><th>Accept event</th></tr>\n";
+                                 "<tr><th>Event Name</th><th>Start Date</th><th>Location</th><th>Description</th><th>Accept event</th></tr>\n";
            
             while( statementResult.next( ) ){
                 String[] results = db.SelectRow( "SELECT has_seen "
