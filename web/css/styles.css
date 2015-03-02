@@ -56,7 +56,7 @@ body {
 }
 
 .card input[type=submit]{
-  width: 15%;
+  width: 100%;
   display: block;
   margin-bottom: 10px;
   position: relative;
@@ -448,6 +448,11 @@ nav ul li a:hover{
     text-decoration: none;
 }
 
+#sidebar h4{
+    font-weight:lighter;
+    border-bottom: 1px solid black;
+}
+
 #sidebar a:hover{
     color: #666;
 }
@@ -456,6 +461,10 @@ nav ul li a:hover{
     width:96%;
 }
 
+#sidebar input[type=submit]{
+    
+    width:100%;
+}
     
 .card{  
    padding:10px;
