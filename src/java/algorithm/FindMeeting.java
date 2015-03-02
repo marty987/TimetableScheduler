@@ -8,31 +8,42 @@ import dbpackage.DatabaseClass;
 import javax.servlet.http.HttpServletRequest;
 
 public class FindMeeting {
-    private int period;
     private String date; 
     private String stream;
-    private String eventType;
-    private String recurrence;
     private String[] groupMembers;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
-    private ArrayList<Integer> currentFreePeriods;
+    private ArrayList<String> periodTimes;
     private ArrayList<Integer> busyPeriods;
+    private ArrayList<Integer> currentFreePeriods;
+
 
     /**
      * Constructor for the class.
      */
     public FindMeeting( ) {
-        this.period = 0;
         this.date = "";
         this.stream = "";
-        this.eventType = "";
-        this.recurrence = "";
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         this.busyPeriods = new ArrayList<>( );
+        this.periodTimes = new ArrayList<>( );
         this.currentFreePeriods = new ArrayList<>( );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
+    }
+    
+    public void getPeriodTimes( ) {
+        periodTimes.add( "8:00am - 9:00am" );
+        periodTimes.add( "9:00am - 10:00am" );
+        periodTimes.add( "10:00am - 11:00am" );
+        periodTimes.add( "11:00am - 12:00am" );
+        periodTimes.add( "12:00pm - 1:00pm" );
+        periodTimes.add( "1:00pm - 2:00pm" );
+        periodTimes.add( "2:00pm - 3:00pm" );
+        periodTimes.add( "3:00pm - 4:00pm" ); 
+        periodTimes.add( "4:00pm - 5:00pm" );
+        periodTimes.add( "5:00pm - 6:00pm" );
+       
     }
     
     /**
@@ -43,10 +54,8 @@ public class FindMeeting {
     public boolean processFormData( HttpServletRequest request ) {
         boolean isValid = true;
         
-        eventType = request.getParameter( "eventType" );
         stream = request.getParameter( "stream" );
         date = request.getParameter( "date" );
-        recurrence = request.getParameter( "recurrence" );
         
         if( date.equals( "" ) ) {
             isValid = false;
@@ -192,17 +201,28 @@ public class FindMeeting {
     } 
     
     public String pickAvailablePeriodFrom( ) {
+        getPeriodTimes( );
+        
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                      + "<h3>Free Periods</h2>";    
+                      + "<h3>Free Periods</h3>";    
      
-        int count = currentFreePeriods.size( );
-        for( int i = 0; i < count; i++ ) {
-            int value = currentFreePeriods.get( i );
-
-                form += "<label for=\"free_period\">Period " + value + "</label>\n"
-                      + "<input type=\"radio\" name=\"free_period\" value=\"" + value + "\" /><br />";
+        int counter = 0;
+        for( int i = 0; i <= 9; i++ ) {
+            
+            if( currentFreePeriods.contains( i + 1) ) {
+                if( counter == 0 ) {
+                    System.out.println( "First if" + counter );
+                    
+                    form += "<label for=\"free_period\"> " + periodTimes.get( i ) + "</label>\n"
+                          + "<input type=\"radio\" name=\"free_period\" value=\"" + periodTimes.get( i ) + "\" checked=\"checked\"/><br />";
+                    counter++;
+                }
+                else {
+                    form += "<label for=\"free_period\"> " + periodTimes.get( i ) + "</label>\n"
+                          + "<input type=\"radio\" name=\"free_period\" value=\"" + periodTimes.get( i ) + "\" /><br />";
+                }
+            }
         }
-                
                 form += "<input type=\"submit\" name=\"accept_slot\" value=\"Accept Slot!\" />\n"
                     + "</form>";
               
@@ -215,13 +235,7 @@ public class FindMeeting {
     * a student, they can only make meetings with other classmates.
     * @return form
     */
-    public String findMeetingForm( HttpServletRequest request ) {
-        String choosenPeriod = request.getParameter( "free_period" );
-        
-        if( choosenPeriod == null ) {
-            System.out.println( "The choosen period was not set!!!!!!!!!!!!!!!!" );
-        }
-        
+    public String findMeetingForm( ) {
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
 
                         + "<label for='stream'>Stream:</label>\n"
@@ -242,7 +256,7 @@ public class FindMeeting {
                         + "</select><br />"
 
                         + "<label for=\"date\">Preferred Day:</label>\n"
-                        + "<input id='dropdown' type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
 
                         + "<input type='submit' value='Search Availability' name='find_meeting' /><br />\n"
                     + "</form>\n";
