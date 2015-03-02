@@ -47,7 +47,7 @@
                     String userId = (String) session.getAttribute( "Authenticated" );
                     
                     if( request.getParameter( "submit" ) == null ) {
-                        out.print( meeting.addMeetingForm( userId ) );
+                        out.print( meeting.addMeetingForm( userId, request ) );
                     }
                     else {
                         if( meeting.validateMeetingForm( userId ) ) {
@@ -55,7 +55,7 @@
                             out.print( "<a href='timetable.jsp'>Back to Timetable!</a>" );
                         }
                         else {
-                            out.print( meeting.addMeetingForm( userId ) );
+                            out.print( meeting.addMeetingForm( userId, request ) );
                             out.print( meeting.errors( ) );
                         }
                     }

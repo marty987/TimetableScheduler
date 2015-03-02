@@ -4,8 +4,9 @@ package application;
  * @author Martin Bullman 112735341
  * @since Feb 8, 2015, 12:56:25 PM
  */
-import dbpackage.DatabaseClass;
 import java.util.ArrayList;
+import dbpackage.DatabaseClass;
+import javax.servlet.http.HttpServletRequest;
 
 public class AddMeeting {
     private String eventName;
@@ -303,7 +304,13 @@ public class AddMeeting {
      * @param userId
      * @return form (string)
      */
-    public String addMeetingForm( String userId ) {
+    public String addMeetingForm( String userId, HttpServletRequest request ) {
+        String choosenPeriod = request.getParameter( "free_period" );
+        
+        if( choosenPeriod != null ) {
+            System.out.println( "The free period was not set !!!!!!!!!!!!!!!!!!" );
+        }
+        
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n"
                         + "<label for=\"eventName\">Event Name:</label>\n"
                         + "<input type=\"text\" name=\"eventName\" value=\"" + eventName + "\" placeholder=\"e.g. Team Meeting\"/><br />\n"

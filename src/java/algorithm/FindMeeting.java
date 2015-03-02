@@ -215,13 +215,7 @@ public class FindMeeting {
     * a student, they can only make meetings with other classmates.
     * @return form
     */
-    public String findMeetingForm( HttpServletRequest request ) {
-        String choosenPeriod = request.getParameter( "free_period" );
-        
-        if( choosenPeriod == null ) {
-            System.out.println( "The choosen period was not set!!!!!!!!!!!!!!!!" );
-        }
-        
+    public String findMeetingForm(  ) {
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
                         + "<label for=\"eventType\">Event Type:</label>\n"
                         + "<select name=\"eventType\" >\n"
