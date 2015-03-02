@@ -113,7 +113,7 @@ public class FindMeeting {
      * @return an array of period slots that correspond to times of events that the member has
      * on the given day. (Integers)
      */
-    public int[] getMembersEvents( int memberNumber ){
+    public int[] getEventTimes( int memberNumber ){
         String member = groupMembers[memberNumber];
          
         int[] otherEvents = database.SelectIntColumn( "SELECT period "
@@ -159,7 +159,7 @@ public class FindMeeting {
             System.out.println( "Member: " + currentMember );
             
             int[] lectureTimes = getLectureTimes(  );
-            int[] eventTimes = getMembersEvents( currentMember );  
+            int[] eventTimes = getEventTimes( currentMember );  
             
             for( int period = 1; period < 11; period++ ) {   
                 System.out.println( "period: " + period + " - is already taken: " + intIsInArray( period, lectureTimes ));
@@ -173,8 +173,8 @@ public class FindMeeting {
                     System.out.println( "Free period " + period );
                     
                     if( ! intIsInArray( period, eventTimes ) ) {
-                        System.out.println( "added new free period: " + period );
                         if( ! currentFreePeriods.contains( period ) && ! busyPeriods.contains( period ) ) {
+                            System.out.println( "added new free period: " + period );
                             currentFreePeriods.add( period );
                         }
                     }
@@ -193,16 +193,17 @@ public class FindMeeting {
     
     public String pickAvailablePeriodFrom( ) {
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                    + "<h3>Free Periods</h2><br />";    
-        
-                for( int i = 1; i < 10; i++ ) {
-                    if( currentFreePeriods.contains( i ) ) {
-                        form += "<label for=\"free_periods\">Period " + currentFreePeriods.get( i ) + "</label>\n"
-                              + "<input type=\"radio\" name=\"free_periods\" value=\"" + currentFreePeriods.get( i )  + "\" /><br />";
-                    }
-                }
+                      + "<h3>Free Periods</h2><br />";    
+     
+        int count = currentFreePeriods.size( );
+        for( int i = 0; i < count; i++ ) {
+            int value = currentFreePeriods.get( i );
+
+                form += "<label for=\"free_periods\">Period " + value + "</label>\n"
+                      + "<input type=\"radio\" name=\"free_periods\" value=\"" + value + "\" /><br />";
+        }
                 
-              form += "<input type=\"submit\" name=\"accept_slot\" value=\"Accept Slot!\" />\n"
+                form += "<input type=\"submit\" name=\"accept_slot\" value=\"Accept Slot!\" />\n"
                     + "</form>";
               
         return form;
