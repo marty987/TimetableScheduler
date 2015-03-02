@@ -193,14 +193,14 @@ public class FindMeeting {
     
     public String pickAvailablePeriodFrom( ) {
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                      + "<h3>Free Periods</h2><br />";    
+                      + "<h3>Free Periods</h2>";    
      
         int count = currentFreePeriods.size( );
         for( int i = 0; i < count; i++ ) {
             int value = currentFreePeriods.get( i );
 
-                form += "<label for=\"free_periods\">Period " + value + "</label>\n"
-                      + "<input type=\"radio\" name=\"free_periods\" value=\"" + value + "\" /><br />";
+                form += "<label for=\"free_period\">Period " + value + "</label>\n"
+                      + "<input type=\"radio\" name=\"free_period\" value=\"" + value + "\" /><br />";
         }
                 
                 form += "<input type=\"submit\" name=\"accept_slot\" value=\"Accept Slot!\" />\n"
@@ -215,7 +215,13 @@ public class FindMeeting {
     * a student, they can only make meetings with other classmates.
     * @return form
     */
-    public String findMeetingForm( ) {
+    public String findMeetingForm( HttpServletRequest request ) {
+        String choosenPeriod = request.getParameter( "free_period" );
+        
+        if( choosenPeriod == null ) {
+            System.out.println( "The choosen period was not set!!!!!!!!!!!!!!!!" );
+        }
+        
         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
                         + "<label for=\"eventType\">Event Type:</label>\n"
                         + "<select name=\"eventType\" >\n"
