@@ -101,6 +101,12 @@
             %>
         </section>
         
+        <section>
+            <%
+                
+            %>
+        </section>
+        
         <%
              out.print( gui.footer() );
         %>
