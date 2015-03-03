@@ -190,6 +190,12 @@ public class AddMeeting {
     public boolean validateMeetingForm( final String userId ) {
         boolean isValid = true;
 
+        if(isPeriodFree(period, startDate)) {
+            errors.add( "Time slot taken" );
+            isValid = false;
+            period = "";
+        }
+        
         if( eventName.equals ("") ){
             errors.add( "Event Name required");
             isValid = false;
@@ -254,6 +260,23 @@ public class AddMeeting {
         errorList += "</ul>";
         
         return errorList;
+    }
+    
+    /**
+     * Function to ensure there are no duplicates entered into the table (events)
+     * @param period.
+     * @param startDate.
+     * @return boolean.
+     */
+    public boolean isPeriodFree(String period, String startDate) {
+        String[] dbResult = database.SelectRow("SELECT * FROM events "
+                            + "WHERE period ='"+ period 
+                            +"'AND start_date = '"+ startDate +"';");
+        
+	if(dbResult.length != 0){
+		return true;
+	}
+        return false;
     }
     
     /**

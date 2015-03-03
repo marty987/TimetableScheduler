@@ -38,12 +38,8 @@ public class Timetable {
         startOfWeek = getMondayOfWeek();
         endOfWeek = getSundayOfWeek();
         
-        this.database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
         this.timetableValues = new String[][]{
-            {"<th></th>", "<th scope=\"col\">Mon " + startOfWeek.getTime() + "</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
+            {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
             {"<th scope=\"row\">8AM - 9AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">9AM - 10AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">10AM - 11AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
@@ -117,7 +113,7 @@ public class Timetable {
         Calendar startDateAsCal = Calendar.getInstance();
         Calendar endDateAsCal = Calendar.getInstance();
         int dayOfEvent;
-        timetableValues[0][0] = "<th>";
+        
         //iterate through the user's events 
         for ( int i = 0; i < myEvents.size(); i++ ) {
             
@@ -135,7 +131,7 @@ public class Timetable {
                     //non-recurring events or weekly recurring events
                 {
                      timetableValues[myEvent.getPeriod()][dayOfEvent]                          
-                                = "<td>" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
+                                = "<td><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
                 } 
                 else
                     //monthly recurring events
@@ -144,7 +140,6 @@ public class Timetable {
                     for( Calendar j = mondayDateAsCal; j.compareTo(sundayDateAsCal) <= 0 ; j.add(Calendar.DATE, 1)){
 
                         if ( j.get(Calendar.DAY_OF_MONTH) == startDateAsCal.get(Calendar.DAY_OF_MONTH)){
-                           // timetableValues[0][0] += " " + myEvent.getEventName() + " ;";
                             timetableValues[myEvent.getPeriod()][dayOfEvent] 
                                 = "<td>" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
                         }
@@ -153,7 +148,6 @@ public class Timetable {
                 } 
             }    
         }
-        timetableValues[0][0] += "</th>";
     }
     /**
      * Function to print the timetable.

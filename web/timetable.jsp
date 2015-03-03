@@ -9,6 +9,7 @@
 <%@ page import="algorithm.FindMeeting;" %>
 <%@ page import="application.Timetable;" %>
 <%@ page import="guipackage.GUI;"%>
+<%@ page import="chatpackage.FriendRequests;"%>
 <%@ page import="java.util.ArrayList;"%>
 
 
@@ -119,15 +120,20 @@
                     notify.hasSeen( request );
                     response.sendRedirect( "timetable.jsp" );
                 }
-                out.print( "</div>" );
+//                out.print( "</div>" );
             %>
         </section>
         
-        <section>
-            <%
-                
-            %>
-        </section>
+<!--        <section>
+//            <%
+//                FriendRequests friends = new FriendRequests();
+//                out.print(friends.getFriendsAndRequests((String)session.getAttribute("Authenticated")));
+//                
+//                // lots of stuff to do
+//                
+//                out.print( "</div>" );
+//            %>
+        </section> -->
         
         <%
              out.print( gui.footer() );
