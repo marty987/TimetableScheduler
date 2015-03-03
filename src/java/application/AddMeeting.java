@@ -322,7 +322,7 @@ public class AddMeeting {
         String[] userStream = database.SelectRow("SELECT stream FROM users WHERE user_id ='"+ userId +"';");
         return userStream[0];
     }
-    
+
     /**
      * Form used to add a meeting.
      * @param userId
@@ -330,10 +330,14 @@ public class AddMeeting {
      */
     public String addMeetingForm( String userId, HttpServletRequest request ) {
         String choosenPeriod = request.getParameter( "free_period" );
-        String choosenStream= request.getParameter( "pick_stream" );
+        String choosenStream = request.getParameter( "pick_stream" );
         String choosenDate = request.getParameter( "date" );
         
-        System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + stream );
+        FindMeeting meeting = new FindMeeting( );
+        int index = meeting.getTimePeriodIndex( choosenPeriod );
+        
+        System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
+        
         
         if( choosenPeriod != null ) {
             System.out.println( "The free period was not set !!!!!!!!!!!!!!!!!!" );
@@ -371,15 +375,9 @@ public class AddMeeting {
         }    
         
         if ( choosenPeriod != null ) {
-               FindMeeting meetings = new FindMeeting( );
-               ArrayList<String> times = meetings.getPeriodTimes( );
-//               int index = times.indexOf( period + 1 );
-//               String time = times.get( index );
-               
-            
                form +=    "<label for=\"period\">Period:</label>\n"
                         + "<select name=\"period\" id='dropdown' disabled>" 
-                        + "  <option value=\"1\" selected>8:00 - 9:00</option>"
+                        + "  <option value=\"" + index + "\" selected>" + choosenPeriod + "</option>"
                         + "</select><br />"
             
                         + "<label for=\"startDate\">Start Date:</label>\n"
@@ -389,15 +387,15 @@ public class AddMeeting {
                form +=    "<label for=\"period\">Period:</label>\n"
                         + "<select name=\"period\" id='dropdown'>" 
                         + "  <option value=\"1\" selected>8:00 - 9:00</option>" 
-                        + "  <option value=\"2\">9:00 - 10:00</option>" 
-                        + "  <option value=\"3\">10:00 - 11:00</option>" 
-                        + "  <option value=\"4\">11:00 - 12:00</option>"
-                        + "  <option value=\"5\">12:00 - 13:00</option>" 
-                        + "  <option value=\"6\">13:00 - 14:00</option>" 
-                        + "  <option value=\"7\">14:00 - 15:00</option>" 
-                        + "  <option value=\"8\">15:00 - 16:00</option>" 
-                        + "  <option value=\"9\">16:00 - 17:00</option>" 
-                        + "  <option value=\"10\">17:00 - 18:00</option>" 
+                        + "  <option value=\"2\">9:00am - 10:00am</option>" 
+                        + "  <option value=\"3\">10:00am - 11:00am</option>" 
+                        + "  <option value=\"4\">11:00am - 12:00pm</option>"
+                        + "  <option value=\"5\">12:00pm - 1:00pm</option>" 
+                        + "  <option value=\"6\">1:00pm - 2:00pm</option>" 
+                        + "  <option value=\"7\">2:00pm - 3:00pm</option>" 
+                        + "  <option value=\"8\">3:00pm - 4:00pm</option>" 
+                        + "  <option value=\"9\">4:00pm - 5:00pm</option>" 
+                        + "  <option value=\"10\">5:00pm - 6:00pm</option>" 
                         + "</select><br />"
                
                         + "<label for=\"startDate\">Start Date:</label>\n"

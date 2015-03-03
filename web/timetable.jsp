@@ -88,7 +88,7 @@
                         if( meeting.checkGroupMembers( ) ) {
                             
                             ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( request );
-                            out.print(freeMeetingPeriods);
+                            out.print( freeMeetingPeriods );
                         }
                         else 
                         {
