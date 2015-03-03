@@ -83,6 +83,8 @@
                 Timetable timetable = new Timetable( );
                 out.print( timetable.printTimetable( username ) );      
                 out.print( "</div>" );
+                session.setAttribute("eventId", timetable.getEventId());
+                session.setAttribute("eventName", timetable.getEventName());
             }
         %>  
 

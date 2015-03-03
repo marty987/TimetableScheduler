@@ -16,13 +16,18 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
     </head>
     <body>
+        <jsp:useBean id="delete" class="application.Delete" scope="request" />
         <%
           GUI gui = new GUI( );  
           out.print( gui.header( false, "blank", "blank" ) );
           if( session.getAttribute( "Authenticated" ) == null ) {
                 response.sendRedirect( "index.jsp" );
           } else {
-              
+              int eventId = (Integer) session.getAttribute( "eventId" );
+              String eventName = (String) session.getAttribute( "eventName" );
+              out.println(eventId);
+              out.println(eventName);
+//              delete.printDeleteForm(eventId, eventName);
           }
           out.print( gui.footer() );
         %>

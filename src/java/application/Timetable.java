@@ -52,6 +52,15 @@ public class Timetable {
             {"<th scope=\"row\">5PM - 6PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"}
         };
     }
+    
+    public int getEventId() {
+        return eventId;
+    }
+    
+    public String getEventName() {
+        return eventName;
+    }
+    
     /**
      * Function that contacts the database and gets the relevant events for the user that is 
      * logged in.
@@ -130,8 +139,9 @@ public class Timetable {
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
-                     timetableValues[myEvent.getPeriod()][dayOfEvent]                          
-                                = "<td><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
+                    
+                    timetableValues[myEvent.getPeriod()][dayOfEvent]                          
+                                = "<td><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
                 } 
                 else
                     //monthly recurring events
