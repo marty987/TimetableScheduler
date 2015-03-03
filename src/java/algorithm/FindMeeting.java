@@ -54,7 +54,7 @@ public class FindMeeting {
     public boolean processFormData( HttpServletRequest request ) {
         boolean isValid = true;
         
-        stream = request.getParameter( "stream" );
+        stream = request.getParameter( "pick_stream" );
         date = request.getParameter( "date" );
         
         if( date.equals( "" ) ) {
