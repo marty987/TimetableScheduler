@@ -32,10 +32,8 @@ public class FindMeeting {
         this.periodTimes = new ArrayList<>( );
         this.currentFreePeriods = new ArrayList<>( );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-    }
-    
-    public void setPeriodTimes( ) {
-        periodTimes.add( "8:00am - 9:00am" );
+        
+        periodTimes.add( "8:00am-9:00am" );
         periodTimes.add( "9:00am - 10:00am" );
         periodTimes.add( "10:00am - 11:00am" );
         periodTimes.add( "11:00am - 12:00am" );
@@ -45,7 +43,6 @@ public class FindMeeting {
         periodTimes.add( "3:00pm - 4:00pm" ); 
         periodTimes.add( "4:00pm - 5:00pm" );
         periodTimes.add( "5:00pm - 6:00pm" );
-       
     }
     
     public ArrayList<String> getPeriodTimes() {
@@ -227,9 +224,21 @@ public class FindMeeting {
         return currentFreePeriods;
     } 
     
-    public String pickAvailablePeriodFrom( String stream, String date ) {
-        setPeriodTimes( );
+    public int getTimePeriodIndex( String period ) {
+        int index = 0;
         
+        for( int i = 0; i < periodTimes.size(); i++ ){
+            if( periodTimes.get( i ).equals( period ) )
+            {
+                index = i;
+                return index + 1;
+            }
+        }
+        
+        return index;
+    }
+    
+    public String pickAvailablePeriodFrom( String stream, String date ) {
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
                       + "<h3>Free Periods</h3>"   
                       + "<input type=\"hidden\" name=\"pick_stream\" value=\"" + stream + "\" />" 
