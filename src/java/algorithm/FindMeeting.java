@@ -11,6 +11,7 @@ public class FindMeeting {
     private String date; 
     private String stream;
     private String[] groupMembers;
+    private String[] privateGroupMembers;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
     private ArrayList<String> periodTimes;
@@ -24,6 +25,7 @@ public class FindMeeting {
     public FindMeeting( ) {
         this.date = "";
         this.stream = "";
+        this.privateGroupMembers = new String[5];
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         this.busyPeriods = new ArrayList<>( );
@@ -32,7 +34,7 @@ public class FindMeeting {
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
-    public void getPeriodTimes( ) {
+    public void setPeriodTimes( ) {
         periodTimes.add( "8:00am - 9:00am" );
         periodTimes.add( "9:00am - 10:00am" );
         periodTimes.add( "10:00am - 11:00am" );
@@ -51,7 +53,7 @@ public class FindMeeting {
      * to be taken from the form and used globally in the class
      * @param request Form.
      */
-    public boolean processFormData( HttpServletRequest request ) {
+    public boolean processFindSlotFormData( HttpServletRequest request ) {
         boolean isValid = true;
         
         stream = request.getParameter( "pick_stream" );
@@ -81,6 +83,21 @@ public class FindMeeting {
         
         return errorList;
     }
+    
+    /**
+     * Function to check is logged in user is a lecturer/administrative staff member or student.
+     * @param userId
+     * @return true if lecturer or administrative staff member and false if otherwise.
+     */
+    public boolean isLecturer( String userId ) {
+        String[] dbResult = database.SelectRow( "SELECT is_admin FROM users WHERE user_id = '" + userId + "';" );
+        //database.Close( );
+        
+        if( dbResult.length == 0 || dbResult[0].equals("0")) {
+            return false;
+        } 
+        return true;
+    }
 
     /**
      * Function to get the group members of a certain stream. The stream is whatever 
@@ -104,8 +121,8 @@ public class FindMeeting {
      * @return array of the period slots which lectures occur in a given day. Day defined using the 
      * global variable 'start_date' chosen through the form. (Integers)
      */
-    public int[] getLectureTimes(  ){ 
-        String member = groupMembers[0];
+    public int[] getLectureTimes( int memberNumber ){ 
+        String member = groupMembers[ memberNumber ];
         
         int[] lectureTimes = database.SelectIntColumn( "SELECT period "
                                                      + "FROM events JOIN has_events JOIN users "
@@ -147,6 +164,10 @@ public class FindMeeting {
                 if( ! busyPeriods.contains( period ) ) {
                     busyPeriods.add( period );
                 }
+                if( currentFreePeriods.contains( period ) ) {
+                    int index = currentFreePeriods.indexOf( period );
+                        currentFreePeriods.remove( index );
+                    }
                 return true;
             }
         }
@@ -160,30 +181,32 @@ public class FindMeeting {
      * @return period during the start_date day that is free for all members of the stream.
      * represented by an integer.
      */
-    public ArrayList<Integer> getFreeSlot(  ) {
+    public ArrayList<Integer> getFreeSlot( HttpServletRequest request ) {
         int currentMember = 0;
-        groupMembers = getGroupMembers( );
+        
+        if( request.getParameter("checker") != null){
+            groupMembers = privateGroupMembers;
+            System.out.println( "Group Members: " + Arrays.toString( groupMembers ) ); 
+        }else{
+            groupMembers = getGroupMembers( );
+        }
                   
         while( currentMember < groupMembers.length ) {
             System.out.println( "Member: " + currentMember );
             
-            int[] lectureTimes = getLectureTimes(  );
+            int[] lectureTimes = getLectureTimes( currentMember );
             int[] eventTimes = getEventTimes( currentMember );  
             
             for( int period = 1; period < 11; period++ ) {   
                 System.out.println( "period: " + period + " - is already taken: " + intIsInArray( period, lectureTimes ));
 
                 if( intIsInArray( period, lectureTimes ) ) {
-                    if( currentFreePeriods.contains( period ) ) {
-                        currentFreePeriods.remove( period );
-                    }
+                    
                 }
                 else {
-                    System.out.println( "Free period " + period );
-                    
                     if( ! intIsInArray( period, eventTimes ) ) {
                         if( ! currentFreePeriods.contains( period ) && ! busyPeriods.contains( period ) ) {
-                            System.out.println( "added new free period: " + period );
+                            System.out.println( "New free period: " + period );
                             currentFreePeriods.add( period );
                         }
                     }
@@ -201,7 +224,7 @@ public class FindMeeting {
     } 
     
     public String pickAvailablePeriodFrom( String stream, String date ) {
-        getPeriodTimes( );
+        setPeriodTimes( );
         
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
                       + "<h3>Free Periods</h3>"   
@@ -238,8 +261,7 @@ public class FindMeeting {
     * @return form
     */
     public String findMeetingForm( ) {
-        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
-
+        String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n"
                         + "<label for='pick_stream'>Stream:</label>\n"
                         + "<select id='dropdown' name=\"pick_stream\" >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
@@ -260,9 +282,78 @@ public class FindMeeting {
                         + "<label for=\"date\">Preferred Day:</label>\n"
                         + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
 
-                        + "<input type='submit' value='Search Availability' name='find_meeting' /><br />\n"
+                        + "<input type='submit' value='Search Availability!' name='find_meeting' /><br />\n"
                     + "</form>\n";
 
         return form;
     }
+
+    public boolean checkGroupMembers( ){
+        for( int i = 0; i < 5; i++){
+            if( ! privateGroupMembers[i].equals( "" ) ) {
+                String[] dbResult = database.SelectRow("SELECT * FROM users WHERE user_id = '" + privateGroupMembers[i] + "';");
+                if(dbResult.length == 0){
+                    //user doesn't exist in database
+                    System.out.println( dbResult[0] );
+                }
+            }
+        }
+        
+        System.out.println(  );
+        return true;
+    }
+    
+    public boolean validatePrivateGroupForm( HttpServletRequest request ) {
+        boolean isValid = true;
+        
+        privateGroupMembers[0] = request.getParameter( "member1" );
+        privateGroupMembers[1] = request.getParameter( "member2" );
+        privateGroupMembers[2] = request.getParameter( "member3" );
+        privateGroupMembers[3] = request.getParameter( "member4" );
+        privateGroupMembers[4] = request.getParameter( "member5" );      
+        date = request.getParameter( "group_date" );
+        
+        if( privateGroupMembers[0].equals("") || privateGroupMembers[1].equals("") ) {
+            isValid = false;
+            errors.add("Must have at least two members to create a group!");
+        }
+        if( date.equals( "" ) ) {
+            isValid = false;
+            errors.add("Date is required!");
+        }
+
+        return isValid;
+    }
+    
+    public String groupFrom( ) {
+         String form = "<form name=\"find_meeting\" action=\"timetable.jsp\" method=\"POST\">\n" 
+                        + "<h4>Create Personal Group Event</h4>"
+                 
+                        + "<input type=\"hidden\" name=\"checker\"/><br />\n"
+                        
+                        + "<label for='member1'>Member 1:</label>\n"
+                        + "<input type=\"text\" name=\"member1\" value=\"" + ( privateGroupMembers[0] != null ? privateGroupMembers[0] : "" ) + "\" placeholder=\"Student 1\"/><br />\n"
+                 
+                        + "<label for='member2'>Member 2:</label>\n"
+                        + "<input type=\"text\" name=\"member2\" value=\"" + ( privateGroupMembers[1] != null ? privateGroupMembers[1] : "" ) + "\" placeholder=\"Student 2\"/><br />\n"
+                 
+                        + "<label for='member3'>Member 3:</label>\n"
+                        + "<input type=\"text\" name=\"member3\" value=\"" + ( privateGroupMembers[2] != null ? privateGroupMembers[2] : "" ) + "\" placeholder=\"Student 3\"/><br />\n"
+                 
+                        + "<label for='member4'>Member 4:</label>\n"
+                        + "<input type=\"text\" name=\"member4\" value=\"" + ( privateGroupMembers[3] != null ? privateGroupMembers[3] : "" ) + "\" placeholder=\"Student 4\"/><br />\n"
+                 
+                        + "<label for='member5'>Member 5:</label>\n"
+                        + "<input type=\"text\" name=\"member5\" value=\"" + ( privateGroupMembers[4] != null ? privateGroupMembers[4] : "" ) + "\" placeholder=\"Student 5\"/><br />\n"
+                 
+                        + "<label for=\"group_date\">Preferred Day:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"group_date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
+
+                        + "<input type='submit' value='Create Personal Group Event!' name='get_members' /><br />\n"
+                    + "</form>\n";
+
+        return form;
+    }
+    
+    
 }
