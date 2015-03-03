@@ -139,9 +139,9 @@ public class Timetable {
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
-                    
-                    timetableValues[myEvent.getPeriod()][dayOfEvent]                          
-                                = "<td><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
+
+                   timetableValues[myEvent.getPeriod()][dayOfEvent]                          
+                             = "<td id="+myEvent.getEventID()+"><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
                 } 
                 else
                     //monthly recurring events
