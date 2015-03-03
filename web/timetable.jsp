@@ -52,25 +52,50 @@
                  
                 FindMeeting meeting = new FindMeeting( );
                 
-                if( request.getParameter( "find_meeting" ) == null ){
-                    
-                    out.print( meeting.findMeetingForm(  ) );
-                }
-                else {
-                    if( meeting.processFormData( request ) ) {
-                        ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( );
+                
+                if( meeting.isLecturer( ( String ) session.getAttribute( "Authenticated" ) ) ) {
+                    if( request.getParameter( "find_meeting" ) == null ){
 
-                        if( freeMeetingPeriods.isEmpty( ) ){
-                            out.print( "<p>No free time for group available on this day, Please try another day!</p>" );
+                        out.print( meeting.findMeetingForm(  ) );
+                    }
+                    else {
+                        if( meeting.processFindSlotFormData( request ) ) {
+                            ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( request );
+
+                            if( freeMeetingPeriods.isEmpty( ) ){
+                                out.print( "<p>No free time for group available on this day, Please try another day!</p>" );
+                            }
+                            else{
+                                out.print( freeMeetingPeriods );
+                                out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
+                                //response.sendRedirect( "add_meeting.jsp" );
+                            }
                         }
-                        else{
-                            out.print( freeMeetingPeriods );
-                            out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
-                            //response.sendRedirect( "add_meeting.jsp" );
+                        else {
+                            out.print( meeting.findMeetingForm( ) );
+                            out.print( meeting.errors( ) );
+                        }
+                    }
+                }
+                
+                
+                if( request.getParameter( "get_members" ) == null) {
+                    out.print( meeting.groupFrom(  ) );
+                }   
+                else {
+                    if( meeting.validatePrivateGroupForm( request ) ) {
+                        if( meeting.checkGroupMembers( ) ) {
+                            
+                            ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( request );
+                            out.print(freeMeetingPeriods);
+                        }
+                        else 
+                        {
+                            out.print("<p> One of the members does not exist in the database. Please try again. </p>");
                         }
                     }
                     else {
-                        out.print( meeting.findMeetingForm( ) );
+                        out.print( meeting.groupFrom(  ) );
                         out.print( meeting.errors( ) );
                     }
                 }
