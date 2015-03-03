@@ -43,7 +43,7 @@ public class Timetable {
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
         
         this.timetableValues = new String[][]{
-            {"<th></th>", "<th scope=\"col\">Mon</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
+            {"<th></th>", "<th scope=\"col\">Mon " + startOfWeek.getTime() + "</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
             {"<th scope=\"row\">8AM - 9AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">9AM - 10AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">10AM - 11AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
@@ -195,6 +195,10 @@ public class Timetable {
         return temp.getTime();
     }
     
+    /**
+     * Function to force the DAY_OF_WEEK values to fit our timetable.
+     * @return the day of the week into which our event fits on our timetable.
+     */
     private int fitDayOfWeekToTimetable(int dayOfEvent){
         if (dayOfEvent == 1){
                     dayOfEvent = 7;
@@ -213,6 +217,28 @@ public class Timetable {
         int currentDayOfWeek = tempCal.get(Calendar.DAY_OF_WEEK);
         tempCal.add(Calendar.DATE, 8 - currentDayOfWeek);
         
+        return tempCal.getTime();
+    }
+    
+    /**
+     * Function to get date of this day next week
+     * @return Date object for this day next week.
+     */
+    private Date getNextWeek(){
+        Calendar tempCal = Calendar.getInstance();
+        tempCal.setTime(today);
+        tempCal.add(Calendar.DATE, 7);
+        return tempCal.getTime();
+    }
+    
+    /**
+     * Function to get date of this day next week
+     * @return Date object for this day last week.
+     */
+    private Date getPreviousWeek(){
+        Calendar tempCal = Calendar.getInstance();
+        tempCal.setTime(today);
+        tempCal.add(Calendar.DATE, -7);
         return tempCal.getTime();
     }
 }
