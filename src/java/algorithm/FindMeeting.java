@@ -48,6 +48,10 @@ public class FindMeeting {
        
     }
     
+    public ArrayList<String> getPeriodTimes() {
+        return periodTimes;
+    }
+    
     /**
      * Funtion to set up the servlet for Javascript. Allows the stream and date 
      * to be taken from the form and used globally in the class

@@ -5,6 +5,7 @@ package application;
  * @since Feb 8, 2015, 12:56:25 PM
  */
 import java.util.ArrayList;
+import algorithm.FindMeeting;
 import dbpackage.DatabaseClass;
 import javax.servlet.http.HttpServletRequest;
 
@@ -370,6 +371,12 @@ public class AddMeeting {
         }    
         
         if ( choosenPeriod != null ) {
+               FindMeeting meetings = new FindMeeting( );
+               ArrayList<String> times = meetings.getPeriodTimes( );
+//               int index = times.indexOf( period + 1 );
+//               String time = times.get( index );
+               
+            
                form +=    "<label for=\"period\">Period:</label>\n"
                         + "<select name=\"period\" id='dropdown' disabled>" 
                         + "  <option value=\"1\" selected>8:00 - 9:00</option>"
