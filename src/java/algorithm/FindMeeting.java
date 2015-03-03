@@ -104,8 +104,8 @@ public class FindMeeting {
      * @return array of the period slots which lectures occur in a given day. Day defined using the 
      * global variable 'start_date' chosen through the form. (Integers)
      */
-    public int[] getLectureTimes(  ){ 
-        String member = groupMembers[0];
+    public int[] getLectureTimes( int memberNumber ){ 
+        String member = groupMembers[ memberNumber ];
         
         int[] lectureTimes = database.SelectIntColumn( "SELECT period "
                                                      + "FROM events JOIN has_events JOIN users "
@@ -153,6 +153,21 @@ public class FindMeeting {
          
         return false;
     }
+    
+    public int getIntIndex( ArrayList<Integer> list ) {
+        int index = 0;
+        
+        for( int i = 0; i < list.size( ); i++ ) {
+            index = list.get( i );
+            
+//            if( itemName.equals( auction.getname( ) )
+//            {
+//                return i;
+//            }
+        }
+        
+        return index;
+    }
      
     /**
      * Function designed to get a free slot that could be used for a meeting based on the timetables
@@ -167,7 +182,7 @@ public class FindMeeting {
         while( currentMember < groupMembers.length ) {
             System.out.println( "Member: " + currentMember );
             
-            int[] lectureTimes = getLectureTimes(  );
+            int[] lectureTimes = getLectureTimes( currentMember );
             int[] eventTimes = getEventTimes( currentMember );  
             
             for( int period = 1; period < 11; period++ ) {   
@@ -175,7 +190,8 @@ public class FindMeeting {
 
                 if( intIsInArray( period, lectureTimes ) ) {
                     if( currentFreePeriods.contains( period ) ) {
-                        currentFreePeriods.remove( period );
+                        int index = currentFreePeriods.indexOf( period );
+                        currentFreePeriods.remove( index );
                     }
                 }
                 else {
