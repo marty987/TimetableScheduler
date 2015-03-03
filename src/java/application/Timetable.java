@@ -100,6 +100,7 @@ public class Timetable {
                 Event event = new Event(eventId, eventName, eventType, stream, period, startDate, endDate, recurrence, moduleCode, location, description);
                 myEvents.add(event);
             }   
+             
         }
     
         database.Close();
@@ -116,7 +117,7 @@ public class Timetable {
         Calendar startDateAsCal = Calendar.getInstance();
         Calendar endDateAsCal = Calendar.getInstance();
         int dayOfEvent;
-        
+        timetableValues[0][0] = "<th>";
         //iterate through the user's events 
         for ( int i = 0; i < myEvents.size(); i++ ) {
             
@@ -124,15 +125,11 @@ public class Timetable {
             startDateAsCal.setTime(myEvent.getStartDate());
             endDateAsCal.setTime(myEvent.getEndDate());
             dayOfEvent = startDateAsCal.get(Calendar.DAY_OF_WEEK);
-            if((startDateAsCal.compareTo(sundayDateAsCal) <= 0 && (endDateAsCal.compareTo(mondayDateAsCal) >= 0)))
+            
+            if(!((startDateAsCal.compareTo(sundayDateAsCal) > 0) && !((endDateAsCal.compareTo(mondayDateAsCal) < 0))))
             { //occurs this week
-              
                 //to force days of the week correspond to our timetable layout
-                if (dayOfEvent == 1){
-                    dayOfEvent = 7;
-                } else {
-                    dayOfEvent--;
-                }
+                dayOfEvent = fitDayOfWeekToTimetable(dayOfEvent);
                 
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
@@ -143,16 +140,20 @@ public class Timetable {
                 else
                     //monthly recurring events
                 {
+                    
                     for( Calendar j = mondayDateAsCal; j.compareTo(sundayDateAsCal) <= 0 ; j.add(Calendar.DATE, 1)){
-                        if ( j.get(Calendar.DAY_OF_MONTH) == startDateAsCal.get(Calendar.DAY_OF_MONTH)){
 
+                        if ( j.get(Calendar.DAY_OF_MONTH) == startDateAsCal.get(Calendar.DAY_OF_MONTH)){
+                           // timetableValues[0][0] += " " + myEvent.getEventName() + " ;";
                             timetableValues[myEvent.getPeriod()][dayOfEvent] 
                                 = "<td>" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
                         }
                     }
+                  mondayDateAsCal.setTime(startOfWeek);  
                 } 
-            }
+            }    
         }
+        timetableValues[0][0] += "</th>";
     }
     /**
      * Function to print the timetable.
@@ -162,8 +163,6 @@ public class Timetable {
         
         fetchEventsFromDB( userId );
         addEventsToTimetable( );
-        
-        timetableValues [0][0] = "<th>" + myEvents.size() + "</th>";
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
@@ -195,6 +194,16 @@ public class Timetable {
         
         return temp.getTime();
     }
+    
+    private int fitDayOfWeekToTimetable(int dayOfEvent){
+        if (dayOfEvent == 1){
+                    dayOfEvent = 7;
+                } else {
+                    dayOfEvent--;
+                }
+        return dayOfEvent;
+    }
+    
     /**
      * Function to get the last day of the week (Sunday) for display purposes.
      * @return the variable date (Date instance)
