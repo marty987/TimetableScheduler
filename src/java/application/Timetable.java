@@ -135,7 +135,7 @@ public class Timetable {
                 } else {
                     dayOfEvent--;
                 }
-                timetableValues[0][0] += " " + ;
+                timetableValues[0][0] += " ";
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
