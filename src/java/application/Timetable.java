@@ -126,16 +126,13 @@ public class Timetable {
             startDateAsCal.setTime(myEvent.getStartDate());
             endDateAsCal.setTime(myEvent.getEndDate());
             dayOfEvent = startDateAsCal.get(Calendar.DAY_OF_WEEK);
-            if((startDateAsCal.compareTo(sundayDateAsCal) <= 0 && (endDateAsCal.compareTo(mondayDateAsCal) >= 0)))
+            
+            if(!((startDateAsCal.compareTo(sundayDateAsCal) > 0) && !((endDateAsCal.compareTo(mondayDateAsCal) < 0))))
             { //occurs this week
-              timetableValues[0][0] += myEvents.get(i).getEventName() + " ;";
                 //to force days of the week correspond to our timetable layout
-                if (dayOfEvent == 1){
-                    dayOfEvent = 7;
-                } else {
-                    dayOfEvent--;
-                }
-                timetableValues[0][0] += " ";
+                dayOfEvent = fitDayOfWeekToTimetable(dayOfEvent);
+                timetableValues[0][0] += myEvents.get(i).getEventName() + " ;";
+                
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
@@ -196,6 +193,16 @@ public class Timetable {
         
         return temp.getTime();
     }
+    
+    private int fitDayOfWeekToTimetable(int dayOfEvent){
+        if (dayOfEvent == 1){
+                    dayOfEvent = 7;
+                } else {
+                    dayOfEvent--;
+                }
+        return dayOfEvent;
+    }
+    
     /**
      * Function to get the last day of the week (Sunday) for display purposes.
      * @return the variable date (Date instance)
