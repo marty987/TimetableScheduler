@@ -43,8 +43,8 @@ public class Timetable {
             {"<th scope=\"row\">8AM - 9AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">9AM - 10AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">10AM - 11AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
-            {"<th scope=\"row\">11AM - 12AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
-            {"<th scope=\"row\">12AM - 1PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
+            {"<th scope=\"row\">11AM - 12PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
+            {"<th scope=\"row\">12PM - 1PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">1PM - 2PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">2PM - 3PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
             {"<th scope=\"row\">3PM - 4PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
@@ -52,6 +52,15 @@ public class Timetable {
             {"<th scope=\"row\">5PM - 6PM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"}
         };
     }
+    
+    public int getEventId() {
+        return eventId;
+    }
+    
+    public String getEventName() {
+        return eventName;
+    }
+    
     /**
      * Function that contacts the database and gets the relevant events for the user that is 
      * logged in.
@@ -130,8 +139,9 @@ public class Timetable {
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
-                     timetableValues[myEvent.getPeriod()][dayOfEvent]                          
-                                = "<td><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
+
+                   timetableValues[myEvent.getPeriod()][dayOfEvent]                          
+                             = "<td id=\""+myEvent.getEventID()+"\"><a href=\"delete.jsp\" id=\""+myEvent.getEventID()+"\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
                 } 
                 else
                     //monthly recurring events
