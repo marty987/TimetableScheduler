@@ -117,9 +117,8 @@ public class Timetable {
         Calendar startDateAsCal = Calendar.getInstance();
         Calendar endDateAsCal = Calendar.getInstance();
         int dayOfEvent;
-        
-        //iterate through the user's events 
         timetableValues[0][0] = "<th>";
+        //iterate through the user's events 
         for ( int i = 0; i < myEvents.size(); i++ ) {
             
             myEvent = myEvents.get(i);
@@ -131,7 +130,6 @@ public class Timetable {
             { //occurs this week
                 //to force days of the week correspond to our timetable layout
                 dayOfEvent = fitDayOfWeekToTimetable(dayOfEvent);
-                timetableValues[0][0] += myEvents.get(i).getEventName() + " ;";
                 
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
@@ -142,15 +140,18 @@ public class Timetable {
                 else
                     //monthly recurring events
                 {
+                    
                     for( Calendar j = mondayDateAsCal; j.compareTo(sundayDateAsCal) <= 0 ; j.add(Calendar.DATE, 1)){
-                        if ( j.get(Calendar.DAY_OF_MONTH) == startDateAsCal.get(Calendar.DAY_OF_MONTH)){
 
+                        if ( j.get(Calendar.DAY_OF_MONTH) == startDateAsCal.get(Calendar.DAY_OF_MONTH)){
+                           // timetableValues[0][0] += " " + myEvent.getEventName() + " ;";
                             timetableValues[myEvent.getPeriod()][dayOfEvent] 
                                 = "<td>" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>"; 
                         }
                     }
+                  mondayDateAsCal.setTime(startOfWeek);  
                 } 
-            }
+            }    
         }
         timetableValues[0][0] += "</th>";
     }
