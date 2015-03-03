@@ -141,7 +141,7 @@ public class Timetable {
                 {
 
                    timetableValues[myEvent.getPeriod()][dayOfEvent]                          
-                             = "<td id="+myEvent.getEventID()+"><a href=\"delete.jsp\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
+                             = "<td id=\""+myEvent.getEventID()+"\"><a href=\"delete.jsp\" id=\""+myEvent.getEventID()+"\">" + myEvent.getEventName()+ " in " + myEvent.getLocation() + "</td>";
                 } 
                 else
                     //monthly recurring events
