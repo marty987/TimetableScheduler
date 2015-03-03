@@ -100,6 +100,7 @@ public class Timetable {
                 Event event = new Event(eventId, eventName, eventType, stream, period, startDate, endDate, recurrence, moduleCode, location, description);
                 myEvents.add(event);
             }   
+             
         }
     
         database.Close();
@@ -118,6 +119,7 @@ public class Timetable {
         int dayOfEvent;
         
         //iterate through the user's events 
+        timetableValues[0][0] = "<th>";
         for ( int i = 0; i < myEvents.size(); i++ ) {
             
             myEvent = myEvents.get(i);
@@ -126,14 +128,14 @@ public class Timetable {
             dayOfEvent = startDateAsCal.get(Calendar.DAY_OF_WEEK);
             if((startDateAsCal.compareTo(sundayDateAsCal) <= 0 && (endDateAsCal.compareTo(mondayDateAsCal) >= 0)))
             { //occurs this week
-              
+              timetableValues[0][0] += myEvents.get(i).getEventName() + " ;";
                 //to force days of the week correspond to our timetable layout
                 if (dayOfEvent == 1){
                     dayOfEvent = 7;
                 } else {
                     dayOfEvent--;
                 }
-                
+                timetableValues[0][0] += " " + ;
                 if ( myEvent.getRecurrence().equals("once") || myEvent.getRecurrence().equals("weekly"))
                     //non-recurring events or weekly recurring events
                 {
@@ -153,6 +155,7 @@ public class Timetable {
                 } 
             }
         }
+        timetableValues[0][0] += "</th>";
     }
     /**
      * Function to print the timetable.
@@ -162,8 +165,6 @@ public class Timetable {
         
         fetchEventsFromDB( userId );
         addEventsToTimetable( );
-        
-        timetableValues [0][0] = "<th>" + myEvents.size() + "</th>";
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
