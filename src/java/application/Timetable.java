@@ -38,10 +38,6 @@ public class Timetable {
         startOfWeek = getMondayOfWeek();
         endOfWeek = getSundayOfWeek();
         
-        this.database = new DatabaseClass( );
-        //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-        
         this.timetableValues = new String[][]{
             {"<th></th>", "<th scope=\"col\">Mon " + startOfWeek.getTime() + "</th>", "<th scope=\"col\">Tue</th>", "<th scope=\"col\">Wed</th>", "<th scope=\"col\">Thurs</th>", "<th scope=\"col\">Fri</th>", "<th scope=\"col\">Sat</th>", "<th scope=\"col\">Sun</th>"},
             {"<th scope=\"row\">8AM - 9AM</th>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>", "<td></td>"},
