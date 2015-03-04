@@ -65,19 +65,6 @@ public class GUI {
         return form;
     }    
    
-    public String footerLogin( ) {
-        form = "<footer id='loginFooter'>\n";
-        form += "<small>\n";
-        form += "<ul class = footerLinks>\n";
-        form += "<li id='sitemap'><a>Sitemap</a></li>\n"; 
-        form += "<li><a>Legal</a></li>\n";
-        form += "<li><a>Acceptable Use Policy</a></li>\n";
-        form += "<li><a>Webmaster</a></li>\n";
-        form += "</ul>\n";
-        form += "</footer>\n";    
-
-        return form;
-    }
     
     public String sessionErrorMessage() {
         form = "<p>\n";

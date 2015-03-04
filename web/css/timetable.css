@@ -17,6 +17,10 @@ table {
     margin-top:1%;
 }
 
+table input[type=submit]{
+    width:20%;
+}
+
 td, th { 
 	
    text-align: center; 
