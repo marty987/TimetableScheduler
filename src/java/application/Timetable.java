@@ -167,7 +167,6 @@ public class Timetable {
         
         fetchEventsFromDB( userId );
         addEventsToTimetable( );
-        printCurrentDate();
         
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Schedule Your Timetable</catption>\n"
@@ -245,13 +244,5 @@ public class Timetable {
         tempCal.setTime(today);
         tempCal.add(Calendar.DATE, -7);
         return tempCal.getTime();
-    }
-    
-    
-    public Calendar printCurrentDate(){
-        Calendar tempCal = Calendar.getInstance();
-        tempCal.setTime(today);
-        timetableValues[0][0] = "<th>" + tempCal + "</th>";
-        return tempCal;
     }
 }
