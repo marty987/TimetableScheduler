@@ -151,6 +151,13 @@ public class FindMeeting {
         System.out.println( "Other periods: " + Arrays.toString( otherEvents ) );    
         return otherEvents;
     }
+    
+    public String[] getStreams() {
+        String[] streams = database.SelectColumn( "SELECT group_name FROM groups;" );
+        
+        System.out.println( Arrays.toString(streams) );
+        return streams;
+    }
      
     /**
      * Check if a given integer array contains a given int ( period ).
@@ -246,11 +253,8 @@ public class FindMeeting {
      
         int counter = 0;
         for( int i = 0; i <= 9; i++ ) {
-            
             if( currentFreePeriods.contains( i + 1) ) {
                 if( counter == 0 ) {
-                    System.out.println( "First if" + counter );
-                    
                     form += "<label for=\"free_period\"> " + periodTimes.get( i ) + "</label>\n"
                           + "<input type=\"radio\" name=\"free_period\" value=\"" + periodTimes.get( i ) + "\" checked=\"checked\"/><br />";
                     counter++;

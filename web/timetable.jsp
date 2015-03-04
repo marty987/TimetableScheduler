@@ -53,10 +53,8 @@
                  
                 FindMeeting meeting = new FindMeeting( );
                 
-                
                 if( meeting.isLecturer( ( String ) session.getAttribute( "Authenticated" ) ) ) {
                     if( request.getParameter( "find_meeting" ) == null ){
-
                         out.print( meeting.findMeetingForm(  ) );
                     }
                     else {
@@ -79,16 +77,22 @@
                     }
                 }
                 
-                
                 if( request.getParameter( "get_members" ) == null) {
                     out.print( meeting.groupFrom(  ) );
                 }   
                 else {
                     if( meeting.validatePrivateGroupForm( request ) ) {
                         if( meeting.checkGroupMembers( ) ) {
-                            
                             ArrayList<Integer> freeMeetingPeriods = meeting.getFreeSlot( request );
-                            out.print( freeMeetingPeriods );
+                            
+                            if( freeMeetingPeriods.isEmpty( ) ){
+                                out.print( "<p>No free time for group available on this day, Please try another day!</p>" );
+                            }
+                            else{
+                                out.print( freeMeetingPeriods );
+                                out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
+                                //response.sendRedirect( "add_meeting.jsp" );
+                            }
                         }
                         else 
                         {
