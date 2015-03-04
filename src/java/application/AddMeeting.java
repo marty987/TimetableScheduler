@@ -242,7 +242,7 @@ public class AddMeeting {
         
         System.out.println( "group members" + Arrays.toString(groupMembers) );
         if( isValid ) {
-            if( groupMembers.length > 0 ) {
+            if( groupMembers != null && groupMembers.length > 0 ) {
                  insertGroupOfMembers( userId, groupMembers );
             }
             else {
@@ -326,8 +326,10 @@ public class AddMeeting {
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
         
         for( int i = 0; i < groupMembers.length; i++ ){
-            database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )"
-                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "', '0' );");
+            if( ! groupMembers[i].equals( "" ) ) {
+                database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )"
+                               + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "', '0' );");
+            }
         }
     }
     
@@ -350,6 +352,10 @@ public class AddMeeting {
         String choosenPeriod = request.getParameter( "free_period" );
         String choosenStream = request.getParameter( "pick_stream" );
         String choosenDate = request.getParameter( "date" );
+        
+        if( choosenStream == null ) {
+            choosenStream = "1";
+        }
         
         FindMeeting meeting = new FindMeeting( );
         int index = meeting.getTimePeriodIndex( choosenPeriod );
@@ -393,10 +399,12 @@ public class AddMeeting {
                         + "</select><br />"; 
                 }
                else {
+                   if( ! choosenStream.equals( "null" ) ) {
                    form +=   "<label for='stream'>Stream:</label>\n"
                         + "<select name=\"stream\" id='dropdown'>\n" 
                         + "  <option value=\"" + choosenStream + "\" selected>" + groupStreams[ Integer.parseInt( choosenStream ) - 1 ] + "</option>\n" 
                         + "</select><br />"; 
+                   }
                }
         }    
         

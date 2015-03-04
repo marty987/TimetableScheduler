@@ -332,7 +332,7 @@ public class FindMeeting {
         privateGroupMembers[2] = request.getParameter( "member3" );
         privateGroupMembers[3] = request.getParameter( "member4" );
         privateGroupMembers[4] = request.getParameter( "member5" );      
-        date = request.getParameter( "group_date" );
+        date = request.getParameter( "date" );
         
         if( privateGroupMembers[0].equals("") || privateGroupMembers[1].equals("") ) {
             isValid = false;
@@ -367,8 +367,8 @@ public class FindMeeting {
                         + "<label for='member5'>Member 5:</label>\n"
                         + "<input type=\"text\" name=\"member5\" value=\"" + ( privateGroupMembers[4] != null ? privateGroupMembers[4] : "" ) + "\" placeholder=\"Student 5\"/><br />\n"
                  
-                        + "<label for=\"group_date\">Preferred Day:</label>\n"
-                        + "<input type=\"text\" class=\"datepicker\" name=\"group_date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
+                        + "<label for=\"date\">Preferred Day:</label>\n"
+                        + "<input type=\"text\" class=\"datepicker\" name=\"date\" value=\"" + date + "\" placeholder=\"2015/01/01\"/><br />\n"
 
                         + "<input type='submit' value='Create Personal Group Event!' name='get_members' /><br />\n"
                     + "</form>\n";
