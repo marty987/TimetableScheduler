@@ -368,6 +368,7 @@ nav ul li a{
  
 footer{
     clear: both;
+
     margin-bottom: 2%;
     margin-left:15%;
     width: 66%; 
@@ -387,7 +388,7 @@ footer{
 
 footer li{
     margin-left:auto;
-
+    margin-top: 100%;
     display: inline;
     padding: 5px;
     border-right:#797A7A 1px solid;
