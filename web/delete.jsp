@@ -27,11 +27,12 @@
           } 
           
           else {
-              out.print( "<div class='login-card'>" );   
+              out.print( "<div class='card'>" );   
 
               String event_Id = request.getParameter( "event_id" );
               out.println(delete.eventInfo(event_Id));
               delete.printDeleteForm(event_Id);
+              out.println(delete.printInfo());
               out.print( "</div>" );
 
           }

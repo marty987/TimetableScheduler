@@ -11,6 +11,7 @@ import java.text.*;
 
 public class Delete {
     private final DatabaseClass database;
+    private String[] dbResults;
   
     public Delete() {
         database = new DatabaseClass( );
@@ -19,9 +20,24 @@ public class Delete {
     }
     
     public String[] eventInfo( String event_id){
-        String[] dbResults = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
+        dbResults = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
         System.out.println( Arrays.toString(dbResults));
         return dbResults;
+    }
+    
+    public String printInfo( ){
+        String table = "<table class=\"emp-sales\">\n"
+                     + "<caption>Event</catption>\n"
+                     + "<tbody>\n"
+                     + "<tr><th>Event ID</th><th>Event Name</th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
+                     + "<th>Module Code</th><th>Location</th><th>Description</th></tr>\n"
+                     + "<td>" + dbResults[0] + "</td><td>" + dbResults[1] + "</td><td>" + dbResults[2] + "</td><td>" + dbResults[3] + "</td>\n"
+                     + "<td>" + dbResults[4] + "</td><td>" + dbResults[5] + "</td><td>" + dbResults[6] + "</td><td>" + dbResults[7] + "</td>\n"
+                     + "<td>" + dbResults[8] + "</td><td>" + dbResults[9] + "</td><td>" + dbResults[10] + "</td>\n"
+                     + "<tbody>\n"
+                     + "<table>\n";
+        
+        return table;
     }
 
     /**
