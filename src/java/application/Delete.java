@@ -6,22 +6,23 @@ package application;
  */
 
 import dbpackage.DatabaseClass;
-import java.util.*;
-import java.text.*;
 
 public class Delete {
     private final DatabaseClass database;
     private String[] dbResults;
-    private String eventId;
     /**
      * Constuctor for the class
      */
     public Delete() {
-        this.eventId = "";
         database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
+    
+    public void setEventId( String eventId ) {
+        System.out.println( "event id set: " + eventId );
+    }
+    
     /**
      * Getter method for the details of a specified event.
      * @param event_id id of the event
@@ -29,21 +30,16 @@ public class Delete {
      * event_id, event_name, event_type, stream, period, start_date, end_date, recurrence
      * module code, location, description.
      */
-    public String[] eventInfo( String event_id){
-       // eventId = event_id;
-        System.out.println("event id: " +  eventId);
-        dbResults = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
-        System.out.println( Arrays.toString(dbResults));
+    public String[] eventInfo( String event_id ){
+        dbResults = database.SelectRow( "Select * FROM events WHERE events.event_id = '" + event_id + "';" );
         return dbResults;
     }
     
   
     
     public String printInfo( ){
-        
-        eventId = dbResults[0]; 
-        String table = "<form action =\"delete.jsp\" method=\"POST\">"
-                     + "<table class=\"emp-sales\">\n"
+        String table = "<form action =\"delete.jsp \" method=\"POST\">"
+                     + "<table border=\"1px\" class=\"emp-sales\">\n"
                      + "<caption>Event</catption>\n"
                      + "<tbody>\n"
                      + "<tr><th>Event Number</th><th>Event Name</th><th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
@@ -61,9 +57,9 @@ public class Delete {
 
     /**
      * Function to delete an event. Needs to take the event ID from a form.
-     * @param event_id
+     * @param eventId
      */
-    public void deleteEvent( String userId ){
+    public void deleteEvent( String userId, String eventId ){
         database.Insert("DELETE FROM events WHERE events.event_id = '" + eventId + "';");
         database.Insert("DELETE FROM has_events WHERE user_id = '" + userId + "' AND has_events.event_id = '" + eventId + "';");
     }
