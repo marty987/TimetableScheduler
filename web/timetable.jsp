@@ -91,7 +91,6 @@
                             else{
                                 session.setAttribute("groupMembers", meeting.getGroupMembers( ));
                                 out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
-                                //response.sendRedirect( "add_meeting.jsp" );
                             }
                         }
                         else 
@@ -106,7 +105,6 @@
                 }
                 
                 out.print( "</div>");
-                
                 out.print( "<div class='card'>" );   
                 out.print( "<div class='time'>" );
                 Timetable timetable = new Timetable( );
