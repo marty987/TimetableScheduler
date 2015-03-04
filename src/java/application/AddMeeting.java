@@ -318,6 +318,11 @@ public class AddMeeting {
         return true;
     }
     
+    /**
+     * Function to create a group of members (minimum two, maximum five) to create a meeting with. 
+     * @param userId the userID of the user who is logged in.
+     * @param groupMembers a string array of the users who the meeting is going to be made with.
+     */
     public void insertGroupOfMembers( String userId, String[] groupMembers ){
          database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + ( stream.equals( "" ) ? getUserStream( userId ) : stream ) + "', '" + period + "', '" + startDate + "', '" +

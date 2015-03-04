@@ -27,13 +27,30 @@
           } 
           
           else {
-              out.print( "<div class='card'>" );   
+ 
 
               String event_Id = request.getParameter( "event_id" );
-              out.println(delete.eventInfo(event_Id));
-              delete.printDeleteForm(event_Id);
-              out.println(delete.printInfo());
-              out.print( "</div>" );
+                 
+               if( request.getParameter( "delete_event" ) == null ){
+                   out.print( "<div class='table'>" );
+                   out.print( "<div class='card'>" );  
+                   delete.eventInfo(event_Id);
+                   out.println(delete.printInfo());
+                                 
+                   out.print( "</div>" );
+                   out.print( "</div>" );
+               }
+
+              else{
+                   
+                   
+                   out.print( "<div class='login-card'>" );
+                   //delete.eventInfo(event_Id);
+                   delete.deleteEvent( (String) session.getAttribute( "Authenticated" ) );
+                   out.println("Your event has been deleted");
+                   out.print( "<a id='back' href='timetable.jsp'>Back to Timetable!</a>" );
+                   out.print( "</div>" );
+               }
 
           }
           out.print( gui.footer() );
