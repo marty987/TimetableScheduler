@@ -37,8 +37,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getEventName();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -50,8 +48,6 @@ public class AddMeetingTest {
         String eventName = "";
         AddMeeting instance = new AddMeeting();
         instance.setEventName(eventName);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -64,8 +60,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getEventType();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -77,8 +71,6 @@ public class AddMeetingTest {
         String eventType = "";
         AddMeeting instance = new AddMeeting();
         instance.setEventType(eventType);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -91,8 +83,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getPeriod();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -104,8 +94,6 @@ public class AddMeetingTest {
         String period = "";
         AddMeeting instance = new AddMeeting();
         instance.setPeriod(period);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -118,8 +106,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getStartDate();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -131,8 +117,6 @@ public class AddMeetingTest {
         String startDate = "";
         AddMeeting instance = new AddMeeting();
         instance.setStartDate(startDate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -145,8 +129,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getEndDate();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -158,8 +140,7 @@ public class AddMeetingTest {
         String endDate = "";
         AddMeeting instance = new AddMeeting();
         instance.setEndDate(endDate);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -172,8 +153,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getRecurrence();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -185,8 +164,6 @@ public class AddMeetingTest {
         String recurrence = "";
         AddMeeting instance = new AddMeeting();
         instance.setRecurrence(recurrence);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -199,8 +176,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getModuleCode();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -212,8 +187,6 @@ public class AddMeetingTest {
         String moduleCode = "";
         AddMeeting instance = new AddMeeting();
         instance.setModuleCode(moduleCode);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -226,8 +199,7 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getLocation();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -239,8 +211,6 @@ public class AddMeetingTest {
         String location = "";
         AddMeeting instance = new AddMeeting();
         instance.setLocation(location);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -253,8 +223,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getDescription();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -266,8 +234,7 @@ public class AddMeetingTest {
         String description = "";
         AddMeeting instance = new AddMeeting();
         instance.setDescription(description);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -280,8 +247,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getStream();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -293,24 +258,8 @@ public class AddMeetingTest {
         String stream = "";
         AddMeeting instance = new AddMeeting();
         instance.setStream(stream);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
-    /**
-     * Test of validateMeetingForm method, of class AddMeeting.
-     */
-    @Test
-    public void testValidateMeetingForm() {
-        System.out.println("validateMeetingForm");
-        String userId = "";
-        AddMeeting instance = new AddMeeting();
-        boolean expResult = false;
-        boolean result = instance.validateMeetingForm(userId);
-        assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
 
     /**
      * Test of errors method, of class AddMeeting.
@@ -322,8 +271,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.errors();
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -338,8 +285,6 @@ public class AddMeetingTest {
         boolean expResult = false;
         boolean result = instance.isPeriodFree(period, startDate);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -351,8 +296,7 @@ public class AddMeetingTest {
         String userId = "";
         AddMeeting instance = new AddMeeting();
         instance.insertNewMeeting(userId);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
+
     }
 
     /**
@@ -366,8 +310,6 @@ public class AddMeetingTest {
         boolean expResult = false;
         boolean result = instance.isLecturer(userId);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -381,8 +323,6 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.getUserStream(userId);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 
     /**
@@ -397,7 +337,5 @@ public class AddMeetingTest {
         String expResult = "";
         String result = instance.addMeetingForm(userId, request);
         assertEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
     }
 }

@@ -1,0 +1,8 @@
+Wed Mar 04 18:44:28 GMT 2015 SELECT * FROM events WHERE period = '' AND start_date = ''; caused error Illegal operation on empty result set.
+Wed Mar 04 18:44:28 GMT 2015 SELECT * FROM events WHERE period = '' AND start_date = '';worked 
+Wed Mar 04 18:44:28 GMT 2015 SELECT stream FROM users WHERE user_id =''; caused error Illegal operation on empty result set.
+Wed Mar 04 18:44:28 GMT 2015 SELECT stream FROM users WHERE user_id ='';worked 
+Wed Mar 04 18:44:28 GMT 2015 SELECT is_admin FROM users WHERE user_id = ''; caused error Illegal operation on empty result set.
+Wed Mar 04 18:44:28 GMT 2015 SELECT is_admin FROM users WHERE user_id = '';worked 
+Wed Mar 04 18:44:28 GMT 2015 SELECT stream FROM users WHERE user_id =''; caused error Illegal operation on empty result set.
+Wed Mar 04 18:44:28 GMT 2015 SELECT stream FROM users WHERE user_id ='';worked 
