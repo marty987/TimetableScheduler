@@ -21,8 +21,6 @@ public class AddMeeting {
     private String moduleCode;
     private String location;
     private String description;
-    private String[] privateGroupMembers;
-    private String[] groupMembers;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
     /**
@@ -39,7 +37,6 @@ public class AddMeeting {
         this.moduleCode = "";
         this.location = "";
         this.description = "";
-        this.privateGroupMembers = new String[5];
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -187,19 +184,7 @@ public class AddMeeting {
     public void setStream( final String stream) {
         this.stream = stream;
     }
-    public void setGroupMembers( final String[] groupMembers){
-        this.groupMembers = groupMembers;
-    }
-    public void setPrivateGroupMembers( final String[] privateGroupMembers){
-        this.privateGroupMembers = privateGroupMembers;
-    }
-    public String[] getGroupMembers(){
-        return this.groupMembers;
-    }
-    public String[] getPrivateGroupMembers(){
-        return this.privateGroupMembers;
-    }
-    /**
+     /**
      * Function to ensure that the user has filled out the form correctly when adding a meeting.
      * @param userId Your student id.
      * @return true if form is filled out correctly and false otherwise.
