@@ -189,7 +189,7 @@ public class AddMeeting {
      * @param userId Your student id.
      * @return true if form is filled out correctly and false otherwise.
      */
-    public boolean validateMeetingForm( final String userId ) {
+    public boolean validateMeetingForm( final String userId, String[] groupMembers ) {
         boolean isValid = true;
 
         if(isPeriodFree(period, startDate)) {
@@ -241,7 +241,12 @@ public class AddMeeting {
         }
         
         if( isValid ) {
-            insertNewMeeting( userId );
+            if( groupMembers.length < 0 ) {
+                 insertGroupOfMembers( groupMembers );
+            }
+            else {
+                insertNewMeeting( userId );
+            }
         }
         
         return isValid;
@@ -292,8 +297,6 @@ public class AddMeeting {
         
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
         
-        System.out.println( last[0].toString( ) );
-        
         database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )" + 
                          "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
         //database.Close( );
@@ -314,6 +317,15 @@ public class AddMeeting {
         return true;
     }
     
+    public void insertGroupOfMembers( String[] groupMembers ){
+        String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
+        
+        for( int i = 0; i < groupMembers.length; i++ ){
+            database.Insert( "INSERT INTO has_events( user_id, event_id )"
+                           + "VALUES( '" + groupMembers + "', '" + last[0] + "' )");
+        }
+    }
+    
     /**
      * Function to get the user's (type student) stream.
      * @param userId
@@ -329,7 +341,7 @@ public class AddMeeting {
      * @param userId
      * @return form (string)
      */
-    public String addMeetingForm( String userId, HttpServletRequest request, String[] groupMembers ) {
+    public String addMeetingForm( String userId, HttpServletRequest request ) {
         String choosenPeriod = request.getParameter( "free_period" );
         String choosenStream = request.getParameter( "pick_stream" );
         String choosenDate = request.getParameter( "date" );
@@ -339,8 +351,6 @@ public class AddMeeting {
         String[] groupStreams = meeting.getStreams(  );
         
         System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
-        System.out.println( "Group Members" + Arrays.toString( groupMembers  ) );
-        
         
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
                     if( choosenPeriod != null ) {
