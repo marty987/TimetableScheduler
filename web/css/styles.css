@@ -248,6 +248,7 @@ footer li:hover{
     background: #003c69;
     padding-right:15px;
     padding-top: 90px;
+    
 }
 
 #sidebar a{
@@ -336,7 +337,7 @@ nav ul li a{
 footer{
     clear: both;
     margin-top: 40px;
-    margin-left:15%;
+    margin-left:25%;
     width: 66%; 
     color: black;
     font-size: 15px;
@@ -428,7 +429,6 @@ nav ul li a:hover{
   -webkit-border-radius: 5;
   -moz-border-radius: 5;
   border-radius: 5px;
-  font-family: Arial;
   color: #ffffff;
   font-size: 20px;
   padding: 10px 20px 10px 20px;
