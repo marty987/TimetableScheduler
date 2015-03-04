@@ -66,6 +66,7 @@
                             }
                             else{
                                 out.print( freeMeetingPeriods );
+                                session.setAttribute("groupMembers", meeting.getGroupMembers( ));
                                 out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
                                 //response.sendRedirect( "add_meeting.jsp" );
                             }
@@ -90,6 +91,7 @@
                             }
                             else{
                                 out.print( freeMeetingPeriods );
+                                session.setAttribute("groupMembers", meeting.getGroupMembers( ));
                                 out.print( meeting.pickAvailablePeriodFrom( request.getParameter( "pick_stream" ), request.getParameter( "date" )  ) );
                                 //response.sendRedirect( "add_meeting.jsp" );
                             }

@@ -329,7 +329,7 @@ public class AddMeeting {
      * @param userId
      * @return form (string)
      */
-    public String addMeetingForm( String userId, HttpServletRequest request ) {
+    public String addMeetingForm( String userId, HttpServletRequest request, String[] groupMembers ) {
         String choosenPeriod = request.getParameter( "free_period" );
         String choosenStream = request.getParameter( "pick_stream" );
         String choosenDate = request.getParameter( "date" );
@@ -339,7 +339,7 @@ public class AddMeeting {
         String[] groupStreams = meeting.getStreams(  );
         
         System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
-        System.out.println( "Group Members" + Arrays.toString( meeting.getGroupMembers()));
+        System.out.println( "Group Members" + Arrays.toString( groupMembers  ) );
         
         
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
