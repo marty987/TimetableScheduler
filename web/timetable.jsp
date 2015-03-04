@@ -128,7 +128,7 @@
                     notify.hasSeen( request );
                     response.sendRedirect( "timetable.jsp" );
                 }
-//                out.print( "</div>" );
+                out.print( "</div>" );
             %>
         </section>
         

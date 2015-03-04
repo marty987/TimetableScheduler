@@ -6,6 +6,7 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="guipackage.GUI;"%>
+<%@ page import="application.Delete;"%>
 <!DOCTYPE html>
 <html>
     <head>
@@ -16,18 +17,24 @@
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
     </head>
     <body>
-        <jsp:useBean id="delete" class="application.Delete" scope="request" />
+
         <%
+          Delete delete = new Delete();
           GUI gui = new GUI( );  
           out.print( gui.header( false, "blank", "blank" ) );
           if( session.getAttribute( "Authenticated" ) == null ) {
                 response.sendRedirect( "index.jsp" );
-          } else {
-              int eventId = (Integer) session.getAttribute( "eventId" );
-              String eventName = (String) session.getAttribute( "eventName" );
-              out.println(eventId);
-              out.println(eventName);
-//              delete.printDeleteForm(eventId, eventName);
+          } 
+          
+          else {
+              out.print( "<div class='card'>" );   
+
+              String event_Id = request.getParameter( "event_id" );
+              out.println(delete.eventInfo(event_Id));
+              delete.printDeleteForm(event_Id);
+              out.println(delete.printInfo());
+              out.print( "</div>" );
+
           }
           out.print( gui.footer() );
         %>
