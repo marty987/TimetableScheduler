@@ -240,9 +240,10 @@ public class AddMeeting {
             description = "";
         }
         
+        System.out.println( "group members" + Arrays.toString(groupMembers) );
         if( isValid ) {
-            if( groupMembers.length < 0 ) {
-                 insertGroupOfMembers( groupMembers );
+            if( groupMembers.length > 0 ) {
+                 insertGroupOfMembers( userId, groupMembers );
             }
             else {
                 insertNewMeeting( userId );
@@ -276,9 +277,7 @@ public class AddMeeting {
      * @return boolean.
      */
     public boolean isPeriodFree(String period, String startDate) {
-        String[] dbResult = database.SelectRow("SELECT * FROM events "
-                            + "WHERE period ='"+ period 
-                            +"'AND start_date = '"+ startDate +"';");
+        String[] dbResult = database.SelectRow( "SELECT * FROM events WHERE period = '" + period + "' AND start_date = '" + startDate + "';" );
         
 	if(dbResult.length != 0){
 		return true;
@@ -299,6 +298,8 @@ public class AddMeeting {
         
         database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )" + 
                          "VALUES( '" + userId+ "', '" + last[0].toString( ) + "', '0' );");
+        
+        System.out.println( "general meeting" );
         //database.Close( );
     }
     
@@ -317,12 +318,16 @@ public class AddMeeting {
         return true;
     }
     
-    public void insertGroupOfMembers( String[] groupMembers ){
+    public void insertGroupOfMembers( String userId, String[] groupMembers ){
+         database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
+                         "VALUES( '" + eventName + "', '" + eventType + "', '" + ( stream.equals( "" ) ? getUserStream( userId ) : stream ) + "', '" + period + "', '" + startDate + "', '" +
+                          endDate + "', '" + recurrence + "', '" + moduleCode + "', '" + location + "', '" + description + "' );" );
+        
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
         
         for( int i = 0; i < groupMembers.length; i++ ){
             database.Insert( "INSERT INTO has_events( user_id, event_id )"
-                           + "VALUES( '" + groupMembers + "', '" + last[0] + "' )");
+                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "' );");
         }
     }
     
