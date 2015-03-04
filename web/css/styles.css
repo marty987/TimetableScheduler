@@ -228,6 +228,11 @@ footer li:hover{
   background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
   text-decoration: none;
 }
+
+div td a{
+
+    color:black;
+}
     
 
 @media screen and (min-width: 768px)
