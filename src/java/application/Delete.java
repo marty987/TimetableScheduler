@@ -31,7 +31,7 @@ public class Delete {
      * module code, location, description.
      */
     public String[] eventInfo( String event_id ){
-        dbResults = database.SelectRow( "Select * FROM events WHERE events.event_id = '" + event_id + "';" );
+        dbResults = database.SelectRow( "Select * FROM events WHERE events.event_id = " + event_id + ";" );
         return dbResults;
     }
     
@@ -60,8 +60,7 @@ public class Delete {
      * @param eventId
      */
     public void deleteEvent( String userId, String eventId ){
-        database.Insert("DELETE FROM events WHERE events.event_id = '" + eventId + "';");
-        database.Insert("DELETE FROM has_events WHERE user_id = '" + userId + "' AND has_events.event_id = '" + eventId + "';");
+        database.Insert("DELETE FROM has_events WHERE user_id = " + userId + " AND has_events.event_id = " + eventId + ";");
     }
 
 }

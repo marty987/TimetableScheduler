@@ -82,7 +82,7 @@ public class Event {
     }
     /**
      * Getter method for the type of event. ie. Meeting, Lecture
-     * @return thhe variable eventType (String)
+     * @return the variable eventType (String)
      */
     public String getEventType(){
         return eventType;
@@ -104,7 +104,7 @@ public class Event {
     /**
      * Setter method for the start date of the event.
      */
-    public void setStartDate(){
+    public void setStartDate(Date startDate){
         this.startDate = startDate;
     }
     /**
@@ -117,7 +117,7 @@ public class Event {
     /**
      * Setter method for the end date of an event
      */
-    public void setEndDate(){
+    public void setEndDate(Date endDate){
         this.endDate = endDate;
     }
     /**
