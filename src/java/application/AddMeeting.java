@@ -335,16 +335,18 @@ public class AddMeeting {
         
         FindMeeting meeting = new FindMeeting( );
         int index = meeting.getTimePeriodIndex( choosenPeriod );
+        String[] groupStreams = meeting.getStreams(  );
         
         System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
+       
         
         
-        if( choosenPeriod != null ) {
-            System.out.println( "The free period was not set !!!!!!!!!!!!!!!!!!" );
-        }
-        
-        String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                        + "<label for=\"eventName\">Event Name:</label>\n"
+        String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
+                    if( choosenPeriod != null ) {
+                        form += "<h4>The Stream, Time Period and Start Date textboxes have already been filled in for you!</h4>";
+                    }
+                    
+                  form += "<label for=\"eventName\">Event Name:</label>\n"
                         + "<input type=\"text\" name=\"eventName\" value=\"" + eventName + "\" placeholder=\"e.g. Team Meeting\"/><br />\n"
 
                         + "<label for=\"eventType\">Event Type:</label>\n"
@@ -356,6 +358,7 @@ public class AddMeeting {
                         + "</select>";
                
         if( isLecturer( userId ) ) {
+               if( choosenPeriod == null ) {
                form +=    "<label for='stream'>Stream:</label>\n"
                         + "<select name=\"stream\" id='dropdown' >\n" 
                         + "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" 
@@ -372,16 +375,23 @@ public class AddMeeting {
                         + "  <option value=\"12\">Chinese Year 3</option>\n" 
                         + "  <option value=\"13\">Chinese Year 4</option>\n" 
                         + "</select><br />"; 
+                }
+               else {
+                   form +=   "<label for='stream'>Stream:</label>\n"
+                        + "<select name=\"stream\" id='dropdown'>\n" 
+                        + "  <option value=\"" + choosenStream + "\" selected>" + groupStreams[ Integer.parseInt( choosenStream ) - 1 ] + "</option>\n" 
+                        + "</select><br />"; 
+               }
         }    
         
         if ( choosenPeriod != null ) {
                form +=    "<label for=\"period\">Period:</label>\n"
-                        + "<select name=\"period\" id='dropdown' disabled>" 
+                        + "<select name=\"period\" id='dropdown'>" 
                         + "  <option value=\"" + index + "\" selected>" + choosenPeriod + "</option>"
                         + "</select><br />"
             
                         + "<label for=\"startDate\">Start Date:</label>\n"
-                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + choosenDate + "\" disabled/><br />\n";
+                        + "<input type=\"text\" class=\"datepicker\" name=\"startDate\" value=\"" + choosenDate + "\" /><br />\n";
         }
         else {
                form +=    "<label for=\"period\">Period:</label>\n"
