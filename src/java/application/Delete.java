@@ -6,7 +6,6 @@ package application;
  */
 
 import dbpackage.DatabaseClass;
-import java.util.*;
 
 public class Delete {
     private final DatabaseClass database;
