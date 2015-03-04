@@ -7,6 +7,7 @@ package application;
 import java.util.ArrayList;
 import algorithm.FindMeeting;
 import dbpackage.DatabaseClass;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 
 public class AddMeeting {
@@ -183,7 +184,7 @@ public class AddMeeting {
     public void setStream( final String stream) {
         this.stream = stream;
     }
-    /**
+     /**
      * Function to ensure that the user has filled out the form correctly when adding a meeting.
      * @param userId Your student id.
      * @return true if form is filled out correctly and false otherwise.
@@ -338,7 +339,7 @@ public class AddMeeting {
         String[] groupStreams = meeting.getStreams(  );
         
         System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
-       
+        System.out.println( "Group Members" + Arrays.toString( meeting.getGroupMembers()));
         
         
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";

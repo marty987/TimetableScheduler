@@ -49,6 +49,10 @@ public class FindMeeting {
         return periodTimes;
     }
     
+    public String[] getGroupMembers() {
+        return groupMembers;
+    }
+    
     /**
      * Funtion to set up the servlet for Javascript. Allows the stream and date 
      * to be taken from the form and used globally in the class
@@ -105,7 +109,7 @@ public class FindMeeting {
      * is chosen through the form which is taken as a global variable.
      * @return An array of user id's of the students in the selected stream. (Strings)
      */
-    public String[] getGroupMembers( ) {
+    public String[] getStreamGroupMembers( ) {
         groupMembers = database.SelectColumn( "SELECT user_id FROM users WHERE stream = '" + stream + "';" );
         if( groupMembers.length == 0 ) {
             groupMembers = new String[]{ "000000000" };
@@ -196,7 +200,7 @@ public class FindMeeting {
             groupMembers = privateGroupMembers;
             System.out.println( "Group Members: " + Arrays.toString( groupMembers ) ); 
         }else{
-            groupMembers = getGroupMembers( );
+            groupMembers = getStreamGroupMembers( );
         }
                   
         while( currentMember < groupMembers.length ) {
