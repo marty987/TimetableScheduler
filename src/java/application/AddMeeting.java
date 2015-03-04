@@ -7,6 +7,7 @@ package application;
 import java.util.ArrayList;
 import algorithm.FindMeeting;
 import dbpackage.DatabaseClass;
+import java.util.Arrays;
 import javax.servlet.http.HttpServletRequest;
 
 public class AddMeeting {
@@ -20,6 +21,8 @@ public class AddMeeting {
     private String moduleCode;
     private String location;
     private String description;
+    private String[] privateGroupMembers;
+    private String[] groupMembers;
     private final DatabaseClass database;
     private final ArrayList<String> errors;
     /**
@@ -36,6 +39,7 @@ public class AddMeeting {
         this.moduleCode = "";
         this.location = "";
         this.description = "";
+        this.privateGroupMembers = new String[5];
         this.errors = new ArrayList<>( );
         this.database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
@@ -182,6 +186,18 @@ public class AddMeeting {
      */
     public void setStream( final String stream) {
         this.stream = stream;
+    }
+    public void setGroupMembers( final String[] groupMembers){
+        this.groupMembers = groupMembers;
+    }
+    public void setPrivateGroupMembers( final String[] privateGroupMembers){
+        this.privateGroupMembers = privateGroupMembers;
+    }
+    public String[] getGroupMembers(){
+        return this.groupMembers;
+    }
+    public String[] getPrivateGroupMembers(){
+        return this.privateGroupMembers;
     }
     /**
      * Function to ensure that the user has filled out the form correctly when adding a meeting.
@@ -338,7 +354,7 @@ public class AddMeeting {
         String[] groupStreams = meeting.getStreams(  );
         
         System.out.println( "period: " + choosenPeriod + " date: " + choosenDate + " Stream:  " + choosenStream + " index: " + index);
-       
+        System.out.println( "Group Members" + Arrays.toString( meeting.getGroupMembers()));
         
         
         String form = "<form name=\"add_meeting\" action=\"add_meeting.jsp\" method=\"POST\">\n";
