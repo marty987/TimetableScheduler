@@ -25,13 +25,14 @@
           if( session.getAttribute( "Authenticated" ) == null ) {
                 response.sendRedirect( "index.jsp" );
           } 
-          
           else {
- 
-
-              String event_Id = request.getParameter( "event_id" );
-                 
                if( request.getParameter( "delete_event" ) == null ){
+                   
+                   String event_Id = request.getParameter( "event_id" );
+                   delete.setEventId( event_Id );
+                   
+                   session.setAttribute("eventid", event_Id );
+                   
                    out.print( "<div class='table'>" );
                    out.print( "<div class='card'>" );  
                    delete.eventInfo(event_Id);
@@ -42,11 +43,11 @@
                }
 
               else{
-                   
+                   System.out.println( "session event id : " +  session.getAttribute("eventid") );
                    
                    out.print( "<div class='login-card'>" );
                    //delete.eventInfo(event_Id);
-                   delete.deleteEvent( (String) session.getAttribute( "Authenticated" ) );
+                   delete.deleteEvent( (String) session.getAttribute( "Authenticated" ), (String) session.getAttribute( "eventid" ) );
                    out.println("Your event has been deleted");
                    out.print( "<a id='back' href='timetable.jsp'>Back to Timetable!</a>" );
                    out.print( "</div>" );
