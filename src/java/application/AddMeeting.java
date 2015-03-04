@@ -318,6 +318,11 @@ public class AddMeeting {
         return true;
     }
     
+    /**
+     * Function to create a group of members (minimum two, maximum five) to create a meeting with. 
+     * @param userId the userID of the user who is logged in.
+     * @param groupMembers a string array of the users who the meeting is going to be made with.
+     */
     public void insertGroupOfMembers( String userId, String[] groupMembers ){
          database.Insert( "INSERT INTO events( event_name, event_type, stream, period, start_date, end_date, recurrence, module_code, location, description )" +
                          "VALUES( '" + eventName + "', '" + eventType + "', '" + ( stream.equals( "" ) ? getUserStream( userId ) : stream ) + "', '" + period + "', '" + startDate + "', '" +
@@ -326,8 +331,8 @@ public class AddMeeting {
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
         
         for( int i = 0; i < groupMembers.length; i++ ){
-            database.Insert( "INSERT INTO has_events( user_id, event_id )"
-                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "' );");
+            database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )"
+                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "', '0' );");
         }
     }
     

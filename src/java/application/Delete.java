@@ -12,30 +12,22 @@ import java.text.*;
 public class Delete {
     private final DatabaseClass database;
     private String[] dbResults;
-  
+    /**
+     * Constuctor for the class
+     */
     public Delete() {
         database = new DatabaseClass( );
         //database.setup( "localhost", "timetable_scheduler_db", "root", "" );
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
-    
     /**
-     * Function to check if a event exists in the database.
-     * @param event_id
-     * @return true if event does exist.
+     * Getter method for the details of a specified event.
+     * @param event_id id of the event
+     * @return dbResults - a string array of the event's details from the database -
+     * event_id, event_name, event_type, stream, period, start_date, end_date, recurrence
+     * module code, location, description.
      */
-    public boolean isEvent( String event_id ) {
-        String[] dbResult = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
-        //database.Close( );
-        
-        if( dbResult.length == 0 || dbResult[0].equals("0")) {
-            return false;
-        } 
-        return true;
-    }
-    
-    
-    public String[] eventInfo( String event_id){
+    public String[] getEventInfo( String event_id){
         dbResults = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
         System.out.println( Arrays.toString(dbResults));
         return dbResults;
@@ -69,10 +61,18 @@ public class Delete {
         database.Insert("DELETE FROM events WHERE events.event_id = '" + event_id + "';");
         database.Insert("DELETE FROM has_event WHERE has_event.event_id = '" + event_id + "';");
     }
+    /**
+     * Getter method for the event name.
+     * @return eventName the name of the event
+     */
     public void getEventName(){
         
     }
-    
+    /**
+     * Form to delete an event from a user's calender and the database.
+     * @param eventId
+     * @return table 
+     */
     public String printDeleteForm(String eventId) {
         String table = "<table class=\"emp-sales\">\n"
                      + "<caption>Event</catption>\n"
