@@ -326,8 +326,8 @@ public class AddMeeting {
         String[] last = database.SelectRow( "SELECT MAX( event_id ) FROM events;" );
         
         for( int i = 0; i < groupMembers.length; i++ ){
-            database.Insert( "INSERT INTO has_events( user_id, event_id )"
-                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "' );");
+            database.Insert( "INSERT INTO has_events( user_id, event_id, has_seen )"
+                           + "VALUES( '" + groupMembers[i] + "', '" + last[0] + "', '0' );");
         }
     }
     
