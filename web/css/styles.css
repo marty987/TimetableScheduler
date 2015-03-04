@@ -193,10 +193,23 @@ body {
     text-indent: 10px;  
 } 
 
+#accordion{
+    -webkit-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 19px -7px rgba(0,0,0,0.75);
+}
+
 #accordion .ui-accordion-header{  
     color:white;
     background-color:#69b3e7;
+    cursor: pointer;
 }
+
+#accordion .ui-accordion-header:hover{  
+    color:white;
+    background-color:#58a2d6;
+}
+
 #accordion .ui-accordion-header:before{
     content:"▼";
     padding-right:5px;
