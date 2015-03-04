@@ -37,15 +37,15 @@
              
   
                  
-                if( request.getParameter( "delete_event" ) == null ){
+               // if( request.getParameter( "delete_event" ) == null ){
                        delete.eventInfo(event_Id);
                        delete.printDeleteForm(event_Id);
                        System.out.println(delete.printInfo());
-                }
+               // }
 
-                else{
+              //  else{
                     System.out.println( "hello");
-                }
+               // }
              
               
               out.print( "</div>" );
