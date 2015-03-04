@@ -12,6 +12,7 @@
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link rel="stylesheet" href="css/styles.css" media="screen" type="text/css" />
+        <link rel="stylesheet" href="css/timetable.css" media="screen" type="text/css" />
         <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300italic' rel='stylesheet' type='text/css'>
         <title>Delete Meeting</title>
         <link rel="stylesheet" href="//code.jquery.com/ui/1.11.3/themes/smoothness/jquery-ui.css">
@@ -32,12 +33,12 @@
               String event_Id = request.getParameter( "event_id" );
                  
                if( request.getParameter( "delete_event" ) == null ){
-                   out.print( "<div class='table'>" );
-                   out.print( "<div class='card'>" );  
+                   out.print( "<div class='table2'>" );
+                   
                    delete.eventInfo(event_Id);
                    out.println(delete.printInfo());
                                  
-                   out.print( "</div>" );
+                 
                    out.print( "</div>" );
                }
 

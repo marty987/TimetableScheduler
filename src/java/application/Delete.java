@@ -46,14 +46,14 @@ public class Delete {
                      + "<table class=\"emp-sales\">\n"
                      + "<caption>Event</catption>\n"
                      + "<tbody>\n"
-                     + "<tr><th>Event Number</th><th>Event Name</th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
+                     + "<tr><th>Event Number</th><th>Event Name</th><th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
                      + "<th>Module Code</th><th>Location</th><th>Description</th></tr>\n"
                      + "<td>" + dbResults[0] + "</td><td>" + dbResults[1] + "</td><td>" + dbResults[2] + "</td><td>" + dbResults[3] + "</td>\n"
                      + "<td>" + dbResults[4] + "</td><td>" + dbResults[5] + "</td><td>" + dbResults[6] + "</td><td>" + dbResults[7] + "</td>\n"
                      + "<td>" + dbResults[8] + "</td><td>" + dbResults[9] + "</td><td>" + dbResults[10] + "</td>\n"
-                     + "<input id='deleteSubmit' type='submit' value='Delete' name='delete_event' /><br />\n"
-                     + "<tbody>\n"         
-                     + "<table>\n"
+                     + "<tr><td colspan=\"10\"><td><input id='deleteSubmit' type='submit' value='Delete' name='delete_event' /></td></tr><br />\n"
+                     + "</tbody>\n"         
+                     + "</table>\n"
                      + "</form>";
         
         return table;
