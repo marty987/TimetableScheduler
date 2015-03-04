@@ -375,6 +375,23 @@ footer{
     box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
 }
 
+.loginFooter{
+    clear: both;
+    margin-bottom: 2%;
+    margin-left:15%;
+    width: 66%; 
+    color: black;
+    font-size: 15px;
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid grey;
+    position: relative;
+    background-image: url(../images/white.png);
+    -webkit-box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
+    -moz-box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
+    box-shadow: 10px 10px 31px -2px rgba(0,0,0,0.75);
+}
+
 footer li{
     margin-left:auto;
 

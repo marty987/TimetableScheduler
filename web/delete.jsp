@@ -31,11 +31,6 @@
               out.print( "<div class='card'>" );   
 
               String event_Id = request.getParameter( "event_id" );
-              delete.eventInfo(event_Id);
-              delete.printDeleteForm(event_Id);
-              System.out.println(delete.printInfo());
-             
-  
                  
                // if( request.getParameter( "delete_event" ) == null ){
                        delete.eventInfo(event_Id);
@@ -44,7 +39,7 @@
                // }
 
               //  else{
-                    System.out.println( "hello");
+
                // }
              
               

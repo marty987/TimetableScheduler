@@ -52,8 +52,8 @@
         </div>
         
         <%
-          GUI footer = new GUI( );  
-          out.print( footer.footer( ) );
+          GUI footerLogin = new GUI( );  
+          out.print( footerLogin.footerLogin( ) );
         %>        
     </body>
 </html>
