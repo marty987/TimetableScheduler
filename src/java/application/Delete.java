@@ -19,23 +19,44 @@ public class Delete {
         database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
     }
     
+    /**
+     * Function to check if a event exists in the database.
+     * @param event_id
+     * @return true if event does exist.
+     */
+    public boolean isEvent( String event_id ) {
+        String[] dbResult = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
+        //database.Close( );
+        
+        if( dbResult.length == 0 || dbResult[0].equals("0")) {
+            return false;
+        } 
+        return true;
+    }
+    
+    
     public String[] eventInfo( String event_id){
         dbResults = database.SelectRow("Select * FROM events WHERE events.event_id = '" + event_id + "';");
         System.out.println( Arrays.toString(dbResults));
         return dbResults;
     }
     
+  
+    
     public String printInfo( ){
-        String table = "<table class=\"emp-sales\">\n"
+        String table = "<form action =\"delete.jsp\" method=\"POST\">"
+                     + "<table class=\"emp-sales\">\n"
                      + "<caption>Event</catption>\n"
                      + "<tbody>\n"
-                     + "<tr><th>Event ID</th><th>Event Name</th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
+                     + "<tr><th>Event Number</th><th>Event Name</th><Event Type</th><th>Stream</th><th>Period</th><th>Start Date</th><th>End date</th><th>Recurrence</th>\n"
                      + "<th>Module Code</th><th>Location</th><th>Description</th></tr>\n"
                      + "<td>" + dbResults[0] + "</td><td>" + dbResults[1] + "</td><td>" + dbResults[2] + "</td><td>" + dbResults[3] + "</td>\n"
                      + "<td>" + dbResults[4] + "</td><td>" + dbResults[5] + "</td><td>" + dbResults[6] + "</td><td>" + dbResults[7] + "</td>\n"
                      + "<td>" + dbResults[8] + "</td><td>" + dbResults[9] + "</td><td>" + dbResults[10] + "</td>\n"
-                     + "<tbody>\n"
-                     + "<table>\n";
+                     + "<input type='submit' value='Delete' name='delete_event' /><br />\n"
+                     + "<tbody>\n"         
+                     + "<table>\n"
+                     + "</form>";
         
         return table;
     }

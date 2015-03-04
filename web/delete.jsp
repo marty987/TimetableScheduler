@@ -27,12 +27,28 @@
           } 
           
           else {
+              out.print( "<div class='table2'>" );
               out.print( "<div class='card'>" );   
 
               String event_Id = request.getParameter( "event_id" );
-              out.println(delete.eventInfo(event_Id));
+              delete.eventInfo(event_Id);
               delete.printDeleteForm(event_Id);
-              out.println(delete.printInfo());
+              System.out.println(delete.printInfo());
+             
+  
+                 
+                if( request.getParameter( "delete_event" ) == null ){
+                       delete.eventInfo(event_Id);
+                       delete.printDeleteForm(event_Id);
+                       System.out.println(delete.printInfo());
+                }
+
+                else{
+                    System.out.println( "hello");
+                }
+             
+              
+              out.print( "</div>" );
               out.print( "</div>" );
 
           }
