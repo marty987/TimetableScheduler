@@ -245,4 +245,9 @@ public class Timetable {
         tempCal.add(Calendar.DATE, -7);
         return tempCal.getTime();
     }
+    
+    private String printCurrentDate(){
+        Date date = new Date();
+        return sdf.format(date);
+    }
 }
