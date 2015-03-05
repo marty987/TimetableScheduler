@@ -251,7 +251,7 @@ public class FindMeeting {
     
     public String pickAvailablePeriodFrom( String stream, String date ) {
         String form = "<form name=\"available_times\" action=\"add_meeting.jsp\" method=\"POST\">\n"
-                      + "<h3>Free Periods</h3>"   
+                      + "<h4>Free Periods</h4>"   
                       + "<input type=\"hidden\" name=\"pick_stream\" value=\"" + stream + "\" />" 
                       + "<input type=\"hidden\" name=\"date\" value=\"" + date + "\" />";  
      

@@ -283,6 +283,11 @@ footer li:hover{
     
 }
 
+label[for='free_period']{
+    width: 170px;
+    display: inline-block;
+}
+
 
 
 #sidebar h1:hover{
