@@ -288,6 +288,10 @@ label[for='free_period']{
     display: inline-block;
 }
 
+input[ value ='Accept Slot!'], input[ value ='Search Availability!']{
+    width: 100%;
+}
+
 
 
 #sidebar h1:hover{
