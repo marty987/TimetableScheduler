@@ -49,12 +49,12 @@
                 
                 out.print( "<div id='sidebar'>" );               
                 out.print( "<a class='add_meeting' href='add_meeting.jsp'><h1>Add meeting</h1></a>" );
-                out.print( "<h4>Find an available time slot</h4>" );
                  
                 FindMeeting meeting = new FindMeeting( );
                 
                 if( meeting.isLecturer( ( String ) session.getAttribute( "Authenticated" ) ) ) {
                     if( request.getParameter( "find_meeting" ) == null ){
+                        out.print( "<h4>Find an available time slot</h4>" );
                         out.print( meeting.findMeetingForm(  ) );
                     }
                     else {
