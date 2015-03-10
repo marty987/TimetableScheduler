@@ -19,7 +19,7 @@ public class EventTest {
     Event test2 = new Event (0, "", "", 0, 0, new Date(1), new Date(14), "", "", "", "");
     Event test3 = new Event (2, "12345", "Appointment", 3, 10, new Date(10), new Date(1000000000), "monthly", "CS4400", "WGB 1.11", "Description");
     Event test4 = new Event (3, "", "Personal Event", 9, 9, new Date(9), new Date(89898989), "once", "CS6690", "Kane Building G03", "placeholder");
-    Event test5 = new Event (4, "", "", 0, 4, new Date(999999999), new Date(999999999), "", "", "", "");
+    Event test5 = new Event (4, "", "", 0, 4, new Date(999999999), new Date(999999999), "_", "", "", "");
     Event test6 = new Event (999999, "_", "Meeting", 0, 5, new Date(-999), new Date(-1), "", "", "", "");
     Event test7 = new Event (256, "0", "_", 0, 7, new Date(-1), new Date(0), "", "", "", "");
     Event test8 = new Event (444, "Fake Name", "Lecture", 0, 3, new Date(-0), new Date(1), "", "", "", "");
@@ -444,8 +444,47 @@ public class EventTest {
     @Test
     public void testSetPeriod() {
         System.out.println("setPeriod");
-        int period = 10;
-        test1.setPeriod(period);
+        
+        int expResult1 = 3;
+        test1.setPeriod(expResult1);
+        int result1 = test1.getPeriod();
+        assertEquals(expResult1, result1);
+        
+        int expResult2 = 4;
+        test2.setPeriod(expResult2);
+        int result2 = test2.getPeriod();
+        assertEquals(expResult2, result2);
+        
+        int expResult3 = 5;
+        test3.setPeriod(expResult3);
+        int result3 = test3.getPeriod();
+        assertEquals(expResult3, result3);
+        
+        int expResult4 = 9;
+        test4.setPeriod(expResult4);
+        int result4 = test4.getPeriod();
+        assertEquals(expResult4, result4);
+        
+        int expResult5 = 10;
+        test5.setPeriod(expResult5);
+        int result5 = test5.getPeriod();
+        assertEquals(expResult5, result5);
+        
+        int expResult6 = 1;
+        test6.setPeriod(expResult6);
+        int result6 = test6.getPeriod();
+        assertEquals(expResult6, result6);
+        
+        int expResult7 = 0;
+        test7.setPeriod(expResult7);
+        int result7 = test7.getPeriod();
+        assertEquals(expResult7, result7);
+        
+        int expResult8 = -4;
+        test8.setPeriod(expResult8);
+        int result8 = test8.getPeriod();
+        assertEquals(expResult8, result8);
+        
     }
 
     /**
@@ -462,6 +501,18 @@ public class EventTest {
         String expResult2 = "";
         String result2 = test2.getRecurrence();
         assertEquals(expResult2, result2);
+        
+        String expResult3 = "monthly";
+        String result3 = test3.getRecurrence();
+        assertEquals(expResult3, result3);
+        
+        String expResult4 = "once";
+        String result4 = test4.getRecurrence();
+        assertEquals(expResult4, result4);
+        
+        String expResult5 = "_";
+        String result5 = test5.getRecurrence();
+        assertEquals(expResult5, result5);
     }
 
     /**
@@ -470,8 +521,36 @@ public class EventTest {
     @Test
     public void testSetRecurrence() {
         System.out.println("setRecurrence");
-        String recurrence = "once";
-        test1.setRecurrence(recurrence);
+        
+        String expResult1 = "_";
+        test1.setRecurrence(expResult1);
+        String result1 = test1.getRecurrence();
+        assertEquals(expResult1, result1);
+        
+        String expResult2 = "monthly";
+        test2.setRecurrence(expResult2);
+        String result2 = test2.getRecurrence();
+        assertEquals(expResult2, result2);
+        
+        String expResult3 = "weekly";
+        test3.setRecurrence(expResult3);
+        String result3 = test3.getRecurrence();
+        assertEquals(expResult3, result3);
+        
+        String expResult4 = "once";
+        test4.setRecurrence(expResult4);
+        String result4 = test4.getRecurrence();
+        assertEquals(expResult4, result4);
+        
+        String expResult5 = "once";
+        test5.setRecurrence(expResult5);
+        String result5 = test5.getRecurrence();
+        assertEquals(expResult5, result5);
+        
+        String expResult6 = "0";
+        test6.setRecurrence(expResult6);
+        String result6 = test6.getRecurrence();
+        assertEquals(expResult6, result6);
     }
 
     /**
