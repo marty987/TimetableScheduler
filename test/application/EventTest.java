@@ -15,8 +15,14 @@ import static org.junit.Assert.*;
  * @author cmc8
  */
 public class EventTest {
-    Event test1 = new Event (1, "CS3300 Lecture", "Lecture", 6, 1, new Date(1001011), new Date(999999999), "weekly", "CS3300", "WGB G02", "Lecture for fake class.");
-    Event test2 = new Event (0, "", "", 0, 0, new Date(0), new Date(1), "", "", "", "");
+    Event test1 = new Event (1, "CS3300 Lecture", "Lecture", 6, 1, new Date(1001011), new Date(99999999), "weekly", "CS3300", "WGB G02", "Lecture for fake class.");
+    Event test2 = new Event (0, "", "", 0, 0, new Date(1), new Date(14), "", "", "", "");
+    Event test3 = new Event (2, "12345", "Appointment", 3, 10, new Date(10), new Date(1000000000), "monthly", "CS4400", "WGB 1.11", "Description");
+    Event test4 = new Event (3, "", "Personal Event", 9, 9, new Date(9), new Date(89898989), "once", "CS6690", "Kane Building G03", "placeholder");
+    Event test5 = new Event (4, "", "", 0, 0, new Date(999999999), new Date(999999999), "", "", "", "");
+    Event test6 = new Event (999999, "_", "Meeting", 0, 0, new Date(-999), new Date(5), "", "", "", "");
+    Event test7 = new Event (256, "0", "_", 0, 0, new Date(-1), new Date(909809), "", "", "", "");
+    Event test8 = new Event (444, "Fake Name", "Lecture", 0, 0, new Date(-0), new Date(1), "", "", "", "");
     
     public EventTest() {
     }
@@ -43,6 +49,30 @@ public class EventTest {
         int expResult2 = 0;
         int result2 = test2.getEventID();
         assertEquals(expResult2, result2);
+        
+        int expResult3 = 2;
+        int result3 = test3.getEventID();
+        assertEquals(expResult3, result3);
+        
+        int expResult4 = 3;
+        int result4 = test4.getEventID();
+        assertEquals(expResult4, result4);
+        
+        int expResult5 = 4;
+        int result5 = test5.getEventID();
+        assertEquals(expResult5, result5);
+        
+        int expResult6 = 999999;
+        int result6 = test6.getEventID();
+        assertEquals(expResult6, result6);
+        
+        int expResult7 = 256;
+        int result7 = test7.getEventID();
+        assertEquals(expResult7, result7);
+        
+        int expResult8 = 444;
+        int result8 = test8.getEventID();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -51,24 +81,46 @@ public class EventTest {
     @Test
     public void testSetEventID() {
         System.out.println("setEventID");
-        int eventID = 4;
-        test1.setEventID(eventID);
-    }
-
-    /**
-     * Test of getEventName method, of class Event.
-     */
-    @Test
-    public void testGetEventName() {
-        System.out.println("getEventName");
         
-        String expResult1 = "CS3300 Lecture";
-        String result1 = test1.getEventName();
+        int expResult1 = 4;
+        test1.setEventID(expResult1);
+        int result1 = test1.getEventID();
         assertEquals(expResult1, result1);
         
-        String expResult2 = "";
-        String result2 = test2.getEventName();
+        int expResult2 = 9999999;
+        test2.setEventID(expResult2);
+        int result2 = test2.getEventID();
         assertEquals(expResult2, result2);
+        
+        int expResult3 = 0;
+        test3.setEventID(expResult3);
+        int result3 = test3.getEventID();
+        assertEquals(expResult3, result3);
+        
+        int expResult4 = 00000;
+        test4.setEventID(expResult4);
+        int result4 = test4.getEventID();
+        assertEquals(expResult4, result4);
+        
+        int expResult5 = 909090;
+        test5.setEventID(expResult5);
+        int result5 = test5.getEventID();
+        assertEquals(expResult5, result5);
+        
+        int expResult6 = 1001000100;
+        test6.setEventID(expResult6);
+        int result6 = test6.getEventID();
+        assertEquals(expResult6, result6);
+        
+        int expResult7 = 8848848;
+        test7.setEventID(expResult7);
+        int result7 = test7.getEventID();
+        assertEquals(expResult7, result7);
+        
+        int expResult8 = 3;
+        test8.setEventID(expResult8);
+        int result8 = test8.getEventID();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -77,8 +129,30 @@ public class EventTest {
     @Test
     public void testSetEventName() {
         System.out.println("setEventName");
-        String eventName = "CS3301 Lab";
-        test1.setEventName(eventName);
+        
+        String expResult1 = "CS3301 Lab";
+        test1.setEventName(expResult1);
+        
+        String expResult2 = "CS6005 Lecture";
+        test2.setEventName(expResult2);
+        
+        String expResult3 = "";
+        test3.setEventName(expResult3);
+        
+        String expResult4 = "0";
+        test4.setEventName(expResult4);
+        
+        String expResult5 = "/*32£";
+        test5.setEventName(expResult5);
+        
+        String expResult6 = "Fake";
+        test6.setEventName(expResult6);
+        
+        String expResult7 = "*//*";
+        test7.setEventName(expResult7);
+        
+        String expResult8 = "CS";
+        test8.setEventName(expResult8);
     }
 
     /**
@@ -95,6 +169,30 @@ public class EventTest {
         String expResult2 = "";
         String result2 = test2.getEventType();
         assertEquals(expResult2, result2);
+        
+        String expResult3 = "Appointment";
+        String result3 = test3.getEventType();
+        assertEquals(expResult3, result3);
+        
+        String expResult4 = "Personal Event";
+        String result4 = test4.getEventType();
+        assertEquals(expResult4, result4);
+        
+        String expResult5 = "";
+        String result5 = test5.getEventType();
+        assertEquals(expResult5, result5);
+        
+        String expResult6 = "Meeting";
+        String result6 = test6.getEventType();
+        assertEquals(expResult6, result6);
+        
+        String expResult7 = "_";
+        String result7 = test7.getEventType();
+        assertEquals(expResult7, result7);
+        
+        String expResult8 = "Lecture";
+        String result8 = test8.getEventType();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -103,10 +201,42 @@ public class EventTest {
     @Test
     public void testSetEventType() {
         System.out.println("setEventType");
-        String eventType = "Lab";
-        test1.setEventType(eventType);
+        
+        String expResult1 = "Lab";
+        test1.setEventType(expResult1);
+        String result1 = test1.getEventType();
+        assertEquals(expResult1, result1);
+        
+        String expResult2 = "Lab";
+        test2.setEventType(expResult2);
+        String result2 = test2.getEventType();
+        assertEquals(expResult2, result2);
+        
+        String expResult3 = "Lecture";
+        test3.setEventType(expResult3);
+        String result3 = test3.getEventType();
+        assertEquals(expResult3, result3);
+        
+        String expResult4 = "Meeting";
+        test4.setEventType(expResult4);
+        String result4 = test4.getEventType();
+        assertEquals(expResult4, result4);
+        
+        String expResult5 = "";
+        test5.setEventType(expResult5);
+        String result5 = test5.getEventType();
+        assertEquals(expResult5, result5);
+        
+        String expResult6 = "/*$3#";
+        test6.setEventType(expResult6);
+        String result6 = test6.getEventType();
+        assertEquals(expResult6, result6);
+        
+        String expResult7 = "+";
+        test7.setEventType(expResult7);
+        String result7 = test7.getEventType();
+        assertEquals(expResult7, result7);
     }
-
     /**
      * Test of getStartDate method, of class Event.
      */
@@ -118,9 +248,33 @@ public class EventTest {
         Date result1 = test1.getStartDate();
         assertEquals(expResult1, result1);
         
-        Date expResult2 = new Date(0);
+        Date expResult2 = new Date(1);
         Date result2 = test2.getStartDate();
         assertEquals(expResult2, result2);
+        
+        Date expResult3 = new Date(10);
+        Date result3 = test3.getStartDate();
+        assertEquals(expResult3, result3);
+        
+        Date expResult4 = new Date(9);
+        Date result4 = test4.getStartDate();
+        assertEquals(expResult4, result4);
+        
+        Date expResult5 = new Date(999999999);
+        Date result5 = test5.getStartDate();
+        assertEquals(expResult5, result5);
+        
+        Date expResult6 = new Date(-999);
+        Date result6 = test6.getStartDate();
+        assertEquals(expResult6, result6);
+        
+        Date expResult7 = new Date(-1);
+        Date result7  = test7.getStartDate();
+        assertEquals(expResult7, result7);
+        
+        Date expResult8 = new Date(-0);
+        Date result8 = test8.getStartDate();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -129,7 +283,7 @@ public class EventTest {
     @Test
     public void testSetStartDate() {
         System.out.println("setStartDate");
-        test1.setStartDate(new Date(0));
+        test1.setStartDate(new Date(1));
     }
 
     /**
@@ -139,7 +293,7 @@ public class EventTest {
     public void testGetEndDate() {
         System.out.println("getEndDate");
         
-        Date expResult1 = new Date(999999999);
+        Date expResult1 = new Date(99999999);
         Date result1 = test1.getEndDate();
         assertEquals(expResult1, result1);
         
