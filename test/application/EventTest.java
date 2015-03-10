@@ -19,10 +19,10 @@ public class EventTest {
     Event test2 = new Event (0, "", "", 0, 0, new Date(1), new Date(14), "", "", "", "");
     Event test3 = new Event (2, "12345", "Appointment", 3, 10, new Date(10), new Date(1000000000), "monthly", "CS4400", "WGB 1.11", "Description");
     Event test4 = new Event (3, "", "Personal Event", 9, 9, new Date(9), new Date(89898989), "once", "CS6690", "Kane Building G03", "placeholder");
-    Event test5 = new Event (4, "", "", 0, 0, new Date(999999999), new Date(999999999), "", "", "", "");
-    Event test6 = new Event (999999, "_", "Meeting", 0, 0, new Date(-999), new Date(5), "", "", "", "");
-    Event test7 = new Event (256, "0", "_", 0, 0, new Date(-1), new Date(909809), "", "", "", "");
-    Event test8 = new Event (444, "Fake Name", "Lecture", 0, 0, new Date(-0), new Date(1), "", "", "", "");
+    Event test5 = new Event (4, "", "", 0, 4, new Date(999999999), new Date(999999999), "", "", "", "");
+    Event test6 = new Event (999999, "_", "Meeting", 0, 5, new Date(-999), new Date(-1), "", "", "", "");
+    Event test7 = new Event (256, "0", "_", 0, 7, new Date(-1), new Date(0), "", "", "", "");
+    Event test8 = new Event (444, "Fake Name", "Lecture", 0, 3, new Date(-0), new Date(1), "", "", "", "");
     
     public EventTest() {
     }
@@ -283,7 +283,31 @@ public class EventTest {
     @Test
     public void testSetStartDate() {
         System.out.println("setStartDate");
-        test1.setStartDate(new Date(1));
+        
+        test1.setStartDate(new Date(0));
+        Date expResult1 = test1.getStartDate();
+        Date result1 = test8.getStartDate();
+        assertEquals(expResult1, result1);
+        
+        test2.setStartDate(new Date(1));
+        Date expResult2 = test2.getStartDate();
+        Date result2 = test2.getStartDate();
+        assertEquals(expResult2, result2);
+        
+        test3.setStartDate(new Date(-1));
+        Date expResult3 = test3.getStartDate();
+        Date result3 = test3.getStartDate();
+        assertEquals(expResult3, result3);
+        
+        test4.setStartDate(new Date(999999999));
+        Date expResult4 = test4.getStartDate();
+        Date result4 = test4.getStartDate();
+        assertEquals(expResult4, result4);
+        
+        test5.setStartDate(new Date(-999999999));
+        Date expResult5 = test5.getStartDate();
+        Date result5 = test5.getStartDate();
+        assertEquals(expResult5, result5);
     }
 
     /**
@@ -300,6 +324,30 @@ public class EventTest {
         Date expResult2 = new Date(14);
         Date result2 = test2.getEndDate();
         assertEquals(expResult2, result2);
+        
+        Date expResult3 = new Date(1000000000);
+        Date result3 = test3.getEndDate();
+        assertEquals(expResult3, result3);
+        
+        Date expResult4 = new Date(89898989);
+        Date result4 = test4.getEndDate();
+        assertEquals(expResult4, result4);
+        
+        Date expResult5 = new Date(999999999);
+        Date result5 = test5.getEndDate();
+        assertEquals(expResult5, result5);
+        
+        Date expResult6 = new Date(-1);
+        Date result6 = test6.getEndDate();
+        assertEquals(expResult6, result6);
+        
+        Date expResult7 = new Date(0);
+        Date result7 = test7.getEndDate();
+        assertEquals(expResult7, result7);
+        
+        Date expResult8 = new Date(1);
+        Date result8 = test8.getEndDate();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -308,7 +356,46 @@ public class EventTest {
     @Test
     public void testSetEndDate() {
         System.out.println("setEndDate");
-        test1.setEndDate(new Date(77777));
+        
+        Date expResult1 = new Date(0);
+        test1.setEndDate(expResult1);
+        Date result1 = test1.getEndDate();
+        assertEquals(expResult1, result1);
+        
+        Date expResult2 = new Date(-0);
+        test2.setEndDate(expResult2);
+        Date result2 = test2.getEndDate();
+        assertEquals(expResult2, result2);
+        
+        Date expResult3 = new Date(9);
+        test3.setEndDate(expResult3);
+        Date result3 = test3.getEndDate();
+        assertEquals(expResult3, result3);
+        
+        Date expResult4 = new Date(-9);
+        test4.setEndDate(expResult4);
+        Date result4 = test4.getEndDate();
+        assertEquals(expResult4, result4);
+        
+        Date expResult5 = new Date(999999999);
+        test5.setEndDate(expResult5);
+        Date result5 = test5.getEndDate();
+        assertEquals(expResult5, result5);
+        
+        Date expResult6 = new Date(-999999999);
+        test6.setEndDate(expResult6);
+        Date result6 = test6.getEndDate();
+        assertEquals(expResult6, result6);
+        
+        Date expResult7 = new Date(-0);
+        test7.setEndDate(expResult7);
+        Date result7 = test7.getEndDate();
+        assertEquals(expResult7, result7);
+        
+        Date expResult8 = new Date(90);
+        test8.setEndDate(expResult8);
+        Date result8 = test8.getEndDate();
+        assertEquals(expResult8, result8);
     }
 
     /**
@@ -325,6 +412,30 @@ public class EventTest {
         int expResult2 = 0;
         int result2 = test2.getPeriod();
         assertEquals(expResult2, result2);
+        
+        int expResult3 = 10;
+        int result3 = test3.getPeriod();
+        assertEquals(expResult3, result3);
+        
+        int expResult4 = 9;
+        int result4 = test4.getPeriod();
+        assertEquals(expResult4, result4);
+        
+        int expResult5 = 4;
+        int result5 = test5.getPeriod();
+        assertEquals(expResult5, result5);
+        
+        int expResult6 = 5;
+        int result6 = test6.getPeriod();
+        assertEquals(expResult6, result6);
+        
+        int expResult7 = 7;
+        int result7 = test7.getPeriod();
+        assertEquals(expResult7, result7);
+        
+        int expResult8 = 3;
+        int result8 = test8.getPeriod();
+        assertEquals(expResult8, result8);
     }
 
     /**
