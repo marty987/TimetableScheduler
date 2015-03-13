@@ -40,19 +40,7 @@ public class TimetableTest {
         int result = test.getEventId();
         assertEquals(expResult, result);
     }
-
-    /**
-     * Test of getEventName method, of class Timetable.
-     */
-    @Test
-    public void testGetEventName() {
-        System.out.println("getEventName");
-        
-        String expResult = "";
-        String result = test.getEventName();
-        assertEquals(expResult, result);
-    }
-
+    
     /**
      * Test of printTimetable method, of class Timetable.
      */
@@ -65,43 +53,37 @@ public class TimetableTest {
                      + "<caption>Schedule Your Timetable</catption>\n"
                      + "<tbody>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th></th>" + "<th scope=\"col\">Mon</th>" + "<th scope=\"col\">Tue</th>" + "<th scope=\"col\">Wed</th>" + "<th scope=\"col\">Thurs</th>" + "<th scope=\"col\">Fri</th>" + "<th scope=\"col\">Sat</th>" + "<th scope=\"col\">Sun</th>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">8AM - 9AM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + 
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">9AM - 10AM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" + 
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">10AM - 11AM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">11AM - 12PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">12PM - 1PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">1PM - 2PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">2PM - 3PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">3PM - 4PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" + 
                             "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">4PM - 5PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                             "<tr>\n" +
-                                "<td></td>" +
-                            "</tr>\n" +
-                            "<tr>\n" +
-                                "<td></td>" +
-                            "</tr>\n" +
-                            "<tr>\n" +
-                                "<td></td>" +
+                                "<th scope=\"row\">5PM - 6PM</th>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" + "<td></td>" +
                             "</tr>\n" +
                      "</tbody>" +
                 "</table>";
