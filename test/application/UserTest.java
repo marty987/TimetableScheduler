@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  * @author cmc8
  */
 public class UserTest {
+    User test = new User();
     
     public UserTest() {
     }
@@ -25,212 +26,418 @@ public class UserTest {
     @AfterClass
     public static void tearDownClass() {
     }
-
+    
     /**
-     * Test of getUserId method, of class User.
+     * Test of getUserId and setUserId methods, of class User.
      */
     @Test
-    public void testGetUserId() {
-        System.out.println("getUserId");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getUserId();
+    public void testGetUserIdAndSetUserId() {
+        System.out.println("getUserId and setUserId");
+        
+        String expResult = "111111111";
+        test.setUserId(expResult);
+        String result = test.getUserId();
+        assertEquals(expResult, result);
+        
+        expResult = "999999999";
+        test.setUserId(expResult);
+        result = test.getUserId();
+        assertEquals(expResult, result);
+        
+        expResult = "123423458";
+        test.setUserId(expResult);
+        result = test.getUserId();
+        assertEquals(expResult, result);
+        
+        expResult = "234456567";
+        test.setUserId(expResult);
+        result = test.getUserId();
+        assertEquals(expResult, result);
+        
+        expResult = "767652341";
+        test.setUserId(expResult);
+        result = test.getUserId();
+        assertEquals(expResult, result);
+        
+        expResult = "000000000";
+        test.setUserId(expResult);
+        result = test.getUserId();
+        assertEquals(expResult, result);
+    }
+    
+    /**
+     * Test of getStream and setStream methods, of class User.
+     */
+    @Test
+    public void testGetStreamAndSetStream() {
+        System.out.println("getStream and setStream");
+        
+        String expResult = "0";
+        test.setStream(expResult);
+        String result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "1";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "2";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "3";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "4";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "5";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "6";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "7";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "8";
+        test.setStream(expResult);
+        result = test.getStream();
+        assertEquals(expResult, result);
+        
+        expResult = "9";
+        test.setStream(expResult);
+        result = test.getStream();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setUserId method, of class User.
+     * Test of getFirstName and setFirstName methods, of class User.
      */
     @Test
-    public void testSetUserId() {
-        System.out.println("setUserId");
-        String userId = "";
-        User instance = new User();
-        instance.setUserId(userId);
-    }
-
-    /**
-     * Test of getStream method, of class User.
-     */
-    @Test
-    public void testGetStream() {
-        System.out.println("getStream");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getStream();
+    public void testGetFirstNameAndSetFirstName() {
+        System.out.println("getFirstName and setFirstName");
+        
+        String expResult = "Mary";
+        test.setFirstName(expResult);
+        String result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = "MARY";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = "mary";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = " mary ";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = " MARY ";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = "0";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = "999";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
+        assertEquals(expResult, result);
+        
+        expResult = "&@*£\\";
+        test.setFirstName(expResult);
+        result = test.getFirstName();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setStream method, of class User.
+     * Test of getMiddleName and setMiddleName methods, of class User.
      */
     @Test
-    public void testSetStream() {
-        System.out.println("setStream");
-        String stream = "";
-        User instance = new User();
-        instance.setStream(stream);
-    }
-
-    /**
-     * Test of getFirstName method, of class User.
-     */
-    @Test
-    public void testGetFirstName() {
-        System.out.println("getFirstName");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getFirstName();
+    public void testGetMiddleNameAndSetMiddleName() {
+        System.out.println("getMiddleName and setMiddleName");
+        
+        String expResult = "Mary";
+        test.setMiddleName(expResult);
+        String result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = "MARY";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = "mary";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = " mary ";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = " MARY ";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = "0";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = "999";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
+        assertEquals(expResult, result);
+        
+        expResult = "&@*£\\";
+        test.setMiddleName(expResult);
+        result = test.getMiddleName();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setFirstName method, of class User.
-     */
-    @Test
-    public void testSetFirstName() {
-        System.out.println("setFirstName");
-        String firstName = "";
-        User instance = new User();
-        instance.setFirstName(firstName);
-    }
-
-    /**
-     * Test of getMiddleName method, of class User.
-     */
-    @Test
-    public void testGetMiddleName() {
-        System.out.println("getMiddleName");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getMiddleName();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setMiddleName method, of class User.
-     */
-    @Test
-    public void testSetMiddleName() {
-        System.out.println("setMiddleName");
-        String middleName = "";
-        User instance = new User();
-        instance.setMiddleName(middleName);
-    }
-
-    /**
-     * Test of getLastName method, of class User.
+     * Test of getLastName and setLastName methods, of class User.
      */
     @Test
     public void testGetLastName() {
-        System.out.println("getLastName");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getLastName();
+        System.out.println("getLastName and setLastName");
+        
+        String expResult = "Mary";
+        test.setLastName(expResult);
+        String result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = "MARY";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = "mary";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = " mary ";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = " MARY ";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = "0";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = "999";
+        test.setLastName(expResult);
+        result = test.getLastName();
+        assertEquals(expResult, result);
+        
+        expResult = "&@*£\\";
+        test.setLastName(expResult);
+        result = test.getLastName();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setLastName method, of class User.
-     */
-    @Test
-    public void testSetLastName() {
-        System.out.println("setLastName");
-        String lastName = "";
-        User instance = new User();
-        instance.setLastName(lastName);
-    }
-
-    /**
-     * Test of getEmail method, of class User.
+     * Test of getEmail and setEmail methods, of class User.
      */
     @Test
     public void testGetEmail() {
         System.out.println("getEmail");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getEmail();
+      
+        String expResult = "&@*£\\";
+        test.setEmail(expResult);
+        String result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "fake@umail.ucc.ie";
+        test.setEmail(expResult);
+        result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "fake@gmail.com";
+        test.setEmail(expResult);
+        result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "fake@hotmail.com";
+        test.setEmail(expResult);
+        result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "fake@eircom.net";
+        test.setEmail(expResult);
+        result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "fake@ucc.ie";
+        test.setEmail(expResult);
+        result = test.getEmail();
+        assertEquals(expResult, result);
+        
+        expResult = "000400404";
+        test.setEmail(expResult);
+        result = test.getEmail();
         assertEquals(expResult, result);
     }
 
-    /**
-     * Test of setEmail method, of class User.
-     */
-    @Test
-    public void testSetEmail() {
-        System.out.println("setEmail");
-        String email = "";
-        User instance = new User();
-        instance.setEmail(email);
-    }
 
     /**
-     * Test of getPassword1 method, of class User.
+     * Test of getPassword1 and setPassword methods, of class User.
      */
     @Test
-    public void testGetPassword1() {
+    public void testGetPassword1AndSetPassword1() {
         System.out.println("getPassword1");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getPassword1();
+        
+        String expResult = "abc";
+        test.setPassword1(expResult);
+        String result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_abc1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "ABC";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_ABC1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "AbC";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_AbC1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "123456789";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "$£€&~@";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setPassword1 method, of class User.
+     * Test of getPassword2 and setPassword2 methods, of class User.
      */
     @Test
-    public void testSetPassword1() {
-        System.out.println("setPassword1");
-        String password1 = "";
-        User instance = new User();
-        instance.setPassword1(password1);
-    }
-
-    /**
-     * Test of getPassword2 method, of class User.
-     */
-    @Test
-    public void testGetPassword2() {
-        System.out.println("getPassword2");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getPassword2();
+    public void testGetPassword2AndSetPassword2() {
+        System.out.println("getPassword2 and setPassword2");
+        
+        String expResult = "abc";
+        test.setPassword1(expResult);
+        String result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_abc1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "ABC";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_ABC1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "AbC";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "_AbC1";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "123456789";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
+        assertEquals(expResult, result);
+        
+        expResult = "$£€&~@";
+        test.setPassword1(expResult);
+        result = test.getPassword1();
         assertEquals(expResult, result);
     }
 
     /**
-     * Test of setPassword2 method, of class User.
-     */
-    @Test
-    public void testSetPassword2() {
-        System.out.println("setPassword2");
-        String password2 = "";
-        User instance = new User();
-        instance.setPassword2(password2);
-    }
-
-    /**
-     * Test of getPhoneNo method, of class User.
+     * Test of getPhoneNo and setPhoneNo method, of class User.
      */
     @Test
     public void testGetPhoneNo() {
-        System.out.println("getPhoneNo");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getPhoneNo();
+        System.out.println("getPhoneNo and setPhoneNo");
+        
+        String expResult = "0";
+        test.setPhoneNo(expResult);
+        String result = test.getPhoneNo();
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setPhoneNo method, of class User.
-     */
-    @Test
-    public void testSetPhoneNo() {
-        System.out.println("setPhoneNo");
-        String phoneNo = "";
-        User instance = new User();
-        instance.setPhoneNo(phoneNo);
+        
+        expResult = "0877777777";
+        test.setPhoneNo(expResult);
+        result = test.getPhoneNo();
+        assertEquals(expResult, result);
+        
+        expResult = "087 7777777 ";
+        test.setPhoneNo(expResult);
+        result = test.getPhoneNo();
+        assertEquals(expResult, result);
+        
+        expResult = "0000000000";
+        test.setPhoneNo(expResult);
+        result = test.getPhoneNo();
+        assertEquals(expResult, result);
+        
+        expResult = "999999999";
+        test.setPhoneNo(expResult);
+        result = test.getPhoneNo();
+        assertEquals(expResult, result);
     }
 
     /**
@@ -239,9 +446,9 @@ public class UserTest {
     @Test
     public void testValidateRegForm() {
         System.out.println("validateRegForm");
-        User instance = new User();
+
         boolean expResult = false;
-        boolean result = instance.validateRegForm();
+        boolean result = test.validateRegForm();
         assertEquals(expResult, result);
     }
 
@@ -251,11 +458,36 @@ public class UserTest {
     @Test
     public void testDoesUserExist() {
         System.out.println("doesUserExist");
-        String userID = "";
-        User instance = new User();
+        
+        String userID = "112409848";
         boolean expResult = false;
-        boolean result = instance.doesUserExist(userID);
+        boolean result = test.doesUserExist(userID);
         assertEquals(expResult, result);
+                
+        test.setUserId(userID);
+        expResult = true;
+        result = test.doesUserExist(userID);
+        assertEquals(expResult, result);
+        
+        userID = "000000000";
+        test.setUserId(userID);
+        expResult = true;
+        result = test.doesUserExist(userID);
+        assertEquals(expResult, result);
+        
+        userID = "999999999";
+        test.setUserId(userID);
+        expResult = true;
+        result = test.doesUserExist(userID);
+        assertEquals(expResult, result);
+        
+        userID = "827368234";
+        test.setUserId(userID);
+        expResult = true;
+        result = test.doesUserExist(userID);
+        assertEquals(expResult, result);
+        
+        
     }
 
     /**
@@ -264,8 +496,8 @@ public class UserTest {
     @Test
     public void testRegisterNewUser() {
         System.out.println("registerNewUser");
-        User instance = new User();
-        instance.registerNewUser();
+        
+        test.registerNewUser();
     }
 
     /**
@@ -274,9 +506,9 @@ public class UserTest {
     @Test
     public void testPrintErrors() {
         System.out.println("printErrors");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.printErrors();
+        
+        String expResult = "<ul></ul>";
+        String result = test.printErrors();
         assertEquals(expResult, result);
     }
 
@@ -286,10 +518,50 @@ public class UserTest {
     @Test
     public void testIsInteger() {
         System.out.println("isInteger");
-        String value = "";
-        User instance = new User();
+        
+        String value = "string";
         boolean expResult = false;
-        boolean result = instance.isInteger(value);
+        boolean result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "0";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "1";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "999999999";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "000000000";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "-0";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "";
+        expResult = false;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "-999999999";
+        expResult = true;
+        result = test.isInteger(value);
+        assertEquals(expResult, result);
+        
+        value = "-1";
+        expResult = true;
+        result = test.isInteger(value);
         assertEquals(expResult, result);
     }
 
@@ -299,9 +571,9 @@ public class UserTest {
     @Test
     public void testGetCurrentDate() {
         System.out.println("getCurrentDate");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.getCurrentDate();
+        
+        String expResult = "2015-03-13";
+        String result = test.getCurrentDate();
         assertEquals(expResult, result);
     }
 
@@ -311,14 +583,45 @@ public class UserTest {
     @Test
     public void testResetPassword() {
         System.out.println("resetPassword");
-        String password1 = "";
-        String password2 = "";
-        String userId = "";
-        User instance = new User();
-        boolean expResult = false;
-        boolean result = instance.resetPassword(password1, password2, userId);
+        
+        String password1 = "abc";
+        test.setPassword1(password1);
+        String password2 = "def";
+        String userId = "827368234";
+        boolean expResult = true;
+        boolean result = test.resetPassword(password1, password2, userId);
+        assertEquals(expResult, result);
+        
+        password2 = "abc";
+        userId = "827368234";
+        expResult = true;
+        result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
   
+        password1 = "123";
+        password2 = "def";
+        userId = "827368234";
+        expResult = false;
+        result = test.resetPassword(password1, password2, userId);
+        assertEquals(expResult, result);
+        
+        password2 = "ABC";
+        userId = "827368234";
+        expResult = true;
+        result = test.resetPassword(password1, password2, userId);
+        assertEquals(expResult, result);
+
+        password2 = "abc123";
+        userId = "827368234";
+        expResult = true;
+        result = test.resetPassword(password1, password2, userId);
+        assertEquals(expResult, result);
+        
+        password2 = "123abc";
+        userId = "827368234";
+        expResult = true;
+        result = test.resetPassword(password1, password2, userId);
+        assertEquals(expResult, result);
     }
 
     /**
@@ -327,10 +630,10 @@ public class UserTest {
     @Test
     public void testGetUser() {
         System.out.println("getUser");
-        String userId = "";
-        User instance = new User();
+        
+        String userId = "999999999";
         String[] expResult = null;
-        String[] result = instance.getUser(userId);
+        String[] result = test.getUser(userId);
         assertArrayEquals(expResult, result);
     }
 
@@ -340,9 +643,43 @@ public class UserTest {
     @Test
     public void testRegistrationForm() {
         System.out.println("registrationForm");
-        User instance = new User();
-        String expResult = "";
-        String result = instance.registrationForm();
+        String expResult = "<form name='registration_form' action='register.jsp' method='POST'>\n" +
+        "<label for='userId'>Id Number:</label>\n" +
+        "<input type='text' name='userId' value='" + test.getUserId() + "' placeholder='123456789' /><br />\n" +
+        "<label for='stream'>Stream:</label>\n" +
+                "<select name=\"stream\"id='dropdown' >\n" +
+                    "  <option value=\"1\" selected>Computer Sci Year 1</option>\n" +
+                    "  <option value=\"2\">Core Year 2</option>\n" +
+                    "  <option value=\"3\">Core Year 3</option>\n" +
+                    "  <option value=\"4\">Core Year 4</option>\n" +
+                    "  <option value=\"5\">Web Year 2</option>\n" +
+                    "  <option value=\"6\">Web Year 3</option>\n" +
+                    "  <option value=\"7\">Web Year 4</option>\n" +
+                    "  <option value=\"8\">Soft Entrep Year 2</option>\n" +
+                    "  <option value=\"9\">Soft Entrep Year 3</option>\n" +
+                    "  <option value=\"10\">Soft Entrep Year 4</option>\n" +
+                    "  <option value=\"11\">Chinese Year 2</option>\n" +
+                    "  <option value=\"12\">Chinese Year 3</option>\n" +
+                    "  <option value=\"13\">Chinese Year 4</option>\n" +
+                "</select><br />"+
+        
+        "<label for='firstName'>First Name:</label>\n" +
+        "<input type='text' name='firstName' value='" + test.getFirstName() +  "' placeholder='John' /><br />\n" +
+        "<label for='middleName'>Middle Name:</label>\n" +
+        "<input type='text' name='middleName' value='" + test.getMiddleName() +  "' placeholder='Swan' /><br />\n" +
+        "<label for='lastName'>Last Name:</label>\n" +
+        "<input type='text' name='lastName' value='" + test.getLastName() +  "' placeholder='Smith' /><br />\n" +
+        "<label for='email'>Email:</label>\n" +
+        "<input type='email' id='email' name='email' value='" + test.getEmail() +  "' placeholder='martin@live.ie' /><br />\n"+
+        "<label for='password1'>Password:</label>\n" +
+        "<input type='password' name='password1' /><br />\n" +
+        "<label for='password2'>Confirm Password:</label>\n" +
+        "<input type='password' name='password2' /><br />\n" +
+        "<label for='phoneNo'>Phone Number:</label>\n" +
+        "<input type='text' name='phoneNo' value='" + test.getPhoneNo() +  "' placeholder='085-1175892' /><br />\n" +
+        "<input type='submit' value='Submit' name='submit' /><br />\n" +
+        "</form>\n";
+        String result = test.registrationForm();
         assertEquals(expResult, result);
     }
 }
