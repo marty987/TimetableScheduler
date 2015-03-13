@@ -4,6 +4,7 @@
  */
 package application;
 
+import dbpackage.DatabaseClass;
 import java.util.Calendar;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,6 +16,7 @@ import static org.junit.Assert.*;
  * @author cmc8
  */
 public class TimetableTest {
+    Timetable test = new Timetable();
     
     public TimetableTest() {
     }
@@ -33,9 +35,9 @@ public class TimetableTest {
     @Test
     public void testGetEventId() {
         System.out.println("getEventId");
-        Timetable instance = new Timetable();
+
         int expResult = 0;
-        int result = instance.getEventId();
+        int result = test.getEventId();
         assertEquals(expResult, result);
     }
 
@@ -45,9 +47,9 @@ public class TimetableTest {
     @Test
     public void testGetEventName() {
         System.out.println("getEventName");
-        Timetable instance = new Timetable();
+        
         String expResult = "";
-        String result = instance.getEventName();
+        String result = test.getEventName();
         assertEquals(expResult, result);
     }
 
@@ -57,9 +59,52 @@ public class TimetableTest {
     @Test
     public void testPrintTimetable() {
         System.out.println("printTimetable");
-        String userId = "";
+        String userId = "98751177";
         Timetable instance = new Timetable();
-        String expResult = "";
+        String expResult = "<table class=\"emp-sales\">\n"
+                     + "<caption>Schedule Your Timetable</catption>\n"
+                     + "<tbody>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" + 
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" + 
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                            "<tr>\n" +
+                                "<td></td>" +
+                            "</tr>\n" +
+                     "</tbody>" +
+                "</table>";
         String result = instance.printTimetable(userId);
         assertEquals(expResult, result);
     }
