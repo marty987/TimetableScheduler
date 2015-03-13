@@ -14,6 +14,7 @@ import static org.junit.Assert.*;
  * @author cmc8
  */
 public class DeleteTest {
+    Delete test = new Delete();
     
     public DeleteTest() {
     }
@@ -32,6 +33,7 @@ public class DeleteTest {
     @Test
     public void testSetEventId() {
         System.out.println("setEventId");
+        
         String eventId = "";
         Delete instance = new Delete();
         instance.setEventId(eventId);
@@ -56,6 +58,7 @@ public class DeleteTest {
     @Test
     public void testPrintInfo() {
         System.out.println("printInfo");
+        
         Delete instance = new Delete();
         String expResult = "";
         String result = instance.printInfo();

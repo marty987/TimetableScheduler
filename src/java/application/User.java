@@ -387,29 +387,6 @@ public class User {
         form += "</form>\n";
         
         return form;
-    }
-     
-//    private void changePassword( String userInputCurrentPassword, String newPassword ) {
-//        DatabaseClass database = new DatabaseClass( );
-//        database.setup( "localhost", "timetable_scheduler_db", "root", "" );
-//        database.setup( "cs1.ucc.ie", "2016_mjb2", "mjb2", "diechoro" );
-//        
-//        String currentPasswordFromDB = request.getParameter( "password" );
-//        
-//        if( currentPasswordFromDB.equals(userInputCurrentPassword) ) {
-//            database.Insert( "INSERT INTO users( password )"
-//                    + "VALUES (\"" + newPassword + "\");"
-//                    + "WHERE user_id = \"" + userId + "\";");
-//        }
-//        else
-//        {
-//            
-//        }
-//            
-//    }
-//    
-//    private void changePhoneNo( String currentPassword ) {
-//        
-//    } 
+     }
 }
 

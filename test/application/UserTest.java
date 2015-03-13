@@ -459,7 +459,7 @@ public class UserTest {
     public void testDoesUserExist() {
         System.out.println("doesUserExist");
         
-        String userID = "112409848";
+        String userID = "999999999";
         boolean expResult = false;
         boolean result = test.doesUserExist(userID);
         assertEquals(expResult, result);
@@ -587,38 +587,33 @@ public class UserTest {
         String password1 = "abc";
         test.setPassword1(password1);
         String password2 = "def";
-        String userId = "827368234";
+        String userId = "999999999";
         boolean expResult = true;
         boolean result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
         
         password2 = "abc";
-        userId = "827368234";
         expResult = true;
         result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
   
         password1 = "123";
         password2 = "def";
-        userId = "827368234";
         expResult = false;
         result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
         
         password2 = "ABC";
-        userId = "827368234";
         expResult = true;
         result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
 
         password2 = "abc123";
-        userId = "827368234";
         expResult = true;
         result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);
         
         password2 = "123abc";
-        userId = "827368234";
         expResult = true;
         result = test.resetPassword(password1, password2, userId);
         assertEquals(expResult, result);

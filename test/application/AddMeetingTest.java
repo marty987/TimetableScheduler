@@ -15,227 +15,21 @@ import static org.junit.Assert.*;
  * @author cmc8
  */
 public class AddMeetingTest {
+    AddMeeting test = new AddMeeting();
     
     public AddMeetingTest() {
+        AddMeeting test = new AddMeeting();
     }
     
     @BeforeClass
     public static void setUpClass() {
+        
     }
     
     @AfterClass
     public static void tearDownClass() {
     }
-
-    /**
-     * Test of getEventName method, of class AddMeeting.
-     */
-    @Test
-    public void testGetEventName() {
-        System.out.println("getEventName");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getEventName();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setEventName method, of class AddMeeting.
-     */
-    @Test
-    public void testSetEventName() {
-        System.out.println("setEventName");
-        String eventName = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setEventName(eventName);
-    }
-
-    /**
-     * Test of getEventType method, of class AddMeeting.
-     */
-    @Test
-    public void testGetEventType() {
-        System.out.println("getEventType");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getEventType();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setEventType method, of class AddMeeting.
-     */
-    @Test
-    public void testSetEventType() {
-        System.out.println("setEventType");
-        String eventType = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setEventType(eventType);
-    }
-
-    /**
-     * Test of getPeriod method, of class AddMeeting.
-     */
-    @Test
-    public void testGetPeriod() {
-        System.out.println("getPeriod");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getPeriod();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setPeriod method, of class AddMeeting.
-     */
-    @Test
-    public void testSetPeriod() {
-        System.out.println("setPeriod");
-        String period = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setPeriod(period);
-    }
-
-    /**
-     * Test of getStartDate method, of class AddMeeting.
-     */
-    @Test
-    public void testGetStartDate() {
-        System.out.println("getStartDate");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getStartDate();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setStartDate method, of class AddMeeting.
-     */
-    @Test
-    public void testSetStartDate() {
-        System.out.println("setStartDate");
-        String startDate = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setStartDate(startDate);
-    }
-
-    /**
-     * Test of getEndDate method, of class AddMeeting.
-     */
-    @Test
-    public void testGetEndDate() {
-        System.out.println("getEndDate");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getEndDate();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setEndDate method, of class AddMeeting.
-     */
-    @Test
-    public void testSetEndDate() {
-        System.out.println("setEndDate");
-        String endDate = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setEndDate(endDate);
-
-    }
-
-    /**
-     * Test of getRecurrence method, of class AddMeeting.
-     */
-    @Test
-    public void testGetRecurrence() {
-        System.out.println("getRecurrence");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getRecurrence();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setRecurrence method, of class AddMeeting.
-     */
-    @Test
-    public void testSetRecurrence() {
-        System.out.println("setRecurrence");
-        String recurrence = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setRecurrence(recurrence);
-    }
-
-    /**
-     * Test of getModuleCode method, of class AddMeeting.
-     */
-    @Test
-    public void testGetModuleCode() {
-        System.out.println("getModuleCode");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getModuleCode();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setModuleCode method, of class AddMeeting.
-     */
-    @Test
-    public void testSetModuleCode() {
-        System.out.println("setModuleCode");
-        String moduleCode = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setModuleCode(moduleCode);
-    }
-
-    /**
-     * Test of getLocation method, of class AddMeeting.
-     */
-    @Test
-    public void testGetLocation() {
-        System.out.println("getLocation");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getLocation();
-        assertEquals(expResult, result);
-
-    }
-
-    /**
-     * Test of setLocation method, of class AddMeeting.
-     */
-    @Test
-    public void testSetLocation() {
-        System.out.println("setLocation");
-        String location = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setLocation(location);
-    }
-
-    /**
-     * Test of getDescription method, of class AddMeeting.
-     */
-    @Test
-    public void testGetDescription() {
-        System.out.println("getDescription");
-        AddMeeting instance = new AddMeeting();
-        String expResult = "";
-        String result = instance.getDescription();
-        assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of setDescription method, of class AddMeeting.
-     */
-    @Test
-    public void testSetDescription() {
-        System.out.println("setDescription");
-        String description = "";
-        AddMeeting instance = new AddMeeting();
-        instance.setDescription(description);
-
-    }
+    
 
     /**
      * Test of getStream method, of class AddMeeting.
@@ -243,9 +37,9 @@ public class AddMeetingTest {
     @Test
     public void testGetStream() {
         System.out.println("getStream");
-        AddMeeting instance = new AddMeeting();
+        
         String expResult = "";
-        String result = instance.getStream();
+        String result = test.getStream();
         assertEquals(expResult, result);
     }
 
@@ -267,9 +61,9 @@ public class AddMeetingTest {
     @Test
     public void testErrors() {
         System.out.println("errors");
-        AddMeeting instance = new AddMeeting();
+        
         String expResult = "";
-        String result = instance.errors();
+        String result = test.errors();
         assertEquals(expResult, result);
     }
 
@@ -331,6 +125,7 @@ public class AddMeetingTest {
     @Test
     public void testAddMeetingForm() {
         System.out.println("addMeetingForm");
+        
         String userId = "";
         HttpServletRequest request = null;
         AddMeeting instance = new AddMeeting();

@@ -16,6 +16,8 @@ import static org.junit.Assert.*;
  */
 public class LoginTest {
     
+    public Login test = new Login( );
+    
     public LoginTest() {
     }
     
@@ -33,9 +35,9 @@ public class LoginTest {
     @Test
     public void testGetUsername() {
         System.out.println("getUsername");
-        Login instance = new Login();
+        
         String expResult = "";
-        String result = instance.getUsername();
+        String result = test.getUsername();
         assertEquals(expResult, result);
     }
 
@@ -45,9 +47,41 @@ public class LoginTest {
     @Test
     public void testSetUsername() {
         System.out.println("setUsername");
+        
         String username = "";
-        Login instance = new Login();
-        instance.setUsername(username);
+        test.setUsername(username);
+        String result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "Mary";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "_$@#~";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "ABCDEFGHIJKLMNOP";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "mary";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "MARY";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
+        
+        username = "1234567890";
+        test.setUsername(username);
+        result = test.getUsername();
+        assertEquals(username, result);
     }
 
     /**
@@ -56,6 +90,7 @@ public class LoginTest {
     @Test
     public void testGetFirstName() {
         System.out.println("getFirstName");
+        
         Login instance = new Login();
         String expResult = "";
         String result = instance.getFirstName();
@@ -68,24 +103,24 @@ public class LoginTest {
     @Test
     public void testGetLastName() {
         System.out.println("getLastName");
-        Login instance = new Login();
-        String expResult = "";
-        String result = instance.getLastName();
+        
+        String expResult = null;
+        String result = test.getLastName();
         assertEquals(expResult, result);
     }
 
     /**
      * Test of loginUser method, of class Login.
-     */
+     
     @Test
     public void testLoginUser() {
         System.out.println("loginUser");
+        
         HttpServletRequest request = null;
-        Login instance = new Login();
         boolean expResult = false;
-        boolean result = instance.loginUser(request);
+        boolean result = test.loginUser(request);
         assertEquals(expResult, result);
-    }
+    }*/
 
     /**
      * Test of validateLogin method, of class Login.
@@ -93,9 +128,9 @@ public class LoginTest {
     @Test
     public void testValidateLogin() {
         System.out.println("validateLogin");
-        Login instance = new Login();
+        
         boolean expResult = false;
-        boolean result = instance.validateLogin();
+        boolean result = test.validateLogin();
         assertEquals(expResult, result);
     }
 
@@ -105,9 +140,16 @@ public class LoginTest {
     @Test
     public void testLoginForm() {
         System.out.println("loginForm");
-        Login instance = new Login();
-        String expResult = "";
-        String result = instance.loginForm();
+        String username = test.getUsername();
+        String expResult = "<form name=\"login_form\" action=\"index.jsp\" method=\"POST\">\n"
+                + "<label for=\"username\">UCC ID:</label>\n"
+                + "<input type=\"text\" name=\"username\" value=\"" + username + "\"placeholder=\"Enter Username\" /><br/>\n"
+                + "<label for=\"Password\">Password:</label>\n"
+                + "<input type=\"password\" name=\"password\" placeholder=\"Enter Password\"/><br />\n"
+                + "<input type=\"submit\" value=\"Login\" name=\"submit\" /><br />\n"
+                + "</form>";
+        
+        String result = test.loginForm();
         assertEquals(expResult, result);
     }
 }
